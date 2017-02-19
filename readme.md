@@ -17,17 +17,13 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 7. Using ``npm run dev`` or ``npm run dev-mock``, you get incremental buildings of typescript code (thanks to [watchify](https://www.npmjs.com/package/watchify)) and live update on multiple browsers (thanks to [browsersync](https://browsersync.io))   
 
-8. If you install gulp globally (``sudo npm install -g gulp``), you can use ``gulp default`` or ``gulp release``
-
-9. In order to uninstall a package globally, run ``sudo npm uninstall -g gulp``
-
 ## Backend implementation 
 
 1. Services from [jsonplaceholder](https://jsonplaceholder.typicode.com)
 
 ## Progressive web app 
 
-1. The app contains a manifest.json and the entire service-worker business in order to cache the app (by default sw is disabled: uncomment ``Main.registerServiceWorker();`` to have it working)
+1. The app contains a [manifest.json](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/) and the entire [service-worker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers) business in order to cache the app (by default sw is disabled: uncomment ``Main.registerServiceWorker();`` to have it working)
 
 ## Unit-tests (karma + jasmine)
 
