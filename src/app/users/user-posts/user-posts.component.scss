@@ -1,0 +1,47 @@
+.posts {
+
+  .addon {
+    color: $secondary-color;
+  }
+
+  .post {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $app-black;
+
+    & .post-title {
+      font-weight: bold;
+    }
+
+    & .post-body {
+
+    }
+
+    & .arrow {
+      background-size: contain;
+      background-repeat: no-repeat;
+      height: 35px;
+      width: 20px;
+    }
+
+    &.on .arrow {
+      background-image: url("../imgs/chevron_up.svg");
+    }
+
+    &.off .arrow {
+      background-image: url("../imgs/chevron_down.svg");
+    }
+  }
+
+  .post:hover {
+    background-color: $app-gray-1;
+    color: $app-gray-2;
+    -webkit-transition: background-color 0.7s;
+    -moz-transition: background-color 0.7s;
+    -ms-transition: background-color 0.7s;
+    -o-transition: background-color 0.7s;
+    transition: background-color 0.7s;
+  }
+}
+
+@import "post-comments/post-comments.component";

@@ -1,0 +1,15 @@
+// -------------------------------------------------------
+// Mixins
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin image-on-background {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}

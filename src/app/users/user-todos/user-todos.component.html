@@ -1,0 +1,31 @@
+<div class="container-fluid todos">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="input-group">
+                <input type="search" class="form-control" ng-change="$ctrl.textFilterDidChange()" ng-model="$ctrl.textFilter" placeholder="{{ ::$ctrl.textFilterPlaceholder }}">
+                <span class="input-group-addon addon" ng-show="$ctrl.textFilter" ng-click="$ctrl.resetTextFilter()"><span class="fa fa-remove"></span></span>
+                <span class="input-group-addon addon" ng-show="!$ctrl.textFilter" ng-click="$ctrl.resetTextFilter()"><span class="fa fa-search"></span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="$ctrl.showData">
+        <div class="col-xs-12" ng-repeat="todo in $ctrl.todos track by todo.id">
+            <div class="row todo">
+                <div class="col-xs-8 col-md-10">
+                    <div class="todo-body">{{ ::$ctrl.getTodoDesc(todo) }}</div>
+                </div>
+                <div class="col-xs-4 col-md-2">
+                    <div class="todo-check"> {{ ::$ctrl.isCompleted(todo) }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="full-width-message"><mc-localized-string key="LOAD_COMPLETED"></mc-localized-string></div>
+    </div>
+
+    <div class="full-width-message" ng-show="$ctrl.isLoadingData"><mc-localized-string key="LOADING"></mc-localized-string></div>
+    <div class="full-width-message" ng-show="$ctrl.hasNoData"><mc-localized-string key="NO_RESULT"></mc-localized-string></div>
+    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadTodos()"><mc-localized-string key="RETRY"></mc-localized-string></div>
+    <div class="go-up" mc-scroll-to-top></div>
+</div>

@@ -1,0 +1,20 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "diagnostics": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": false,
+    "noFallthroughCasesInSwitch": false,
+    "noImplicitAny": false,
+    "pretty": true,
+    "removeComments": true,
+    "target": "es2015",
+    "types": ["jasmine"],
+    "outDir": "tmp"
+  },
+  "exclude": [
+    "node_modules",
+    "src"
+  ]
+}

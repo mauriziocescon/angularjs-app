@@ -1,0 +1,21 @@
+.photos {
+
+  .photo {
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 10px;
+    border-bottom: 1px solid $primary-color;
+
+    & > .photo-img {
+      display: inline-block;
+      width: 30%;
+      max-width: 250px;
+      @include image-on-background;
+    }
+
+    & > .photo-desc {
+      display: inline-block;
+      width: calc(100% - 35%);
+    }
+  }
+}

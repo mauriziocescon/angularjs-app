@@ -1,0 +1,8 @@
+.app-content {
+  padding-top: 60px;
+}
+
+// components
+@import "core/navigation-bar/navigation-bar.component";
+@import "albums/albums.component";
+@import "users/users.component";

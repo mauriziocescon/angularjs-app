@@ -1,0 +1,36 @@
+.albums {
+
+  .addon {
+    color: $secondary-color;
+  }
+
+  .album {
+    padding-top: 10px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid $app-black;
+
+    & .album-title {
+      display: inline-block;
+    }
+
+    & .arrow {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-image: url("../imgs/chevron-right.svg");
+      height: 35px;
+      width: 20px;
+    }
+  }
+
+  .album:hover {
+    background-color: $app-gray-1;
+    color: $app-gray-2;
+    -webkit-transition: background-color 0.7s;
+    -moz-transition: background-color 0.7s;
+    -ms-transition: background-color 0.7s;
+    -o-transition: background-color 0.7s;
+    transition: background-color 0.7s;
+  }
+}
+
+@import "photos/photos.component";

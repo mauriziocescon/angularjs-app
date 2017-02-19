@@ -1,0 +1,17 @@
+// -------------------------------------------------------
+// Select
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color: $primary-color;
+  border: 1px solid $primary-color;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+option:not(:checked) {
+  background-color: $app-white !important;
+}

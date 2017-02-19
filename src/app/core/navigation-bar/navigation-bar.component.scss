@@ -1,0 +1,27 @@
+.navigation-container {
+
+  .logo {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .navigation-bar-title {
+    display: inline-block;
+    margin: 0 auto;
+    float: none;
+    color: $secondary-color;
+  }
+
+  .menu-icon {
+    padding-right: 5px;
+  }
+
+  .popover-analysis {
+    max-width: 600px;
+    max-height: 600px;
+    overflow-y: scroll;
+  }
+}

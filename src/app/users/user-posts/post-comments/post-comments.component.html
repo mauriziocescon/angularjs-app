@@ -1,0 +1,18 @@
+<div class="container-fluid comments">
+
+    <div class="row" ng-show="$ctrl.showData">
+        <div class="col-xs-12 comment" ng-repeat="comment in ::$ctrl.comments track by comment.id">
+            <div class="row">
+                <span class="comment-title">{{ ::$ctrl.getCommentTitle(comment) }}</span>
+            </div>
+            <div class="row">
+                <span class="comment-body">{{ ::comment.body }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="full-width-message" ng-show="$ctrl.isLoadingData"><mc-localized-string key="LOADING"></mc-localized-string></div>
+    <div class="full-width-message" ng-show="$ctrl.hasNoData"><mc-localized-string key="NO_RESULT"></mc-localized-string></div>
+    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadComments()"><mc-localized-string key="RETRY"></mc-localized-string></div>
+    <div class="go-up" mc-scroll-to-top></div>
+</div>

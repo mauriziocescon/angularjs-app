@@ -1,0 +1,35 @@
+<div class="container-fluid posts">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="input-group">
+                <input type="search" class="form-control" ng-change="$ctrl.textFilterDidChange()" ng-model="$ctrl.textFilter" placeholder="{{ ::$ctrl.textFilterPlaceholder }}">
+                <span class="input-group-addon addon" ng-show="$ctrl.textFilter" ng-click="$ctrl.resetTextFilter()"><span class="fa fa-remove"></span></span>
+                <span class="input-group-addon addon" ng-show="!$ctrl.textFilter" ng-click="$ctrl.resetTextFilter()"><span class="fa fa-search"></span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="$ctrl.showData">
+        <div class="col-xs-12 post" ng-repeat="post in $ctrl.posts track by post.id">
+            <div class="row" mc-toggle="$ctrl.isOpen(post)" on="$ctrl.open(post)" off="$ctrl.close(post)" toggle-on-selector=".arrow">
+                <div class="col-xs-11">
+                    <div class="col-xs-12">
+                        <span class="post-title">{{ ::$ctrl.getPostTitle(post) }}</span>
+                    </div>
+                    <div class="col-xs-12">
+                        <span class="post-body">{{ ::post.body }}</span>
+                    </div>
+                </div>
+                <div class="col-xs-1 arrow"></div>
+            </div>
+            <post-comments class="row" ng-if="$ctrl.isOpen(post)" post-id="post.id"></post-comments>
+        </div>
+        <div class="full-width-message"><mc-localized-string key="LOAD_COMPLETED"></mc-localized-string></div>
+    </div>
+
+    <div class="full-width-message" ng-show="$ctrl.isLoadingData"><mc-localized-string key="LOADING"></mc-localized-string></div>
+    <div class="full-width-message" ng-show="$ctrl.hasNoData"><mc-localized-string key="NO_RESULT"></mc-localized-string></div>
+    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadPosts()"><mc-localized-string key="RETRY"></mc-localized-string></div>
+    <div class="go-up" mc-scroll-to-top></div>
+</div>

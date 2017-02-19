@@ -1,0 +1,91 @@
+// -------------------------------------------------------
+// App variables
+
+$primary-color:     $app-black !default;
+$secondary-color:   $app-white !default;
+$tertiary-color:    $app-green-1 !default;
+
+
+// -------------------------------------------------------
+// Bootstrap variables
+
+//== Typography
+$font-size-base:      16px;
+$font-family-base:    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !default;
+
+//== Grid system
+$grid-gutter-width:   8px;
+
+//== Navbar
+$navbar-height: 50px;
+$navbar-margin-bottom: 0px;
+$navbar-border-radius: 0px;
+
+$navbar-default-color: $secondary-color;
+$navbar-default-bg: $primary-color;
+$navbar-default-border: $secondary-color;
+
+$navbar-default-link-color: $secondary-color;
+$navbar-default-link-hover-color: $secondary-color;
+$navbar-default-link-hover-bg: $app-transparent;
+$navbar-default-link-active-color: $primary-color;
+$navbar-default-link-active-bg: $secondary-color;
+$navbar-default-link-disabled-color: $secondary-color;
+$navbar-default-link-disabled-bg: $primary-color;
+
+//== Buttons
+$btn-default-color: $secondary-color;
+$btn-default-bg: $tertiary-color;
+
+$input-group-addon-bg: $tertiary-color;
+
+
+// -------------------------------------------------------
+// Font awesome variables
+
+
+// -------------------------------------------------------
+// Common style
+
+.full-width-message {
+  display: inline-block;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100%;
+  font-size: 1.5em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.go-up {
+  position: fixed;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("../imgs/chevron-circle-up.svg");
+  opacity: 0.7;
+  width: 50px;
+  height: 50px;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+}
+
+input.ng-invalid, select.ng-invalid, textarea.ng-invalid {
+  color: red;
+  border-color: red;
+}
+
+input.ng-invalid-mc-custom-validator-error, select.ng-invalid-mc-custom-validator-error, textarea.ng-invalid-mc-custom-validator-error {
+  color: red;
+  border-color: red;
+}
+
+// angular-loading-bar override style
+#loading-bar .bar {
+  background: $tertiary-color !important;
+  height: 4px !important;
+}
+
+// -------------------------------------------------------

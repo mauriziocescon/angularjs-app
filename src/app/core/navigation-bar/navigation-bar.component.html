@@ -1,0 +1,29 @@
+<nav id="navigationbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid navigation-container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">{{ $ctrl.pageDesc }}</a>
+        </div>
+        <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <form class="navbar-form navbar-left hidden-xs">
+                    <button class="btn btn-default fa fa-line-chart" ng-if="$ctrl.canShowAnalysis" uib-popover-html="$ctrl.analysis" popover-class="popover-analysis" popover-append-to-body popover-placement="bottom" popover-trigger="click" popover-is-open="$ctrl.isPopoverOpened" ng-click="$ctrl.isPopoverOpened = !$ctrl.isPopoverOpened"></button>
+                </form>
+                <li><a href="" ng-click="$ctrl.goToUsers()"><span class="fa fa-users menu-icon"></span><mc-localized-string key="USERS"></mc-localized-string></a></li>
+                <li><a href="" ng-click="$ctrl.goToAlbums()"><span class="fa fa-book menu-icon"></span><mc-localized-string key="ALBUMS"></mc-localized-string></a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ ::$ctrl.selectedLanguageId }}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="language in ::$ctrl.languages">
+                            <a ng-click="$ctrl.selectLanguage(language)">{{ ::language }}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

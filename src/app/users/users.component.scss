@@ -1,0 +1,27 @@
+.users {
+
+  .addon {
+    color: $secondary-color;
+  }
+
+  .user {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $app-black;
+
+    & .user-label {
+      float: left;
+      width: 80px;
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+
+    & .user-value {
+      float: left;
+      width: calc(100% - 80px);
+    }
+  }
+}
+
+@import "user-posts/user-posts.component";
+@import "user-todos/user-todos.component";

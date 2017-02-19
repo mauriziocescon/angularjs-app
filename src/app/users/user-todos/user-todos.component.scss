@@ -1,0 +1,20 @@
+.todos {
+
+  .addon {
+    color: $secondary-color;
+  }
+
+  .todo {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $app-black;
+
+    & .todo-body {
+
+    }
+
+    & .todo-check {
+
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<div class="modal-header text-center">
+    <h3 class="modal-title">{{ ::$ctrl.modalTitle }}</h3>
+</div>
+
+<div class="modal-body text-center">{{ ::$ctrl.modalMessage }}</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default active" ng-if="$ctrl.modalYesButtonLabel" ng-click="$ctrl.yes()">{{ ::$ctrl.modalYesButtonLabel }}</button>
+    <button class="btn btn-default" ng-if="$ctrl.modalNoButtonLabel" ng-click="$ctrl.no()">{{ ::$ctrl.modalNoButtonLabel }}</button>
+</div>

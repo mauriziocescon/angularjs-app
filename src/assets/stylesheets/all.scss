@@ -1,0 +1,14 @@
+// Variables and mixins
+@import "colors";
+@import "functions";
+@import "mixins";
+
+// Core css
+@import "base";
+@import "buttons";
+@import "selects";
+
+// Vendors
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "../../../node_modules/font-awesome/scss/font-awesome";
+@import "../../../node_modules/angular-loading-bar/build/loading-bar";
