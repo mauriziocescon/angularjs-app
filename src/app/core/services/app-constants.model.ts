@@ -7,7 +7,7 @@ export class Application {
 	// @if MOCK_BACKEND = "false"
 	MOCK_BACKEND = false;
 	CAN_MOCK_WS_FAIL = false;
-	SHOW_ANALYSIS = true;
+	SHOW_ANALYSIS = false;
 	LOG_WS_REQUEST = false;
 	LOG_WS_RESPONSE = false;
 	// @endif
