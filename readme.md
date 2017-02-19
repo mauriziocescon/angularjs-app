@@ -55,4 +55,4 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 3. More e2e tests written in Typescript
 
-4. Covert ServiceWorker to Typescript
+4. Convert serviceworker to Typescript
