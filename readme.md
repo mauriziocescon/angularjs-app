@@ -54,3 +54,5 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 2. Soon: Angular 2 + Webpack 
 
 3. Soon: more e2e tests written in Typescript
+
+4. Soon: covert ServiceWorker to Typescript
