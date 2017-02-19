@@ -19,7 +19,7 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 ## Backend implementation 
 
-1. Services from [jsonplaceholder](https://jsonplaceholder.typicode.com)
+1. REST APIs from [jsonplaceholder](https://jsonplaceholder.typicode.com)
 
 ## Progressive web app 
 
