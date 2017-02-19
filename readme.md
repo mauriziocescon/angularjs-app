@@ -15,8 +15,8 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 6. If you want to mock the backend, run ``npm run dev-mock`` or ``npm run prod-mock``
 
-7. Using ``npm run dev`` or ``npm run dev-mock``, you get incremental buildings of typescript code (thanks to [watchify](https://www.npmjs.com/package/watchify)) and live update on multiple browsers (thanks to [browsersync](https://browsersync.io))   
-
+7. Using ``npm run dev`` or ``npm run dev-mock``, you get incremental buildings of typescript code (thanks to [watchify](https://www.npmjs.com/package/watchify)) and live update on multiple browsers (thanks to [browsersync](https://browsersync.io))
+   
 ## Backend implementation 
 
 1. REST APIs from [jsonplaceholder](https://jsonplaceholder.typicode.com)
@@ -35,8 +35,6 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 1. Run ``npm start`` and when the server is up and running, open another console and run ``npm run protractor``
 
-2. Write e2e tests using Typescript
-
 ## Lightweight rest-api tests
 
 1. Take a look at [Frisby](http://frisbyjs.com) and write your own tests inside *rest-api-tests*
@@ -48,3 +46,11 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 1. Check versions using ``npm outdated``
 
 2. Update ``package.json`` modules using ``npm update``
+
+## Major future developments 
+
+1. Improve README and To-Do section of the app 
+
+2. Soon: Angular 2 + Webpack 
+
+3. Soon: more e2e tests written in Typescript
