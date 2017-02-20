@@ -24,12 +24,12 @@
       width: 20px;
     }
 
-    &.on .arrow {
-      background-image: url("../imgs/chevron_up.svg");
+    & .arrow.on {
+      background-image: url("../imgs/chevron-up.svg");
     }
 
-    &.off .arrow {
-      background-image: url("../imgs/chevron_down.svg");
+    & .arrow.off {
+      background-image: url("../imgs/chevron-down.svg");
     }
   }
 
