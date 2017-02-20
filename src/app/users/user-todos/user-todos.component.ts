@@ -125,6 +125,10 @@ export class UserTodosController {
 		});
 	}
 
+	public changeTodo(todo: Todo): void {
+		todo.completed = !todo.completed;
+	}
+
 	public $onDestroy(): void {
 		this.todosService.cancelOngoingRequests();
 	}

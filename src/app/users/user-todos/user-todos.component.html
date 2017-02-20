@@ -16,8 +16,8 @@
                 <div class="col-xs-8 col-md-10">
                     <div class="todo-body">{{ ::$ctrl.getTodoDesc(todo) }}</div>
                 </div>
-                <div class="col-xs-4 col-md-2">
-                    <div class="todo-check"><span class="fa fa-2x" ng-class="{ 'done' : $ctrl.isCompleted(todo), 'pending' : !$ctrl.isCompleted(todo) }"></span></div>
+                <div class="col-xs-4 col-md-2 cursor-pointer">
+                    <div class="todo-check "><span class="fa fa-2x" ng-class="{ 'done' : $ctrl.isCompleted(todo), 'pending' : !$ctrl.isCompleted(todo) }" ng-click="$ctrl.changeTodo(todo)"></span></div>
                 </div>
             </div>
         </div>

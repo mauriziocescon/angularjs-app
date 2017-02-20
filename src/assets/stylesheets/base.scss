@@ -72,6 +72,10 @@ $input-group-addon-bg: $tertiary-color;
   z-index: 200;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 input.ng-invalid, select.ng-invalid, textarea.ng-invalid {
   color: red;
   border-color: red;
