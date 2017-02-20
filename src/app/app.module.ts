@@ -11,13 +11,13 @@ import {users} from "./users/users.module";
 export * from "./core/core.module";
 
 const appModule = angular.module("app", [
+	"angular-loading-bar",
+	"angular-stats",
+	"app-templates",
+	"infinite-scroll",
 	"ngAnimate",
 	"ngSanitize",
 	"ngTouch",
-	"ngtemplates",
-	"angular-loading-bar",
-	"angular-stats",
-	"infinite-scroll",
 	"tmh.dynamicLocale",
 	"ui.bootstrap",
 	"ui.router",

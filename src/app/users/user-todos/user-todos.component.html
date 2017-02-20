@@ -17,7 +17,7 @@
                     <div class="todo-body">{{ ::$ctrl.getTodoDesc(todo) }}</div>
                 </div>
                 <div class="col-xs-4 col-md-2">
-                    <div class="todo-check"> {{ ::$ctrl.isCompleted(todo) }}</div>
+                    <div class="todo-check"><span class="fa fa-2x" ng-class="{ 'done' : $ctrl.isCompleted(todo), 'pending' : !$ctrl.isCompleted(todo) }"></span></div>
                 </div>
             </div>
         </div>

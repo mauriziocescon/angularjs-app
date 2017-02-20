@@ -123,7 +123,7 @@ gulp.task("cache-html-templates", function () {
         .pipe(gulpRename({dirname: ""}))
         .pipe(gulpAngularTemplateCache(appendVersionToFileName("templates.js"), {
             root: "",
-            module: "ngtemplates",
+            module: "app-templates",
             standalone: true
         }))
         .pipe(gulp.dest("dist/js/"));

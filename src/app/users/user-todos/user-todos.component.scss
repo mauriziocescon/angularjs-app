@@ -15,6 +15,15 @@
 
     & .todo-check {
 
+      & > .done {
+        @extend .fa-check;
+        color: $tertiary-color;
+      }
+
+      & > .pending {
+        @extend .fa-close;
+        color: $app-red-3;
+      }
     }
   }
 }

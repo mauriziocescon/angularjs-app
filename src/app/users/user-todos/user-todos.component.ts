@@ -86,8 +86,8 @@ export class UserTodosController {
 		return todo.title;
 	}
 
-	public isCompleted(todo: Todo): string {
-		return todo.completed ? this.localizedStringService.getLocalizedString("YES") : this.localizedStringService.getLocalizedString("NO");
+	public isCompleted(todo: Todo): boolean {
+		return todo.completed;
 	}
 
 	public resetTextFilter(): void {
