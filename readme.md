@@ -49,7 +49,7 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 ## Major future developments 
 
-1. Soon: Improve README and To-Do section of the app 
+1. Soon: improve some layouts (Users / To-Do / Posts) and readme.md
 
 2. Angular 2 + Webpack 
 
