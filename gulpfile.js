@@ -202,7 +202,7 @@ gulp.task("preprocess-ts", function () {
 
 gulp.task("compile-ts-dev", function () {
     return watchedBrowserify
-        //.transform(babelify, {presets: ["es2015"], extensions: [".tsx", ".ts"]})
+        .transform(babelify, {presets: ["es2015"], extensions: [".tsx", ".ts"]})
         .bundle()
         .on("error", function (e) {
             gulpUtil.log(gulpUtil.colors.red("Bundle error:", e.message));
