@@ -97,10 +97,10 @@ var watchedBrowserify = watchify(browserify({
     cache: {},
     debug: true,
     entries: paths.browserifyEntries,
-    // external: paths.dependencies,
     packageCache: {}
 })
-    .plugin(tsify))
+    .external(paths.dependencies))
+    .plugin(tsify)
     .on("log", gulpUtil.log);
 
 
@@ -183,12 +183,10 @@ gulp.task("sass-prod", function () {
 });
 
 gulp.task("bundle-vendors", function () {
-    return browserify({
-        require: paths.dependencies
-    })
-        .plugin(tsify)
+    return browserify()
+        .require(paths.dependencies)
         .bundle()
-        .pipe(vinylSourceStream(appendVersionToFileName("vendor.js")))
+        .pipe(vinylSourceStream(appendVersionToFileName("vendors.js")))
         .pipe(vinylBuffer())
         .pipe(gulp.dest("dist/js/"));
 });
@@ -218,10 +216,10 @@ gulp.task("compile-ts-spec", function () {
     return browserify({
         basedir: ".",
         entries: paths.browserifyEntries.concat(glob.sync("dist/tmp_ts/**/*.spec.ts")),
-        // external: paths.dependencies,
         cache: {},
         packageCache: {}
     })
+        .external(paths.dependencies)
         .plugin(tsify)
         .transform(babelify, {presets: ["es2015"], extensions: [".tsx", ".ts"]})
         .bundle()
@@ -235,9 +233,9 @@ gulp.task("compile-ts-prod", function () {
         basedir: ".",
         cache: {},
         entries: paths.browserifyEntries,
-        // external: paths.dependencies,
         packageCache: {}
     })
+        .external(paths.dependencies)
         .plugin(tsify)
         .transform(babelify, {presets: ["es2015"], extensions: [".tsx", ".ts"]})
         .bundle()
@@ -256,7 +254,8 @@ gulp.task("fix-map-file", function () {
 
 gulp.task("injectFileNames", function () {
     return gulp.src("./dist/index.html")
-        .pipe(gulpInject(gulp.src(["./dist/js/*.js", "./dist/css/*.css"]), {relative: true}))
+        .pipe(gulpInject(gulp.src(["./dist/js/vendors*.js"]), {relative: true, name: "head"}))
+        .pipe(gulpInject(gulp.src(["./dist/js/**/*js", "./dist/css/**/*.css", "!./dist/js/vendors*.js"]), {relative: true}))
         .pipe(gulp.dest("./dist"));
 });
 
@@ -329,7 +328,7 @@ gulp.task("default", function () {
             "copy-properties",
             "sass-dev"
         ],
-        // "bundle-vendors",
+        "bundle-vendors",
         "preprocess-ts",
         "compile-ts-dev",
         "fix-map-file",
@@ -354,7 +353,7 @@ gulp.task("test", function () {
             "copy-properties",
             "sass-dev"
         ],
-        // "bundle-vendors",
+        "bundle-vendors",
         "preprocess-ts",
         "compile-ts-spec",
         "injectFileNames",
@@ -377,7 +376,7 @@ gulp.task("prod", function () {
             "cache-html-templates",
             "sass-prod"
         ],
-        // "bundle-vendors",
+        "bundle-vendors",
         "preprocess-ts",
         "compile-ts-prod",
         "injectFileNames",
