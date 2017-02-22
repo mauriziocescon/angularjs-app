@@ -188,6 +188,7 @@ gulp.task("bundle-vendors", function () {
         .bundle()
         .pipe(vinylSourceStream(appendVersionToFileName("vendors.js")))
         .pipe(vinylBuffer())
+        .pipe(gulpUglify({mangle: false}))
         .pipe(gulp.dest("dist/js/"));
 });
 
