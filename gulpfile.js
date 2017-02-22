@@ -183,7 +183,9 @@ gulp.task("sass-prod", function () {
 });
 
 gulp.task("bundle-vendors", function () {
-    return browserify()
+    return browserify({
+        noparse: path.dependencies
+    })
         .require(paths.dependencies)
         .bundle()
         .pipe(vinylSourceStream(appendVersionToFileName("vendors.js")))
@@ -327,9 +329,9 @@ gulp.task("default", function () {
             "copy-imgs",
             "copy-fonts",
             "copy-properties",
-            "sass-dev"
+            "sass-dev",
+            "bundle-vendors"
         ],
-        "bundle-vendors",
         "preprocess-ts",
         "compile-ts-dev",
         "fix-map-file",
@@ -352,9 +354,9 @@ gulp.task("test", function () {
             "copy-imgs",
             "copy-fonts",
             "copy-properties",
-            "sass-dev"
+            "sass-dev",
+            "bundle-vendors"
         ],
-        "bundle-vendors",
         "preprocess-ts",
         "compile-ts-spec",
         "injectFileNames",
@@ -375,9 +377,9 @@ gulp.task("prod", function () {
             "copy-properties",
             "cache-uib-templates",
             "cache-html-templates",
-            "sass-prod"
+            "sass-prod",
+            "bundle-vendors"
         ],
-        "bundle-vendors",
         "preprocess-ts",
         "compile-ts-prod",
         "injectFileNames",
