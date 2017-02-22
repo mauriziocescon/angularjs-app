@@ -55,6 +55,25 @@ var paths = {
     ],
     properties: ["src/assets/properties/**/"],
     browserifyEntries: ["dist/tmp_ts/main.ts"],
+    dependencies: [
+        "jquery",
+        "angular",
+        "angular-animate",
+        "angular-mocks",
+        "angular-sanitize",
+        "angular-touch",
+        "bootstrap-sass",
+        "angular-dynamic-locale",
+        "angular-loading-bar",
+        "angular-stats",
+        "angular-ui-bootstrap",
+        "angular-ui-router",
+        "angular-ui-scroll",
+        "babel-polyfill",
+        "format4js",
+        "ng-infinite-scroll",
+        "stacktrace-js"
+    ],
     i18n: [
         "node_modules/angular-i18n/angular-locale_de.js",
         "node_modules/angular-i18n/angular-locale_en.js",
@@ -75,11 +94,13 @@ function appendVersionToFileName(fileName) {
 
 var watchedBrowserify = watchify(browserify({
     basedir: ".",
+    cache: {},
     debug: true,
     entries: paths.browserifyEntries,
-    cache: {},
+    // external: paths.dependencies,
     packageCache: {}
-}).plugin(tsify))
+})
+    .plugin(tsify))
     .on("log", gulpUtil.log);
 
 
@@ -161,6 +182,17 @@ gulp.task("sass-prod", function () {
         .pipe(gulp.dest("dist/css/"));
 });
 
+gulp.task("bundle-vendors", function () {
+    return browserify({
+        require: paths.dependencies
+    })
+        .plugin(tsify)
+        .bundle()
+        .pipe(vinylSourceStream(appendVersionToFileName("vendor.js")))
+        .pipe(vinylBuffer())
+        .pipe(gulp.dest("dist/js/"));
+});
+
 gulp.task("preprocess-ts", function () {
     return gulp.src("./src/**/*.ts")
         .pipe(gulpPreprocess({
@@ -186,6 +218,7 @@ gulp.task("compile-ts-spec", function () {
     return browserify({
         basedir: ".",
         entries: paths.browserifyEntries.concat(glob.sync("dist/tmp_ts/**/*.spec.ts")),
+        // external: paths.dependencies,
         cache: {},
         packageCache: {}
     })
@@ -200,8 +233,9 @@ gulp.task("compile-ts-spec", function () {
 gulp.task("compile-ts-prod", function () {
     return browserify({
         basedir: ".",
-        entries: paths.browserifyEntries,
         cache: {},
+        entries: paths.browserifyEntries,
+        // external: paths.dependencies,
         packageCache: {}
     })
         .plugin(tsify)
@@ -295,6 +329,7 @@ gulp.task("default", function () {
             "copy-properties",
             "sass-dev"
         ],
+        // "bundle-vendors",
         "preprocess-ts",
         "compile-ts-dev",
         "fix-map-file",
@@ -319,6 +354,7 @@ gulp.task("test", function () {
             "copy-properties",
             "sass-dev"
         ],
+        // "bundle-vendors",
         "preprocess-ts",
         "compile-ts-spec",
         "injectFileNames",
@@ -341,6 +377,7 @@ gulp.task("prod", function () {
             "cache-html-templates",
             "sass-prod"
         ],
+        // "bundle-vendors",
         "preprocess-ts",
         "compile-ts-prod",
         "injectFileNames",
