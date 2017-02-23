@@ -183,9 +183,7 @@ gulp.task("sass-prod", function () {
 });
 
 gulp.task("bundle-vendors", function () {
-    return browserify({
-        noparse: path.dependencies
-    })
+    return browserify()
         .require(paths.dependencies)
         .bundle()
         .pipe(vinylSourceStream(appendVersionToFileName("vendors.js")))
