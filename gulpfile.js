@@ -53,7 +53,7 @@ var paths = {
         "node_modules/bootstrap-sass/assets/fonts/**/",
         "node_modules/font-awesome/fonts/**/"
     ],
-    properties: ["src/assets/properties/**/"],
+    preprocessTs: ["src/**/*.ts"],
     browserifyEntries: ["dist/tmp_ts/main.ts"],
     dependencies: [
         "jquery",
@@ -159,11 +159,6 @@ gulp.task("copy-fonts", function () {
         .pipe(gulp.dest("dist/fonts/"));
 });
 
-gulp.task("copy-properties", function () {
-    return gulp.src(paths.properties)
-        .pipe(gulp.dest("dist/properties/"));
-});
-
 gulp.task("sass-dev", function () {
     return gulp.src(paths.sass)
         .pipe(gulpSass().on("error", gulpSass.logError))
@@ -193,7 +188,7 @@ gulp.task("bundle-vendors", function () {
 });
 
 gulp.task("preprocess-ts", function () {
-    return gulp.src("./src/**/*.ts")
+    return gulp.src(paths.preprocessTs)
         .pipe(gulpPreprocess({
             includeExtensions: [".tsx", ".ts"],
             context: {"MOCK_BACKEND": mock, "STRICT_DI": strictDi}
@@ -326,7 +321,6 @@ gulp.task("default", function () {
             "cache-html-templates",
             "copy-imgs",
             "copy-fonts",
-            "copy-properties",
             "sass-dev",
             "bundle-vendors"
         ],
@@ -351,7 +345,6 @@ gulp.task("test", function () {
             "cache-html-templates",
             "copy-imgs",
             "copy-fonts",
-            "copy-properties",
             "sass-dev",
             "bundle-vendors"
         ],
@@ -372,7 +365,6 @@ gulp.task("prod", function () {
             "copy-i18n",
             "copy-imgs",
             "copy-fonts",
-            "copy-properties",
             "cache-uib-templates",
             "cache-html-templates",
             "sass-prod",
