@@ -31,7 +31,7 @@ const appModule = angular.module("app", [
 // register app component
 appModule.component(appModule.name, AppComponent);
 
-// config locale provider
+// config providers
 appModule.config(appConfigFunc);
 
 // config route provider
