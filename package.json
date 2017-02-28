@@ -2,6 +2,10 @@
   "name": "angular-1-x-app",
   "version": "1.0.0",
   "description": "A demo application built on angular 1.x components, Typescript, ES2017, ui-router",
+  "author": "Maurizio Cescon <maurizio.cescon@gmail.com> (http://www.mauriziocescon.com)",
+  "homepage": "http://www.mauriziocescon.com",
+  "license": "MIT",
+  "private": false,
   "scripts": {
     "postinstall": "gulp prod --mock=false --strictDi=true",
 
@@ -21,9 +25,6 @@
 
     "test-api": "jasmine-node rest-api-tests/"
   },
-  "author": "Maurizio Cescon",
-  "license": "MIT",
-  "private": false,
   "dependencies": {
     "angular": "1.6.2",
     "angular-animate": "1.6.2",
