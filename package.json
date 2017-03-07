@@ -37,7 +37,7 @@
     "angular-touch": "1.6.2",
     "angular-ui-bootstrap": "2.5.0",
     "angular-ui-router": "0.4.2",
-    "angular-ui-scroll": "1.6.0",
+    "angular-ui-scroll": "1.6.1",
     "babel-polyfill": "6.23.0",
     "format4js": "0.1.1",
     "jquery": "3.1.1",
@@ -57,8 +57,8 @@
     "@types/jasmine": "2.5.43",
     "@types/jquery": "2.0.40",
     "@types/node": "7.0.5",
-    "@types/selenium-webdriver": "2.53.40",
-    "@types/service_worker_api": "0.0.8",
+    "@types/selenium-webdriver": "2.53.41",
+    "@types/service_worker_api": "0.0.9",
     "@types/stacktrace-js": "0.0.30",
     "babel-cli": "6.23.0",
     "babel-core": "6.23.1",
@@ -87,7 +87,7 @@
     "jasmine-node": "1.14.5",
     "karma": "1.5.0",
     "karma-chrome-launcher": "2.0.0",
-    "karma-firefox-launcher": "1.0.0",
+    "karma-firefox-launcher": "1.0.1",
     "karma-ie-launcher": "1.0.0",
     "karma-jasmine": "1.1.0",
     "karma-phantomjs-launcher": "1.0.2",
@@ -100,6 +100,6 @@
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "1.1.0",
     "watchify": "3.9.0",
-    "yargs": "6.6.0"
+    "yargs": "7.0.1"
   }
 }
