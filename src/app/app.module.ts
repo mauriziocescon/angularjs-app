@@ -1,4 +1,5 @@
 import * as angular from "angular";
+import {angularStats} from "angular-stats";
 import {appConfigFunc} from "./app-config.module";
 import {routingConfigFunc} from "./app-routing.module";
 import {runFunc} from "./app-run.module";
@@ -12,7 +13,7 @@ export * from "./core/core.module";
 
 const appModule = angular.module("app", [
 	"angular-loading-bar",
-	"angular-stats",
+	angularStats,
 	"app-templates",
 	"infinite-scroll",
 	"ngAnimate",

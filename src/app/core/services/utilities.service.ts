@@ -1,4 +1,5 @@
 import * as angular from "angular";
+import {AngularStats} from "angular-stats";
 import {IAppConstantsService} from "./app-constants.service";
 import {Logger, TypeDetect} from "../../shared/shared.module";
 
@@ -136,7 +137,7 @@ export class UtilitiesService implements IUtilitiesService {
 	private document: ng.IDocumentService;
 	private window: ng.IWindowService;
 	private timeout: ng.ITimeoutService;
-	private angularStats: ng.mc.IAngularStats;
+	private angularStats: AngularStats;
 	private appConstantsService: IAppConstantsService;
 
 	private static WARNING_TIME_SCOPE = 1000;
@@ -147,7 +148,7 @@ export class UtilitiesService implements IUtilitiesService {
 				$document: ng.IDocumentService,
 				$window: ng.IWindowService,
 				$timeout: ng.ITimeoutService,
-				AngularStats: ng.mc.IAngularStats,
+				AngularStats: AngularStats,
 				AppConstantsService: IAppConstantsService) {
 		this.rootScope = $rootScope;
 		this.document = $document;
