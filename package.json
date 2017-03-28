@@ -57,7 +57,7 @@
     "@types/angular-ui-scroll": "1.3.33",
     "@types/jasmine": "2.5.46",
     "@types/jquery": "2.0.41",
-    "@types/node": "7.0.8",
+    "@types/node": "7.0.12",
     "@types/selenium-webdriver": "3.0.0",
     "@types/service_worker_api": "0.0.9",
     "@types/stacktrace-js": "0.0.30",
