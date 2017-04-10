@@ -312,6 +312,7 @@ gulp.task("karma", function (done) {
 /*--------------------------*/
 /* Dev                      */
 /*--------------------------*/
+
 gulp.task("default", function () {
     runSequence(
         "empty-dist",
@@ -333,9 +334,11 @@ gulp.task("default", function () {
     );
 });
 
+
 /*--------------------------*/
 /* Unit tests               */
 /*--------------------------*/
+
 gulp.task("test", function () {
     runSequence(
         "empty-dist",
@@ -355,9 +358,11 @@ gulp.task("test", function () {
     );
 });
 
+
 /*--------------------------*/
 /* Prod                     */
 /*--------------------------*/
+
 gulp.task("prod", function () {
     runSequence(
         "empty-dist",
