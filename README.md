@@ -27,7 +27,7 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 ## Unit-tests (karma + jasmine)
 
-1. The unit-tests are written in typescript using Jasmine. You fine all the files searching for *__.spec.ts*
+1. The unit-tests are written in typescript using Jasmine. You find all the files searching for *__.spec.ts*
  
 2. On the console, run ``npm test`` for execute the tests
 
