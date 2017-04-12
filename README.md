@@ -1,7 +1,7 @@
 Demo built on angular 1.x, Typescript, ES2017, ui-router
 =========
 
-## How to compile the app
+## How to build the app
 
 1. Before starting, take a look at the following [post](http://www.typescriptlang.org/docs/handbook/gulp.html) from the typescript developer team; it's also noteworthy [The Future of Declaration Files](https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/)
 
