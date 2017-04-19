@@ -151,7 +151,9 @@ gulp.task("cache-html-templates", function () {
 });
 
 gulp.task("copy-imgs", function () {
-    return gulp.src(paths.imgs).pipe(gulpFlatten()).pipe(gulp.dest("dist/imgs/"));
+    return gulp.src(paths.imgs)
+        .pipe(gulpFlatten())
+        .pipe(gulp.dest("dist/imgs/"));
 });
 
 gulp.task("copy-fonts", function () {
