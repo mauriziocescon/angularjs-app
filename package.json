@@ -4,8 +4,11 @@
   "description": "A demo application built on angular 1.x components, Typescript, ES2017, ui-router",
   "author": "Maurizio Cescon <maurizio.cescon@gmail.com> (http://www.mauriziocescon.com)",
   "homepage": "http://www.mauriziocescon.com",
-  "license": "MIT",
   "private": false,
+  "engines": {
+    "node": ">=6.10.2",
+    "npm": ">=3.10.10"
+  },
   "scripts": {
     "postinstall": "gulp prod --mock=false --strictDi=true",
 
@@ -25,6 +28,21 @@
 
     "test-api": "jasmine-node rest-api-tests/"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mauriziocescon/angular-1-x-app"
+  },
+  "keywords": [
+    "angular",
+    "maurizio",
+    "cescon"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/brentertz/scapegoat/blob/master/LICENSE-MIT"
+    }
+  ],
   "dependencies": {
     "angular": "1.6.4",
     "angular-animate": "1.6.4",
