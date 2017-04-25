@@ -1,5 +1,4 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
     "allowJs": true,
     "diagnostics": false,
@@ -21,5 +20,9 @@
   "exclude": [
     "node_modules",
     "src"
-  ]
+  ],
+  "compileOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  }
 }
