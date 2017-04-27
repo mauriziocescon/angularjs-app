@@ -34,11 +34,11 @@ class Main {
 		//start angular
 
 		// @if MOCK_BACKEND = "false"
-		angular.bootstrap(app, [app], config);
+		angular.bootstrap(document.querySelector(app), [app], config);
 		// @endif
 
 		// @if MOCK_BACKEND = "true"
-		angular.bootstrap(app, [appDev], config);
+		angular.bootstrap(document.querySelector(app), [appDev], config);
 		// @endif
 
 		// register service worker
