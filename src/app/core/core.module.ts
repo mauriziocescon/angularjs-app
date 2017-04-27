@@ -3,8 +3,8 @@ import {mcServices} from "./services/services.module";
 import {navigationBar} from "./navigation-bar/navigation-bar.module";
 import {servicesSetupFunc} from "./core-run.module";
 
-export * from "./navigation-bar/navigation-bar.module";
 export * from "./services/services.module";
+export * from "./navigation-bar/navigation-bar.module";
 
 const coreModule = angular.module("app.core", [
 	"tmh.dynamicLocale",
