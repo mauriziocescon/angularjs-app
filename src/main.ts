@@ -31,7 +31,7 @@ class Main {
 	static loadAngular(): void {
 		const config: ng.IAngularBootstrapConfig = {strictDi: /* @echo STRICT_DI */};
 
-		//start angular
+		// start angular
 
 		// @if MOCK_BACKEND = "false"
 		angular.bootstrap(document.querySelector(app), [app], config);
