@@ -1,0 +1,9 @@
+{
+  "lintOptions": {
+    "typeCheck": true
+  },
+  "extends": "tslint:all",
+  "rules": {
+
+  }
+}

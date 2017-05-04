@@ -200,11 +200,13 @@ gulp.task("preprocess-ts", () => {
 });
 
 gulp.task("tslint", () => {
-    gulp.src("dist/tmp_ts/")
+    return gulp.src("dist/tmp_ts/**/")
         .pipe(gulpTslint({
-            formatter: "verbose"
+            formatter: "stylish"
         }))
-        .pipe(tslint.report());
+        .pipe(gulpTslint.report({
+            emitError: false
+        }));
 });
 
 gulp.task("compile-ts-dev", () => {
@@ -337,6 +339,7 @@ gulp.task("default", () => {
             "bundle-vendors"
         ],
         "preprocess-ts",
+        // "tslint",
         "compile-ts-dev",
         "fix-map-file",
         "injectFileNames",
@@ -363,6 +366,7 @@ gulp.task("test", () => {
             "bundle-vendors"
         ],
         "preprocess-ts",
+        // "tslint",
         "compile-ts-spec",
         "injectFileNames",
         "empty-tmp-ts"
@@ -387,6 +391,7 @@ gulp.task("prod", () => {
             "bundle-vendors"
         ],
         "preprocess-ts",
+        // "tslint",
         "compile-ts-prod",
         "injectFileNames",
         "empty-tmp-ts"
