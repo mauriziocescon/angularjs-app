@@ -11,11 +11,11 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 4. From the console, run ``npm install``. You'll get a folder named *node_modules* with all necessary modules
 
-5. Run ``npm run dev`` or ``npm run prod`` on the console in order to deploy the code inside *dist* 
+5. Run ``npm run serve`` or ``npm run build`` on the console in order to deploy the code inside *dist* 
 
-6. If you want to mock the backend, run ``npm run dev-mock`` or ``npm run prod-mock``
+6. If you want to mock the backend, run ``npm run serve-mock`` or ``npm run build-mock``
 
-7. Using ``npm run dev`` or ``npm run dev-mock``, you get incremental buildings of typescript code (thanks to [watchify](https://www.npmjs.com/package/watchify)) and live update on multiple browsers (thanks to [browsersync](https://browsersync.io))
+7. Using ``npm run serve`` or ``npm run serve-mock``, you get incremental buildings of typescript code (thanks to [watchify](https://www.npmjs.com/package/watchify)) and live update on multiple browsers (thanks to [browsersync](https://browsersync.io))
    
 ## Backend implementation 
 
@@ -49,10 +49,6 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 ## Major future developments 
 
-1. Soon: improve some layouts (Users / To-Do / Posts) and readme.md
+1. Improvement of some layouts (Users / To-Do / Posts)
 
-2. Angular 2 + Webpack 
-
-3. More e2e tests written in Typescript
-
-4. Convert serviceworker to Typescript
+2. Convert serviceworker to Typescript

@@ -3,39 +3,40 @@
 /* Build scripts            */
 /*--------------------------*/
 
-var babelify = require("babelify");
-var browserify = require("browserify");
-var browserSync = require("browser-sync").create();
-var del = require("del");
-var fs = require("fs");
-var glob = require("glob");
-var gulp = require("gulp");
-var gulpAngularTemplateCache = require("gulp-angular-templatecache");
-var gulpCleanCSS = require("gulp-clean-css");
-var gulpFlatten = require("gulp-flatten");
-var gulpInject = require("gulp-inject");
-var gulpNgAnnotate = require("gulp-ng-annotate");
-var gulpPreprocess = require("gulp-preprocess");
-var gulpRename = require("gulp-rename");
-var gulpReplace = require("gulp-replace");
-var gulpSass = require("gulp-sass");
-var gulpUglify = require("gulp-uglify");
-var gulpUtil = require("gulp-util");
-var karmaServer = require("karma").Server;
-var path = require("path");
-var runSequence = require("run-sequence");
-var tsify = require("tsify");
-var vinylBuffer = require("vinyl-buffer");
-var vinylSourceStream = require("vinyl-source-stream");
-var watchify = require("watchify");
-var yargs = require("yargs");
+const babelify = require("babelify");
+const browserify = require("browserify");
+const browserSync = require("browser-sync").create();
+const del = require("del");
+const fs = require("fs");
+const glob = require("glob");
+const gulp = require("gulp");
+const gulpAngularTemplateCache = require("gulp-angular-templatecache");
+const gulpCleanCSS = require("gulp-clean-css");
+const gulpFlatten = require("gulp-flatten");
+const gulpInject = require("gulp-inject");
+const gulpNgAnnotate = require("gulp-ng-annotate");
+const gulpPreprocess = require("gulp-preprocess");
+const gulpRename = require("gulp-rename");
+const gulpReplace = require("gulp-replace");
+const gulpSass = require("gulp-sass");
+const gulpTslint = require("gulp-tslint");
+const gulpUglify = require("gulp-uglify");
+const gulpUtil = require("gulp-util");
+const karmaServer = require("karma").Server;
+const path = require("path");
+const runSequence = require("run-sequence");
+const tsify = require("tsify");
+const vinylBuffer = require("vinyl-buffer");
+const vinylSourceStream = require("vinyl-source-stream");
+const watchify = require("watchify");
+const yargs = require("yargs");
 
-var package = JSON.parse(fs.readFileSync("./package.json"));
-var version = package.version;
-var mock = yargs.argv.mock;
-var strictDi = yargs.argv.strictDi;
+const package = JSON.parse(fs.readFileSync("./package.json"));
+const version = package.version;
+const mock = yargs.argv.mock;
+const strictDi = yargs.argv.strictDi;
 
-var paths = {
+const paths = {
     baseFiles: [
         "src/index.html",
         "src/manifest.json",
@@ -92,7 +93,7 @@ function appendVersionToFileName(fileName) {
     return fileName.substring(0, fileName.lastIndexOf(".")) + "-" + version + fileName.substring(fileName.lastIndexOf("."));
 }
 
-var watchedBrowserify = watchify(browserify({
+const watchedBrowserify = watchify(browserify({
     basedir: ".",
     cache: {},
     debug: true,
@@ -108,11 +109,11 @@ var watchedBrowserify = watchify(browserify({
 /* Common tasks             */
 /*--------------------------*/
 
-gulp.task("empty-dist", function () {
+gulp.task("empty-dist", () => {
     return del.sync(["dist/**/*"]);
 });
 
-gulp.task("copy-base-files", function () {
+gulp.task("copy-base-files", () => {
     return gulp.src(paths.baseFiles)
         .pipe(gulpPreprocess({
             context: {"VERSION": version}
@@ -120,15 +121,15 @@ gulp.task("copy-base-files", function () {
         .pipe(gulp.dest("dist/"));
 });
 
-gulp.task("copy-i18n", function () {
+gulp.task("copy-i18n", () => {
     return gulp.src(paths.i18n)
         .pipe(gulp.dest("dist/lib/"));
 });
 
-gulp.task("cache-uib-templates", function () {
+gulp.task("cache-uib-templates", () => {
     return gulp.src(paths.uibTemplates)
-        .pipe(gulpRename(function (path) {
-            var arr = path.dirname.split("/");
+        .pipe(gulpRename((path) => {
+            const arr = path.dirname.split("/");
             path.dirname = arr[arr.length - 1] || arr[arr.length - 2];
         }))
         .pipe(gulpAngularTemplateCache(appendVersionToFileName("uibtemplates.js"), {
@@ -139,7 +140,7 @@ gulp.task("cache-uib-templates", function () {
         .pipe(gulp.dest("dist/js/"));
 });
 
-gulp.task("cache-html-templates", function () {
+gulp.task("cache-html-templates", () => {
     return gulp.src(paths.htmlTemplates)
         .pipe(gulpRename({dirname: ""}))
         .pipe(gulpAngularTemplateCache(appendVersionToFileName("templates.js"), {
@@ -150,28 +151,28 @@ gulp.task("cache-html-templates", function () {
         .pipe(gulp.dest("dist/js/"));
 });
 
-gulp.task("copy-imgs", function () {
+gulp.task("copy-imgs", () => {
     return gulp.src(paths.imgs)
         .pipe(gulpFlatten())
         .pipe(gulp.dest("dist/imgs/"));
 });
 
-gulp.task("copy-fonts", function () {
+gulp.task("copy-fonts", () => {
     return gulp.src(paths.fonts)
         .pipe(gulp.dest("dist/fonts/"));
 });
 
-gulp.task("sass-dev", function () {
+gulp.task("sass-dev", () => {
     return gulp.src(paths.sass)
         .pipe(gulpSass().on("error", gulpSass.logError))
         .pipe(gulpRename(appendVersionToFileName("app.css")))
         .pipe(gulp.dest("dist/css/"));
 });
 
-gulp.task("sass-prod", function () {
+gulp.task("sass-prod", () => {
     return gulp.src(paths.sass)
         .pipe(gulpSass().on("error", gulpSass.logError))
-        .pipe(gulpCleanCSS({debug: true}, function (details) {
+        .pipe(gulpCleanCSS({debug: true}, (details) => {
             console.log(details.name + ": " + details.stats.originalSize);
             console.log(details.name + ": " + details.stats.minifiedSize);
         }))
@@ -179,7 +180,7 @@ gulp.task("sass-prod", function () {
         .pipe(gulp.dest("dist/css/"));
 });
 
-gulp.task("bundle-vendors", function () {
+gulp.task("bundle-vendors", () => {
     return browserify()
         .require(paths.dependencies)
         .bundle()
@@ -189,7 +190,7 @@ gulp.task("bundle-vendors", function () {
         .pipe(gulp.dest("dist/js/"));
 });
 
-gulp.task("preprocess-ts", function () {
+gulp.task("preprocess-ts", () => {
     return gulp.src(paths.preprocessTs)
         .pipe(gulpPreprocess({
             includeExtensions: [".tsx", ".ts"],
@@ -198,11 +199,19 @@ gulp.task("preprocess-ts", function () {
         .pipe(gulp.dest("dist/tmp_ts/"));
 });
 
-gulp.task("compile-ts-dev", function () {
+gulp.task("tslint", () => {
+    gulp.src("dist/tmp_ts/")
+        .pipe(gulpTslint({
+            formatter: "verbose"
+        }))
+        .pipe(tslint.report());
+});
+
+gulp.task("compile-ts-dev", () => {
     return watchedBrowserify
         .transform(babelify, {presets: ["es2015"], extensions: [".tsx", ".ts"]})
         .bundle()
-        .on("error", function (e) {
+        .on("error", (e) => {
             gulpUtil.log(gulpUtil.colors.red("Bundle error:", e.message));
         })
         .pipe(vinylSourceStream(appendVersionToFileName("app.js")))
@@ -210,7 +219,7 @@ gulp.task("compile-ts-dev", function () {
         .pipe(gulp.dest("dist/js/"));
 });
 
-gulp.task("compile-ts-spec", function () {
+gulp.task("compile-ts-spec", () => {
     return browserify({
         basedir: ".",
         entries: paths.browserifyEntries.concat(glob.sync("dist/tmp_ts/**/*.spec.ts")),
@@ -226,7 +235,7 @@ gulp.task("compile-ts-spec", function () {
         .pipe(gulp.dest("dist/js/"));
 });
 
-gulp.task("compile-ts-prod", function () {
+gulp.task("compile-ts-prod", () => {
     return browserify({
         basedir: ".",
         cache: {},
@@ -244,20 +253,20 @@ gulp.task("compile-ts-prod", function () {
         .pipe(gulp.dest("dist/js/"));
 });
 
-gulp.task("fix-map-file", function () {
+gulp.task("fix-map-file", () => {
     return gulp.src(["./dist/tmp_ts/*.map"])
         .pipe(gulpReplace("dist/tmp_ts", "src"))
         .pipe(gulp.dest("./dist/js/"));
 });
 
-gulp.task("injectFileNames", function () {
+gulp.task("injectFileNames", () => {
     return gulp.src("./dist/index.html")
         .pipe(gulpInject(gulp.src(["./dist/js/vendors*.js"]), {relative: true, name: "head"}))
         .pipe(gulpInject(gulp.src(["./dist/js/**/*js", "./dist/css/**/*.css", "!./dist/js/vendors*.js"]), {relative: true}))
         .pipe(gulp.dest("./dist"));
 });
 
-gulp.task("start-browsersynch", function () {
+gulp.task("start-browsersynch", () => {
     return browserSync.init({
         server: {
             files: ["./dist/**", "!./dist/tmp_ts/**"],
@@ -266,12 +275,12 @@ gulp.task("start-browsersynch", function () {
     });
 });
 
-gulp.task("refresh", function() {
+gulp.task("refresh", () => {
     return browserSync.reload();
 });
 
-gulp.task("watch", function () {
-    gulp.watch(["./src/**/*.ts"]).on("change", function () {
+gulp.task("watch", () => {
+    gulp.watch(["./src/**/*.ts"]).on("change", () => {
         runSequence(
             "preprocess-ts",
             "compile-ts-dev",
@@ -280,7 +289,7 @@ gulp.task("watch", function () {
             "refresh"
         );
     });
-    gulp.watch(["./src/**/*.html"]).on("change", function () {
+    gulp.watch(["./src/**/*.html"]).on("change", () => {
         runSequence(
             "copy-base-files",
             "cache-uib-templates",
@@ -290,7 +299,7 @@ gulp.task("watch", function () {
         );
     });
 
-    gulp.watch(["./src/**/*.scss"]).on("change", function () {
+    gulp.watch(["./src/**/*.scss"]).on("change", () => {
         runSequence(
             "sass-dev",
             "injectFileNames",
@@ -299,11 +308,11 @@ gulp.task("watch", function () {
     });
 });
 
-gulp.task("empty-tmp-ts", function () {
+gulp.task("empty-tmp-ts", () => {
     return del.sync(["dist/tmp_ts/"]);
 });
 
-gulp.task("karma", function (done) {
+gulp.task("karma", (done) => {
     return new karmaServer({
         configFile: path.resolve("karma.conf.js"),
         singleRun: true
@@ -315,7 +324,7 @@ gulp.task("karma", function (done) {
 /* Dev                      */
 /*--------------------------*/
 
-gulp.task("default", function () {
+gulp.task("default", () => {
     runSequence(
         "empty-dist",
         ["copy-base-files",
@@ -341,7 +350,7 @@ gulp.task("default", function () {
 /* Unit tests               */
 /*--------------------------*/
 
-gulp.task("test", function () {
+gulp.task("test", () => {
     runSequence(
         "empty-dist",
         ["copy-base-files",
@@ -365,7 +374,7 @@ gulp.task("test", function () {
 /* Prod                     */
 /*--------------------------*/
 
-gulp.task("prod", function () {
+gulp.task("prod", () => {
     runSequence(
         "empty-dist",
         ["copy-base-files",
