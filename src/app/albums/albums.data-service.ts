@@ -1,5 +1,5 @@
 import * as ng from "angular";
-import {Album} from "./albums.model";
+import { Album } from "./albums.model";
 import {
     RequestWs,
     ResponseWs
@@ -49,7 +49,7 @@ export class AlbumsService implements IAlbumsService {
 
         // configure new request
         this.getAlbumsRequest.canceler = this.q.defer();
-        let config: ng.IRequestShortcutConfig = {
+        const config: ng.IRequestShortcutConfig = {
             params: {q: textFilter, _page: page},
             // set a promise that let you cancel the current request
             timeout: this.getAlbumsRequest.canceler.promise
@@ -58,14 +58,14 @@ export class AlbumsService implements IAlbumsService {
         // setup a timeout for the request
         this.getAlbumsRequest.setupTimeout(this, this.utilitiesService);
 
-        let url = this.appConstantsService.Application.WS_URL + "/albums";
+        const url = this.appConstantsService.Application.WS_URL + "/albums";
         this.utilitiesService.logRequest(url);
-        let startTime = this.utilitiesService.getTimeFrom1970();
+        const startTime = this.utilitiesService.getTimeFrom1970();
 
         // fetch data
-        this.getAlbumsRequest.promise = this.http.get<Array<Album>>(url, config);
+        this.getAlbumsRequest.promise = this.http.get<Album[]>(url, config);
 
-        return this.getAlbumsRequest.promise.then((response: ng.IHttpPromiseCallbackArg<Array<Album>>) => {
+        return this.getAlbumsRequest.promise.then((response: ng.IHttpPromiseCallbackArg<Album[]>) => {
             this.utilitiesService.logResponse(response, startTime);
             let info = this.utilitiesService.parseLinkHeaders(response.headers);
 
@@ -79,12 +79,12 @@ export class AlbumsService implements IAlbumsService {
                 };
             }
 
-            let lastPage = parseInt(this.utilitiesService.parseQueryString(info.last)._page);
-            return new ResponseWs(response.status == 200, response.statusText, response.data, page == lastPage, response.status == -1);
+            const lastPage = parseInt(this.utilitiesService.parseQueryString(info.last)._page, null);
+            return new ResponseWs(response.status === 200, response.statusText, response.data, page === lastPage, response.status === -1);
 
-        }, (response: ng.IHttpPromiseCallbackArg<Array<Album>>) => {
+        }, (response: ng.IHttpPromiseCallbackArg<Album[]>) => {
             this.utilitiesService.logResponse(response, startTime);
-            return new ResponseWs(false, response.statusText, undefined, true, response.status == -1);
+            return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });
     }
 

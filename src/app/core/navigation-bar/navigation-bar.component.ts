@@ -8,6 +8,9 @@ import {
 } from "../services/services.module";
 
 export class NavigationBarController {
+    static $inject = ["$location", "AppConstantsService", "AppLanguageService", "LocalizedStringService", "UtilitiesService", "NavigationBarService"];
+    public name: string;
+
     private location: ng.ILocationService;
     private appConstantsService: IAppConstantsService;
     private appLanguageService: IAppLanguageService;
@@ -15,11 +18,8 @@ export class NavigationBarController {
     private utilitiesService: IUtilitiesService;
     private navigationBarService: INavigationBarService;
 
-    public name: string;
-    private languages: Array<string>;
+    private languages: string[];
     public selectedLanguageId: string;
-
-    static $inject = ["$location", "AppConstantsService", "AppLanguageService", "LocalizedStringService", "UtilitiesService", "NavigationBarService"];
 
     constructor($location: ng.ILocationService,
                 AppConstantsService: IAppConstantsService,
@@ -38,7 +38,7 @@ export class NavigationBarController {
     }
 
     get canShowAnalysis(): boolean {
-        return this.appConstantsService.Application.SHOW_ANALYSIS == true;
+        return this.appConstantsService.Application.SHOW_ANALYSIS === true;
     }
 
     get canChangeLanguage(): boolean {
@@ -53,27 +53,27 @@ export class NavigationBarController {
         return this.navigationBarService.getTitle();
     }
 
-    $onInit(): void {
+    public $onInit(): void {
         this.selectedLanguageId = this.appLanguageService.getLanguageId();
         this.languages = this.appConstantsService.Languages.SUPPORTED_LANG;
     }
 
-    goToAlbums(): void {
+    public goToAlbums(): void {
         this.location.path("/albums");
     }
 
-    goToUsers(): void {
+    public goToUsers(): void {
         this.location.path("/users");
     }
 
-    selectLanguage(language: string): void {
-        if (this.appLanguageService.getLanguageId() != language) {
+    public selectLanguage(language: string): void {
+        if (this.appLanguageService.getLanguageId() !== language) {
             this.selectedLanguageId = language;
             this.appLanguageService.setLanguageId(this.selectedLanguageId);
         }
     }
 
-    $onDestroy() {
+    public $onDestroy(): void {
 
     }
 }
@@ -83,5 +83,5 @@ export const NavigationBarComponent: ng.IComponentOptions = {
     controller: NavigationBarController,
     templateUrl: () => {
         return "navigation-bar.component.html";
-    }
+    },
 };

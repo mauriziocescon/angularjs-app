@@ -1,6 +1,6 @@
 import * as angular from "angular";
-import {NavigationBarController} from "./navigation-bar.component";
-import {IAppConstantsService, IUtilitiesService} from "../services/services.module";
+import { NavigationBarController } from "./navigation-bar.component";
+import { IAppConstantsService, IUtilitiesService } from "../services/services.module";
 
 // Addition of angular-mocks and jasmine references is done on the gulpfile
 describe("NavigationBarController", () => {
@@ -25,7 +25,7 @@ describe("NavigationBarController", () => {
     }));
 
     it("controller.name is defined after $onInit", () => {
-        let controller = <NavigationBarController>componentController("navigationBar", null, null);
+        const controller = componentController("navigationBar", null, null) as NavigationBarController;
         controller.$onInit();
         expect(controller.name).toBe("NavigationBarComponent", "controller.name is not equal to NavigationBarComponent");
     });
