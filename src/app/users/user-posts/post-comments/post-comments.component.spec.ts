@@ -1,7 +1,7 @@
 import * as angular from "angular";
-import {Comment} from "./post-comments.model";
-import {PostCommentsController} from "./post-comments.component";
-import {IAppConstantsService, IUtilitiesService} from "../../../app.module";
+import { Comment } from "./post-comments.model";
+import { PostCommentsController } from "./post-comments.component";
+import { IAppConstantsService, IUtilitiesService } from "../../../app.module";
 
 // Addition of angular-mocks and jasmine references is done on the gulpfile
 describe("PostCommentsController", () => {
@@ -29,7 +29,7 @@ describe("PostCommentsController", () => {
             return url.startsWith(AppConstantsService.Application.WS_URL + "/comments");
         }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
 
-            let response = [];
+            const response = [];
             const fakeText = "Lorem ipsum dolor sit amet, vidit clita vitae no vix. " +
                 "Melius utamur definiebas mei ad. No maluisset prodesset theophrastus eum. " +
                 "Nam sadipscing adversarium ut. Est rebum aperiam ex, ex vel regione " +
@@ -41,9 +41,9 @@ describe("PostCommentsController", () => {
                 "vituperata no, per at etiam deserunt inimicus.";
 
             for (let i = 0; i < Math.round(Math.random() * 150); i++) {
-                let comment = new Comment();
+                const comment = new Comment();
 
-                comment.postId = parseInt(params.postId);
+                comment.postId = parseInt(params.postId, null);
                 comment.id = i;
                 comment.name = fakeText.substring(0, (Math.random() * 10000) % 20);
                 comment.email = fakeText.substring(0, (Math.random() * 10000) % 20);
@@ -62,34 +62,34 @@ describe("PostCommentsController", () => {
     });
 
     it("controller.name is defined after $onInit", () => {
-        let controller = <PostCommentsController>componentController("postComments", null, {postId: 1});
+        const controller = componentController("postComments", null, {postId: 1}) as PostCommentsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.name).toBe("PostCommentsComponent", "controller.name is not equal to PostCommentsComponent");
     });
 
     it("expect controller fetches data after $onInit", () => {
-        let controller = <PostCommentsController>componentController("postComments", null, {postId: 1});
+        const controller = componentController("postComments", null, {postId: 1}) as PostCommentsController;
         controller.$onInit();
         httpBackend.flush();
     });
 
     it("controller.posts is not undefined after $onInit", () => {
-        let controller = <PostCommentsController>componentController("postComments", null, {postId: 1});
+        const controller = componentController("postComments", null, {postId: 1}) as PostCommentsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.comments).not.toBeUndefined("controller.posts is undefined...");
     });
 
     it("controller.posts is not null after $onInit", () => {
-        let controller = <PostCommentsController>componentController("postComments", null, {postId: 1});
+        const controller = componentController("postComments", null, {postId: 1}) as PostCommentsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.comments).not.toBeNull("controller.posts is null...");
     });
 
     it("controller.isLoadingData is false after $onInit", () => {
-        let controller = <PostCommentsController>componentController("postComments", null, {postId: 1});
+        const controller = componentController("postComments", null, {postId: 1}) as PostCommentsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.isLoadingData).toBeFalsy("isLoadingData is true after the loading...");

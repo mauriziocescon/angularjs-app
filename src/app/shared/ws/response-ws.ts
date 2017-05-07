@@ -13,23 +13,23 @@ export class ResponseWs<T> {
         this.abort = abort;
     }
 
-    isSuccess(): boolean {
+    public isSuccess(): boolean {
         return this.success;
     }
 
-    getMessage(): string {
+    public getMessage(): string {
         return this.message;
     }
 
-    getData(): T {
+    public getData(): T {
         return this.success ? this.data : undefined;
     }
 
-    isLastPage(): boolean {
+    public isLastPage(): boolean {
         return this.lastPage;
     }
 
-    hasBeenCanceled(): boolean {
-        return this.abort == true;
+    public hasBeenCanceled(): boolean {
+        return this.abort === true;
     }
 }
