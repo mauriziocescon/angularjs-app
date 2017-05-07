@@ -1,7 +1,7 @@
 import * as angular from "angular";
-import {Todo} from "./user-todos.model";
-import {UserTodosController} from "./user-todos.component";
-import {IAppConstantsService, IUtilitiesService} from "../../app.module";
+import { Todo} from "./user-todos.model";
+import { UserTodosController } from "./user-todos.component";
+import { IAppConstantsService, IUtilitiesService } from "../../app.module";
 
 // Addition of angular-mocks and jasmine references is done on the gulpfile
 describe("UserTodosController", () => {

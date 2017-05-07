@@ -1,5 +1,5 @@
-import {Post} from "./user-posts.model";
-import {IAppConstantsService, IUtilitiesService} from "../../app.module";
+import { Post } from "./user-posts.model";
+import { IAppConstantsService, IUtilitiesService } from "../../app.module";
 
 export let userPostsRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
                                     AppConstantsService: IAppConstantsService,
@@ -25,7 +25,7 @@ export let userPostsRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
         for (let i = 0; i < Math.round(Math.random() * 150); i++) {
             const post = new Post();
 
-            post.userId = parseInt(params.userId);
+            post.userId = parseInt(params.userId, null);
             post.id = i;
             post.title = fakeText.substring(0, (Math.random() * 10000) % 20);
             post.body = fakeText.substring(0, (Math.random() * 10000) % fakeText.length);

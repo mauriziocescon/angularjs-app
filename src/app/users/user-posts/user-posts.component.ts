@@ -1,17 +1,17 @@
-import {Post} from "./user-posts.model";
-import {IUserPostsService} from "./user-posts.data-service";
+import { Post } from "./user-posts.model";
+import { IUserPostsService } from "./user-posts.data-service";
 import {
+    Enum,
     ISharedFilterService,
-    ResponseWs,
     Logger,
-    Enum
+    ResponseWs,
 } from "../../shared/shared.module";
 import {
     IDelayExecutionService,
     ILocalizedStringService,
+    INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
-    INavigationBarService
 } from "../../app.module";
 
 export class UserPostsController {
@@ -85,7 +85,7 @@ export class UserPostsController {
     }
 
     public isOpen(post: Post): boolean {
-        return this.openedPost && post.id == this.openedPost.id;
+        return this.openedPost && post.id === this.openedPost.id;
     }
 
     public open(post: Post): void {
@@ -97,8 +97,9 @@ export class UserPostsController {
     }
 
     public resetTextFilter(): void {
-        if (this.textFilter == undefined)
+        if (this.textFilter === undefined) {
             return;
+        }
 
         this.textFilter = undefined;
         this.loadPosts();
@@ -114,12 +115,12 @@ export class UserPostsController {
         this.busy = true;
         this.posts = undefined;
 
-        this.userPostsService.getPosts(this.stateParams["userId"], this.textFilter).then((response: ResponseWs<Array<Post>>) => {
+        this.userPostsService.getPosts(this.stateParams["userId"], this.textFilter).then((response: ResponseWs<Post[]>) => {
 
             if (response.isSuccess()) {
                 this.posts = response.getData();
             }
-            else if (response.hasBeenCanceled() == false) {
+            else if (response.hasBeenCanceled() === false) {
                 // we do not notify the user in case of cancel request
                 this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA"), response.getMessage(), this.localizedStringService.getLocalizedString("CLOSE"));
             }
@@ -141,5 +142,5 @@ export const UserPostsComponent: ng.IComponentOptions = {
     controller: UserPostsController,
     templateUrl: () => {
         return "user-posts.component.html";
-    }
+    },
 };

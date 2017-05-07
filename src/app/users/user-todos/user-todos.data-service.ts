@@ -1,5 +1,5 @@
 import * as ng from "angular";
-import {Todo} from "./user-todos.model";
+import { Todo } from "./user-todos.model";
 import {
     RequestWs,
     ResponseWs,

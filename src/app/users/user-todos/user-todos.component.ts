@@ -1,5 +1,5 @@
-import {Todo} from "./user-todos.model";
-import {IUserTodosService} from "./user-todos.data-service";
+import { Todo } from "./user-todos.model";
+import { IUserTodosService } from "./user-todos.data-service";
 import {
     Enum,
     ISharedFilterService,
