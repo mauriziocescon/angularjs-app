@@ -24,79 +24,79 @@ import {appDev} from "./app/app-dev.module";
 
 class Main {
 
-	static appReady(): void {
-		Main.loadAngular();
-	}
+    static appReady(): void {
+        Main.loadAngular();
+    }
 
-	static loadAngular(): void {
-		const config: ng.IAngularBootstrapConfig = {strictDi: /* @echo STRICT_DI */};
+    static loadAngular(): void {
+        const config: ng.IAngularBootstrapConfig = {strictDi: /* @echo STRICT_DI */};
 
-		// start angular
+        // start angular
 
-		// @if MOCK_BACKEND = "false"
-		angular.bootstrap(document.querySelector(app), [app], config);
-		// @endif
+        // @if MOCK_BACKEND = "false"
+        angular.bootstrap(document.querySelector(app), [app], config);
+        // @endif
 
-		// @if MOCK_BACKEND = "true"
-		angular.bootstrap(document.querySelector(app), [appDev], config);
-		// @endif
+        // @if MOCK_BACKEND = "true"
+        angular.bootstrap(document.querySelector(app), [appDev], config);
+        // @endif
 
-		// register service worker
-		// Main.registerServiceWorker();
-	}
+        // register service worker
+        // Main.registerServiceWorker();
+    }
 
-	private static registerServiceWorker(): void {
-		if (!navigator.serviceWorker) return;
+    private static registerServiceWorker(): void {
+        if (!navigator.serviceWorker) return;
 
-		navigator.serviceWorker.register("/serviceworker.js").then((reg) => {
+        navigator.serviceWorker.register("/serviceworker.js").then((reg) => {
 
-			// Registration was successful
-			console.log("ServiceWorker registration successful with scope: ", reg.scope);
+            // Registration was successful
+            console.log("ServiceWorker registration successful with scope: ", reg.scope);
 
-			if (!navigator.serviceWorker.controller) {
-				return;
-			}
+            if (!navigator.serviceWorker.controller) {
+                return;
+            }
 
-			if (reg.waiting) {
-				Main.updateReady(reg.waiting);
-				return;
-			}
+            if (reg.waiting) {
+                Main.updateReady(reg.waiting);
+                return;
+            }
 
-			if (reg.installing) {
-				Main.trackInstalling(reg.installing);
-				return;
-			}
+            if (reg.installing) {
+                Main.trackInstalling(reg.installing);
+                return;
+            }
 
-			reg.addEventListener("updatefound", () => {
-				Main.trackInstalling(reg.installing);
-			});
+            reg.addEventListener("updatefound", () => {
+                Main.trackInstalling(reg.installing);
+            });
 
-		}).catch((error: string) => {
-			// registration failed :(
-			console.log("ServiceWorker registration failed: ", error);
-		});
+        }).catch((error: string) => {
+            // registration failed :(
+            console.log("ServiceWorker registration failed: ", error);
+        });
 
-		// Ensure refresh is only called once.
-		// This works around a bug in "force update on reload".
-		let refreshing;
-		navigator.serviceWorker.oncontrollerchange = () => {
-			if (refreshing) return;
-			window.location.reload();
-			refreshing = true;
-		};
-	}
+        // Ensure refresh is only called once.
+        // This works around a bug in "force update on reload".
+        let refreshing;
+        navigator.serviceWorker.oncontrollerchange = () => {
+            if (refreshing) return;
+            window.location.reload();
+            refreshing = true;
+        };
+    }
 
-	private static trackInstalling(worker): void {
-		worker.addEventListener("statechange", () => {
-			if (worker.state == "installed") {
-				Main.updateReady(worker);
-			}
-		});
-	};
+    private static trackInstalling(worker): void {
+        worker.addEventListener("statechange", () => {
+            if (worker.state == "installed") {
+                Main.updateReady(worker);
+            }
+        });
+    };
 
-	private static updateReady(worker): void {
-		worker.postMessage({action: "skipWaiting"});
-	};
+    private static updateReady(worker): void {
+        worker.postMessage({action: "skipWaiting"});
+    };
 }
 
 document.addEventListener("DOMContentLoaded", Main.appReady.bind(Main));

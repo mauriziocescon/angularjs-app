@@ -12,14 +12,14 @@ const appDevModule = angular.module("appDev", [app, "ngMockE2E"]);
 
 let defaultRunFuncMocks = ($httpBackend: ng.IHttpBackendService) => {
 
-	// by default call the real ws
-	$httpBackend.whenGET((url: string) => {
-		return true;
-	}).passThrough();
+    // by default call the real ws
+    $httpBackend.whenGET((url: string) => {
+        return true;
+    }).passThrough();
 
-	$httpBackend.whenPOST((url: string) => {
-		return true;
-	}).passThrough();
+    $httpBackend.whenPOST((url: string) => {
+        return true;
+    }).passThrough();
 };
 
 defaultRunFuncMocks.$inject = ["$httpBackend"];

@@ -1,24 +1,24 @@
 export class AppController {
-	public name: string;
+    public name: string;
 
-	static $inject = [];
+    static $inject = [];
 
-	constructor() {
-		this.name = "AppComponent";
-	}
+    constructor() {
+        this.name = "AppComponent";
+    }
 
-	public $onInit(): void {
+    public $onInit(): void {
 
-	}
+    }
 
-	public $onDestroy(): void {
+    public $onDestroy(): void {
 
-	}
+    }
 }
 
 export const AppComponent: ng.IComponentOptions = {
-	controller: AppController,
-	templateUrl: () => {
-		return "app.component.html";
-	}
+    controller: AppController,
+    templateUrl: () => {
+        return "app.component.html";
+    },
 };
