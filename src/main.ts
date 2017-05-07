@@ -45,7 +45,7 @@ class Main {
         // Main.registerServiceWorker();
     }
 
-    private static registerServiceWorker(): void {
+    protected static registerServiceWorker(): void {
         if (!navigator.serviceWorker) {
             return;
         }
@@ -90,17 +90,17 @@ class Main {
         };
     }
 
-    private static trackInstalling(worker): void {
+    protected static trackInstalling(worker): void {
         worker.addEventListener("statechange", () => {
             if (worker.state === "installed") {
                 Main.updateReady(worker);
             }
         });
-    };
+    }
 
-    private static updateReady(worker): void {
+    protected static updateReady(worker): void {
         worker.postMessage({action: "skipWaiting"});
-    };
+    }
 }
 
 document.addEventListener("DOMContentLoaded", Main.appReady.bind(Main));
