@@ -1,4 +1,4 @@
-import {Logger} from "../shared.module";
+import { Logger } from "../shared.module";
 
 /**
  * Call $setValidity on the ngModel based on
@@ -11,7 +11,7 @@ import {Logger} from "../shared.module";
 export const mcCustomValidatorDirective = () => {
 
     const setValidity = (scope: ng.IScope, attrs: ng.IAttributes, ngModel: ng.INgModelController) => {
-        ngModel.$setValidity("mcCustomValidatorError", scope.$eval(attrs["mcCustomValidator"]) == true);
+        ngModel.$setValidity("mcCustomValidatorError", scope.$eval(attrs["mcCustomValidator"]) === true);
     };
 
     const directive: ng.IDirective = {};

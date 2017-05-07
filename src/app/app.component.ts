@@ -1,6 +1,5 @@
 export class AppController {
     public static $inject = [];
-
     public name: string;
 
     constructor() {

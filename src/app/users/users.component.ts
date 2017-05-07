@@ -16,6 +16,7 @@ import {
 
 export class UsersController {
     public static $inject = ["$filter", "$location", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UsersService"];
+    public name: string;
 
     private filter: ISharedFilterService;
     private location: ng.ILocationService;
@@ -26,7 +27,6 @@ export class UsersController {
     private navigationBarService: INavigationBarService;
     private usersService: IUsersService;
 
-    public name: string;
     public users: User[];
     private busy: boolean;
     public textFilter: string;

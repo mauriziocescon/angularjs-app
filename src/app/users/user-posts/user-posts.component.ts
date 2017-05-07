@@ -16,6 +16,7 @@ import {
 
 export class UserPostsController {
     public static $inject = ["$filter", "$stateParams", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UserPostsService"];
+    public name: string;
 
     private filter: ISharedFilterService;
     private stateParams: ng.ui.IStateParamsService;
@@ -26,7 +27,6 @@ export class UserPostsController {
     private navigationBarService: INavigationBarService;
     private userPostsService: IUserPostsService;
 
-    public name: string;
     public posts: Array<Post>;
     private busy: boolean;
     private openedPost: Post;

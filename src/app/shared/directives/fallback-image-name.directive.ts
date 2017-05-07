@@ -1,5 +1,5 @@
 import * as $ from "jquery";
-import {Logger} from "../shared.module";
+import { Logger } from "../shared.module";
 
 /**
  * Insert an image as fallback in case of error

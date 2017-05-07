@@ -16,6 +16,7 @@ import {
 
 export class UserTodosController {
     public static $inject = ["$filter", "$location", "$stateParams", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UserTodosService"];
+    public name: string;
 
     private filter: ISharedFilterService;
     private location: ng.ILocationService;
@@ -27,7 +28,6 @@ export class UserTodosController {
     private navigationBarService: INavigationBarService;
     private todosService: IUserTodosService;
 
-    public name: string;
     public todos: Todo[];
     private busy: boolean;
     public textFilter: string;

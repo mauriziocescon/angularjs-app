@@ -1,5 +1,5 @@
 import * as $ from "jquery";
-import {Logger} from "../shared.module";
+import { Logger } from "../shared.module";
 
 /**
  * Invoke a function when mousewheel event fires on the element

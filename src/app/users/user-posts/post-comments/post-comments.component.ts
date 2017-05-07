@@ -14,6 +14,7 @@ import {
 
 export class PostCommentsController {
     public static $inject = ["$filter", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "PostCommentsService"];
+    public name: string;
 
     private filter: ISharedFilterService;
     private localizedStringService: ILocalizedStringService;
@@ -24,7 +25,6 @@ export class PostCommentsController {
 
     private postId: number;
 
-    public name: string;
     public comments: Comment[];
     private busy: boolean;
 

@@ -6,9 +6,14 @@ import {
     ILocationChangeService,
     IUtilitiesService,
 } from "./services/services.module";
-import {Logger} from "../shared/utilities/utilities.module";
+import { Logger } from "../shared/utilities/utilities.module";
 
-export const servicesSetupFunc = (AppLanguageService: IAppLanguageService, CacheHelperService: ICacheHelperService, ConnectionService: IConnectionService, LocalizedStringService: ILocalizedStringService, LocationChangeService: ILocationChangeService, UtilitiesService: IUtilitiesService) => {
+export const servicesSetupFunc = (AppLanguageService: IAppLanguageService,
+                                  CacheHelperService: ICacheHelperService,
+                                  ConnectionService: IConnectionService,
+                                  LocalizedStringService: ILocalizedStringService,
+                                  LocationChangeService: ILocationChangeService,
+                                  UtilitiesService: IUtilitiesService) => {
     // setup services
     // Logger.log("ANGULAR CORE OK  " + UtilitiesService.getNow().toISOString());
     AppLanguageService.start();

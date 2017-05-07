@@ -1,5 +1,5 @@
-import {Logger} from "../shared.module";
-import {IUtilitiesService} from "../../app.module";
+import { Logger } from "../shared.module";
+import { IUtilitiesService } from "../../app.module";
 
 /**
  * Invoke a function when scroll event fires on the element
@@ -17,7 +17,7 @@ export const mcOnScrollDirective = (UtilitiesService: IUtilitiesService) => {
             const raw = element[0];
 
             element.bind("scroll", (eventObject: JQueryEventObject) => {
-                const callback: Function = scope.$eval(attrs["mcOnScroll"]);
+                const callback: () => void = scope.$eval(attrs["mcOnScroll"]);
                 UtilitiesService.call(callback, scope, raw.scrollLeft, raw.scrollTop);
             });
 

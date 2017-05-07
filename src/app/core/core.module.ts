@@ -1,7 +1,7 @@
 import * as angular from "angular";
-import {mcServices} from "./services/services.module";
-import {navigationBar} from "./navigation-bar/navigation-bar.module";
-import {servicesSetupFunc} from "./core-run.module";
+import { mcServices } from "./services/services.module";
+import { navigationBar } from "./navigation-bar/navigation-bar.module";
+import { servicesSetupFunc } from "./core-run.module";
 
 export * from "./services/services.module";
 export * from "./navigation-bar/navigation-bar.module";

@@ -1,6 +1,6 @@
 import * as $ from "jquery";
-import {Logger} from "../shared.module";
-import {IScrollToService} from "../../app.module";
+import { Logger } from "../shared.module";
+import { IScrollToService } from "../../app.module";
 
 /**
  * When the user starts scrolling and window.pageYOffset
@@ -17,10 +17,10 @@ export const mcScrollToTopDirective = ($window: ng.IWindowService, ScrollToServi
         const elementVisibility = attrs["element-visibility"];
         const shouldBeVisible = ScrollToService.getScrollPosition() > 100;
 
-        if (shouldBeVisible == true && elementVisibility != true) {
+        if (shouldBeVisible === true && elementVisibility !== true) {
             $(element).show();
             attrs["element-visibility"] = true;
-        } else if (shouldBeVisible == false && elementVisibility != false) {
+        } else if (shouldBeVisible === false && elementVisibility !== false) {
             $(element).hide();
             attrs["element-visibility"] = false;
         }
@@ -36,7 +36,7 @@ export const mcScrollToTopDirective = ($window: ng.IWindowService, ScrollToServi
                 ScrollToService.scrollTo(0);
             });
 
-            let scrollFunc = (ev: UIEvent) => {
+            const scrollFunc = (ev: UIEvent) => {
                 onScroll(element, attrs);
             };
 

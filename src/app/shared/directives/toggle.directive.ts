@@ -1,5 +1,5 @@
 import * as $ from "jquery";
-import {Logger} from "../shared.module";
+import { Logger } from "../shared.module";
 
 /**
  * At the click event, mc-toggle is evaluated and
@@ -18,7 +18,7 @@ import {Logger} from "../shared.module";
 export const mcToggleDirective = () => {
 
     const getState = (scope: ng.IScope, attrs: ng.IAttributes) => {
-        return scope.$eval(attrs["mcToggle"]) == true;
+        return scope.$eval(attrs["mcToggle"]) === true;
     };
 
     const execute = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, state: boolean, eventObject?: JQueryEventObject) => {
@@ -26,9 +26,9 @@ export const mcToggleDirective = () => {
         callStateFunction(scope, element, attrs, state, eventObject);
     };
 
-    let setClass = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, state: boolean) => {
+    const setClass = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, state: boolean) => {
 
-        if (state == true) {
+        if (state === true) {
             $(element).addClass("on");
             $(element).removeClass("off");
         } else {
@@ -46,14 +46,14 @@ export const mcToggleDirective = () => {
 
     let callStateFunction = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, state: boolean, eventObject: JQueryEventObject) => {
 
-        if (state == true) {
-            if (attrs["on"] != undefined) {
+        if (state === true) {
+            if (attrs["on"] !== undefined) {
                 scope.$apply(() => {
                     scope.$eval(attrs["on"], {$event: eventObject});
                 });
             }
         } else {
-            if (attrs["off"] != undefined) {
+            if (attrs["off"] !== undefined) {
                 scope.$apply(() => {
                     scope.$eval(attrs["off"], {$event: eventObject});
                 });
@@ -67,7 +67,7 @@ export const mcToggleDirective = () => {
     directive.restrict = "A";
     directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
         try {
-            const keepWatching = scope.$eval(attrs["keepWatching"]) == true;
+            const keepWatching = scope.$eval(attrs["keepWatching"]) === true;
             setClass(scope, element, attrs, getState(scope, attrs));
             let clearWatcher;
 
@@ -75,18 +75,19 @@ export const mcToggleDirective = () => {
                 clearWatcher = scope.$watch(() => {
                     return getState(scope, attrs);
                 }, (newvalue: boolean, oldvalue: boolean) => {
-                    if (newvalue != oldvalue)
+                    if (newvalue !== oldvalue)
                         execute(scope, element, attrs, newvalue);
                 });
             }
 
             $(element).click((eventObject: JQueryEventObject) => {
-                execute(scope, element, attrs, getState(scope, attrs) != true, eventObject);
+                execute(scope, element, attrs, getState(scope, attrs) !== true, eventObject);
             });
 
             scope.$on("$destroy", (event: ng.IAngularEvent) => {
-                if (clearWatcher)
+                if (clearWatcher) {
                     clearWatcher();
+                }
 
                 $(element).unbind("click");
             });

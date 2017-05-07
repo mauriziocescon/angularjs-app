@@ -1,5 +1,5 @@
 import * as $ from "jquery";
-import {Logger} from "../shared.module";
+import { Logger } from "../shared.module";
 
 /**
  * Set focus to the element when the condition "mc-focus-if" is true
@@ -17,22 +17,23 @@ export const mcFocusIfDirective = ($timeout: ng.ITimeoutService) => {
             const clearWatcher = scope.$watch(() => {
                 return scope.$eval(attrs["mcFocusIf"]);
             }, (newValue, oldValue) => {
-                if (newValue != oldValue && newValue == true) {
+                if (newValue !== oldValue && newValue === true) {
                     $timeout(() => {
                         $(element).focus();
                     }, 200);
                 }
             });
 
-            if (scope.$eval(attrs["mcFocusIf"]) == true) {
+            if (scope.$eval(attrs["mcFocusIf"]) === true) {
                 $timeout(() => {
                     $(element).focus();
                 }, 200);
             }
 
             scope.$on("$destroy", (event: ng.IAngularEvent) => {
-                if (clearWatcher)
+                if (clearWatcher) {
                     clearWatcher();
+                }
             });
         } catch (e) {
             Logger.exception(scope, e);

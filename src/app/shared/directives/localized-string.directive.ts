@@ -1,6 +1,6 @@
 import * as $ from "jquery";
-import {Logger} from "../shared.module";
-import {ILocalizedStringService} from "../../app.module";
+import { Logger } from "../shared.module";
+import { ILocalizedStringService } from "../../app.module";
 
 /**
  * Replace the mc-localized-string element with
@@ -19,7 +19,7 @@ export const mcLocalizedStringDirective = (LocalizedStringService: ILocalizedStr
     directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
         try {
 
-            if (attrs["key"] != undefined && $(element).parent() != undefined) {
+            if (attrs["key"] !== undefined && $(element).parent() !== undefined) {
                 $(element).replaceWith(LocalizedStringService.getLocalizedString(attrs["key"]));
             }
 
