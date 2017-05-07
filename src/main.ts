@@ -19,16 +19,16 @@ import "format4js";
 import "ng-infinite-scroll";
 import "stacktrace-js";
 
-import {app} from "./app/app.module";
-import {appDev} from "./app/app-dev.module";
+import { app } from "./app/app.module";
+import { appDev } from "./app/app-dev.module";
 
 class Main {
 
-    static appReady(): void {
+    public static appReady(): void {
         Main.loadAngular();
     }
 
-    static loadAngular(): void {
+    protected static loadAngular(): void {
         const config: ng.IAngularBootstrapConfig = {strictDi: /* @echo STRICT_DI */};
 
         // start angular
@@ -46,7 +46,9 @@ class Main {
     }
 
     private static registerServiceWorker(): void {
-        if (!navigator.serviceWorker) return;
+        if (!navigator.serviceWorker) {
+            return;
+        }
 
         navigator.serviceWorker.register("/serviceworker.js").then((reg) => {
 
@@ -80,7 +82,9 @@ class Main {
         // This works around a bug in "force update on reload".
         let refreshing;
         navigator.serviceWorker.oncontrollerchange = () => {
-            if (refreshing) return;
+            if (refreshing) {
+                return;
+            }
             window.location.reload();
             refreshing = true;
         };
@@ -88,7 +92,7 @@ class Main {
 
     private static trackInstalling(worker): void {
         worker.addEventListener("statechange", () => {
-            if (worker.state == "installed") {
+            if (worker.state === "installed") {
                 Main.updateReady(worker);
             }
         });

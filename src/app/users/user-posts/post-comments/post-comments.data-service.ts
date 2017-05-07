@@ -2,28 +2,28 @@ import * as ng from "angular";
 import {Comment} from "./post-comments.model";
 import {
     RequestWs,
-    ResponseWs
+    ResponseWs,
 } from "../../../shared/shared.module";
 import {
     IAppConstantsService,
-    IUtilitiesService
+    IUtilitiesService,
 } from "../../../app.module";
 
 export interface IPostCommentsService {
-    getPostComments(postId: string): ng.IPromise<ResponseWs<Array<Comment>>>;
+    getPostComments(postId: string): ng.IPromise<ResponseWs<Comment[]>>;
     cancelOngoingRequests(): void;
 }
 
 export class PostCommentsService implements IPostCommentsService {
+    public static $inject = ["$http", "$q", "AppConstantsService", "UtilitiesService"];
+
     protected http: ng.IHttpService;
     protected q: ng.IQService;
     protected appConstantsService: IAppConstantsService;
     protected utilitiesService: IUtilitiesService;
 
     // requests
-    private getPostCommentsRequest: RequestWs<Array<Comment>>;
-
-    static $inject = ["$http", "$q", "AppConstantsService", "UtilitiesService"];
+    private getPostCommentsRequest: RequestWs<Comment[]>;
 
     constructor($http: ng.IHttpService,
                 $q: ng.IQService,
@@ -42,36 +42,36 @@ export class PostCommentsService implements IPostCommentsService {
         return {};
     }
 
-    public getPostComments(postId: string): ng.IPromise<ResponseWs<Array<Comment>>> {
+    public getPostComments(postId: string): ng.IPromise<ResponseWs<Comment[]>> {
 
         // reset request
         this.getPostCommentsRequest.reset(this.utilitiesService);
 
         // configure new request
         this.getPostCommentsRequest.canceler = this.q.defer();
-        let config: ng.IRequestShortcutConfig = {
+        const config: ng.IRequestShortcutConfig = {
             params: {postId: postId},
             // set a promise that let you cancel the current request
-            timeout: this.getPostCommentsRequest.canceler.promise
+            timeout: this.getPostCommentsRequest.canceler.promise,
         };
 
         // setup a timeout for the request
         this.getPostCommentsRequest.setupTimeout(this, this.utilitiesService);
 
-        let url = this.appConstantsService.Application.WS_URL + "/comments";
+        const url = this.appConstantsService.Application.WS_URL + "/comments";
         this.utilitiesService.logRequest(url);
-        let startTime = this.utilitiesService.getTimeFrom1970();
+        const startTime = this.utilitiesService.getTimeFrom1970();
 
         // fetch data
-        this.getPostCommentsRequest.promise = this.http.get<Array<Comment>>(url, config);
+        this.getPostCommentsRequest.promise = this.http.get<Comment[]>(url, config);
 
-        return this.getPostCommentsRequest.promise.then((response: ng.IHttpPromiseCallbackArg<Array<Comment>>) => {
+        return this.getPostCommentsRequest.promise.then((response: ng.IHttpPromiseCallbackArg<Comment[]>) => {
             this.utilitiesService.logResponse(response, startTime);
-            return new ResponseWs(response.status == 200, response.statusText, response.data, true, response.status == -1);
+            return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
 
-        }, (response: ng.IHttpPromiseCallbackArg<Array<Comment>>) => {
+        }, (response: ng.IHttpPromiseCallbackArg<Comment[]>) => {
             this.utilitiesService.logResponse(response, startTime);
-            return new ResponseWs(false, response.statusText, undefined, true, response.status == -1);
+            return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });
     }
 

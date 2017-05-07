@@ -1,5 +1,5 @@
-import {User, Address, Coordinates, Company} from "./users.model";
-import {IAppConstantsService, IUtilitiesService} from "../app.module";
+import { IAppConstantsService, IUtilitiesService } from "../app.module";
+import { Address, Company, Coordinates, User } from "./users.model";
 
 export let usersRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
                                 AppConstantsService: IAppConstantsService,
@@ -7,13 +7,14 @@ export let usersRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
 
     // returns the current list of users
     $httpBackend.whenGET((url: string) => {
-        return AppConstantsService.Application.MOCK_BACKEND == true && url.startsWith(AppConstantsService.Application.WS_URL + "/users");
+        return AppConstantsService.Application.MOCK_BACKEND === true &&
+            url.startsWith(AppConstantsService.Application.WS_URL + "/users");
     }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
 
-        let response = [];
+        const response = [];
 
         for (let i = 0; Math.round(Math.random() * 25); i++) {
-            let user = new User();
+            const user = new User();
 
             user.id = i;
             user.name = "name " + i.toString() + " fds fsf f fs fsfdf ds f f gjkfd gf gkflk gfk gkfdlg fd";
