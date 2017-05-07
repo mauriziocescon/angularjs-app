@@ -1,5 +1,5 @@
 import * as ng from "angular";
-import {IUtilitiesService} from "../../app.module";
+import { IUtilitiesService } from "../../app.module";
 
 export class RequestWs<T> {
     public promise: ng.IPromise<T>;
@@ -10,14 +10,6 @@ export class RequestWs<T> {
         this.promise = promise;
         this.canceler = canceler;
         this.timeout = timeout;
-    }
-
-    private cancel(): void {
-
-        // abort http request if it's defined
-        if (this.canceler) {
-            this.canceler.resolve("Resolve $http request");
-        }
     }
 
     public setupTimeout(scope: any, utilitiesService: IUtilitiesService): void {
@@ -33,5 +25,13 @@ export class RequestWs<T> {
 
         // cancel ongoing request or do nothing
         this.cancel();
+    }
+
+    private cancel(): void {
+
+        // abort http request if it's defined
+        if (this.canceler) {
+            this.canceler.resolve("Resolve $http request");
+        }
     }
 }

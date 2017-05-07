@@ -5,14 +5,15 @@ export class Enum {
         this.value = value;
     }
 
-    public toString(): string {
-        return this.value;
-    }
-
     public static toEnum(val: string): Enum {
-        if (val == undefined || val == null)
+        if (val === undefined || val === null) {
             return undefined;
+        }
 
         return new Enum(val);
+    }
+
+    public toString(): string {
+        return this.value;
     }
 }
