@@ -16,7 +16,7 @@ import {
 
 export class UserPostsController {
     public static $inject = ["$filter", "$stateParams", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UserPostsService"];
-    
+
     private filter: ISharedFilterService;
     private stateParams: ng.ui.IStateParamsService;
     private delayExecutionService: IDelayExecutionService;
@@ -54,19 +54,19 @@ export class UserPostsController {
     }
 
     public get isLoadingData(): boolean {
-        return this.busy == true;
+        return this.busy === true;
     }
 
     public get hasNoData(): boolean {
-        return this.posts != undefined && this.posts.length == 0 && this.isLoadingData == false;
+        return this.posts !== undefined && this.posts.length === 0 && this.isLoadingData === false;
     }
 
     public get shouldRetry(): boolean {
-        return this.posts == undefined && this.isLoadingData == false;
+        return this.posts === undefined && this.isLoadingData === false;
     }
 
     public get showData(): boolean {
-        return this.isLoadingData == false && this.hasNoData == false && this.shouldRetry == false;
+        return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
     }
 
     public get textFilterPlaceholder(): string {

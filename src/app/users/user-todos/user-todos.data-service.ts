@@ -2,15 +2,15 @@ import * as ng from "angular";
 import {Todo} from "./user-todos.model";
 import {
     RequestWs,
-    ResponseWs
+    ResponseWs,
 } from "../../shared/shared.module";
 import {
     IAppConstantsService,
-    IUtilitiesService
+    IUtilitiesService,
 } from "../../app.module";
 
 export interface IUserTodosService {
-    getTodos(userId: string, textFilter: string): ng.IPromise<ResponseWs<Array<Todo>>>;
+    getTodos(userId: string, textFilter: string): ng.IPromise<ResponseWs<Todo[]>>;
     cancelOngoingRequests(): void;
 }
 
@@ -23,7 +23,7 @@ export class UserTodosService implements IUserTodosService {
     protected utilitiesService: IUtilitiesService;
 
     // requests
-    private getUserTodosRequest: RequestWs<Array<Todo>>;
+    private getUserTodosRequest: RequestWs<Todo[]>;
 
     constructor($http: ng.IHttpService,
                 $q: ng.IQService,

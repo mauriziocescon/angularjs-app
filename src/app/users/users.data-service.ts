@@ -10,7 +10,7 @@ import {
 } from "../app.module";
 
 export interface IUsersService {
-    getUsers(textFilter: string): ng.IPromise<ResponseWs<User[]>;
+    getUsers(textFilter: string): ng.IPromise<ResponseWs<User[]>>;
     cancelOngoingRequests(): void;
 }
 
@@ -42,7 +42,7 @@ export class UsersService implements IUsersService {
         return {};
     }
 
-    public getUsers(textFilter: string): ng.IPromise<ResponseWs<User[]> {
+    public getUsers(textFilter: string): ng.IPromise<ResponseWs<User[]>> {
 
         // reset request
         this.getUsersRequest.reset(this.utilitiesService);
@@ -52,7 +52,7 @@ export class UsersService implements IUsersService {
         const config: ng.IRequestShortcutConfig = {
             params: {q: textFilter},
             // set a promise that let you cancel the current request
-            timeout: this.getUsersRequest.canceler.promise
+            timeout: this.getUsersRequest.canceler.promise,
         };
 
         // setup a timeout for the request
