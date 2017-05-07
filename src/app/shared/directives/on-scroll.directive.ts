@@ -8,27 +8,27 @@ import {IUtilitiesService} from "../../app.module";
  */
 export const mcOnScrollDirective = (UtilitiesService: IUtilitiesService) => {
 
-	const directive: ng.IDirective = {};
+    const directive: ng.IDirective = {};
 
-	directive.priority = 0;
-	directive.restrict = "A";
-	directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
-		try {
-			const raw = element[0];
+    directive.priority = 0;
+    directive.restrict = "A";
+    directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
+        try {
+            const raw = element[0];
 
-			element.bind("scroll", (eventObject: JQueryEventObject) => {
-				const callback: Function = scope.$eval(attrs["mcOnScroll"]);
-				UtilitiesService.call(callback, scope, raw.scrollLeft, raw.scrollTop);
-			});
+            element.bind("scroll", (eventObject: JQueryEventObject) => {
+                const callback: Function = scope.$eval(attrs["mcOnScroll"]);
+                UtilitiesService.call(callback, scope, raw.scrollLeft, raw.scrollTop);
+            });
 
-			scope.$on("$destroy", (event: ng.IAngularEvent) => {
-				element.unbind("scroll");
-			});
-		} catch (e) {
-			Logger.exception(scope, e);
-		}
-	};
-	return directive;
+            scope.$on("$destroy", (event: ng.IAngularEvent) => {
+                element.unbind("scroll");
+            });
+        } catch (e) {
+            Logger.exception(scope, e);
+        }
+    };
+    return directive;
 };
 
 mcOnScrollDirective.$inject = ["UtilitiesService"];

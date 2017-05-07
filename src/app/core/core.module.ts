@@ -7,9 +7,9 @@ export * from "./services/services.module";
 export * from "./navigation-bar/navigation-bar.module";
 
 const coreModule = angular.module("app.core", [
-	"tmh.dynamicLocale",
-	mcServices,
-	navigationBar
+    "tmh.dynamicLocale",
+    mcServices,
+    navigationBar
 ]);
 
 // run function

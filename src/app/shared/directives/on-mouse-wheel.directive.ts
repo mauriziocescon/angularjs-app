@@ -8,22 +8,22 @@ import {Logger} from "../shared.module";
  */
 export const mcOnMouseWheelDirective = () => {
 
-	const directive: ng.IDirective = {};
+    const directive: ng.IDirective = {};
 
-	directive.priority = 0;
-	directive.restrict = "A";
-	directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
-		try {
-			const mousewheelHandler = scope.$eval(attrs["mcOnMouseWheel"]);
+    directive.priority = 0;
+    directive.restrict = "A";
+    directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
+        try {
+            const mousewheelHandler = scope.$eval(attrs["mcOnMouseWheel"]);
 
-			$(element).bind("mousewheel DOMMouseScroll", mousewheelHandler());
+            $(element).bind("mousewheel DOMMouseScroll", mousewheelHandler());
 
-			scope.$on("$destroy", (event: ng.IAngularEvent) => {
-				$(element).unbind("mousewheel DOMMouseScroll");
-			});
-		} catch (e) {
-			Logger.exception(scope, e);
-		}
-	};
-	return directive;
+            scope.$on("$destroy", (event: ng.IAngularEvent) => {
+                $(element).unbind("mousewheel DOMMouseScroll");
+            });
+        } catch (e) {
+            Logger.exception(scope, e);
+        }
+    };
+    return directive;
 };

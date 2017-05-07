@@ -5,6 +5,6 @@ import {ModalConfirmerController} from "./modal-confirmer/modal-confirmer.contro
 
 // shared modals
 export const mcModals = angular.module("shared.modals", [])
-	.controller("ModalAlertController", ModalAlertController)
-	.controller("ModalConfirmerController", ModalConfirmerController)
-	.name;
+    .controller("ModalAlertController", ModalAlertController)
+    .controller("ModalConfirmerController", ModalConfirmerController)
+    .name;

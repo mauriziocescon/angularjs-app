@@ -12,22 +12,22 @@ import {ILocalizedStringService} from "../../app.module";
  */
 export const mcLocalizedStringDirective = (LocalizedStringService: ILocalizedStringService) => {
 
-	const directive: ng.IDirective = {};
+    const directive: ng.IDirective = {};
 
-	directive.priority = 0;
-	directive.restrict = "E";
-	directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
-		try {
+    directive.priority = 0;
+    directive.restrict = "E";
+    directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
+        try {
 
-			if (attrs["key"] != undefined && $(element).parent() != undefined) {
-				$(element).replaceWith(LocalizedStringService.getLocalizedString(attrs["key"]));
-			}
+            if (attrs["key"] != undefined && $(element).parent() != undefined) {
+                $(element).replaceWith(LocalizedStringService.getLocalizedString(attrs["key"]));
+            }
 
-		} catch (e) {
-			Logger.exception(scope, e);
-		}
-	};
-	return directive;
+        } catch (e) {
+            Logger.exception(scope, e);
+        }
+    };
+    return directive;
 };
 
 mcLocalizedStringDirective.$inject = ["LocalizedStringService"];

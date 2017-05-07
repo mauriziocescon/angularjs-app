@@ -10,29 +10,29 @@ import {Logger} from "../shared.module";
  */
 export const mcCustomValidatorDirective = () => {
 
-	const setValidity = (scope: ng.IScope, attrs: ng.IAttributes, ngModel: ng.INgModelController) => {
-		ngModel.$setValidity("mcCustomValidatorError", scope.$eval(attrs["mcCustomValidator"]) == true);
-	};
+    const setValidity = (scope: ng.IScope, attrs: ng.IAttributes, ngModel: ng.INgModelController) => {
+        ngModel.$setValidity("mcCustomValidatorError", scope.$eval(attrs["mcCustomValidator"]) == true);
+    };
 
-	const directive: ng.IDirective = {};
+    const directive: ng.IDirective = {};
 
-	directive.priority = 0;
-	directive.restrict = "A";
-	directive.require = "^ngModel";
-	directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, ngModel: ng.INgModelController) => {
-		try {
-			const clearWatcher = scope.$watch(() => {
-				setValidity(scope, attrs, ngModel);
-			});
-			setValidity(scope, attrs, ngModel);
+    directive.priority = 0;
+    directive.restrict = "A";
+    directive.require = "^ngModel";
+    directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, ngModel: ng.INgModelController) => {
+        try {
+            const clearWatcher = scope.$watch(() => {
+                setValidity(scope, attrs, ngModel);
+            });
+            setValidity(scope, attrs, ngModel);
 
-			scope.$on("$destroy", (event: ng.IAngularEvent) => {
-				if (clearWatcher)
-					clearWatcher();
-			});
-		} catch (e) {
-			Logger.exception(scope, e);
-		}
-	};
-	return directive;
+            scope.$on("$destroy", (event: ng.IAngularEvent) => {
+                if (clearWatcher)
+                    clearWatcher();
+            });
+        } catch (e) {
+            Logger.exception(scope, e);
+        }
+    };
+    return directive;
 };

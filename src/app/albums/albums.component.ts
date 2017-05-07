@@ -1,160 +1,160 @@
 import {Album} from "./albums.model";
 import {IAlbumsService} from "./albums.data-service";
 import {
-	ISharedFilterService,
-	ResponseWs,
-	Logger,
-	Enum
+    ISharedFilterService,
+    ResponseWs,
+    Logger,
+    Enum
 } from "../shared/shared.module";
 import {
-	IDelayExecutionService,
-	ILocalizedStringService,
-	IUIUtilitiesService,
-	IUtilitiesService,
-	INavigationBarService
+    IDelayExecutionService,
+    ILocalizedStringService,
+    IUIUtilitiesService,
+    IUtilitiesService,
+    INavigationBarService
 } from "../app.module";
 
 export class AlbumsController {
-	private filter: ISharedFilterService;
-	private state: ng.ui.IStateService;
-	private delayExecutionService: IDelayExecutionService;
-	private localizedStringService: ILocalizedStringService;
-	private uiUtilitiesService: IUIUtilitiesService;
-	private utilitiesService: IUtilitiesService;
-	private navigationBarService: INavigationBarService;
-	private albumsService: IAlbumsService;
+    private filter: ISharedFilterService;
+    private state: ng.ui.IStateService;
+    private delayExecutionService: IDelayExecutionService;
+    private localizedStringService: ILocalizedStringService;
+    private uiUtilitiesService: IUIUtilitiesService;
+    private utilitiesService: IUtilitiesService;
+    private navigationBarService: INavigationBarService;
+    private albumsService: IAlbumsService;
 
-	public name: string;
-	public albums: Array<Album>;
-	private pageNumber: number;
-	private loadCompleted: boolean;
-	private busy: boolean;
-	public textFilter: string;
-	private loadAlbumsKey: Enum;
+    public name: string;
+    public albums: Array<Album>;
+    private pageNumber: number;
+    private loadCompleted: boolean;
+    private busy: boolean;
+    public textFilter: string;
+    private loadAlbumsKey: Enum;
 
-	static $inject = ["$filter", "$state", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "AlbumsService"];
+    static $inject = ["$filter", "$state", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "AlbumsService"];
 
-	constructor($filter: ISharedFilterService,
-				$state: ng.ui.IStateService,
-				DelayExecutionService: IDelayExecutionService,
-				LocalizedStringService: ILocalizedStringService,
-				UIUtilitiesService: IUIUtilitiesService,
-				UtilitiesService: IUtilitiesService,
-				NavigationBarService: INavigationBarService,
-				AlbumsService: IAlbumsService) {
-		this.filter = $filter;
-		this.state = $state;
-		this.delayExecutionService = DelayExecutionService;
-		this.localizedStringService = LocalizedStringService;
-		this.uiUtilitiesService = UIUtilitiesService;
-		this.utilitiesService = UtilitiesService;
-		this.navigationBarService = NavigationBarService;
-		this.albumsService = AlbumsService;
+    constructor($filter: ISharedFilterService,
+                $state: ng.ui.IStateService,
+                DelayExecutionService: IDelayExecutionService,
+                LocalizedStringService: ILocalizedStringService,
+                UIUtilitiesService: IUIUtilitiesService,
+                UtilitiesService: IUtilitiesService,
+                NavigationBarService: INavigationBarService,
+                AlbumsService: IAlbumsService) {
+        this.filter = $filter;
+        this.state = $state;
+        this.delayExecutionService = DelayExecutionService;
+        this.localizedStringService = LocalizedStringService;
+        this.uiUtilitiesService = UIUtilitiesService;
+        this.utilitiesService = UtilitiesService;
+        this.navigationBarService = NavigationBarService;
+        this.albumsService = AlbumsService;
 
-		this.name = "AlbumsComponent";
-	}
+        this.name = "AlbumsComponent";
+    }
 
-	public get isLoadingData(): boolean {
-		return this.busy == true;
-	}
+    public get isLoadingData(): boolean {
+        return this.busy == true;
+    }
 
-	public get isLoadCompleted(): boolean {
-		return this.isLoadingData == false && this.albums != undefined && this.albums.length > 0 && this.loadCompleted == true;
-	}
+    public get isLoadCompleted(): boolean {
+        return this.isLoadingData == false && this.albums != undefined && this.albums.length > 0 && this.loadCompleted == true;
+    }
 
-	public get hasNoData(): boolean {
-		return this.albums != undefined && this.albums.length == 0 && this.isLoadingData == false;
-	}
+    public get hasNoData(): boolean {
+        return this.albums != undefined && this.albums.length == 0 && this.isLoadingData == false;
+    }
 
-	public get shouldRetry(): boolean {
-		return this.albums == undefined && this.isLoadingData == false;
-	}
+    public get shouldRetry(): boolean {
+        return this.albums == undefined && this.isLoadingData == false;
+    }
 
-	public get isInfiniteScrollDisabled(): boolean {
-		return this.isLoadingData == true || this.loadCompleted == true || this.albums == undefined || this.albums.length == 0;
-	}
+    public get isInfiniteScrollDisabled(): boolean {
+        return this.isLoadingData == true || this.loadCompleted == true || this.albums == undefined || this.albums.length == 0;
+    }
 
-	public get textFilterPlaceholder(): string {
-		return this.localizedStringService.getLocalizedString("INPUT_TEXT_PLACEHOLDER");
-	}
+    public get textFilterPlaceholder(): string {
+        return this.localizedStringService.getLocalizedString("INPUT_TEXT_PLACEHOLDER");
+    }
 
-	public $onInit(): void {
-		this.navigationBarService.setTitle(this.localizedStringService.getLocalizedString("ALBUMS"));
-		this.loadAlbumsKey = new Enum("ALBUMS");
-		this.busy = false;
-		this.loadAlbumsFirstPage();
-	}
+    public $onInit(): void {
+        this.navigationBarService.setTitle(this.localizedStringService.getLocalizedString("ALBUMS"));
+        this.loadAlbumsKey = new Enum("ALBUMS");
+        this.busy = false;
+        this.loadAlbumsFirstPage();
+    }
 
-	public getAlbumDesc(album: Album): string {
-		return album.title;
-	}
+    public getAlbumDesc(album: Album): string {
+        return album.title;
+    }
 
-	public resetTextFilter(): void {
-		if (this.textFilter == undefined)
-			return;
+    public resetTextFilter(): void {
+        if (this.textFilter == undefined)
+            return;
 
-		this.textFilter = undefined;
-		this.loadAlbumsFirstPage();
-	}
+        this.textFilter = undefined;
+        this.loadAlbumsFirstPage();
+    }
 
-	public textFilterDidChange(): void {
-		this.delayExecutionService.execute(() => {
-			this.loadAlbumsFirstPage();
-		}, this.loadAlbumsKey, 1500);
-	}
+    public textFilterDidChange(): void {
+        this.delayExecutionService.execute(() => {
+            this.loadAlbumsFirstPage();
+        }, this.loadAlbumsKey, 1500);
+    }
 
-	protected loadAlbumsFirstPage(): void {
-		this.busy = true;
-		this.pageNumber = 1;
-		this.loadCompleted = false;
-		this.albums = undefined;
+    protected loadAlbumsFirstPage(): void {
+        this.busy = true;
+        this.pageNumber = 1;
+        this.loadCompleted = false;
+        this.albums = undefined;
 
-		this.loadAlbums();
-	}
+        this.loadAlbums();
+    }
 
-	protected loadAlbumsNextPage(): void {
-		if (this.isInfiniteScrollDisabled) return;
+    protected loadAlbumsNextPage(): void {
+        if (this.isInfiniteScrollDisabled) return;
 
-		this.busy = true;
-		this.loadAlbums();
-	}
+        this.busy = true;
+        this.loadAlbums();
+    }
 
-	protected loadAlbums(): void {
-		this.albumsService.getAlbums(this.textFilter, this.pageNumber).then((response: ResponseWs<Array<Album>>) => {
+    protected loadAlbums(): void {
+        this.albumsService.getAlbums(this.textFilter, this.pageNumber).then((response: ResponseWs<Array<Album>>) => {
 
-			if (response.isSuccess()) {
-				this.albums = this.albums == undefined ? response.getData() : this.albums.concat(response.getData());
-				this.loadCompleted = response.isLastPage();
+            if (response.isSuccess()) {
+                this.albums = this.albums == undefined ? response.getData() : this.albums.concat(response.getData());
+                this.loadCompleted = response.isLastPage();
 
-				if (!this.loadCompleted) {
-					this.pageNumber++;
-				}
-			}
-			else if (response.hasBeenCanceled() == false) {
-				// we do not notify the user in case of cancel request
-				this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA"), response.getMessage(), this.localizedStringService.getLocalizedString("CLOSE"));
-			}
-		}).catch((reason: any) => {
-			this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA_COMPONENT"), reason.toString(), this.localizedStringService.getLocalizedString("CLOSE"));
-			Logger.log(reason);
-		}).finally(() => {
-			this.busy = false;
-		});
-	}
+                if (!this.loadCompleted) {
+                    this.pageNumber++;
+                }
+            }
+            else if (response.hasBeenCanceled() == false) {
+                // we do not notify the user in case of cancel request
+                this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA"), response.getMessage(), this.localizedStringService.getLocalizedString("CLOSE"));
+            }
+        }).catch((reason: any) => {
+            this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA_COMPONENT"), reason.toString(), this.localizedStringService.getLocalizedString("CLOSE"));
+            Logger.log(reason);
+        }).finally(() => {
+            this.busy = false;
+        });
+    }
 
-	public goToPhotos(album: Album): void {
-		this.state.go("photos", {albumId: album.id});
-	}
+    public goToPhotos(album: Album): void {
+        this.state.go("photos", {albumId: album.id});
+    }
 
-	public $onDestroy(): void {
-		this.albumsService.cancelOngoingRequests();
-	}
+    public $onDestroy(): void {
+        this.albumsService.cancelOngoingRequests();
+    }
 }
 
 export const AlbumsComponent: ng.IComponentOptions = {
-	bindings: {},
-	controller: AlbumsController,
-	templateUrl: () => {
-		return "albums.component.html";
-	}
+    bindings: {},
+    controller: AlbumsController,
+    templateUrl: () => {
+        return "albums.component.html";
+    }
 };

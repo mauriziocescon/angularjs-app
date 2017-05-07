@@ -8,9 +8,9 @@ export * from "./utilities/utilities.module";
 export * from "./ws/ws.module";
 
 const sharedModule = angular.module("app.shared", [
-	mcModals,
-	mcDirectives,
-	mcFilters
+    mcModals,
+    mcDirectives,
+    mcFilters
 ]);
 
 export const shared = sharedModule.name;

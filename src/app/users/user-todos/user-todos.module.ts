@@ -3,6 +3,6 @@ import {UserTodosComponent} from "./user-todos.component";
 import {UserTodosService} from "./user-todos.data-service";
 
 export const userTodos = angular.module("users.userTodos", [])
-	.service("UserTodosService", UserTodosService)
-	.component("userTodos", UserTodosComponent)
-	.name;
+    .service("UserTodosService", UserTodosService)
+    .component("userTodos", UserTodosComponent)
+    .name;
