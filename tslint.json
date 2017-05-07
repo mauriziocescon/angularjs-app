@@ -2,7 +2,7 @@
   "lintOptions": {
     "typeCheck": true
   },
-  "extends": "tslint:all",
+  "extends": "tslint:recommended",
   "rules": {
 
   }

@@ -12,21 +12,21 @@ import {users} from "./users/users.module";
 export * from "./core/core.module";
 
 const appModule = angular.module("app", [
-	"angular-loading-bar",
-	angularStats,
-	"app-templates",
-	"infinite-scroll",
-	"ngAnimate",
-	"ngSanitize",
-	"ngTouch",
-	"tmh.dynamicLocale",
-	"ui.bootstrap",
-	"ui.router",
-	"ui.scroll",
-	core,
-	shared,
-	albums,
-	users
+    "angular-loading-bar",
+    angularStats,
+    "app-templates",
+    "infinite-scroll",
+    "ngAnimate",
+    "ngSanitize",
+    "ngTouch",
+    "tmh.dynamicLocale",
+    "ui.bootstrap",
+    "ui.router",
+    "ui.scroll",
+    core,
+    shared,
+    albums,
+    users
 ]);
 
 // register app component
