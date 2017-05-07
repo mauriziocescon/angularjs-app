@@ -1,20 +1,23 @@
-import {Album} from "./albums.model";
-import {IAlbumsService} from "./albums.data-service";
+import { Album } from "./albums.model";
+import { IAlbumsService } from "./albums.data-service";
 import {
+    Enum,
     ISharedFilterService,
-    ResponseWs,
     Logger,
-    Enum
+    ResponseWs,
 } from "../shared/shared.module";
 import {
     IDelayExecutionService,
     ILocalizedStringService,
+    INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
-    INavigationBarService
 } from "../app.module";
 
 export class AlbumsController {
+    public static $inject = ["$filter", "$state", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "AlbumsService"];
+    public name: string;
+
     private filter: ISharedFilterService;
     private state: ng.ui.IStateService;
     private delayExecutionService: IDelayExecutionService;
@@ -24,15 +27,12 @@ export class AlbumsController {
     private navigationBarService: INavigationBarService;
     private albumsService: IAlbumsService;
 
-    public name: string;
-    public albums: Array<Album>;
+    public albums: Album[];
     private pageNumber: number;
     private loadCompleted: boolean;
     private busy: boolean;
     public textFilter: string;
     private loadAlbumsKey: Enum;
-
-    static $inject = ["$filter", "$state", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "AlbumsService"];
 
     constructor($filter: ISharedFilterService,
                 $state: ng.ui.IStateService,
@@ -55,23 +55,23 @@ export class AlbumsController {
     }
 
     public get isLoadingData(): boolean {
-        return this.busy == true;
+        return this.busy === true;
     }
 
     public get isLoadCompleted(): boolean {
-        return this.isLoadingData == false && this.albums != undefined && this.albums.length > 0 && this.loadCompleted == true;
+        return this.isLoadingData === false && this.albums !== undefined && this.albums.length > 0 && this.loadCompleted === true;
     }
 
     public get hasNoData(): boolean {
-        return this.albums != undefined && this.albums.length == 0 && this.isLoadingData == false;
+        return this.albums !== undefined && this.albums.length === 0 && this.isLoadingData === false;
     }
 
     public get shouldRetry(): boolean {
-        return this.albums == undefined && this.isLoadingData == false;
+        return this.albums === undefined && this.isLoadingData === false;
     }
 
     public get isInfiniteScrollDisabled(): boolean {
-        return this.isLoadingData == true || this.loadCompleted == true || this.albums == undefined || this.albums.length == 0;
+        return this.isLoadingData === true || this.loadCompleted === true || this.albums === undefined || this.albums.length === 0;
     }
 
     public get textFilterPlaceholder(): string {
@@ -90,8 +90,9 @@ export class AlbumsController {
     }
 
     public resetTextFilter(): void {
-        if (this.textFilter == undefined)
+        if (this.textFilter === undefined) {
             return;
+        }
 
         this.textFilter = undefined;
         this.loadAlbumsFirstPage();
@@ -113,24 +114,26 @@ export class AlbumsController {
     }
 
     protected loadAlbumsNextPage(): void {
-        if (this.isInfiniteScrollDisabled) return;
+        if (this.isInfiniteScrollDisabled) {
+            return;
+        }
 
         this.busy = true;
         this.loadAlbums();
     }
 
     protected loadAlbums(): void {
-        this.albumsService.getAlbums(this.textFilter, this.pageNumber).then((response: ResponseWs<Array<Album>>) => {
+        this.albumsService.getAlbums(this.textFilter, this.pageNumber).then((response: ResponseWs<Album[]>) => {
 
             if (response.isSuccess()) {
-                this.albums = this.albums == undefined ? response.getData() : this.albums.concat(response.getData());
+                this.albums = this.albums === undefined ? response.getData() : this.albums.concat(response.getData());
                 this.loadCompleted = response.isLastPage();
 
                 if (!this.loadCompleted) {
                     this.pageNumber++;
                 }
             }
-            else if (response.hasBeenCanceled() == false) {
+            else if (response.hasBeenCanceled() === false) {
                 // we do not notify the user in case of cancel request
                 this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA"), response.getMessage(), this.localizedStringService.getLocalizedString("CLOSE"));
             }

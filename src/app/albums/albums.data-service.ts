@@ -15,15 +15,15 @@ export interface IAlbumsService {
 }
 
 export class AlbumsService implements IAlbumsService {
+    public static $inject = ["$http", "$q", "AppConstantsService", "UtilitiesService"];
+
     protected http: ng.IHttpService;
     protected q: ng.IQService;
     protected appConstantsService: IAppConstantsService;
     protected utilitiesService: IUtilitiesService;
 
     // requests
-    private getAlbumsRequest: RequestWs<Array<Album>>;
-
-    static $inject = ["$http", "$q", "AppConstantsService", "UtilitiesService"];
+    private getAlbumsRequest: RequestWs<Album[]>;
 
     constructor($http: ng.IHttpService,
                 $q: ng.IQService,

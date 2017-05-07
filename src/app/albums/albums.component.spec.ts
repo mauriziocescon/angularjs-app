@@ -1,7 +1,7 @@
 import * as angular from "angular";
-import {Album} from "./albums.model";
-import {AlbumsController} from "./albums.component";
-import {IAppConstantsService, IUtilitiesService} from "../app.module";
+import { Album } from "./albums.model";
+import { AlbumsController } from "./albums.component";
+import { IAppConstantsService, IUtilitiesService } from "../app.module";
 
 // Addition of angular-mocks and jasmine references is done on the gulpfile
 describe("AlbumsController", () => {
@@ -29,7 +29,7 @@ describe("AlbumsController", () => {
             return url.startsWith(AppConstantsService.Application.WS_URL + "/albums");
         }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
 
-            let response = [];
+            const response = [];
             const fakeText = "Lorem ipsum dolor sit amet, vidit clita vitae no vix. " +
                 "Melius utamur definiebas mei ad. No maluisset prodesset theophrastus eum. " +
                 "Nam sadipscing adversarium ut. Est rebum aperiam ex, ex vel regione " +
@@ -39,10 +39,10 @@ describe("AlbumsController", () => {
                 "Eu errem albucius invenire qui, unum dolorem ne nec. Torquatos concludaturque ius " +
                 "et, cu viderer minimum voluptua duo, ex eligendi abhorreant vis. Sea posse legimus " +
                 "vituperata no, per at etiam deserunt inimicus.";
-            let page = parseInt(params._page);
+            const page = parseInt(params._page, null);
 
             for (let i = (page * 10) - 10; i < page * 10; i++) {
-                let album = new Album();
+                const album = new Album();
 
                 album.userId = page * 10;
                 album.id = i;
@@ -52,8 +52,8 @@ describe("AlbumsController", () => {
             }
 
             // pagination
-            let prevPage = Math.max(page - 1, 1);
-            let nextPage = page + 1;
+            const prevPage = Math.max(page - 1, 1);
+            const nextPage = page + 1;
             headers = {
                 link: "<http://jsonplaceholder.typicode.com/albums?_page=1>; rel=\"first\", " +
                 "<http://jsonplaceholder.typicode.com/albums?_page=" + prevPage.toString() + ">; rel=\"prev\", " +
@@ -71,34 +71,34 @@ describe("AlbumsController", () => {
     });
 
     it("controller.name is defined after $onInit", () => {
-        let controller = <AlbumsController>componentController("albums", null, null);
+        const controller = componentController("albums", null, null) as AlbumsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.name).toBe("AlbumsComponent", "controller.name is not equal to AlbumsComponent");
     });
 
     it("expect controller fetches data after $onInit", () => {
-        let controller = <AlbumsController>componentController("albums", null, null);
+        const controller = componentController("albums", null, null) as AlbumsController;
         controller.$onInit();
         httpBackend.flush();
     });
 
     it("controller.albums is not undefined after $onInit", () => {
-        let controller = <AlbumsController>componentController("albums", null, null);
+        const controller = componentController("albums", null, null) as AlbumsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.albums).not.toBeUndefined("controller.albums is undefined...");
     });
 
     it("controller.albums is not null after $onInit", () => {
-        let controller = <AlbumsController>componentController("albums", null, null);
+        const controller = componentController("albums", null, null) as AlbumsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.albums).not.toBeNull("controller.albums is null...");
     });
 
     it("controller.isLoadingData is false after $onInit", () => {
-        let controller = <AlbumsController>componentController("albums", null, null);
+        const controller = componentController("albums", null, null) as AlbumsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.isLoadingData).toBeFalsy("isLoadingData is true after $onInit...");
