@@ -1,33 +1,33 @@
 import * as ng from "angular";
-import {Photo} from "./photos.model";
+import { Photo } from "./photos.model";
 import {
     RequestWs,
-    ResponseWs
+    ResponseWs,
 } from "../../shared/shared.module";
 import {
     IAppConstantsService,
-    IUtilitiesService
+    IUtilitiesService,
 } from "../../app.module";
 
 export interface IPhotosService {
-    getPhoto(id: number): ng.IPromise<ResponseWs<Array<Photo>>>;
-    getPhotos(ids: Array<number>): ng.IPromise<ResponseWs<Array<Photo>>>;
-    getPhotosForAlbum(albumId: number, page: number): ng.IPromise<ResponseWs<Array<Photo>>>;
+    getPhoto(id: number): ng.IPromise<ResponseWs<Photo[]>>;
+    getPhotos(ids: number[]): ng.IPromise<ResponseWs<Photo[]>>;
+    getPhotosForAlbum(albumId: number, page: number): ng.IPromise<ResponseWs<Photo[]>>;
     cancelOngoingRequests(): void;
 }
 
 export class PhotosService implements IPhotosService {
+    public static $inject = ["$http", "$q", "AppConstantsService", "UtilitiesService"];
+
     protected http: ng.IHttpService;
     protected q: ng.IQService;
     protected appConstantsService: IAppConstantsService;
     protected utilitiesService: IUtilitiesService;
 
     // requests
-    private getPhotoRequest: RequestWs<Array<Photo>>;
+    private getPhotoRequest: RequestWs<Photo[]>;
     private getPhotosRequests: Array<RequestWs<Photo>>;
-    private getPhotosForAlbumRequests: RequestWs<Array<Photo>>;
-
-    static $inject = ["$http", "$q", "AppConstantsService", "UtilitiesService"];
+    private getPhotosForAlbumRequests: RequestWs<Photo[]>;
 
     constructor($http: ng.IHttpService,
                 $q: ng.IQService,
@@ -48,14 +48,14 @@ export class PhotosService implements IPhotosService {
         return {};
     }
 
-    private setupGetPhotoRequest(id: number, request: RequestWs<Array<Photo>>): void {
+    private setupGetPhotoRequest(id: number, request: RequestWs<Photo[]>): void {
 
         // reset request
         request.reset(this.utilitiesService);
 
         // configure new request
         request.canceler = this.q.defer();
-        let config: ng.IRequestShortcutConfig = {
+        const config: ng.IRequestShortcutConfig = {
             params: {id: id},
             // setup a promise that let you cancel the current request
             timeout: request.canceler.promise
@@ -64,31 +64,31 @@ export class PhotosService implements IPhotosService {
         // setup a timeout for the request
         request.setupTimeout(this, this.utilitiesService);
 
-        let url = this.appConstantsService.Application.WS_URL + "/photos";
+        const url = this.appConstantsService.Application.WS_URL + "/photos";
         this.utilitiesService.logRequest(url, config);
 
         // fetch data
         request.promise = this.http.get(url, config);
     }
 
-    public getPhoto(id: number): ng.IPromise<ResponseWs<Array<Photo>>> {
+    public getPhoto(id: number): ng.IPromise<ResponseWs<Photo[]>> {
 
         // fetch data using the generic currentGetPhotoRequest
         this.setupGetPhotoRequest(id, this.getPhotoRequest);
 
-        let startTime = this.utilitiesService.getTimeFrom1970();
+        const startTime = this.utilitiesService.getTimeFrom1970();
 
-        return this.getPhotoRequest.promise.then((response: ng.IHttpPromiseCallbackArg<Array<Photo>>) => {
+        return this.getPhotoRequest.promise.then((response: ng.IHttpPromiseCallbackArg<Photo[]>) => {
             this.utilitiesService.logResponse(response, startTime);
-            return new ResponseWs(response.status == 200, response.statusText, response.data, true, response.status == -1);
+            return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
 
         }).catch((response: ng.IHttpPromiseCallbackArg<Photo>) => {
             this.utilitiesService.logResponse(response, startTime);
-            return new ResponseWs(false, response.statusText, undefined, true, response.status == -1);
+            return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });
     }
 
-    public getPhotos(ids: Array<number>): ng.IPromise<ResponseWs<Array<Photo>>> {
+    public getPhotos(ids: number[]): ng.IPromise<ResponseWs<Photo[]>> {
 
         // reset requests timeout
         this.getPhotosRequests.forEach((request: RequestWs<Photo>) => {
@@ -98,41 +98,41 @@ export class PhotosService implements IPhotosService {
         // setup new requests
         this.getPhotosRequests = [];
 
-        let promises = ids.map((id: number) => {
-            let request = new RequestWs();
+        const promises = ids.map((id: number) => {
+            const request = new RequestWs();
             this.getPhotosRequests.push(request);
             this.setupGetPhotoRequest(id, request);
             return request.promise;
         });
 
-        let startTime = this.utilitiesService.getTimeFrom1970();
+        const startTime = this.utilitiesService.getTimeFrom1970();
 
-        return this.q.all(promises).then((responses: Array<ng.IHttpPromiseCallbackArg<Array<Photo>>>) => {
+        return this.q.all(promises).then((responses: Array<ng.IHttpPromiseCallbackArg<Photo[]>>) => {
             this.utilitiesService.logResponse(responses, startTime);
 
             let photos = [];
-            responses.forEach((response: ng.IHttpPromiseCallbackArg<Array<Photo>>) => {
+            responses.forEach((response: ng.IHttpPromiseCallbackArg<Photo[]>) => {
                 photos = photos.concat(response.data);
             });
 
             return new ResponseWs(true, "OK", photos, true, responses.findIndex((response) => {
-                    return response.status == -1
-                }) != -1);
+                    return response.status === -1;
+                }) !== -1);
 
         }, (response: ng.IHttpPromiseCallbackArg<Photo>) => {
             this.utilitiesService.logResponse(response, startTime);
-            return new ResponseWs(false, response.statusText, undefined, true, response.status == -1);
+            return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });
     }
 
-    public getPhotosForAlbum(albumId: number, page: number): ng.IPromise<ResponseWs<Array<Photo>>> {
+    public getPhotosForAlbum(albumId: number, page: number): ng.IPromise<ResponseWs<Photo[]>> {
 
         // reset request
         this.getPhotosForAlbumRequests.reset(this.utilitiesService);
 
         // configure new request
         this.getPhotosForAlbumRequests.canceler = this.q.defer();
-        let config: ng.IRequestShortcutConfig = {
+        const config: ng.IRequestShortcutConfig = {
             params: {albumId: albumId, _page: page},
             // set a promise that let you cancel the current request
             timeout: this.getPhotosForAlbumRequests.canceler.promise
@@ -141,14 +141,14 @@ export class PhotosService implements IPhotosService {
         // setup a timeout for the request
         this.getPhotosForAlbumRequests.setupTimeout(this, this.utilitiesService);
 
-        let url = this.appConstantsService.Application.WS_URL + "/photos";
+        const url = this.appConstantsService.Application.WS_URL + "/photos";
         this.utilitiesService.logRequest(url);
-        let startTime = this.utilitiesService.getTimeFrom1970();
+        const startTime = this.utilitiesService.getTimeFrom1970();
 
         // fetch data
-        this.getPhotosForAlbumRequests.promise = this.http.get<Array<Photo>>(url, config);
+        this.getPhotosForAlbumRequests.promise = this.http.get<Photo[]>(url, config);
 
-        return this.getPhotosForAlbumRequests.promise.then((response: ng.IHttpPromiseCallbackArg<Array<Photo>>) => {
+        return this.getPhotosForAlbumRequests.promise.then((response: ng.IHttpPromiseCallbackArg<Photo[]>) => {
             this.utilitiesService.logResponse(response, startTime);
             let info = this.utilitiesService.parseLinkHeaders(response.headers);
 
@@ -162,12 +162,12 @@ export class PhotosService implements IPhotosService {
                 };
             }
 
-            let lastPage = parseInt(this.utilitiesService.parseQueryString(info.last)._page);
-            return new ResponseWs(response.status == 200, response.statusText, response.data, page == lastPage, response.status == -1);
+            const lastPage = parseInt(this.utilitiesService.parseQueryString(info.last)._page, null);
+            return new ResponseWs(response.status === 200, response.statusText, response.data, page === lastPage, response.status === -1);
 
-        }, (response: ng.IHttpPromiseCallbackArg<Array<Photo>>) => {
+        }, (response: ng.IHttpPromiseCallbackArg<Photo[]>) => {
             this.utilitiesService.logResponse(response, startTime);
-            return new ResponseWs(false, response.statusText, undefined, true, response.status == -1);
+            return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });
     }
 

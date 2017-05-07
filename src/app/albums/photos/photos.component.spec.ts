@@ -1,8 +1,8 @@
 import * as angular from "angular";
-import {Photo} from "./photos.model";
-import {PhotosController} from "./photos.component";
-import {photos} from "./photos.module";
-import {IAppConstantsService, IUtilitiesService} from "../../app.module";
+import { Photo } from "./photos.model";
+import { PhotosController } from "./photos.component";
+import { photos } from "./photos.module";
+import { IAppConstantsService, IUtilitiesService } from "../../app.module";
 
 // Addition of angular-mocks and jasmine references is done on the gulpfile
 describe("PhotosController", () => {
@@ -46,7 +46,7 @@ describe("PhotosController", () => {
                 "et, cu viderer minimum voluptua duo, ex eligendi abhorreant vis. Sea posse legimus " +
                 "vituperata no, per at etiam deserunt inimicus.";
 
-            let photo = new Photo();
+            const photo = new Photo();
 
             photo.albumId = 124;
             photo.id = params.id;
@@ -64,7 +64,7 @@ describe("PhotosController", () => {
             return url.startsWith(AppConstantsService.Application.WS_URL + "/photos") && (/(&|\?)albumId\=/g).test(url) == true;
         }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
 
-            let response = [];
+            const response = [];
             const fakeText = "Lorem ipsum dolor sit amet, vidit clita vitae no vix. " +
                 "Melius utamur definiebas mei ad. No maluisset prodesset theophrastus eum. " +
                 "Nam sadipscing adversarium ut. Est rebum aperiam ex, ex vel regione " +
@@ -74,12 +74,12 @@ describe("PhotosController", () => {
                 "Eu errem albucius invenire qui, unum dolorem ne nec. Torquatos concludaturque ius " +
                 "et, cu viderer minimum voluptua duo, ex eligendi abhorreant vis. Sea posse legimus " +
                 "vituperata no, per at etiam deserunt inimicus.";
-            let page = parseInt(params._page);
+            const page = parseInt(params._page);
 
             for (let i = (page * 10) - 10; i < page * 10; i++) {
-                let photo = new Photo();
+                const photo = new Photo();
 
-                photo.albumId = parseInt(params.albumId);
+                photo.albumId = parseInt(params.albumId, null);
                 photo.id = i;
                 photo.title = fakeText.substring(0, (Math.random() * 10000) % 20);
                 photo.url = ["imgs/chevron-circle-up.svg", "imgs/chevron-down.svg", "imgs/chevron-up.svg", "imgs/chevron-left.svg", "imgs/chevron-right.svg"][Math.round(Math.random() * 1000) % 5];
@@ -89,8 +89,8 @@ describe("PhotosController", () => {
             }
 
             // pagination
-            let prevPage = Math.max(page - 1, 1);
-            let nextPage = page + 1;
+            const prevPage = Math.max(page - 1, 1);
+            const nextPage = page + 1;
             headers = {
                 link: "<http://jsonplaceholder.typicode.com/photos?_page=1>; rel=\"first\", " +
                 "<http://jsonplaceholder.typicode.com/photos?_page=" + prevPage.toString() + ">; rel=\"prev\", " +
@@ -109,7 +109,7 @@ describe("PhotosController", () => {
     });
 
     it("controller.name is defined after $onInit", () => {
-        let controller = <PhotosController>componentController("photos", null, null);
+        const controller = componentController("photos", null, null) as PhotosController;
         controller["stateParams"] = {albumId: 1};
         controller.$onInit();
         httpBackend.flush();
@@ -117,14 +117,14 @@ describe("PhotosController", () => {
     });
 
     it("expect controller fetches data after $onInit", () => {
-        let controller = <PhotosController>componentController("photos", null, null);
+        const controller = componentController("photos", null, null) as PhotosController;
         controller["stateParams"] = {albumId: 1};
         controller.$onInit();
         httpBackend.flush();
     });
 
     it("controller.photos is not undefined after $onInit", () => {
-        let controller = <PhotosController>componentController("photos", null, null);
+        const controller = componentController("photos", null, null) as PhotosController;
         controller["stateParams"] = {albumId: 1};
         controller.$onInit();
         httpBackend.flush();
@@ -132,7 +132,7 @@ describe("PhotosController", () => {
     });
 
     it("controller.photos is not null after $onInit", () => {
-        let controller = <PhotosController>componentController("photos", null, null);
+        const controller = componentController("photos", null, null) as PhotosController;
         controller["stateParams"] = {albumId: 1};
         controller.$onInit();
         httpBackend.flush();
@@ -140,7 +140,7 @@ describe("PhotosController", () => {
     });
 
     it("controller.isLoadingData is false after $onInit", () => {
-        let controller = <PhotosController>componentController("photos", null, null);
+        const controller = componentController("photos", null, null) as PhotosController;
         controller["stateParams"] = {albumId: 1};
         controller.$onInit();
         httpBackend.flush();

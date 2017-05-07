@@ -1,18 +1,21 @@
-import {Photo} from "./photos.model";
-import {IPhotosService} from "./photos.data-service";
+import { Photo } from "./photos.model";
+import { IPhotosService } from "./photos.data-service";
 import {
     ISharedFilterService,
     ResponseWs,
-    Logger
+    Logger,
 } from "../../shared/shared.module";
 import {
     ILocalizedStringService,
     IUIUtilitiesService,
     IUtilitiesService,
-    INavigationBarService
+    INavigationBarService,
 } from "../../app.module";
 
 export class PhotosController {
+    public static $inject = ["$filter", "$stateParams", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "PhotosService"];
+    public name: string;
+
     private filter: ISharedFilterService;
     private stateParams: ng.ui.IStateParamsService;
     private localizedStringService: ILocalizedStringService;
@@ -21,13 +24,10 @@ export class PhotosController {
     private navigationBarService: INavigationBarService;
     private photosService: IPhotosService;
 
-    public name: string;
     public photos: Array<Photo>;
     private pageNumber: number;
     private loadCompleted: boolean;
     private busy: boolean;
-
-    static $inject = ["$filter", "$stateParams", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "PhotosService"];
 
     constructor($filter: ISharedFilterService,
                 $stateParams: ng.ui.IStateParamsService,
@@ -48,23 +48,23 @@ export class PhotosController {
     }
 
     public get isLoadingData(): boolean {
-        return this.busy == true;
+        return this.busy === true;
     }
 
     public get isLoadCompleted(): boolean {
-        return this.isLoadingData == false && this.photos != undefined && this.photos.length > 0 && this.loadCompleted == true;
+        return this.isLoadingData === false && this.photos !== undefined && this.photos.length > 0 && this.loadCompleted === true;
     }
 
     public get hasNoData(): boolean {
-        return this.photos != undefined && this.photos.length == 0 && this.isLoadingData == false;
+        return this.photos !== undefined && this.photos.length === 0 && this.isLoadingData === false;
     }
 
     public get shouldRetry(): boolean {
-        return this.photos == undefined && this.isLoadingData == false;
+        return this.photos === undefined && this.isLoadingData === false;
     }
 
     public get isInfiniteScrollDisabled(): boolean {
-        return this.isLoadingData == true || this.loadCompleted == true || this.photos == undefined || this.photos.length == 0;
+        return this.isLoadingData === true || this.loadCompleted === true || this.photos === undefined || this.photos.length === 0;
     }
 
     public $onInit(): void {
@@ -97,14 +97,14 @@ export class PhotosController {
         this.photosService.getPhotosForAlbum(this.stateParams["albumId"], this.pageNumber).then((response: ResponseWs<Array<Photo>>) => {
 
             if (response.isSuccess()) {
-                this.photos = this.photos == undefined ? response.getData() : this.photos.concat(response.getData());
+                this.photos = this.photos === undefined ? response.getData() : this.photos.concat(response.getData());
                 this.loadCompleted = response.isLastPage();
 
                 if (!this.loadCompleted) {
                     this.pageNumber++;
                 }
             }
-            else if (response.hasBeenCanceled() == false) {
+            else if (response.hasBeenCanceled() === false) {
                 // we do not notify the user in case of cancel request
                 this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA"), response.getMessage(), this.localizedStringService.getLocalizedString("CLOSE"));
             }
@@ -126,5 +126,5 @@ export const PhotosComponent: ng.IComponentOptions = {
     controller: PhotosController,
     templateUrl: () => {
         return "photos.component.html";
-    }
+    },
 };
