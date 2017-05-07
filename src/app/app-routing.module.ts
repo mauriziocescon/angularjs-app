@@ -1,31 +1,32 @@
-export const routingConfigFunc = ($locationProvider: ng.ILocationProvider, $stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) => {
-
+export const routingConfigFunc = ($locationProvider: ng.ILocationProvider,
+                                  $stateProvider: ng.ui.IStateProvider,
+                                  $urlRouterProvider: ng.ui.IUrlRouterProvider) => {
     $stateProvider.state({
         name: "albums",
+        template: "<albums></albums>",
         url: "/albums",
-        template: "<albums></albums>"
     });
     $stateProvider.state({
         name: "photos",
         params: {
-            albumId: null
+            albumId: null,
         },
-        template: "<photos></photos>"
+        template: "<photos></photos>",
     });
     $stateProvider.state({
         name: "users",
+        template: "<users></users>",
         url: "/users",
-        template: "<users></users>"
     });
     $stateProvider.state({
         name: "user-posts",
+        template: "<user-posts></user-posts>",
         url: "/user-posts/{userId}",
-        template: "<user-posts></user-posts>"
     });
     $stateProvider.state({
         name: "user-todos",
+        template: "<user-todos></user-todos>",
         url: "/user-todos/{userId}",
-        template: "<user-todos></user-todos>"
     });
     $urlRouterProvider.otherwise("/users");
 };

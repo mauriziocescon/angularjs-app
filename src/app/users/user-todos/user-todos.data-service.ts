@@ -15,6 +15,8 @@ export interface IUserTodosService {
 }
 
 export class UserTodosService implements IUserTodosService {
+    public static $inject = ["$http", "$q", "AppConstantsService", "UtilitiesService"];
+
     protected http: ng.IHttpService;
     protected q: ng.IQService;
     protected appConstantsService: IAppConstantsService;
@@ -22,8 +24,6 @@ export class UserTodosService implements IUserTodosService {
 
     // requests
     private getUserTodosRequest: RequestWs<Array<Todo>>;
-
-    static $inject = ["$http", "$q", "AppConstantsService", "UtilitiesService"];
 
     constructor($http: ng.IHttpService,
                 $q: ng.IQService,

@@ -1,6 +1,6 @@
 import * as angular from "angular";
-import {AppController} from "./app.component";
-import {IAppConstantsService, IUtilitiesService} from "./app.module";
+import { AppController } from "./app.component";
+import { IAppConstantsService, IUtilitiesService } from "./app.module";
 
 // Addition of angular-mocks and jasmine references is done on the gulpfile
 describe("AppController", () => {
@@ -25,8 +25,7 @@ describe("AppController", () => {
     }));
 
     it("controller.name is defined after $onInit", () => {
-        let controller = <AppController>componentController("app", null, null);
-        controller.$onInit();
+        const controller = componentController("app", null, null) as AppController;
         expect(controller.name).toBe("AppComponent", "controller.name is not equal to AppComponent");
     });
 });

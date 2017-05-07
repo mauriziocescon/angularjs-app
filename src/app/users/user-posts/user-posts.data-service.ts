@@ -15,6 +15,8 @@ export interface IUserPostsService {
 }
 
 export class UserPostsService implements IUserPostsService {
+    public static $inject = ["$http", "$q", "AppConstantsService", "UtilitiesService"];
+
     protected http: ng.IHttpService;
     protected q: ng.IQService;
     protected appConstantsService: IAppConstantsService;
@@ -22,8 +24,6 @@ export class UserPostsService implements IUserPostsService {
 
     // requests
     private getUserPostsRequest: RequestWs<Post[]>;
-
-    public static $inject = ["$http", "$q", "AppConstantsService", "UtilitiesService"];
 
     constructor($http: ng.IHttpService,
                 $q: ng.IQService,

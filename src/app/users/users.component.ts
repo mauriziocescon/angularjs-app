@@ -1,20 +1,22 @@
-import {User} from "./users.model";
-import {IUsersService} from "./users.data-service";
+import { User } from "./users.model";
+import { IUsersService } from "./users.data-service";
 import {
+    Enum,
     ISharedFilterService,
-    ResponseWs,
     Logger,
-    Enum
+    ResponseWs,
 } from "../shared/shared.module";
 import {
     IDelayExecutionService,
     ILocalizedStringService,
+    INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
-    INavigationBarService
 } from "../app.module";
 
 export class UsersController {
+    public static $inject = ["$filter", "$location", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UsersService"];
+
     private filter: ISharedFilterService;
     private location: ng.ILocationService;
     private delayExecutionService: IDelayExecutionService;
@@ -25,12 +27,10 @@ export class UsersController {
     private usersService: IUsersService;
 
     public name: string;
-    public users: Array<User>;
+    public users: User[];
     private busy: boolean;
     public textFilter: string;
     private loadUsersKey: Enum;
-
-    static $inject = ["$filter", "$location", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UsersService"];
 
     constructor($filter: ISharedFilterService,
                 $location: ng.ILocationService,
@@ -53,19 +53,19 @@ export class UsersController {
     }
 
     public get isLoadingData(): boolean {
-        return this.busy == true;
+        return this.busy === true;
     }
 
     public get hasNoData(): boolean {
-        return this.users != undefined && this.users.length == 0 && this.isLoadingData == false;
+        return this.users !== undefined && this.users.length === 0 && this.isLoadingData === false;
     }
 
     public get shouldRetry(): boolean {
-        return this.users == undefined && this.isLoadingData == false;
+        return this.users === undefined && this.isLoadingData === false;
     }
 
     public get showData(): boolean {
-        return this.isLoadingData == false && this.hasNoData == false && this.shouldRetry == false;
+        return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
     }
 
     public get textFilterPlaceholder(): string {
@@ -92,8 +92,9 @@ export class UsersController {
     }
 
     public resetTextFilter(): void {
-        if (this.textFilter == undefined)
+        if (this.textFilter === undefined) {
             return;
+        }
 
         this.textFilter = undefined;
         this.loadUsers();
@@ -114,7 +115,7 @@ export class UsersController {
             if (response.isSuccess()) {
                 this.users = response.getData();
             }
-            else if (response.hasBeenCanceled() == false) {
+            else if (response.hasBeenCanceled() === false) {
                 // we do not notify the user in case of cancel request
                 this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA"), response.getMessage(), this.localizedStringService.getLocalizedString("CLOSE"));
             }
@@ -148,5 +149,5 @@ export const UsersComponent: ng.IComponentOptions = {
     controller: UsersController,
     templateUrl: () => {
         return "users.component.html";
-    }
+    },
 };

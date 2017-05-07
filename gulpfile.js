@@ -19,6 +19,7 @@ const gulpPreprocess = require("gulp-preprocess");
 const gulpRename = require("gulp-rename");
 const gulpReplace = require("gulp-replace");
 const gulpSass = require("gulp-sass");
+const gulpSourcemaps = require("gulp-sourcemaps");
 const gulpTslint = require("gulp-tslint");
 const gulpUglify = require("gulp-uglify");
 const gulpUtil = require("gulp-util");
@@ -251,7 +252,9 @@ gulp.task("compile-ts-prod", () => {
         .pipe(vinylSourceStream(appendVersionToFileName("app.js")))
         .pipe(vinylBuffer())
         .pipe(gulpNgAnnotate())
+        .pipe(gulpSourcemaps.init({loadMaps: true}))
         .pipe(gulpUglify({mangle: false}))
+        .pipe(gulpSourcemaps.write("./"))
         .pipe(gulp.dest("dist/js/"));
 });
 
@@ -286,7 +289,7 @@ gulp.task("watch", () => {
         runSequence(
             "preprocess-ts",
             "compile-ts-dev",
-            "fix-map-file",
+            // "fix-map-file",
             "injectFileNames",
             "refresh"
         );
@@ -339,9 +342,9 @@ gulp.task("default", () => {
             "bundle-vendors"
         ],
         "preprocess-ts",
-        // "tslint",
+        "tslint",
         "compile-ts-dev",
-        "fix-map-file",
+        // "fix-map-file",
         "injectFileNames",
         "start-browsersynch",
         "watch"
@@ -366,7 +369,7 @@ gulp.task("test", () => {
             "bundle-vendors"
         ],
         "preprocess-ts",
-        // "tslint",
+        "tslint",
         "compile-ts-spec",
         "injectFileNames",
         "empty-tmp-ts"
@@ -391,7 +394,7 @@ gulp.task("prod", () => {
             "bundle-vendors"
         ],
         "preprocess-ts",
-        // "tslint",
+        "tslint",
         "compile-ts-prod",
         "injectFileNames",
         "empty-tmp-ts"

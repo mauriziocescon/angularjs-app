@@ -15,6 +15,8 @@ import {
 } from "../../app.module";
 
 export class UserTodosController {
+    public static $inject = ["$filter", "$location", "$stateParams", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UserTodosService"];
+
     private filter: ISharedFilterService;
     private location: ng.ILocationService;
     private stateParams: ng.ui.IStateParamsService;
@@ -30,8 +32,6 @@ export class UserTodosController {
     private busy: boolean;
     public textFilter: string;
     private loadTodosKey: Enum;
-
-    static $inject = ["$filter", "$location", "$stateParams", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UserTodosService"];
 
     constructor($filter: ISharedFilterService,
                 $location: ng.ILocationService,

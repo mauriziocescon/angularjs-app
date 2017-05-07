@@ -1,18 +1,10 @@
 export class AppController {
-    public name: string;
+    public static $inject = [];
 
-    static $inject = [];
+    public name: string;
 
     constructor() {
         this.name = "AppComponent";
-    }
-
-    public $onInit(): void {
-
-    }
-
-    public $onDestroy(): void {
-
     }
 }
 

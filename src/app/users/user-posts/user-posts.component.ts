@@ -15,6 +15,8 @@ import {
 } from "../../app.module";
 
 export class UserPostsController {
+    public static $inject = ["$filter", "$stateParams", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UserPostsService"];
+    
     private filter: ISharedFilterService;
     private stateParams: ng.ui.IStateParamsService;
     private delayExecutionService: IDelayExecutionService;
@@ -30,8 +32,6 @@ export class UserPostsController {
     private openedPost: Post;
     public textFilter: string;
     private loadPostsKey: Enum;
-
-    static $inject = ["$filter", "$stateParams", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UserPostsService"];
 
     constructor($filter: ISharedFilterService,
                 $stateParams: ng.ui.IStateParamsService,
