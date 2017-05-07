@@ -12,12 +12,14 @@ export let postCommentsRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
     }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
 
         const response = [];
-        const fakeText = "Lorem ipsum dolor sit amet, vidit clita vitae no vix. Melius utamur definiebas mei ad. " +
-            "No maluisset prodesset theophrastus eum. Nam sadipscing adversarium ut. Est rebum aperiam ex, ex vel " +
-            "regione forensibus contentiones, eos in numquam persecuti omittantur. Cu sumo illum has, " +
-            "meis assum eligendi ex sit.\n Option sapientem dissentias ad eam, cum virtute numquam ex, cum salutatus " +
-            "vituperata ne. Te omnes volumus pro. Eu errem albucius invenire qui, unum dolorem ne nec. Torquatos " +
-            "concludaturque ius et, cu viderer minimum voluptua duo, ex eligendi abhorreant vis. Sea posse legimus " +
+        const fakeText = "Lorem ipsum dolor sit amet, vidit clita vitae no vix. " +
+            "Melius utamur definiebas mei ad. No maluisset prodesset theophrastus eum. " +
+            "Nam sadipscing adversarium ut. Est rebum aperiam ex, ex vel regione " +
+            "forensibus contentiones, eos in numquam persecuti omittantur. Cu sumo " +
+            "illum has, meis assum eligendi ex sit.\n Option sapientem dissentias ad eam, " +
+            "cum virtute numquam ex, cum salutatus vituperata ne. Te omnes volumus pro. " +
+            "Eu errem albucius invenire qui, unum dolorem ne nec. Torquatos concludaturque ius " +
+            "et, cu viderer minimum voluptua duo, ex eligendi abhorreant vis. Sea posse legimus " +
             "vituperata no, per at etiam deserunt inimicus.";
 
         for (let i = 0; i < Math.round(Math.random() * 150); i++) {
