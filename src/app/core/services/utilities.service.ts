@@ -230,7 +230,7 @@ export class UtilitiesService implements IUtilitiesService {
     }
 
     public addScript(src: string): void {
-        if (this.document[0].readyState === "complete" || this.document[0].readyState == "interactive") {
+        if (this.document[0].readyState === "complete" || this.document[0].readyState === "interactive") {
             const script: HTMLScriptElement = this.document[0].createElement("script");
             script.setAttribute("src", src);
             script.setAttribute("type", "text/javascript");
@@ -276,7 +276,7 @@ export class UtilitiesService implements IUtilitiesService {
     }
 
     public logRequest(url: string, requestData?: any): void {
-        if (this.appConstantsService.Application.LOG_WS_REQUEST == true) {
+        if (this.appConstantsService.Application.LOG_WS_REQUEST === true) {
             let log = "\nREQUEST BODY (" + url;
             log += "): \n" + requestData ? JSON.stringify(requestData, null, 2) : "" + "\n\n";
             Logger.log(log);
