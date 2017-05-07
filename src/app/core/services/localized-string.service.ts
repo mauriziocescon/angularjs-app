@@ -1,6 +1,6 @@
-import {IAppLanguageService} from "./app-language.service";
-import {IUtilitiesService} from "./utilities.service";
-import {LOCALIZED_STRINGS_OBJECT} from "./localized-string.model";
+import { IAppLanguageService } from "./app-language.service";
+import { IUtilitiesService } from "./utilities.service";
+import { LOCALIZED_STRINGS_OBJECT } from "./localized-string.model";
 
 /**
  * Retrieves the value from the
@@ -22,13 +22,13 @@ export interface ILocalizedStringService {
 }
 
 export class LocalizedStringService implements ILocalizedStringService {
+    public static $inject = ["AppLanguageService", "UtilitiesService"];
+
     private appLanguageService: IAppLanguageService;
     private utilitiesService: IUtilitiesService;
 
     private specificDictionary: any;
     private defaultDictionary: any;
-
-    static $inject = ["AppLanguageService", "UtilitiesService"];
 
     constructor(AppLanguageService: IAppLanguageService,
                 UtilitiesService: IUtilitiesService) {
@@ -42,20 +42,21 @@ export class LocalizedStringService implements ILocalizedStringService {
     }
 
     public getLocalizedString(key: string, ...args: Array<string | number>): string {
-        if (this.utilitiesService.isDefinedAndNotEmpty(key) == false || key == "")
+        if (this.utilitiesService.isDefinedAndNotEmpty(key) === false || key === "") {
             return "##";
+        }
 
         let result: string;
 
-        if (this.specificDictionary != undefined) {
+        if (this.specificDictionary !== undefined) {
             result = this.specificDictionary[key];
         }
 
-        if (result == undefined && this.defaultDictionary != undefined) {
+        if (result === undefined && this.defaultDictionary !== undefined) {
             result = this.defaultDictionary[key];
         }
 
-        if (result == undefined) {
+        if (result === undefined) {
             result = "#" + key + "#";
         }
 

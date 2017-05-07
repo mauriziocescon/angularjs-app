@@ -1,5 +1,5 @@
-import {IAppConstantsService} from "./app-constants.service";
-import {ILocalStorageService} from "./local-storage.service";
+import { IAppConstantsService } from "./app-constants.service";
+import { ILocalStorageService } from "./local-storage.service";
 
 /**
  * Manage the language set by the
@@ -35,13 +35,13 @@ export interface IAppLanguageService {
 }
 
 export class AppLanguageService implements IAppLanguageService {
+    public static $inject = ["$locale", "tmhDynamicLocale", "AppConstantsService", "LocalStorageService"];
+
     private locale: ng.ILocaleService;
     private tmhDynamicLocale: ng.dynamicLocale.tmhDynamicLocaleService;
     private appConstantsService: IAppConstantsService;
     private localStorageService: ILocalStorageService;
     private selectedLanguageId: string;
-
-    static $inject = ["$locale", "tmhDynamicLocale", "AppConstantsService", "LocalStorageService"];
 
     constructor($locale: ng.ILocaleService,
                 tmhDynamicLocale: ng.dynamicLocale.tmhDynamicLocaleService,
@@ -58,11 +58,11 @@ export class AppLanguageService implements IAppLanguageService {
         const browserLang = this.getBrowserLang();
         const defaultLang = this.getDefaultLanguageId();
 
-        if (localStorageLang && this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(localStorageLang) != -1) {
+        if (localStorageLang && this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(localStorageLang) !== -1) {
             this.selectedLanguageId = localStorageLang;
             this.tmhDynamicLocale.set(this.selectedLanguageId);
         } else {
-            this.selectedLanguageId = this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(browserLang) == -1 ? defaultLang : browserLang;
+            this.selectedLanguageId = this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(browserLang) === -1 ? defaultLang : browserLang;
             this.tmhDynamicLocale.set(this.selectedLanguageId);
             this.localStorageService.setData(this.appConstantsService.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
         }
@@ -73,14 +73,14 @@ export class AppLanguageService implements IAppLanguageService {
     }
 
     public setLanguageId(languageId: string): void {
-        if (languageId != undefined && languageId != this.selectedLanguageId && this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(languageId) != -1) {
+        if (languageId !== undefined && languageId !== this.selectedLanguageId && this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(languageId) !== -1) {
             this.selectedLanguageId = languageId;
             this.localStorageService.setData(this.appConstantsService.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
             location.reload(true);
         }
     }
 
-    public getSupportedLanguagesList(): Array<string> {
+    public getSupportedLanguagesList(): string[] {
         return this.appConstantsService.Languages.SUPPORTED_LANG;
     }
 
@@ -91,14 +91,17 @@ export class AppLanguageService implements IAppLanguageService {
     private getBrowserLang(): string {
         let lang: string = navigator["browserLanguage"];
 
-        if (lang == undefined)
+        if (lang === undefined) {
             lang = navigator.language;
+        }
 
-        if (lang.length > 0)
+        if (lang.length > 0) {
             lang = lang.toLowerCase();
+        }
 
-        if (lang.length > 2)
+        if (lang.length > 2) {
             lang = lang.substring(0, 2);
+        }
 
         return lang;
     }

@@ -25,14 +25,14 @@ export interface IAppConstantsService {
 }
 
 export class AppConstantsService {
+    public static $inject = ["$window"];
+
     private window: ng.IWindowService;
 
     protected application: Constants.Application;
     protected languages: Constants.Languages;
     protected localStorageKey: Constants.LocalStorageKey;
     protected validator: Constants.Validator;
-
-    static $inject = ["$window"];
 
     constructor($window: ng.IWindowService) {
         this.window = $window;

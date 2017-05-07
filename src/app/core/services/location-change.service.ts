@@ -1,5 +1,5 @@
-import {IUtilitiesService} from "./utilities.service";
-import {Enum} from "../../shared/shared.module";
+import { IUtilitiesService } from "./utilities.service";
+import { Enum } from "../../shared/shared.module";
 
 /**
  * Manage $location changes
@@ -24,14 +24,14 @@ export interface ILocationChangeService {
 }
 
 export class LocationChangeService implements ILocationChangeService {
+    static $inject = ["$rootScope", "$location", "UtilitiesService"];
+
     private rootScope: ng.IRootScopeService;
     private location: ng.ILocationService;
     private utilitiesService: IUtilitiesService;
 
     private semaphoreQueue: Array<string>;
     private lastUrlBlock: string;
-
-    static $inject = ["$rootScope", "$location", "UtilitiesService"];
 
     constructor($rootScope: ng.IRootScopeService,
                 $location: ng.ILocationService,
@@ -49,10 +49,10 @@ export class LocationChangeService implements ILocationChangeService {
     }
 
     public lockLocationChange(semaphore: Enum, url?: string): void {
-        if (this.semaphoreQueue.indexOf(semaphore.toString()) == -1) {
+        if (this.semaphoreQueue.indexOf(semaphore.toString()) === -1) {
             this.semaphoreQueue.push(semaphore.toString());
         }
-        if (this.utilitiesService.isDefinedAndNotEmpty(url) == true) {
+        if (this.utilitiesService.isDefinedAndNotEmpty(url) === true) {
             this.lastUrlBlock = this.utilitiesService.getPath(url);
         }
     }
@@ -60,10 +60,10 @@ export class LocationChangeService implements ILocationChangeService {
     public unlockLocationChange(semaphore: Enum): boolean {
         const index = this.semaphoreQueue.indexOf(semaphore.toString());
 
-        if (index != -1) {
+        if (index !== -1) {
             this.semaphoreQueue.splice(index);
 
-            if (this.semaphoreQueue.length == 0 && this.utilitiesService.isDefinedAndNotEmpty(this.lastUrlBlock) == true) {
+            if (this.semaphoreQueue.length === 0 && this.utilitiesService.isDefinedAndNotEmpty(this.lastUrlBlock) === true) {
                 this.location.path(this.lastUrlBlock);
                 this.lastUrlBlock = undefined;
                 this.rootScope.$apply();

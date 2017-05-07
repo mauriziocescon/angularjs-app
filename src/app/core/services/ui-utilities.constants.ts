@@ -1,4 +1,4 @@
-import {Enum} from "../../shared/shared.module";
+import { Enum } from "../../shared/shared.module";
 
 export interface IUIUtilitiesConstants {
     CurrencyCode: CurrencyCode;
@@ -6,15 +6,15 @@ export interface IUIUtilitiesConstants {
 }
 
 export class CurrencyCode {
-    EUR = new Enum("EUR");
-    USD = new Enum("USD");
-    GBP = new Enum("GBP");
+    public EUR = new Enum("EUR");
+    public USD = new Enum("USD");
+    public GBP = new Enum("GBP");
 }
 
 export class CurrencyChar {
-    EUR = new Enum("€");
-    USS = new Enum("$");
-    GBP = new Enum("£");
+    public EUR = new Enum("€");
+    public USS = new Enum("$");
+    public GBP = new Enum("£");
 }
 
 class UIUtilitiesConstants implements IUIUtilitiesConstants {

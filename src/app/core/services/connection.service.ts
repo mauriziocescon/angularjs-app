@@ -19,12 +19,12 @@ export interface IConnectionService {
 }
 
 export class ConnectionService implements IConnectionService {
+    public static $inject = ["$rootScope", "$window"];
+
     private rootScope: ng.IRootScopeService;
     private window: ng.IWindowService;
 
     private onLine: boolean;
-
-    static $inject = ["$rootScope", "$window"];
 
     constructor($rootScope: ng.IRootScopeService,
                 $window: ng.IWindowService) {
@@ -37,12 +37,12 @@ export class ConnectionService implements IConnectionService {
 
         this.window.onoffline = () => {
             this.onLine = false;
-            this.rootScope.$apply()
+            this.rootScope.$apply();
         };
 
         this.window.ononline = () => {
             this.onLine = true;
-            this.rootScope.$apply()
+            this.rootScope.$apply();
         };
     }
 

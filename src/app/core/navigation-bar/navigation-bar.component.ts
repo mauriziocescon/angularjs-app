@@ -1,5 +1,5 @@
 import * as ng from "angular";
-import {INavigationBarService} from "./navigation-bar.service";
+import { INavigationBarService } from "./navigation-bar.service";
 import {
     IAppConstantsService,
     IAppLanguageService,

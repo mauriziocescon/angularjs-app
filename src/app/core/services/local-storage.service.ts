@@ -1,5 +1,5 @@
-import {IAppConstantsService} from "./app-constants.service";
-import {Enum, Logger} from "../../shared/shared.module";
+import { IAppConstantsService } from "./app-constants.service";
+import { Enum, Logger } from "../../shared/shared.module";
 
 /**
  * Manage data in
@@ -34,11 +34,11 @@ export interface ILocalStorageService {
 }
 
 export class LocalStorageService implements ILocalStorageService {
+    public static $inject = ["AppConstantsService"];
+
     private appConstantsService: IAppConstantsService;
 
     private prefix: string;
-
-    static $inject = ["AppConstantsService"];
 
     constructor(AppConstantsService: IAppConstantsService) {
         this.appConstantsService = AppConstantsService;
@@ -49,7 +49,7 @@ export class LocalStorageService implements ILocalStorageService {
     public getData(key: Enum): any {
         try {
             const result = localStorage.getItem(this.prefix + "_" + key.toString());
-            return result != undefined ? JSON.parse(result) : undefined;
+            return result !== undefined ? JSON.parse(result) : undefined;
         } catch (e) {
             Logger.warn(e);
             return undefined;
@@ -58,7 +58,7 @@ export class LocalStorageService implements ILocalStorageService {
 
     public setData(key: Enum, data: any): void {
         try {
-            if (data == undefined) {
+            if (data === undefined) {
                 localStorage.removeItem(this.prefix + "_" + key.toString());
             } else {
                 const result = JSON.stringify(data);
@@ -79,7 +79,7 @@ export class LocalStorageService implements ILocalStorageService {
 
     public removeAllData(): void {
         try {
-            for (let key in localStorage) {
+            for (const key in localStorage) {
                 if (key.startsWith(this.prefix + "_")) {
                     localStorage.removeItem(key);
                 }

@@ -1,4 +1,4 @@
-import {Enum} from "../../shared/shared.module";
+import { Enum } from "../../shared/shared.module";
 
 /**
  * Helper to share global variables
@@ -39,7 +39,7 @@ export class SharedDataService implements ISharedDataService {
 
     public getValue(key: Enum, defaultValue?: any): any {
         const value = this.dictionary[key.toString()];
-        return value != undefined ? value : defaultValue;
+        return value !== undefined ? value : defaultValue;
     }
 
     public setValue(key: Enum, value: any): void {

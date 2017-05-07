@@ -1,7 +1,7 @@
-import {IUIUtilitiesConstants, uiUtilitiesConstants} from "./ui-utilities.constants";
-import {IAppConstantsService} from "./app-constants.service";
-import {IUtilitiesService} from "./utilities.service";
-import {Logger} from "../../shared/shared.module";
+import { IUIUtilitiesConstants, uiUtilitiesConstants } from "./ui-utilities.constants";
+import { IAppConstantsService } from "./app-constants.service";
+import { IUtilitiesService } from "./utilities.service";
+import { Logger } from "../../shared/shared.module";
 
 /**
  * UI Utilities
@@ -36,12 +36,12 @@ export interface IUIUtilitiesService {
 }
 
 export class UIUtilitiesService implements IUIUtilitiesService {
+    public static $inject = ["$uibModal", "AppConstantsService", "UtilitiesService", "UIUtilitiesConstants"];
+
     private uibModal: ng.ui.bootstrap.IModalService;
     private appConstantsService: IAppConstantsService;
     private utilitiesService: IUtilitiesService;
     private uiUtilitiesConstants: IUIUtilitiesConstants;
-
-    static $inject = ["$uibModal", "AppConstantsService", "UtilitiesService", "UIUtilitiesConstants"];
 
     constructor($uibModal: ng.ui.bootstrap.IModalService,
                 AppConstantsService: IAppConstantsService,
@@ -84,7 +84,7 @@ export class UIUtilitiesService implements IUIUtilitiesService {
                     return message;
                 }, modalButtonLabel: () => {
                     return buttonLabel;
-                }
+                },
             };
 
             this.uibModal.open(modalSettings);
@@ -109,7 +109,7 @@ export class UIUtilitiesService implements IUIUtilitiesService {
                     return yesButtonLabel;
                 }, modalNoButtonLabel: () => {
                     return noButtonLabel;
-                }
+                },
             };
 
             const modalInstance: ng.ui.bootstrap.IModalServiceInstance = this.uibModal.open(modalSettings);

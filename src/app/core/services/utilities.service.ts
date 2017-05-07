@@ -1,7 +1,7 @@
 import * as angular from "angular";
-import {AngularStats} from "angular-stats";
-import {IAppConstantsService} from "./app-constants.service";
-import {Logger, TypeDetect} from "../../shared/shared.module";
+import { AngularStats } from "angular-stats";
+import { IAppConstantsService } from "./app-constants.service";
+import { Logger, TypeDetect } from "../../shared/shared.module";
 
 /**
  * Generic utilities
@@ -133,16 +133,16 @@ export interface IUtilitiesService {
 }
 
 export class UtilitiesService implements IUtilitiesService {
+    public static $inject = ["$rootScope", "$document", "$window", "$timeout", "AngularStats", "AppConstantsService"];
+
+    private static WARNING_TIME_SCOPE = 1000;
+
     private rootScope: ng.IRootScopeService;
     private document: ng.IDocumentService;
     private window: ng.IWindowService;
     private timeout: ng.ITimeoutService;
     private angularStats: AngularStats;
     private appConstantsService: IAppConstantsService;
-
-    private static WARNING_TIME_SCOPE = 1000;
-
-    static $inject = ["$rootScope", "$document", "$window", "$timeout", "AngularStats", "AppConstantsService"];
 
     constructor($rootScope: ng.IRootScopeService,
                 $document: ng.IDocumentService,
@@ -175,7 +175,7 @@ export class UtilitiesService implements IUtilitiesService {
     }
 
     public clone<T>(original: T): T {
-        if (original != undefined) {
+        if (original !== undefined) {
             return angular.copy(original);
         } else {
             return original;
@@ -189,25 +189,25 @@ export class UtilitiesService implements IUtilitiesService {
     public createUUID(): string {
         let d = new Date().getTime();
         if (this.window.performance && typeof this.window.performance.now === "function") {
-            d += performance.now(); //use high-precision timer if available
+            d += performance.now(); // use high-precision timer if available
         }
         const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
             const r = (d + Math.random() * 16) % 16 | 0;
             d = Math.floor(d / 16);
-            return (c == "x" ? r : (r & 0x3 | 0x8)).toString(16);
+            return (c === "x" ? r : (r & 0x3 | 0x8)).toString(16);
         });
         return uuid;
     }
 
     public isDefinedAndNotEmpty(text: string): boolean {
-        if (!TypeDetect.isString(text) || text == "")
+        if (!TypeDetect.isString(text) || text === "")
             return false;
 
-        return (<string>text).replace(/^\s*/, "").replace(/\s*$/, "").length > 0;
+        return (text as string).replace(/^\s*/, "").replace(/\s*$/, "").length > 0;
     }
 
     public formatString(text: string, ...params: Array<string | number>): string {
-        if (this.isDefinedAndNotEmpty(text) == false || params == undefined || params.length === 0) {
+        if (this.isDefinedAndNotEmpty(text) === false || params === undefined || params.length === 0) {
             return text;
         } else {
             // "arguments": https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/arguments
@@ -230,12 +230,12 @@ export class UtilitiesService implements IUtilitiesService {
     }
 
     public addScript(src: string): void {
-        if (this.document[0].readyState == "complete" || this.document[0].readyState == "interactive") {
-            let script: HTMLScriptElement = this.document[0].createElement("script");
+        if (this.document[0].readyState === "complete" || this.document[0].readyState == "interactive") {
+            const script: HTMLScriptElement = this.document[0].createElement("script");
             script.setAttribute("src", src);
             script.setAttribute("type", "text/javascript");
             script.setAttribute("charset", "utf-8");
-            let head: HTMLElement = this.document[0].getElementById("head");
+            const head: HTMLElement = this.document[0].getElementById("head");
             head.appendChild(script);
         }
         else {
@@ -245,16 +245,16 @@ export class UtilitiesService implements IUtilitiesService {
     }
 
     public getPath(url: string): string {
-        if (TypeDetect.isString(url) == false || this.isDefinedAndNotEmpty(url) == false)
+        if (TypeDetect.isString(url) === false || this.isDefinedAndNotEmpty(url) === false)
             return "/";
 
-        return url.indexOf("!") == -1 ? (url.startsWith("/") == true ? url : "/") : url.slice(url.indexOf("!") + 1);
+        return url.indexOf("!") === -1 ? (url.startsWith("/") === true ? url : "/") : url.slice(url.indexOf("!") + 1);
     }
 
     public getCurrentPath(): string {
         const path = this.getPath(window.location.href.toString());
 
-        if (this.isDefinedAndNotEmpty(path) == true) {
+        if (this.isDefinedAndNotEmpty(path) === true) {
             return path;
         } else {
             return "/";
@@ -262,7 +262,7 @@ export class UtilitiesService implements IUtilitiesService {
     }
 
     public parseQueryString(url: string): any {
-        let urlParams = {};
+        const urlParams = {};
 
         url.replace(new RegExp("([^?=&]+)(=([^&]*))?", "g"), (substring: string, ...args: any[]) => {
             return urlParams[args[0]] = args[2];
@@ -284,18 +284,18 @@ export class UtilitiesService implements IUtilitiesService {
     }
 
     public logResponse(response: ng.IHttpPromiseCallbackArg<any> | Array<ng.IHttpPromiseCallbackArg<any>>, startTime: number): void {
-        if (this.appConstantsService.Application.LOG_WS_RESPONSE == true) {
+        if (this.appConstantsService.Application.LOG_WS_RESPONSE === true) {
 
-            let time = (this.getTimeFrom1970() - startTime).toString();
+            const time = (this.getTimeFrom1970() - startTime).toString();
 
             if (TypeDetect.isArray(response)) {
-                let rs = <Array<ng.IHttpPromiseCallbackArg<any>>>response;
+                const rs = response as Array<ng.IHttpPromiseCallbackArg<any>>;
                 rs.forEach((r: ng.IHttpPromiseCallbackArg<any>) => {
                     Logger.log("\nRESPONSE BODY: (" + r.config.method + " " + r.config.url + ", Status: " + r.status.toString() + ", StatusText: " + r.statusText + ") in " + time + " ms: \n" + JSON.stringify(r.data, null, 2) + "\n\n\n\n");
                 });
             }
             else {
-                let r = <ng.IHttpPromiseCallbackArg<any>>response;
+                const r = response as ng.IHttpPromiseCallbackArg<any>;
                 Logger.log("\nRESPONSE BODY: (" + r.config.method + " " + r.config.url + ", Status: " + r.status.toString() + ", StatusText: " + r.statusText + ") in " + time + " ms: \n" + JSON.stringify(r.data, null, 2) + "\n\n\n\n");
             }
         }
@@ -356,18 +356,18 @@ export class UtilitiesService implements IUtilitiesService {
         }
 
         // Split parts by comma
-        let parts = headers("link").split(',');
-        let links = {};
+        const parts = headers("link").split(",");
+        const links = {};
 
         if (parts.length > 1) {
             // Parse each part into a named link
             for (let i = 0; i < parts.length; i++) {
-                let section = parts[i].split(';');
+                const section = parts[i].split(";");
                 if (section.length !== 2) {
                     throw new Error("section could not be split on ';'");
                 }
-                let url = section[0].replace(/<(.*)>/, '$1').trim();
-                let name = section[1].replace(/rel="(.*)"/, '$1').trim();
+                const url = section[0].replace(/<(.*)>/, "$1").trim();
+                const name = section[1].replace(/rel="(.*)"/, "$1").trim();
                 links[name] = url;
             }
         }

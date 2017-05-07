@@ -4,9 +4,9 @@ export interface INavigationBarService {
 }
 
 export class NavigationBarService implements INavigationBarService {
-    private title: string;
+    public static $inject = [];
 
-    static $inject = [];
+    private title: string;
 
     constructor() {
     }

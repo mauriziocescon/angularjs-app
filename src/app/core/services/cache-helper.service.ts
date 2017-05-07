@@ -1,4 +1,4 @@
-import {IUtilitiesService} from "./utilities.service";
+import { IUtilitiesService } from "./utilities.service";
 
 /**
  * Helper around ng.ICacheObject
@@ -42,7 +42,7 @@ export class CacheHelper implements ICacheHelper {
     public getValueForKey(key: string, defaultValue?: any): any {
         const returnValue = this.currentCache.get(key);
 
-        if (returnValue != undefined)
+        if (returnValue !== undefined)
             return returnValue;
 
         return defaultValue;
@@ -103,15 +103,15 @@ export interface ICacheHelperService {
 }
 
 export class CacheHelperService implements ICacheHelperService {
+    public static $inject = ["$rootScope", "$cacheFactory", "UtilitiesService"];
+
     private rootScope: ng.IRootScopeService;
     private cacheFactory: ng.ICacheFactoryService;
     private utilitiesService: IUtilitiesService;
 
-    private cacheNames: Array<string>;
-    private urlStack: Array<string>;
+    private cacheNames: string[];
+    private urlStack: string[];
     private clearDefer: ng.IPromise<any>;
-
-    static $inject = ["$rootScope", "$cacheFactory", "UtilitiesService"];
 
     constructor($rootScope: ng.IRootScopeService, $cacheFactory: ng.ICacheFactoryService, UtilitiesService: IUtilitiesService) {
         this.rootScope = $rootScope;
@@ -124,7 +124,7 @@ export class CacheHelperService implements ICacheHelperService {
 
     public start(): void {
         this.rootScope.$on("$locationChangeStart", (event: ng.IAngularEvent, nextLocation: string, currentLocation: string) => {
-            this.locationChangeStart(event, nextLocation, currentLocation)
+            this.locationChangeStart(event, nextLocation, currentLocation);
         });
     }
 
@@ -132,17 +132,19 @@ export class CacheHelperService implements ICacheHelperService {
         const currentPath = this.utilitiesService.getCurrentPath();
 
         let cache = this.cacheFactory.get(currentPath);
-        if (cache == undefined)
+        if (cache === undefined) {
             cache = this.cacheFactory(currentPath);
+        }
 
-        if (this.cacheNames.indexOf(currentPath) == -1)
+        if (this.cacheNames.indexOf(currentPath) === -1) {
             this.cacheNames.push(currentPath);
+        }
 
         return (new CacheHelper(cache));
     }
 
     public resetCacheStack(url?: string): void {
-        if (url && this.urlStack.length > 0 && this.urlStack[0] == this.utilitiesService.getPath(url)) {
+        if (url && this.urlStack.length > 0 && this.urlStack[0] === this.utilitiesService.getPath(url)) {
             this.urlStack = [this.urlStack[0]];
         } else {
             this.urlStack = [];
@@ -152,7 +154,7 @@ export class CacheHelperService implements ICacheHelperService {
     public destroyAllCache(): void {
         for (let i = 0; i < this.cacheNames.length; i++) {
             const cache = this.cacheFactory.get(this.cacheNames[i]);
-            if (cache != undefined) {
+            if (cache !== undefined) {
                 cache.destroy();
             }
         }
@@ -165,9 +167,9 @@ export class CacheHelperService implements ICacheHelperService {
         for (let i = 0; i < this.cacheNames.length; i++) {
             const cacheName = this.cacheNames[i];
 
-            if (this.urlStack.indexOf(cacheName) == -1) {
+            if (this.urlStack.indexOf(cacheName) === -1) {
                 const cache = this.cacheFactory.get(cacheName);
-                if (cache != undefined) {
+                if (cache !== undefined) {
                     cache.destroy();
                 }
             } else {
@@ -178,24 +180,25 @@ export class CacheHelperService implements ICacheHelperService {
     }
 
     private locationChangeStart(event: ng.IAngularEvent, nextLocation: string, currentLocation: string, newState?: string, oldState?: string): void {
-        if (event.defaultPrevented == true)
+        if (event.defaultPrevented === true) {
             return;
+        }
 
         const path = this.utilitiesService.getPath(nextLocation);
         const index = this.urlStack.indexOf(path);
 
-        if (this.urlStack.length > 0 && this.urlStack[this.urlStack.length - 1] == path) {
+        if (this.urlStack.length > 0 && this.urlStack[this.urlStack.length - 1] === path) {
             return;
         }
 
         // remove urlStack references from index to urlStack.length
-        if (index != -1) {
+        if (index !== -1) {
             this.urlStack = this.urlStack.splice(0, index);
         }
 
         this.urlStack.push(path);
         this.clearDefer = this.utilitiesService.defer(() => {
-            this.deleteNotReferredCache()
+            this.deleteNotReferredCache();
         }, 100, this);
     }
 }

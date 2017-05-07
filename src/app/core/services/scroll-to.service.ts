@@ -1,4 +1,4 @@
-import {TypeDetect} from "../../shared/shared.module";
+import { TypeDetect } from "../../shared/shared.module";
 
 /**
  * Window scrolling
@@ -30,11 +30,11 @@ export interface IScrollToService {
 }
 
 export class ScrollToService implements IScrollToService {
+    public static $inject = ["$document", "$window", "$timeout"];
+
     private document: ng.IDocumentService;
     private window: ng.IWindowService;
     private timeout: ng.ITimeoutService;
-
-    static $inject = ["$document", "$window", "$timeout"];
 
     constructor($document: ng.IDocumentService,
                 $window: ng.IWindowService,
