@@ -49,7 +49,7 @@ export class UserTodosService implements IUserTodosService {
 
         // configure new request
         this.getUserTodosRequest.canceler = this.q.defer();
-        let config: ng.IRequestShortcutConfig = {
+        const config: ng.IRequestShortcutConfig = {
             params: {userId: userId, q: textFilter},
             // set a promise that let you cancel the current request
             timeout: this.getUserTodosRequest.canceler.promise
@@ -58,20 +58,20 @@ export class UserTodosService implements IUserTodosService {
         // setup a timeout for the request
         this.getUserTodosRequest.setupTimeout(this, this.utilitiesService);
 
-        let url = this.appConstantsService.Application.WS_URL + "/todos";
+        const url = this.appConstantsService.Application.WS_URL + "/todos";
         this.utilitiesService.logRequest(url);
-        let startTime = this.utilitiesService.getTimeFrom1970();
+        const startTime = this.utilitiesService.getTimeFrom1970();
 
         // fetch data
-        this.getUserTodosRequest.promise = this.http.get<Array<Todo>>(url, config);
+        this.getUserTodosRequest.promise = this.http.get<Todo[]>(url, config);
 
-        return this.getUserTodosRequest.promise.then((response: ng.IHttpPromiseCallbackArg<Array<Todo>>) => {
+        return this.getUserTodosRequest.promise.then((response: ng.IHttpPromiseCallbackArg<Todo[]>) => {
             this.utilitiesService.logResponse(response, startTime);
-            return new ResponseWs(response.status == 200, response.statusText, response.data, true, response.status == -1);
+            return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
 
-        }, (response: ng.IHttpPromiseCallbackArg<Array<Todo>>) => {
+        }, (response: ng.IHttpPromiseCallbackArg<Todo[]>) => {
             this.utilitiesService.logResponse(response, startTime);
-            return new ResponseWs(false, response.statusText, undefined, true, response.status == -1);
+            return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });
     }
 

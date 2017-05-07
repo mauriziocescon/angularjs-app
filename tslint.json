@@ -4,6 +4,6 @@
   },
   "extends": "tslint:recommended",
   "rules": {
-    "max-len": 180
+    "max-line-length": [true, 250]
   }
 }

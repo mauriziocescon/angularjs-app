@@ -1,17 +1,17 @@
 import {Todo} from "./user-todos.model";
 import {IUserTodosService} from "./user-todos.data-service";
 import {
+    Enum,
     ISharedFilterService,
-    ResponseWs,
     Logger,
-    Enum
+    ResponseWs,
 } from "../../shared/shared.module";
 import {
     IDelayExecutionService,
     ILocalizedStringService,
+    INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
-    INavigationBarService
 } from "../../app.module";
 
 export class UserTodosController {
@@ -28,7 +28,7 @@ export class UserTodosController {
     private todosService: IUserTodosService;
 
     public name: string;
-    public todos: Array<Todo>;
+    public todos: Todo[];
     private busy: boolean;
     public textFilter: string;
     private loadTodosKey: Enum;
@@ -56,19 +56,19 @@ export class UserTodosController {
     }
 
     public get isLoadingData(): boolean {
-        return this.busy == true;
+        return this.busy === true;
     }
 
     public get hasNoData(): boolean {
-        return this.todos != undefined && this.todos.length == 0 && this.isLoadingData == false;
+        return this.todos !== undefined && this.todos.length === 0 && this.isLoadingData === false;
     }
 
     public get shouldRetry(): boolean {
-        return this.todos == undefined && this.isLoadingData == false;
+        return this.todos === undefined && this.isLoadingData === false;
     }
 
     public get showData(): boolean {
-        return this.isLoadingData == false && this.hasNoData == false && this.shouldRetry == false;
+        return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
     }
 
     public get textFilterPlaceholder(): string {
@@ -91,8 +91,9 @@ export class UserTodosController {
     }
 
     public resetTextFilter(): void {
-        if (this.textFilter == undefined)
+        if (this.textFilter === undefined) {
             return;
+        }
 
         this.textFilter = undefined;
         this.loadTodos();
@@ -108,12 +109,12 @@ export class UserTodosController {
         this.busy = true;
         this.todos = undefined;
 
-        this.todosService.getTodos(this.stateParams["userId"], this.textFilter).then((response: ResponseWs<Array<Todo>>) => {
+        this.todosService.getTodos(this.stateParams["userId"], this.textFilter).then((response: ResponseWs<Todo[]>) => {
 
             if (response.isSuccess()) {
                 this.todos = response.getData();
             }
-            else if (response.hasBeenCanceled() == false) {
+            else if (response.hasBeenCanceled() === false) {
                 // we do not notify the user in case of cancel request
                 this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA"), response.getMessage(), this.localizedStringService.getLocalizedString("CLOSE"));
             }
@@ -139,5 +140,5 @@ export const UserTodosComponent: ng.IComponentOptions = {
     controller: UserTodosController,
     templateUrl: () => {
         return "user-todos.component.html";
-    }
+    },
 };

@@ -1,5 +1,5 @@
-import {Todo} from "./user-todos.model";
-import {IAppConstantsService, IUtilitiesService} from "../../app.module";
+import { Todo } from "./user-todos.model";
+import { IAppConstantsService, IUtilitiesService } from "../../app.module";
 
 export let userTodosRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
                                     AppConstantsService: IAppConstantsService,
@@ -7,10 +7,11 @@ export let userTodosRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
 
     // returns the current list of todos per user
     $httpBackend.whenGET((url: string) => {
-        return AppConstantsService.Application.MOCK_BACKEND == true && url.startsWith(AppConstantsService.Application.WS_URL + "/todos");
+        return AppConstantsService.Application.MOCK_BACKEND === true &&
+            url.startsWith(AppConstantsService.Application.WS_URL + "/todos");
     }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
 
-        let response = [];
+        const response = [];
         const fakeText = "Lorem ipsum dolor sit amet, vidit clita vitae no vix. " +
             "Melius utamur definiebas mei ad. No maluisset prodesset theophrastus eum. " +
             "Nam sadipscing adversarium ut. Est rebum aperiam ex, ex vel regione " +
@@ -22,13 +23,12 @@ export let userTodosRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
             "vituperata no, per at etiam deserunt inimicus.";
 
         for (let i = 0; Math.round(Math.random() * 25); i++) {
-            let todo = new Todo();
+            const todo = new Todo();
 
-            todo.userId = parseInt(params.userId);
+            todo.userId = parseInt(params.userId, null);
             todo.id = i;
             todo.title = fakeText.substring(0, (Math.random() * 10000) % 100);
             todo.completed = Math.random() < 0.5;
-
 
             response.push(todo);
         }

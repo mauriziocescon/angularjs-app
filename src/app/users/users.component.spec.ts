@@ -1,7 +1,7 @@
 import * as angular from "angular";
-import {User, Address, Coordinates, Company} from "./users.model";
-import {UsersController} from "./users.component";
-import {IAppConstantsService, IUtilitiesService} from "../app.module";
+import { Address, Company, Coordinates, User } from "./users.model";
+import { UsersController} from "./users.component";
+import { IAppConstantsService, IUtilitiesService } from "../app.module";
 
 // Addition of angular-mocks and jasmine references is done on the gulpfile
 describe("UsersController", () => {
@@ -29,10 +29,10 @@ describe("UsersController", () => {
             return url.startsWith(AppConstantsService.Application.WS_URL + "/users");
         }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
 
-            let response = [];
+            const response = [];
 
             for (let i = 0; i < 4; i++) {
-                let user = new User();
+                const user = new User();
 
                 user.id = i;
                 user.name = "name " + i.toString();
@@ -66,34 +66,34 @@ describe("UsersController", () => {
     });
 
     it("controller.name is defined after $onInit", () => {
-        let controller = <UsersController>componentController("users", null, null);
+        const controller = componentController("users", null, null) as UsersController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.name).toBe("UsersComponent", "controller.name is not equal to UsersComponent");
     });
 
     it("expect controller fetches data after $onInit", () => {
-        let controller = <UsersController>componentController("users", null, null);
+        const controller = componentController("users", null, null) as UsersController;
         controller.$onInit();
         httpBackend.flush();
     });
 
     it("controller.users is not undefined after $onInit", () => {
-        let controller = <UsersController>componentController("users", null, null);
+        const controller = componentController("users", null, null) as UsersController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.users).not.toBeUndefined("controller.users is undefined...");
     });
 
     it("controller.users is not null after $onInit", () => {
-        let controller = <UsersController>componentController("users", null, null);
+        const controller = componentController("users", null, null) as UsersController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.users).not.toBeNull("controller.users is null...");
     });
 
     it("controller.isLoadingData is false after $onInit", () => {
-        let controller = <UsersController>componentController("users", null, null);
+        const controller = componentController("users", null, null) as UsersController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.isLoadingData).toBeFalsy("isLoadingData is true after the loading...");
