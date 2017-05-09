@@ -1,4 +1,3 @@
-import { User } from "./users.model";
 import {
     IDelayExecutionService,
     ILocalizedStringService,
@@ -12,7 +11,9 @@ import {
     Logger,
     ResponseWs,
 } from "../shared/shared.module";
+
 import { IUsersService } from "./users.data-service";
+import { User } from "./users.model";
 
 export class UsersController {
     public static $inject = ["$filter", "$location", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UsersService"];

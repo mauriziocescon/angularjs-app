@@ -1,6 +1,7 @@
 import * as $ from "jquery";
 window["$"] = window["jQuery"] = $; // jQuery is global for other objs
 import * as angular from "angular";
+
 import "angular-animate";
 import "angular-mocks";
 import "angular-sanitize";
@@ -19,8 +20,8 @@ import "format4js";
 import "ng-infinite-scroll";
 import "stacktrace-js";
 
-import { app } from "./app/app.module";
 import { appDev } from "./app/app-dev.module";
+import { app } from "./app/app.module";
 
 class Main {
 

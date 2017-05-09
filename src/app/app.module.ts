@@ -1,13 +1,17 @@
 import * as angular from "angular";
 import { angularStats } from "angular-stats";
+
+import { core } from "./core/core.module";
+import { shared } from "./shared/shared.module";
+
+import { albums } from "./albums/albums.module";
+import { users } from "./users/users.module";
+
 import { appConfigFunc } from "./app-config.module";
 import { routingConfigFunc } from "./app-routing.module";
 import { runFunc } from "./app-run.module";
+
 import { AppComponent } from "./app.component";
-import { core } from "./core/core.module";
-import { shared } from "./shared/shared.module";
-import { albums } from "./albums/albums.module";
-import { users } from "./users/users.module";
 
 export * from "./core/core.module";
 
@@ -26,11 +30,8 @@ const appModule = angular.module("app", [
     core,
     shared,
     albums,
-    users
+    users,
 ]);
-
-// register app component
-appModule.component(appModule.name, AppComponent);
 
 // config providers
 appModule.config(appConfigFunc);
@@ -40,5 +41,8 @@ appModule.config(routingConfigFunc);
 
 // run function
 appModule.run(runFunc);
+
+// register app component
+appModule.component(appModule.name, AppComponent);
 
 export const app = appModule.name;

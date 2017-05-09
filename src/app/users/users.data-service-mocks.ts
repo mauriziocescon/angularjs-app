@@ -1,4 +1,5 @@
 import { IAppConstantsService, IUtilitiesService } from "../app.module";
+
 import { Address, Company, Coordinates, User } from "./users.model";
 
 export let usersRunFuncMocks = ($httpBackend: ng.IHttpBackendService,

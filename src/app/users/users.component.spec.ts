@@ -1,4 +1,5 @@
 import * as angular from "angular";
+
 import { Address, Company, Coordinates, User } from "./users.model";
 import { UsersController} from "./users.component";
 import { IAppConstantsService, IUtilitiesService } from "../app.module";
@@ -82,14 +83,14 @@ describe("UsersController", () => {
         const controller = componentController("users", null, null) as UsersController;
         controller.$onInit();
         httpBackend.flush();
-        expect(controller.users).not.toBeUndefined("controller.users is undefined...");
+        expect(controller.dataSource).not.toBeUndefined("controller.users is undefined...");
     });
 
     it("controller.users is not null after $onInit", () => {
         const controller = componentController("users", null, null) as UsersController;
         controller.$onInit();
         httpBackend.flush();
-        expect(controller.users).not.toBeNull("controller.users is null...");
+        expect(controller.dataSource).not.toBeNull("controller.users is null...");
     });
 
     it("controller.isLoadingData is false after $onInit", () => {

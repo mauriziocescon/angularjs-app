@@ -1,13 +1,15 @@
 import * as ng from "angular";
-import { User } from "./users.model";
-import {
-    RequestWs,
-    ResponseWs,
-} from "../shared/shared.module";
+
 import {
     IAppConstantsService,
     IUtilitiesService,
 } from "../app.module";
+import {
+    RequestWs,
+    ResponseWs,
+} from "../shared/shared.module";
+
+import { User } from "./users.model";
 
 export interface IUsersService {
     getUsers(textFilter: string): ng.IPromise<ResponseWs<User[]>>;
