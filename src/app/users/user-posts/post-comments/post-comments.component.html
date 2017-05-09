@@ -1,7 +1,7 @@
 <div class="container-fluid comments">
 
     <div class="row" ng-show="$ctrl.showData">
-        <div class="col-xs-12 comment" ng-repeat="comment in ::$ctrl.comments track by comment.id">
+        <div class="col-xs-12 comment" ng-repeat="comment in ::$ctrl.dataSource track by comment.id">
             <div class="row">
                 <span class="comment-title">{{ ::$ctrl.getCommentTitle(comment) }}</span>
             </div>

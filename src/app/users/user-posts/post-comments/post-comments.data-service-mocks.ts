@@ -1,5 +1,5 @@
-import { Comment } from "./post-comments.model";
 import { IAppConstantsService, IUtilitiesService } from "../../../app.module";
+import { Comment } from "./post-comments.model";
 
 export let postCommentsRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
                                        AppConstantsService: IAppConstantsService,

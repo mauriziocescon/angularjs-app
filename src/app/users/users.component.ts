@@ -1,11 +1,4 @@
 import { User } from "./users.model";
-import { IUsersService } from "./users.data-service";
-import {
-    Enum,
-    ISharedFilterService,
-    Logger,
-    ResponseWs,
-} from "../shared/shared.module";
 import {
     IDelayExecutionService,
     ILocalizedStringService,
@@ -13,24 +6,31 @@ import {
     IUIUtilitiesService,
     IUtilitiesService,
 } from "../app.module";
+import {
+    Enum,
+    ISharedFilterService,
+    Logger,
+    ResponseWs,
+} from "../shared/shared.module";
+import { IUsersService } from "./users.data-service";
 
 export class UsersController {
     public static $inject = ["$filter", "$location", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UsersService"];
     public name: string;
-
-    private filter: ISharedFilterService;
-    private location: ng.ILocationService;
-    private delayExecutionService: IDelayExecutionService;
-    private localizedStringService: ILocalizedStringService;
-    private uiUtilitiesService: IUIUtilitiesService;
-    private utilitiesService: IUtilitiesService;
-    private navigationBarService: INavigationBarService;
-    private usersService: IUsersService;
-
-    public users: User[];
-    private busy: boolean;
     public textFilter: string;
-    private loadUsersKey: Enum;
+
+    protected filter: ISharedFilterService;
+    protected location: ng.ILocationService;
+    protected delayExecutionService: IDelayExecutionService;
+    protected localizedStringService: ILocalizedStringService;
+    protected uiUtilitiesService: IUIUtilitiesService;
+    protected utilitiesService: IUtilitiesService;
+    protected navigationBarService: INavigationBarService;
+    protected usersService: IUsersService;
+
+    protected users: User[];
+    protected busy: boolean;
+    protected loadUsersKey: Enum;
 
     constructor($filter: ISharedFilterService,
                 $location: ng.ILocationService,
@@ -72,11 +72,19 @@ export class UsersController {
         return this.localizedStringService.getLocalizedString("INPUT_TEXT_PLACEHOLDER");
     }
 
+    public get dataSource(): User[] {
+        return this.users;
+    }
+
     public $onInit(): void {
         this.navigationBarService.setTitle(this.localizedStringService.getLocalizedString("USERS"));
         this.loadUsersKey = new Enum("USERS");
         this.busy = false;
-        this.loadUsers();
+        this.loadDataSource();
+    }
+
+    public $onDestroy(): void {
+        this.usersService.cancelOngoingRequests();
     }
 
     public getUserNameDesc(user: User): string {
@@ -97,16 +105,16 @@ export class UsersController {
         }
 
         this.textFilter = undefined;
-        this.loadUsers();
+        this.loadDataSource();
     }
 
     public textFilterDidChange(): void {
         this.delayExecutionService.execute(() => {
-            this.loadUsers();
+            this.loadDataSource();
         }, this.loadUsersKey, 1500);
     }
 
-    protected loadUsers(): void {
+    public loadDataSource(): void {
         this.busy = true;
         this.users = undefined;
 
@@ -137,10 +145,6 @@ export class UsersController {
         event.preventDefault();
         event.stopPropagation();
         this.location.path("/user-todos/" + user.id);
-    }
-
-    public $onDestroy(): void {
-        this.usersService.cancelOngoingRequests();
     }
 }
 

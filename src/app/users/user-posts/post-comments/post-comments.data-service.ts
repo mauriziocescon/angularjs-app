@@ -1,13 +1,7 @@
 import * as ng from "angular";
-import {Comment} from "./post-comments.model";
-import {
-    RequestWs,
-    ResponseWs,
-} from "../../../shared/shared.module";
-import {
-    IAppConstantsService,
-    IUtilitiesService,
-} from "../../../app.module";
+import { IAppConstantsService, IUtilitiesService } from "../../../app.module";
+import { RequestWs, ResponseWs } from "../../../shared/shared.module";
+import { Comment } from "./post-comments.model";
 
 export interface IPostCommentsService {
     getPostComments(postId: string): ng.IPromise<ResponseWs<Comment[]>>;
@@ -50,7 +44,7 @@ export class PostCommentsService implements IPostCommentsService {
         // configure new request
         this.getPostCommentsRequest.canceler = this.q.defer();
         const config: ng.IRequestShortcutConfig = {
-            params: {postId: postId},
+            params: {postId},
             // set a promise that let you cancel the current request
             timeout: this.getPostCommentsRequest.canceler.promise,
         };

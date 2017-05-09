@@ -1,32 +1,31 @@
 import { Comment } from "./post-comments.model";
-import { IPostCommentsService } from "./post-comments.data-service";
-import {
-    ISharedFilterService,
-    Logger,
-    ResponseWs,
-} from "../../../shared/shared.module";
 import {
     ILocalizedStringService,
     INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
 } from "../../../app.module";
+import {
+    ISharedFilterService,
+    Logger,
+    ResponseWs,
+} from "../../../shared/shared.module";
+import { IPostCommentsService } from "./post-comments.data-service";
 
 export class PostCommentsController {
     public static $inject = ["$filter", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "PostCommentsService"];
     public name: string;
 
-    private filter: ISharedFilterService;
-    private localizedStringService: ILocalizedStringService;
-    private uiUtilitiesService: IUIUtilitiesService;
-    private utilitiesService: IUtilitiesService;
-    private navigationBarService: INavigationBarService;
-    private postCommentsService: IPostCommentsService;
+    protected filter: ISharedFilterService;
+    protected localizedStringService: ILocalizedStringService;
+    protected uiUtilitiesService: IUIUtilitiesService;
+    protected utilitiesService: IUtilitiesService;
+    protected navigationBarService: INavigationBarService;
+    protected postCommentsService: IPostCommentsService;
 
-    private postId: number;
-
-    public comments: Comment[];
-    private busy: boolean;
+    protected postId: number;
+    protected comments: Comment[];
+    protected busy: boolean;
 
     constructor($filter: ISharedFilterService,
                 LocalizedStringService: ILocalizedStringService,
@@ -60,20 +59,28 @@ export class PostCommentsController {
         return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
     }
 
+    public get dataSource(): Comment[] {
+        return this.comments;
+    }
+
     public $onInit(): void {
         this.busy = false;
         this.loadComments();
+    }
+
+    public $onDestroy(): void {
+        this.postCommentsService.cancelOngoingRequests();
     }
 
     public getCommentTitle(comment: Comment): string {
         return comment.id + " " + comment.name + comment.email;
     }
 
-    protected loadComments(): void {
+    public loadComments(): void {
         this.busy = true;
         this.comments = undefined;
 
-        this.postCommentsService.getPostComments(this.postId.toString()).then((response: ResponseWs<Array<Comment>>) => {
+        this.postCommentsService.getPostComments(this.postId.toString()).then((response: ResponseWs<Comment[]>) => {
 
             if (response.isSuccess()) {
                 this.comments = response.getData();
@@ -88,10 +95,6 @@ export class PostCommentsController {
         }).finally(() => {
             this.busy = false;
         });
-    }
-
-    public $onDestroy(): void {
-        this.postCommentsService.cancelOngoingRequests();
     }
 }
 

@@ -11,7 +11,7 @@
     </div>
 
     <div class="row" ng-show="$ctrl.showData">
-        <div class="col-xs-12" ng-repeat="user in $ctrl.users track by user.id">
+        <div class="col-xs-12" ng-repeat="user in $ctrl.dataSource track by user.id">
             <div class="row user">
                 <div class="col-xs-10">
                     <div class="col-xs-12 col-md-6">
@@ -51,6 +51,6 @@
 
     <div class="full-width-message" ng-show="$ctrl.isLoadingData"><mc-localized-string key="LOADING"></mc-localized-string></div>
     <div class="full-width-message" ng-show="$ctrl.hasNoData"><mc-localized-string key="NO_RESULT"></mc-localized-string></div>
-    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadUsers()"><mc-localized-string key="RETRY"></mc-localized-string></div>
+    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSource()"><mc-localized-string key="RETRY"></mc-localized-string></div>
     <div class="go-up" mc-scroll-to-top></div>
 </div>
