@@ -98,7 +98,7 @@ describe("PhotosController", () => {
                 link: "<http://jsonplaceholder.typicode.com/photos?_page=1>; rel=\"first\", " +
                 "<http://jsonplaceholder.typicode.com/photos?_page=" + prevPage.toString() + ">; rel=\"prev\", " +
                 "<http://jsonplaceholder.typicode.com/photos?_page=" + nextPage.toString() + ">; rel=\"next\", " +
-                "<http://jsonplaceholder.typicode.com/photos?_page=10>; rel=\"last\""
+                "<http://jsonplaceholder.typicode.com/photos?_page=10>; rel=\"last\"",
             };
 
             return AppConstantsService.Application.CAN_MOCK_WS_FAIL ? UtilitiesService.randomHttpStatusCode(response, headers) : [200, response, headers, "ok"];
@@ -131,7 +131,7 @@ describe("PhotosController", () => {
         controller["stateParams"] = {albumId: 1};
         controller.$onInit();
         httpBackend.flush();
-        expect(controller.photos).not.toBeUndefined("controller.photos is undefined...");
+        expect(controller.dataSource).not.toBeUndefined("controller.photos is undefined...");
     });
 
     it("controller.photos is not null after $onInit", () => {
@@ -139,7 +139,7 @@ describe("PhotosController", () => {
         controller["stateParams"] = {albumId: 1};
         controller.$onInit();
         httpBackend.flush();
-        expect(controller.photos).not.toBeNull("controller.photos is null...");
+        expect(controller.dataSource).not.toBeNull("controller.photos is null...");
     });
 
     it("controller.isLoadingData is false after $onInit", () => {

@@ -1,33 +1,34 @@
-import { Photo } from "./photos.model";
-import { IPhotosService } from "./photos.data-service";
-import {
-    ISharedFilterService,
-    ResponseWs,
-    Logger,
-} from "../../shared/shared.module";
 import {
     ILocalizedStringService,
+    INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
-    INavigationBarService,
 } from "../../app.module";
+import {
+    ISharedFilterService,
+    Logger,
+    ResponseWs,
+} from "../../shared/shared.module";
+
+import { IPhotosService } from "./photos.data-service";
+import { Photo } from "./photos.model";
 
 export class PhotosController {
     public static $inject = ["$filter", "$stateParams", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "PhotosService"];
     public name: string;
 
-    private filter: ISharedFilterService;
-    private stateParams: ng.ui.IStateParamsService;
-    private localizedStringService: ILocalizedStringService;
-    private uiUtilitiesService: IUIUtilitiesService;
-    private utilitiesService: IUtilitiesService;
-    private navigationBarService: INavigationBarService;
-    private photosService: IPhotosService;
+    protected filter: ISharedFilterService;
+    protected stateParams: ng.ui.IStateParamsService;
+    protected localizedStringService: ILocalizedStringService;
+    protected uiUtilitiesService: IUIUtilitiesService;
+    protected utilitiesService: IUtilitiesService;
+    protected navigationBarService: INavigationBarService;
+    protected photosService: IPhotosService;
 
-    public photos: Array<Photo>;
-    private pageNumber: number;
-    private loadCompleted: boolean;
-    private busy: boolean;
+    protected photos: Photo[];
+    protected pageNumber: number;
+    protected loadCompleted: boolean;
+    protected busy: boolean;
 
     constructor($filter: ISharedFilterService,
                 $stateParams: ng.ui.IStateParamsService,
@@ -67,33 +68,43 @@ export class PhotosController {
         return this.isLoadingData === true || this.loadCompleted === true || this.photos === undefined || this.photos.length === 0;
     }
 
+    public get dataSource(): Photo[] {
+        return this.photos;
+    }
+
     public $onInit(): void {
         this.navigationBarService.setTitle(this.localizedStringService.getLocalizedString("PHOTOS"));
         this.busy = false;
-        this.loadPhotosFirstPage();
+        this.loadDataSourceFirstPage();
+    }
+
+    public $onDestroy(): void {
+        this.photosService.cancelOngoingRequests();
     }
 
     public getPhotoDesc(photo: Photo): string {
         return "[" + photo.id.toString() + "] " + photo.title.toString();
     }
 
-    protected loadPhotosFirstPage(): void {
+    public loadDataSourceFirstPage(): void {
         this.busy = true;
         this.pageNumber = 1;
         this.loadCompleted = false;
         this.photos = undefined;
 
-        this.loadPhotos();
+        this.loadDataSource();
     }
 
-    protected loadPhotosNextPage(): void {
-        if (this.isInfiniteScrollDisabled) return;
+    public loadDataSourceNextPage(): void {
+        if (this.isInfiniteScrollDisabled) {
+            return;
+        }
 
         this.busy = true;
-        this.loadPhotos();
+        this.loadDataSource();
     }
 
-    public loadPhotos(): void {
+    public loadDataSource(): void {
         this.photosService.getPhotosForAlbum(this.stateParams["albumId"], this.pageNumber).then((response: ResponseWs<Array<Photo>>) => {
 
             if (response.isSuccess()) {
@@ -114,10 +125,6 @@ export class PhotosController {
         }).finally(() => {
             this.busy = false;
         });
-    }
-
-    public $onDestroy(): void {
-        this.photosService.cancelOngoingRequests();
     }
 }
 

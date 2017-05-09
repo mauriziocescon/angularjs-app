@@ -60,7 +60,7 @@ describe("AlbumsController", () => {
                 link: "<http://jsonplaceholder.typicode.com/albums?_page=1>; rel=\"first\", " +
                 "<http://jsonplaceholder.typicode.com/albums?_page=" + prevPage.toString() + ">; rel=\"prev\", " +
                 "<http://jsonplaceholder.typicode.com/albums?_page=" + nextPage.toString() + ">; rel=\"next\", " +
-                "<http://jsonplaceholder.typicode.com/albums?_page=10>; rel=\"last\""
+                "<http://jsonplaceholder.typicode.com/albums?_page=10>; rel=\"last\"",
             };
 
             return [200, response, headers, "ok"];

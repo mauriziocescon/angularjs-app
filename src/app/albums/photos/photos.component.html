@@ -1,8 +1,8 @@
 <div class="container-fluid photos">
 
-    <div class="clearfix" infinite-scroll="$ctrl.loadPhotosNextPage()" infinite-scroll-disabled="$ctrl.isInfiniteScrollDisabled" infinite-scroll-distance="1">
+    <div class="clearfix" infinite-scroll="$ctrl.loadDataSourceNextPage()" infinite-scroll-disabled="$ctrl.isInfiniteScrollDisabled" infinite-scroll-distance="1">
         <div class="row">
-            <div class="col-xs-12 photo" ng-repeat="photo in $ctrl.photos track by photo.id">
+            <div class="col-xs-12 photo" ng-repeat="photo in $ctrl.dataSource track by photo.id">
                 <img class="photo-img" ng-src="{{ ::photo.thumbnailUrl }}" mc-fallback-image-url="$ctrl.imgFallbackUrl" alt="Photo"/>
                 <div class="photo-desc">{{ ::$ctrl.getPhotoDesc(photo) }}</div>
             </div>
@@ -14,6 +14,6 @@
     <div class="full-width-message" ng-show="$ctrl.isLoadingData"><mc-localized-string key="LOADING"></mc-localized-string></div>
     <div class="full-width-message" ng-show="$ctrl.hasNoData"><mc-localized-string key="NO_RESULT"></mc-localized-string></div>
     <div class="full-width-message" ng-show="$ctrl.isLoadCompleted"><mc-localized-string key="LOAD_COMPLETED"></mc-localized-string></div>
-    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadPhotosFirstPage()"><mc-localized-string key="RETRY"></mc-localized-string></div>
+    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSourceFirstPage()"><mc-localized-string key="RETRY"></mc-localized-string></div>
     <div class="go-up" mc-scroll-to-top></div>
 </div>
