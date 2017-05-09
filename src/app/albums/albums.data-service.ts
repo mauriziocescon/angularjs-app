@@ -1,16 +1,18 @@
 import * as ng from "angular";
-import { Album } from "./albums.model";
-import {
-    RequestWs,
-    ResponseWs
-} from "../shared/shared.module";
+
 import {
     IAppConstantsService,
-    IUtilitiesService
+    IUtilitiesService,
 } from "../app.module";
+import {
+    RequestWs,
+    ResponseWs,
+} from "../shared/shared.module";
+
+import { Album } from "./albums.model";
 
 export interface IAlbumsService {
-    getAlbums(textFilter: string, page: number): ng.IPromise<ResponseWs<Array<Album>>>;
+    getAlbums(textFilter: string, page: number): ng.IPromise<ResponseWs<Album[]>>;
     cancelOngoingRequests(): void;
 }
 
@@ -23,7 +25,7 @@ export class AlbumsService implements IAlbumsService {
     protected utilitiesService: IUtilitiesService;
 
     // requests
-    private getAlbumsRequest: RequestWs<Album[]>;
+    protected getAlbumsRequest: RequestWs<Album[]>;
 
     constructor($http: ng.IHttpService,
                 $q: ng.IQService,
@@ -42,7 +44,7 @@ export class AlbumsService implements IAlbumsService {
         return {};
     }
 
-    public getAlbums(textFilter: string, page: number): ng.IPromise<ResponseWs<Array<Album>>> {
+    public getAlbums(textFilter: string, page: number): ng.IPromise<ResponseWs<Album[]>> {
 
         // reset request
         this.getAlbumsRequest.reset(this.utilitiesService);

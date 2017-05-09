@@ -1,8 +1,11 @@
 import * as angular from "angular";
-import { Photo } from "./photos.model";
-import { PhotosController } from "./photos.component";
+
 import { photos } from "./photos.module";
+
 import { IAppConstantsService, IUtilitiesService } from "../../app.module";
+
+import { PhotosController } from "./photos.component";
+import { Photo } from "./photos.model";
 
 // Addition of angular-mocks and jasmine references is done on the gulpfile
 describe("PhotosController", () => {

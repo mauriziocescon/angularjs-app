@@ -25,9 +25,9 @@ export class PhotosService implements IPhotosService {
     protected utilitiesService: IUtilitiesService;
 
     // requests
-    private getPhotoRequest: RequestWs<Photo[]>;
-    private getPhotosRequests: Array<RequestWs<Photo>>;
-    private getPhotosForAlbumRequests: RequestWs<Photo[]>;
+    protected getPhotoRequest: RequestWs<Photo[]>;
+    protected getPhotosRequests: Array<RequestWs<Photo>>;
+    protected getPhotosForAlbumRequests: RequestWs<Photo[]>;
 
     constructor($http: ng.IHttpService,
                 $q: ng.IQService,

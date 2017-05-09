@@ -1,4 +1,5 @@
 import * as angular from "angular";
+
 import { NavigationBarService } from "./navigation-bar.service";
 import { NavigationBarComponent } from "./navigation-bar.component";
 

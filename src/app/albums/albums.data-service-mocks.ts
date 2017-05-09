@@ -1,5 +1,6 @@
-import { Album } from "./albums.model";
 import { IAppConstantsService, IUtilitiesService } from "../app.module";
+
+import { Album } from "./albums.model";
 
 export let albumsRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
                                  AppConstantsService: IAppConstantsService,

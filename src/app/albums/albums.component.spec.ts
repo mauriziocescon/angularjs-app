@@ -1,7 +1,9 @@
 import * as angular from "angular";
-import { Album } from "./albums.model";
-import { AlbumsController } from "./albums.component";
+
 import { IAppConstantsService, IUtilitiesService } from "../app.module";
+
+import { AlbumsController } from "./albums.component";
+import { Album } from "./albums.model";
 
 // Addition of angular-mocks and jasmine references is done on the gulpfile
 describe("AlbumsController", () => {

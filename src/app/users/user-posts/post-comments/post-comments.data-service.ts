@@ -17,7 +17,7 @@ export class PostCommentsService implements IPostCommentsService {
     protected utilitiesService: IUtilitiesService;
 
     // requests
-    private getPostCommentsRequest: RequestWs<Comment[]>;
+    protected getPostCommentsRequest: RequestWs<Comment[]>;
 
     constructor($http: ng.IHttpService,
                 $q: ng.IQService,

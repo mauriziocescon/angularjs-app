@@ -1,5 +1,7 @@
 import * as angular from "angular";
+
 import { IAppConstantsService, IUtilitiesService } from "../../../app.module";
+
 import { PostCommentsController } from "./post-comments.component";
 import { Comment } from "./post-comments.model";
 

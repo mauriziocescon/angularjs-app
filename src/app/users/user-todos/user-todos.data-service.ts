@@ -25,7 +25,7 @@ export class UserTodosService implements IUserTodosService {
     protected utilitiesService: IUtilitiesService;
 
     // requests
-    private getUserTodosRequest: RequestWs<Todo[]>;
+    protected getUserTodosRequest: RequestWs<Todo[]>;
 
     constructor($http: ng.IHttpService,
                 $q: ng.IQService,

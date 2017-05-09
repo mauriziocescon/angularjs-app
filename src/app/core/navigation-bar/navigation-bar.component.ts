@@ -1,25 +1,26 @@
 import * as ng from "angular";
-import { INavigationBarService } from "./navigation-bar.service";
+
 import {
     IAppConstantsService,
     IAppLanguageService,
     ILocalizedStringService,
-    IUtilitiesService
+    IUtilitiesService,
 } from "../services/services.module";
+import { INavigationBarService } from "./navigation-bar.service";
 
 export class NavigationBarController {
-    static $inject = ["$location", "AppConstantsService", "AppLanguageService", "LocalizedStringService", "UtilitiesService", "NavigationBarService"];
+    public static $inject = ["$location", "AppConstantsService", "AppLanguageService", "LocalizedStringService", "UtilitiesService", "NavigationBarService"];
     public name: string;
-
-    private location: ng.ILocationService;
-    private appConstantsService: IAppConstantsService;
-    private appLanguageService: IAppLanguageService;
-    private localizedStringService: ILocalizedStringService;
-    private utilitiesService: IUtilitiesService;
-    private navigationBarService: INavigationBarService;
-
-    private languages: string[];
     public selectedLanguageId: string;
+
+    protected location: ng.ILocationService;
+    protected appConstantsService: IAppConstantsService;
+    protected appLanguageService: IAppLanguageService;
+    protected localizedStringService: ILocalizedStringService;
+    protected utilitiesService: IUtilitiesService;
+    protected navigationBarService: INavigationBarService;
+
+    protected languages: string[];
 
     constructor($location: ng.ILocationService,
                 AppConstantsService: IAppConstantsService,
@@ -58,6 +59,10 @@ export class NavigationBarController {
         this.languages = this.appConstantsService.Languages.SUPPORTED_LANG;
     }
 
+    public $onDestroy(): void {
+
+    }
+
     public goToAlbums(): void {
         this.location.path("/albums");
     }
@@ -71,10 +76,6 @@ export class NavigationBarController {
             this.selectedLanguageId = language;
             this.appLanguageService.setLanguageId(this.selectedLanguageId);
         }
-    }
-
-    public $onDestroy(): void {
-
     }
 }
 
