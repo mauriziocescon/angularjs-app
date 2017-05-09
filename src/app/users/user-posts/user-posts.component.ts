@@ -1,11 +1,3 @@
-import { Post } from "./user-posts.model";
-import { IUserPostsService } from "./user-posts.data-service";
-import {
-    Enum,
-    ISharedFilterService,
-    Logger,
-    ResponseWs,
-} from "../../shared/shared.module";
 import {
     IDelayExecutionService,
     ILocalizedStringService,
@@ -13,25 +5,34 @@ import {
     IUIUtilitiesService,
     IUtilitiesService,
 } from "../../app.module";
+import {
+    Enum,
+    ISharedFilterService,
+    Logger,
+    ResponseWs,
+} from "../../shared/shared.module";
+
+import { IUserPostsService } from "./user-posts.data-service";
+import { Post } from "./user-posts.model";
 
 export class UserPostsController {
     public static $inject = ["$filter", "$stateParams", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UserPostsService"];
     public name: string;
-
-    private filter: ISharedFilterService;
-    private stateParams: ng.ui.IStateParamsService;
-    private delayExecutionService: IDelayExecutionService;
-    private localizedStringService: ILocalizedStringService;
-    private uiUtilitiesService: IUIUtilitiesService;
-    private utilitiesService: IUtilitiesService;
-    private navigationBarService: INavigationBarService;
-    private userPostsService: IUserPostsService;
-
-    public posts: Array<Post>;
-    private busy: boolean;
-    private openedPost: Post;
     public textFilter: string;
-    private loadPostsKey: Enum;
+
+    protected filter: ISharedFilterService;
+    protected stateParams: ng.ui.IStateParamsService;
+    protected delayExecutionService: IDelayExecutionService;
+    protected localizedStringService: ILocalizedStringService;
+    protected uiUtilitiesService: IUIUtilitiesService;
+    protected utilitiesService: IUtilitiesService;
+    protected navigationBarService: INavigationBarService;
+    protected userPostsService: IUserPostsService;
+
+    protected posts: Post[];
+    protected busy: boolean;
+    protected openedPost: Post;
+    protected loadPostsKey: Enum;
 
     constructor($filter: ISharedFilterService,
                 $stateParams: ng.ui.IStateParamsService,
@@ -73,11 +74,19 @@ export class UserPostsController {
         return this.localizedStringService.getLocalizedString("INPUT_TEXT_PLACEHOLDER");
     }
 
+    public get dataSource(): Post[] {
+        return this.posts;
+    }
+
     public $onInit(): void {
         this.navigationBarService.setTitle(this.localizedStringService.getLocalizedString("POSTS"));
         this.loadPostsKey = new Enum("POSTS");
         this.busy = false;
-        this.loadPosts();
+        this.loadDataSource();
+    }
+
+    public $onDestroy(): void {
+        this.userPostsService.cancelOngoingRequests();
     }
 
     public getPostTitle(post: Post): string {
@@ -102,16 +111,16 @@ export class UserPostsController {
         }
 
         this.textFilter = undefined;
-        this.loadPosts();
+        this.loadDataSource();
     }
 
     public textFilterDidChange(): void {
         this.delayExecutionService.execute(() => {
-            this.loadPosts();
+            this.loadDataSource();
         }, this.loadPostsKey, 1500);
     }
 
-    protected loadPosts(): void {
+    public loadDataSource(): void {
         this.busy = true;
         this.posts = undefined;
 
@@ -130,10 +139,6 @@ export class UserPostsController {
         }).finally(() => {
             this.busy = false;
         });
-    }
-
-    public $onDestroy(): void {
-        this.userPostsService.cancelOngoingRequests();
     }
 }
 

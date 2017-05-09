@@ -1,4 +1,5 @@
 import * as ng from "angular";
+
 import {
     IAppConstantsService,
     IUtilitiesService,
@@ -7,6 +8,7 @@ import {
     RequestWs,
     ResponseWs,
 } from "../../shared/shared.module";
+
 import {Post} from "./user-posts.model";
 
 export interface IUserPostsService {
@@ -23,7 +25,7 @@ export class UserPostsService implements IUserPostsService {
     protected utilitiesService: IUtilitiesService;
 
     // requests
-    private getUserPostsRequest: RequestWs<Post[]>;
+    protected getUserPostsRequest: RequestWs<Post[]>;
 
     constructor($http: ng.IHttpService,
                 $q: ng.IQService,

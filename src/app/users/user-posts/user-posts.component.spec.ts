@@ -1,7 +1,9 @@
 import * as angular from "angular";
-import { Post} from "./user-posts.model";
-import { UserPostsController } from "./user-posts.component";
+
 import { IAppConstantsService, IUtilitiesService } from "../../app.module";
+
+import { UserPostsController } from "./user-posts.component";
+import { Post} from "./user-posts.model";
 
 // Addition of angular-mocks and jasmine references is done on the gulpfile
 describe("UserPostsController", () => {
@@ -68,14 +70,14 @@ describe("UserPostsController", () => {
         const controller = componentController("userPosts", null, null) as UserPostsController;
         controller.$onInit();
         httpBackend.flush();
-        expect(controller.posts).not.toBeUndefined("controller.posts is undefined...");
+        expect(controller.dataSource).not.toBeUndefined("controller.posts is undefined...");
     });
 
     it("controller.posts is not null after $onInit", () => {
         const controller = componentController("userPosts", null, null) as UserPostsController;
         controller.$onInit();
         httpBackend.flush();
-        expect(controller.posts).not.toBeNull("controller.posts is null...");
+        expect(controller.dataSource).not.toBeNull("controller.posts is null...");
     });
 
     it("controller.isLoadingData is false after $onInit", () => {

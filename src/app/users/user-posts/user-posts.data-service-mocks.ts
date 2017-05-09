@@ -1,5 +1,6 @@
-import { Post } from "./user-posts.model";
 import { IAppConstantsService, IUtilitiesService } from "../../app.module";
+
+import { Post } from "./user-posts.model";
 
 export let userPostsRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
                                     AppConstantsService: IAppConstantsService,
