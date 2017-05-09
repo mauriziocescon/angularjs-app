@@ -1,4 +1,5 @@
 import { IAppConstantsService, IUtilitiesService } from "../../app.module";
+
 import { Photo } from "./photos.model";
 
 export let photosRunFuncMocks = ($httpBackend: ng.IHttpBackendService,

@@ -1,11 +1,3 @@
-import { Album } from "./albums.model";
-import { IAlbumsService } from "./albums.data-service";
-import {
-    Enum,
-    ISharedFilterService,
-    Logger,
-    ResponseWs,
-} from "../shared/shared.module";
 import {
     IDelayExecutionService,
     ILocalizedStringService,
@@ -13,25 +5,35 @@ import {
     IUIUtilitiesService,
     IUtilitiesService,
 } from "../app.module";
+import {
+    Enum,
+    ISharedFilterService,
+    Logger,
+    ResponseWs,
+} from "../shared/shared.module";
+
+import { IAlbumsService } from "./albums.data-service";
+import { Album } from "./albums.model";
 
 export class AlbumsController {
     public static $inject = ["$filter", "$state", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "AlbumsService"];
     public name: string;
-
-    private filter: ISharedFilterService;
-    private state: ng.ui.IStateService;
-    private delayExecutionService: IDelayExecutionService;
-    private localizedStringService: ILocalizedStringService;
-    private uiUtilitiesService: IUIUtilitiesService;
-    private utilitiesService: IUtilitiesService;
-    private navigationBarService: INavigationBarService;
-    private albumsService: IAlbumsService;
-
-    public albums: Album[];
-    private pageNumber: number;
-    private loadCompleted: boolean;
-    private busy: boolean;
     public textFilter: string;
+
+    protected filter: ISharedFilterService;
+    protected state: ng.ui.IStateService;
+    protected delayExecutionService: IDelayExecutionService;
+    protected localizedStringService: ILocalizedStringService;
+    protected uiUtilitiesService: IUIUtilitiesService;
+    protected utilitiesService: IUtilitiesService;
+    protected navigationBarService: INavigationBarService;
+    protected albumsService: IAlbumsService;
+
+    protected albums: Album[];
+    protected pageNumber: number;
+    protected loadCompleted: boolean;
+    protected busy: boolean;
+
     private loadAlbumsKey: Enum;
 
     constructor($filter: ISharedFilterService,
@@ -78,11 +80,19 @@ export class AlbumsController {
         return this.localizedStringService.getLocalizedString("INPUT_TEXT_PLACEHOLDER");
     }
 
+    public get dataSource(): Album[] {
+        return this.albums;
+    }
+
     public $onInit(): void {
         this.navigationBarService.setTitle(this.localizedStringService.getLocalizedString("ALBUMS"));
         this.loadAlbumsKey = new Enum("ALBUMS");
         this.busy = false;
-        this.loadAlbumsFirstPage();
+        this.loadDataSourceFirstPage();
+    }
+
+    public $onDestroy(): void {
+        this.albumsService.cancelOngoingRequests();
     }
 
     public getAlbumDesc(album: Album): string {
@@ -95,34 +105,34 @@ export class AlbumsController {
         }
 
         this.textFilter = undefined;
-        this.loadAlbumsFirstPage();
+        this.loadDataSourceFirstPage();
     }
 
     public textFilterDidChange(): void {
         this.delayExecutionService.execute(() => {
-            this.loadAlbumsFirstPage();
+            this.loadDataSourceFirstPage();
         }, this.loadAlbumsKey, 1500);
     }
 
-    protected loadAlbumsFirstPage(): void {
+    public loadDataSourceFirstPage(): void {
         this.busy = true;
         this.pageNumber = 1;
         this.loadCompleted = false;
         this.albums = undefined;
 
-        this.loadAlbums();
+        this.loadDataSource();
     }
 
-    protected loadAlbumsNextPage(): void {
+    public loadDataSourceNextPage(): void {
         if (this.isInfiniteScrollDisabled) {
             return;
         }
 
         this.busy = true;
-        this.loadAlbums();
+        this.loadDataSource();
     }
 
-    protected loadAlbums(): void {
+    public loadDataSource(): void {
         this.albumsService.getAlbums(this.textFilter, this.pageNumber).then((response: ResponseWs<Album[]>) => {
 
             if (response.isSuccess()) {
@@ -148,10 +158,6 @@ export class AlbumsController {
     public goToPhotos(album: Album): void {
         this.state.go("photos", {albumId: album.id});
     }
-
-    public $onDestroy(): void {
-        this.albumsService.cancelOngoingRequests();
-    }
 }
 
 export const AlbumsComponent: ng.IComponentOptions = {
@@ -159,5 +165,5 @@ export const AlbumsComponent: ng.IComponentOptions = {
     controller: AlbumsController,
     templateUrl: () => {
         return "albums.component.html";
-    }
+    },
 };

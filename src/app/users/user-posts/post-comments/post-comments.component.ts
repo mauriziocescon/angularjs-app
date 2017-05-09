@@ -65,7 +65,7 @@ export class PostCommentsController {
 
     public $onInit(): void {
         this.busy = false;
-        this.loadComments();
+        this.loadDataSource();
     }
 
     public $onDestroy(): void {
@@ -76,7 +76,7 @@ export class PostCommentsController {
         return comment.id + " " + comment.name + comment.email;
     }
 
-    public loadComments(): void {
+    public loadDataSource(): void {
         this.busy = true;
         this.comments = undefined;
 

@@ -89,14 +89,14 @@ describe("AlbumsController", () => {
         const controller = componentController("albums", null, null) as AlbumsController;
         controller.$onInit();
         httpBackend.flush();
-        expect(controller.albums).not.toBeUndefined("controller.albums is undefined...");
+        expect(controller.dataSource).not.toBeUndefined("controller.albums is undefined...");
     });
 
     it("controller.albums is not null after $onInit", () => {
         const controller = componentController("albums", null, null) as AlbumsController;
         controller.$onInit();
         httpBackend.flush();
-        expect(controller.albums).not.toBeNull("controller.albums is null...");
+        expect(controller.dataSource).not.toBeNull("controller.albums is null...");
     });
 
     it("controller.isLoadingData is false after $onInit", () => {

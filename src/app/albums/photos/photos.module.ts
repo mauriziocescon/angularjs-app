@@ -1,4 +1,5 @@
 import * as angular from "angular";
+
 import { PhotosComponent } from "./photos.component";
 import { PhotosService } from "./photos.data-service";
 

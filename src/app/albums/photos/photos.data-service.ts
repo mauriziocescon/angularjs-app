@@ -1,13 +1,15 @@
 import * as ng from "angular";
-import { Photo } from "./photos.model";
-import {
-    RequestWs,
-    ResponseWs,
-} from "../../shared/shared.module";
+
 import {
     IAppConstantsService,
     IUtilitiesService,
 } from "../../app.module";
+import {
+    RequestWs,
+    ResponseWs,
+} from "../../shared/shared.module";
+
+import { Photo } from "./photos.model";
 
 export interface IPhotosService {
     getPhoto(id: number): ng.IPromise<ResponseWs<Photo[]>>;
@@ -46,29 +48,6 @@ export class PhotosService implements IPhotosService {
 
     private get httpDefaults(): ng.IHttpProviderDefaults {
         return {};
-    }
-
-    private setupGetPhotoRequest(id: number, request: RequestWs<Photo[]>): void {
-
-        // reset request
-        request.reset(this.utilitiesService);
-
-        // configure new request
-        request.canceler = this.q.defer();
-        const config: ng.IRequestShortcutConfig = {
-            params: {id: id},
-            // setup a promise that let you cancel the current request
-            timeout: request.canceler.promise
-        };
-
-        // setup a timeout for the request
-        request.setupTimeout(this, this.utilitiesService);
-
-        const url = this.appConstantsService.Application.WS_URL + "/photos";
-        this.utilitiesService.logRequest(url, config);
-
-        // fetch data
-        request.promise = this.http.get(url, config);
     }
 
     public getPhoto(id: number): ng.IPromise<ResponseWs<Photo[]>> {
@@ -133,9 +112,9 @@ export class PhotosService implements IPhotosService {
         // configure new request
         this.getPhotosForAlbumRequests.canceler = this.q.defer();
         const config: ng.IRequestShortcutConfig = {
-            params: {albumId: albumId, _page: page},
+            params: {albumId, _page: page},
             // set a promise that let you cancel the current request
-            timeout: this.getPhotosForAlbumRequests.canceler.promise
+            timeout: this.getPhotosForAlbumRequests.canceler.promise,
         };
 
         // setup a timeout for the request
@@ -158,7 +137,7 @@ export class PhotosService implements IPhotosService {
                 info = {
                     first: "http://jsonplaceholder.typicode.com/default?_page=1",
                     last: "http://jsonplaceholder.typicode.com/default?_page=1",
-                    next: "http://jsonplaceholder.typicode.com/default?_page=1"
+                    next: "http://jsonplaceholder.typicode.com/default?_page=1",
                 };
             }
 
@@ -179,5 +158,28 @@ export class PhotosService implements IPhotosService {
             request.reset(this.utilitiesService);
         });
         this.getPhotosForAlbumRequests.reset(this.utilitiesService);
+    }
+
+    protected setupGetPhotoRequest(id: number, request: RequestWs<Photo[]>): void {
+
+        // reset request
+        request.reset(this.utilitiesService);
+
+        // configure new request
+        request.canceler = this.q.defer();
+        const config: ng.IRequestShortcutConfig = {
+            params: {id},
+            // setup a promise that let you cancel the current request
+            timeout: request.canceler.promise,
+        };
+
+        // setup a timeout for the request
+        request.setupTimeout(this, this.utilitiesService);
+
+        const url = this.appConstantsService.Application.WS_URL + "/photos";
+        this.utilitiesService.logRequest(url, config);
+
+        // fetch data
+        request.promise = this.http.get(url, config);
     }
 }
