@@ -1,13 +1,15 @@
 import * as ng from "angular";
-import { Todo } from "./user-todos.model";
-import {
-    RequestWs,
-    ResponseWs,
-} from "../../shared/shared.module";
+
 import {
     IAppConstantsService,
     IUtilitiesService,
 } from "../../app.module";
+import {
+    RequestWs,
+    ResponseWs,
+} from "../../shared/shared.module";
+
+import { Todo } from "./user-todos.model";
 
 export interface IUserTodosService {
     getTodos(userId: string, textFilter: string): ng.IPromise<ResponseWs<Todo[]>>;
@@ -42,7 +44,7 @@ export class UserTodosService implements IUserTodosService {
         return {};
     }
 
-    public getTodos(userId: string, textFilter: string): ng.IPromise<ResponseWs<Array<Todo>>> {
+    public getTodos(userId: string, textFilter: string): ng.IPromise<ResponseWs<Todo[]>> {
 
         // reset request
         this.getUserTodosRequest.reset(this.utilitiesService);
@@ -50,7 +52,7 @@ export class UserTodosService implements IUserTodosService {
         // configure new request
         this.getUserTodosRequest.canceler = this.q.defer();
         const config: ng.IRequestShortcutConfig = {
-            params: {userId: userId, q: textFilter},
+            params: {userId, q: textFilter},
             // set a promise that let you cancel the current request
             timeout: this.getUserTodosRequest.canceler.promise
         };

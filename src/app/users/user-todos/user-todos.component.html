@@ -11,7 +11,7 @@
     </div>
 
     <div class="row" ng-show="$ctrl.showData">
-        <div class="col-xs-12" ng-repeat="todo in $ctrl.todos track by todo.id">
+        <div class="col-xs-12" ng-repeat="todo in $ctrl.dataSource track by todo.id">
             <div class="row todo">
                 <div class="col-xs-8 col-md-10">
                     <div class="todo-body">{{ ::$ctrl.getTodoDesc(todo) }}</div>
@@ -26,6 +26,6 @@
 
     <div class="full-width-message" ng-show="$ctrl.isLoadingData"><mc-localized-string key="LOADING"></mc-localized-string></div>
     <div class="full-width-message" ng-show="$ctrl.hasNoData"><mc-localized-string key="NO_RESULT"></mc-localized-string></div>
-    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadTodos()"><mc-localized-string key="RETRY"></mc-localized-string></div>
+    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSource()"><mc-localized-string key="RETRY"></mc-localized-string></div>
     <div class="go-up" mc-scroll-to-top></div>
 </div>

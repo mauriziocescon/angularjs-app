@@ -1,11 +1,3 @@
-import { Todo } from "./user-todos.model";
-import { IUserTodosService } from "./user-todos.data-service";
-import {
-    Enum,
-    ISharedFilterService,
-    Logger,
-    ResponseWs,
-} from "../../shared/shared.module";
 import {
     IDelayExecutionService,
     ILocalizedStringService,
@@ -13,25 +5,34 @@ import {
     IUIUtilitiesService,
     IUtilitiesService,
 } from "../../app.module";
+import {
+    Enum,
+    ISharedFilterService,
+    Logger,
+    ResponseWs,
+} from "../../shared/shared.module";
+
+import { IUserTodosService } from "./user-todos.data-service";
+import { Todo } from "./user-todos.model";
 
 export class UserTodosController {
     public static $inject = ["$filter", "$location", "$stateParams", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UserTodosService"];
     public name: string;
-
-    private filter: ISharedFilterService;
-    private location: ng.ILocationService;
-    private stateParams: ng.ui.IStateParamsService;
-    private delayExecutionService: IDelayExecutionService;
-    private localizedStringService: ILocalizedStringService;
-    private uiUtilitiesService: IUIUtilitiesService;
-    private utilitiesService: IUtilitiesService;
-    private navigationBarService: INavigationBarService;
-    private todosService: IUserTodosService;
-
-    public todos: Todo[];
-    private busy: boolean;
     public textFilter: string;
-    private loadTodosKey: Enum;
+
+    protected filter: ISharedFilterService;
+    protected location: ng.ILocationService;
+    protected stateParams: ng.ui.IStateParamsService;
+    protected delayExecutionService: IDelayExecutionService;
+    protected localizedStringService: ILocalizedStringService;
+    protected uiUtilitiesService: IUIUtilitiesService;
+    protected utilitiesService: IUtilitiesService;
+    protected navigationBarService: INavigationBarService;
+    protected todosService: IUserTodosService;
+
+    protected todos: Todo[];
+    protected busy: boolean;
+    protected loadTodosKey: Enum;
 
     constructor($filter: ISharedFilterService,
                 $location: ng.ILocationService,
@@ -75,11 +76,19 @@ export class UserTodosController {
         return this.localizedStringService.getLocalizedString("INPUT_TEXT_PLACEHOLDER");
     }
 
+    public get dataSource(): Todo[] {
+        return this.todos;
+    }
+
     public $onInit(): void {
         this.navigationBarService.setTitle(this.localizedStringService.getLocalizedString("TODOS"));
         this.loadTodosKey = new Enum("TODOS");
         this.busy = false;
-        this.loadTodos();
+        this.loadDataSource();
+    }
+
+    public $onDestroy(): void {
+        this.todosService.cancelOngoingRequests();
     }
 
     public getTodoDesc(todo: Todo): string {
@@ -96,16 +105,16 @@ export class UserTodosController {
         }
 
         this.textFilter = undefined;
-        this.loadTodos();
+        this.loadDataSource();
     }
 
     public textFilterDidChange(): void {
         this.delayExecutionService.execute(() => {
-            this.loadTodos();
+            this.loadDataSource();
         }, this.loadTodosKey, 1500);
     }
 
-    protected loadTodos(): void {
+    public loadDataSource(): void {
         this.busy = true;
         this.todos = undefined;
 
@@ -128,10 +137,6 @@ export class UserTodosController {
 
     public changeTodo(todo: Todo): void {
         todo.completed = !todo.completed;
-    }
-
-    public $onDestroy(): void {
-        this.todosService.cancelOngoingRequests();
     }
 }
 

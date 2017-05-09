@@ -1,7 +1,9 @@
 import * as angular from "angular";
-import { Todo} from "./user-todos.model";
-import { UserTodosController } from "./user-todos.component";
+
 import { IAppConstantsService, IUtilitiesService } from "../../app.module";
+
+import { UserTodosController } from "./user-todos.component";
+import { Todo} from "./user-todos.model";
 
 // Addition of angular-mocks and jasmine references is done on the gulpfile
 describe("UserTodosController", () => {
@@ -29,12 +31,12 @@ describe("UserTodosController", () => {
             return url.startsWith(AppConstantsService.Application.WS_URL + "/todos");
         }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
 
-            let response = [];
+            const response = [];
 
             for (let i = 0; i < 10; i++) {
-                let todo = new Todo();
+                const todo = new Todo();
 
-                todo.userId = parseInt(params.userId);
+                todo.userId = parseInt(params.userId, null);
                 todo.id = i;
                 todo.title = "title " + i.toString();
                 todo.completed = Math.random() > 0.5;
@@ -52,34 +54,34 @@ describe("UserTodosController", () => {
     });
 
     it("controller.name is defined after $onInit", () => {
-        let controller = <UserTodosController>componentController("userTodos", null, null);
+        const controller = componentController("userTodos", null, null) as UserTodosController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.name).toBe("UserTodosComponent", "controller.name is not equal to UserTodosComponent");
     });
 
     it("expect controller fetches data after $onInit", () => {
-        let controller = <UserTodosController>componentController("userTodos", null, null);
+        const controller = componentController("userTodos", null, null) as UserTodosController;
         controller.$onInit();
         httpBackend.flush();
     });
 
     it("controller.todos is not undefined after $onInit", () => {
-        let controller = <UserTodosController>componentController("userTodos", null, null);
+        const controller = componentController("userTodos", null, null) as UserTodosController;
         controller.$onInit();
         httpBackend.flush();
-        expect(controller.todos).not.toBeUndefined("controller.todos is undefined...");
+        expect(controller.dataSource).not.toBeUndefined("controller.todos is undefined...");
     });
 
     it("controller.todos is not null after $onInit", () => {
-        let controller = <UserTodosController>componentController("userTodos", null, null);
+        const controller = componentController("userTodos", null, null) as UserTodosController;
         controller.$onInit();
         httpBackend.flush();
-        expect(controller.todos).not.toBeNull("controller.todos is null...");
+        expect(controller.dataSource).not.toBeNull("controller.todos is null...");
     });
 
     it("controller.isLoadingData is false after $onInit", () => {
-        let controller = <UserTodosController>componentController("userTodos", null, null);
+        const controller = componentController("userTodos", null, null) as UserTodosController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.isLoadingData).toBeFalsy("isLoadingData is true after the loading...");

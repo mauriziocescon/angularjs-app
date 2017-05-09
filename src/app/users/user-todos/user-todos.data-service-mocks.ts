@@ -1,5 +1,5 @@
-import { Todo } from "./user-todos.model";
 import { IAppConstantsService, IUtilitiesService } from "../../app.module";
+import { Todo } from "./user-todos.model";
 
 export let userTodosRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
                                     AppConstantsService: IAppConstantsService,

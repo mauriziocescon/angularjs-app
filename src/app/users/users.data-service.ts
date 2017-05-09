@@ -25,7 +25,7 @@ export class UsersService implements IUsersService {
     protected utilitiesService: IUtilitiesService;
 
     // requests
-    private getUsersRequest: RequestWs<User[]>;
+    protected getUsersRequest: RequestWs<User[]>;
 
     constructor($http: ng.IHttpService,
                 $q: ng.IQService,
