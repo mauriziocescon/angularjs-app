@@ -1,7 +1,8 @@
-import { IUIUtilitiesConstants, uiUtilitiesConstants } from "./ui-utilities.constants";
-import { IAppConstantsService } from "./app-constants.service";
-import { IUtilitiesService } from "./utilities.service";
 import { Logger } from "../../shared/shared.module";
+
+import { IAppConstantsService } from "./app-constants.service";
+import { IUIUtilitiesConstants, uiUtilitiesConstants } from "./ui-utilities.constants";
+import { IUtilitiesService } from "./utilities.service";
 
 /**
  * UI Utilities

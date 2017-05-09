@@ -54,7 +54,7 @@ export class AlbumsService implements IAlbumsService {
         const config: ng.IRequestShortcutConfig = {
             params: {q: textFilter, _page: page},
             // set a promise that let you cancel the current request
-            timeout: this.getAlbumsRequest.canceler.promise
+            timeout: this.getAlbumsRequest.canceler.promise,
         };
 
         // setup a timeout for the request
@@ -77,7 +77,7 @@ export class AlbumsService implements IAlbumsService {
                 info = {
                     first: "http://jsonplaceholder.typicode.com/default?_page=1",
                     last: "http://jsonplaceholder.typicode.com/default?_page=1",
-                    next: "http://jsonplaceholder.typicode.com/default?_page=1"
+                    next: "http://jsonplaceholder.typicode.com/default?_page=1",
                 };
             }
 

@@ -1,7 +1,10 @@
 import * as angular from "angular";
+
 import { AngularStats } from "angular-stats";
-import { IAppConstantsService } from "./app-constants.service";
+
 import { Logger, TypeDetect } from "../../shared/shared.module";
+
+import { IAppConstantsService } from "./app-constants.service";
 
 /**
  * Generic utilities

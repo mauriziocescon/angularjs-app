@@ -37,14 +37,14 @@ export const mcToggleDirective = () => {
         }
 
         if (attrs["toggleOnSelector"]) {
-            let selector = [attrs["toggleOnSelector"], ".on"].join(",");
-            let elements = $(selector).not(element);
+            const selector = [attrs["toggleOnSelector"], ".on"].join(",");
+            const elements = $(selector).not(element);
             elements.removeClass("on");
             elements.addClass("off");
         }
     };
 
-    let callStateFunction = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, state: boolean, eventObject: JQueryEventObject) => {
+    const callStateFunction = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, state: boolean, eventObject: JQueryEventObject) => {
 
         if (state === true) {
             if (attrs["on"] !== undefined) {
@@ -75,8 +75,9 @@ export const mcToggleDirective = () => {
                 clearWatcher = scope.$watch(() => {
                     return getState(scope, attrs);
                 }, (newvalue: boolean, oldvalue: boolean) => {
-                    if (newvalue !== oldvalue)
+                    if (newvalue !== oldvalue) {
                         execute(scope, element, attrs, newvalue);
+                    }
                 });
             }
 

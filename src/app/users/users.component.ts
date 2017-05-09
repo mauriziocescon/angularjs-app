@@ -119,7 +119,7 @@ export class UsersController {
         this.busy = true;
         this.users = undefined;
 
-        this.usersService.getUsers(this.textFilter).then((response: ResponseWs<Array<User>>) => {
+        this.usersService.getUsers(this.textFilter).then((response: ResponseWs<User[]>) => {
 
             if (response.isSuccess()) {
                 this.users = response.getData();

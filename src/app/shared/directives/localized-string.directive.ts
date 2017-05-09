@@ -1,6 +1,7 @@
 import * as $ from "jquery";
-import { Logger } from "../shared.module";
+
 import { ILocalizedStringService } from "../../app.module";
+import { Logger } from "../shared.module";
 
 /**
  * Replace the mc-localized-string element with

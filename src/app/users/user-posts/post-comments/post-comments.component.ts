@@ -1,4 +1,3 @@
-import { Comment } from "./post-comments.model";
 import {
     ILocalizedStringService,
     INavigationBarService,
@@ -10,7 +9,9 @@ import {
     Logger,
     ResponseWs,
 } from "../../../shared/shared.module";
+
 import { IPostCommentsService } from "./post-comments.data-service";
+import { Comment } from "./post-comments.model";
 
 export class PostCommentsController {
     public static $inject = ["$filter", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "PostCommentsService"];

@@ -1,6 +1,7 @@
 import * as $ from "jquery";
-import { Logger } from "../shared.module";
+
 import { IScrollToService } from "../../app.module";
+import { Logger } from "../shared.module";
 
 /**
  * When the user starts scrolling and window.pageYOffset

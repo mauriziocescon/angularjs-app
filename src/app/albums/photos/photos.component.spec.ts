@@ -64,7 +64,7 @@ describe("PhotosController", () => {
 
         // returns photos for album
         httpBackend.whenGET((url: string) => {
-            return url.startsWith(AppConstantsService.Application.WS_URL + "/photos") && (/(&|\?)albumId\=/g).test(url) == true;
+            return url.startsWith(AppConstantsService.Application.WS_URL + "/photos") && (/(&|\?)albumId\=/g).test(url) === true;
         }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
 
             const response = [];
@@ -77,7 +77,7 @@ describe("PhotosController", () => {
                 "Eu errem albucius invenire qui, unum dolorem ne nec. Torquatos concludaturque ius " +
                 "et, cu viderer minimum voluptua duo, ex eligendi abhorreant vis. Sea posse legimus " +
                 "vituperata no, per at etiam deserunt inimicus.";
-            const page = parseInt(params._page);
+            const page = parseInt(params._page, null);
 
             for (let i = (page * 10) - 10; i < page * 10; i++) {
                 const photo = new Photo();

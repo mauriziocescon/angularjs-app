@@ -27,8 +27,9 @@ export const mcCustomValidatorDirective = () => {
             setValidity(scope, attrs, ngModel);
 
             scope.$on("$destroy", (event: ng.IAngularEvent) => {
-                if (clearWatcher)
+                if (clearWatcher) {
                     clearWatcher();
+                }
             });
         } catch (e) {
             Logger.exception(scope, e);

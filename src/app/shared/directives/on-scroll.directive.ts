@@ -1,5 +1,5 @@
-import { Logger } from "../shared.module";
 import { IUtilitiesService } from "../../app.module";
+import { Logger } from "../shared.module";
 
 /**
  * Invoke a function when scroll event fires on the element

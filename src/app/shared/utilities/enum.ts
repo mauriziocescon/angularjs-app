@@ -1,5 +1,5 @@
 export class Enum {
-    private value: string;
+    protected value: string;
 
     constructor(value: string) {
         this.value = value;

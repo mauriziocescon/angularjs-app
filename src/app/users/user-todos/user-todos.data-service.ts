@@ -54,7 +54,7 @@ export class UserTodosService implements IUserTodosService {
         const config: ng.IRequestShortcutConfig = {
             params: {userId, q: textFilter},
             // set a promise that let you cancel the current request
-            timeout: this.getUserTodosRequest.canceler.promise
+            timeout: this.getUserTodosRequest.canceler.promise,
         };
 
         // setup a timeout for the request
