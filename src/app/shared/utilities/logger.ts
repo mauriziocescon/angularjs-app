@@ -70,7 +70,7 @@ export class Logger {
         }
     }
 
-    private static getPath(url: string): string {
+    protected static getPath(url: string): string {
         try {
 
             if (TypeDetect.isString(url) === false || !url || url.length === 0) {

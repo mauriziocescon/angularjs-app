@@ -2,10 +2,10 @@ export class ModalAlertController {
     public static $inject = ["$uibModalInstance", "modalTitle", "modalMessage", "modalButtonLabel"];
     public name: string;
 
-    private modalInstance: ng.ui.bootstrap.IModalServiceInstance;
-    private modalTitle: string;
-    private modalMessage: string;
-    private modalButtonLabel: string;
+    protected modalInstance: ng.ui.bootstrap.IModalServiceInstance;
+    protected modalTitle: string;
+    protected modalMessage: string;
+    protected modalButtonLabel: string;
 
     constructor($uibModalInstance: ng.ui.bootstrap.IModalServiceInstance, modalTitle: string, modalMessage: string, modalButtonLabel: string) {
         this.modalInstance = $uibModalInstance;

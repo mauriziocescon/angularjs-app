@@ -27,7 +27,7 @@ export class RequestWs<T> {
         this.cancel();
     }
 
-    private cancel(): void {
+    protected cancel(): void {
 
         // abort http request if it's defined
         if (this.canceler) {

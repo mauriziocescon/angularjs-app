@@ -32,7 +32,7 @@ export class PostCommentsService implements IPostCommentsService {
         this.http.defaults = this.httpDefaults;
     }
 
-    private get httpDefaults(): ng.IHttpProviderDefaults {
+    protected get httpDefaults(): ng.IHttpProviderDefaults {
         return {};
     }
 

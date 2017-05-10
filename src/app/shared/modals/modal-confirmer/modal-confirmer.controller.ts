@@ -2,11 +2,11 @@ export class ModalConfirmerController {
     public  static $inject = ["$uibModalInstance", "modalTitle", "modalMessage", "modalYesButtonLabel", "modalNoButtonLabel"];
     public name: string;
 
-    private modalInstance: ng.ui.bootstrap.IModalServiceInstance;
-    private modalTitle: string;
-    private modalMessage: string;
-    private modalYesButtonLabel: string;
-    private modalNoButtonLabel: string;
+    protected modalInstance: ng.ui.bootstrap.IModalServiceInstance;
+    protected modalTitle: string;
+    protected modalMessage: string;
+    protected modalYesButtonLabel: string;
+    protected modalNoButtonLabel: string;
 
     constructor($uibModalInstance: ng.ui.bootstrap.IModalServiceInstance, modalTitle: string, modalMessage: string, modalYesButtonLabel: string, modalNoButtonLabel: string) {
         this.modalInstance = $uibModalInstance;

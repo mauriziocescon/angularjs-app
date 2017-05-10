@@ -40,7 +40,7 @@ export class AlbumsService implements IAlbumsService {
         this.http.defaults = this.httpDefaults;
     }
 
-    private get httpDefaults(): ng.IHttpProviderDefaults {
+    protected get httpDefaults(): ng.IHttpProviderDefaults {
         return {};
     }
 

@@ -1,9 +1,9 @@
 export class ResponseWs<T> {
-    private success: boolean;
-    private message: string;
-    private data: T;
-    private lastPage: boolean;
-    private abort: boolean;
+    protected success: boolean;
+    protected message: string;
+    protected data: T;
+    protected lastPage: boolean;
+    protected abort: boolean;
 
     constructor(success: boolean, message: string, data: T, lastPage: boolean, abort: boolean) {
         this.success = success;
