@@ -17,7 +17,8 @@ export const mcOnScrollDirective = (UtilitiesService: IUtilitiesService) => {
             const raw = element[0];
 
             element.bind("scroll", (eventObject: JQueryEventObject) => {
-                const callback: () => void = scope.$eval(attrs["mcOnScroll"]);
+                const mcOnScroll = "mcOnScroll";
+                const callback: () => void = scope.$eval(attrs[mcOnScroll]);
                 UtilitiesService.call(callback, scope, raw.scrollLeft, raw.scrollTop);
             });
 

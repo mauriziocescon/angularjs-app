@@ -14,7 +14,8 @@ export const mcOnMouseWheelDirective = () => {
     directive.restrict = "A";
     directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
         try {
-            const mousewheelHandler = scope.$eval(attrs["mcOnMouseWheel"]);
+            const mcOnMouseWheel = "mcOnMouseWheel";
+            const mousewheelHandler = scope.$eval(attrs[mcOnMouseWheel]);
 
             $(element).bind("mousewheel DOMMouseScroll", mousewheelHandler());
 

@@ -118,7 +118,8 @@ export class UserTodosController {
         this.busy = true;
         this.todos = undefined;
 
-        this.todosService.getTodos(this.stateParams["userId"], this.textFilter).then((response: ResponseWs<Todo[]>) => {
+        const userId = "userId";
+        this.todosService.getTodos(this.stateParams[userId], this.textFilter).then((response: ResponseWs<Todo[]>) => {
 
             if (response.isSuccess()) {
                 this.todos = response.getData();

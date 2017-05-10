@@ -79,12 +79,14 @@ export class UIUtilitiesService implements IUIUtilitiesService {
             modalSettings.controllerAs = "$ctrl";
             modalSettings.size = "xs";
             modalSettings.resolve = {
+                modalButtonLabel: () => {
+                    return buttonLabel;
+                },
+                modalMessage: () => {
+                    return message;
+                },
                 modalTitle: () => {
                     return title;
-                }, modalMessage: () => {
-                    return message;
-                }, modalButtonLabel: () => {
-                    return buttonLabel;
                 },
             };
 
@@ -102,14 +104,17 @@ export class UIUtilitiesService implements IUIUtilitiesService {
             modalSettings.controllerAs = "$ctrl";
             modalSettings.size = "xs";
             modalSettings.resolve = {
+                modalMessage: () => {
+                    return message;
+                },
+                modalNoButtonLabel: () => {
+                    return noButtonLabel;
+                },
                 modalTitle: () => {
                     return title;
-                }, modalMessage: () => {
-                    return message;
-                }, modalYesButtonLabel: () => {
+                },
+                modalYesButtonLabel: () => {
                     return yesButtonLabel;
-                }, modalNoButtonLabel: () => {
-                    return noButtonLabel;
                 },
             };
 

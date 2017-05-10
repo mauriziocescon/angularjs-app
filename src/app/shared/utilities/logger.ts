@@ -24,7 +24,8 @@ export class Logger {
                 try {
                     if (["constructor"]) {
                         const funcNameRegex = /function (.{1,})\(/;
-                        const results = (funcNameRegex).exec(scope["constructor"].toString());
+                        const constructor = "constructor";
+                        const results = (funcNameRegex).exec(scope[constructor].toString());
                         if (results && results.length > 1) {
                             className = results[1];
                         }

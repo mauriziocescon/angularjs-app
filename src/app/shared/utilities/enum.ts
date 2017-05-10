@@ -1,16 +1,13 @@
 export class Enum {
+
+    public static toEnum(val: string): Enum {
+        return (val === undefined || val === null) ? undefined : new Enum(val);
+    }
+
     protected value: string;
 
     constructor(value: string) {
         this.value = value;
-    }
-
-    public static toEnum(val: string): Enum {
-        if (val === undefined || val === null) {
-            return undefined;
-        }
-
-        return new Enum(val);
     }
 
     public toString(): string {

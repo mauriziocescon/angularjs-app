@@ -14,7 +14,8 @@ export const mcFallbackImageUrlDirective = () => {
     directive.restrict = "A";
     directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
         try {
-            const fallbackImageUrl = scope.$eval(attrs["mcFallbackImageUrl"]);
+            const mcFallbackImageUrl = "mcFallbackImageUrl";
+            const fallbackImageUrl = scope.$eval(attrs[mcFallbackImageUrl]);
 
             $(element).bind("error", () => {
                 $(element).attr("src", fallbackImageUrl);

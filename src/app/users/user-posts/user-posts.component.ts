@@ -124,7 +124,8 @@ export class UserPostsController {
         this.busy = true;
         this.posts = undefined;
 
-        this.userPostsService.getPosts(this.stateParams["userId"], this.textFilter).then((response: ResponseWs<Post[]>) => {
+        const userId = "userId";
+        this.userPostsService.getPosts(this.stateParams[userId], this.textFilter).then((response: ResponseWs<Post[]>) => {
 
             if (response.isSuccess()) {
                 this.posts = response.getData();

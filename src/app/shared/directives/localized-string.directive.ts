@@ -19,9 +19,10 @@ export const mcLocalizedStringDirective = (LocalizedStringService: ILocalizedStr
     directive.restrict = "E";
     directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
         try {
+            const key = "key";
 
-            if (attrs["key"] !== undefined && $(element).parent() !== undefined) {
-                $(element).replaceWith(LocalizedStringService.getLocalizedString(attrs["key"]));
+            if (attrs[key] !== undefined && $(element).parent() !== undefined) {
+                $(element).replaceWith(LocalizedStringService.getLocalizedString(attrs[key]));
             }
 
         } catch (e) {

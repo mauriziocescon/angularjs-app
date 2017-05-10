@@ -11,7 +11,8 @@ import { Logger } from "../shared.module";
 export const mcCustomValidatorDirective = () => {
 
     const setValidity = (scope: ng.IScope, attrs: ng.IAttributes, ngModel: ng.INgModelController) => {
-        ngModel.$setValidity("mcCustomValidatorError", scope.$eval(attrs["mcCustomValidator"]) === true);
+        const mcCustomValidator = "mcCustomValidator";
+        ngModel.$setValidity("mcCustomValidatorError", scope.$eval(attrs[mcCustomValidator]) === true);
     };
 
     const directive: ng.IDirective = {};

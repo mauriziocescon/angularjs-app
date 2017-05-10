@@ -14,8 +14,10 @@ export const mcFocusIfDirective = ($timeout: ng.ITimeoutService) => {
     directive.restrict = "A";
     directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
         try {
+            const mcFocusIf = "mcFocusIf";
+
             const clearWatcher = scope.$watch(() => {
-                return scope.$eval(attrs["mcFocusIf"]);
+                return scope.$eval(attrs[mcFocusIf]);
             }, (newValue, oldValue) => {
                 if (newValue !== oldValue && newValue === true) {
                     $timeout(() => {
@@ -24,7 +26,7 @@ export const mcFocusIfDirective = ($timeout: ng.ITimeoutService) => {
                 }
             });
 
-            if (scope.$eval(attrs["mcFocusIf"]) === true) {
+            if (scope.$eval(attrs[mcFocusIf]) === true) {
                 $timeout(() => {
                     $(element).focus();
                 }, 200);

@@ -18,7 +18,8 @@ import { Logger } from "../shared.module";
 export const mcToggleDirective = () => {
 
     const getState = (scope: ng.IScope, attrs: ng.IAttributes) => {
-        return scope.$eval(attrs["mcToggle"]) === true;
+        const mcToggle = "mcToggle";
+        return scope.$eval(attrs[mcToggle]) === true;
     };
 
     const execute = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, state: boolean, eventObject?: JQueryEventObject) => {
@@ -36,8 +37,9 @@ export const mcToggleDirective = () => {
             $(element).removeClass("on");
         }
 
-        if (attrs["toggleOnSelector"]) {
-            const selector = [attrs["toggleOnSelector"], ".on"].join(",");
+        const toggleOnSelector = "toggleOnSelector";
+        if (attrs[toggleOnSelector]) {
+            const selector = [attrs[toggleOnSelector], ".on"].join(",");
             const elements = $(selector).not(element);
             elements.removeClass("on");
             elements.addClass("off");
@@ -45,17 +47,19 @@ export const mcToggleDirective = () => {
     };
 
     const callStateFunction = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, state: boolean, eventObject: JQueryEventObject) => {
+        const on = "on";
+        const off = "off";
 
         if (state === true) {
-            if (attrs["on"] !== undefined) {
+            if (attrs[on] !== undefined) {
                 scope.$apply(() => {
-                    scope.$eval(attrs["on"], {$event: eventObject});
+                    scope.$eval(attrs[on], {$event: eventObject});
                 });
             }
         } else {
-            if (attrs["off"] !== undefined) {
+            if (attrs[off] !== undefined) {
                 scope.$apply(() => {
-                    scope.$eval(attrs["off"], {$event: eventObject});
+                    scope.$eval(attrs[off], {$event: eventObject});
                 });
             }
         }
@@ -67,11 +71,12 @@ export const mcToggleDirective = () => {
     directive.restrict = "A";
     directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
         try {
-            const keepWatching = scope.$eval(attrs["keepWatching"]) === true;
+            const keepWatching = "keepWatching";
+            const keepWatchingAttrs = scope.$eval(attrs[keepWatching]) === true;
             setClass(scope, element, attrs, getState(scope, attrs));
             let clearWatcher;
 
-            if (keepWatching) {
+            if (keepWatchingAttrs) {
                 clearWatcher = scope.$watch(() => {
                     return getState(scope, attrs);
                 }, (newvalue: boolean, oldvalue: boolean) => {
