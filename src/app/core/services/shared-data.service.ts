@@ -31,7 +31,7 @@ export interface ISharedDataService {
 }
 
 export class SharedDataService implements ISharedDataService {
-    private dictionary: any;
+    protected dictionary: any;
 
     constructor() {
         this.dictionary = {};

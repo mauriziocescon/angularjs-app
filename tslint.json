@@ -4,6 +4,7 @@
   },
   "extends": "tslint:recommended",
   "rules": {
+    "max-classes-per-file": [true, 5],
     "max-line-length": [true, 250]
   }
 }

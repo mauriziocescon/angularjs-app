@@ -39,10 +39,10 @@ export interface IUIUtilitiesService {
 export class UIUtilitiesService implements IUIUtilitiesService {
     public static $inject = ["$uibModal", "AppConstantsService", "UtilitiesService", "UIUtilitiesConstants"];
 
-    private uibModal: ng.ui.bootstrap.IModalService;
-    private appConstantsService: IAppConstantsService;
-    private utilitiesService: IUtilitiesService;
-    private uiUtilitiesConstants: IUIUtilitiesConstants;
+    protected uibModal: ng.ui.bootstrap.IModalService;
+    protected appConstantsService: IAppConstantsService;
+    protected utilitiesService: IUtilitiesService;
+    protected uiUtilitiesConstants: IUIUtilitiesConstants;
 
     constructor($uibModal: ng.ui.bootstrap.IModalService,
                 AppConstantsService: IAppConstantsService,

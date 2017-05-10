@@ -34,7 +34,7 @@ export class AlbumsController {
     protected loadCompleted: boolean;
     protected busy: boolean;
 
-    private loadAlbumsKey: Enum;
+    protected loadAlbumsKey: Enum;
 
     constructor($filter: ISharedFilterService,
                 $state: ng.ui.IStateService,

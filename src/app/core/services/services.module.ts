@@ -1,10 +1,10 @@
 /* shared services */
 import * as angular from "angular";
-import { IAppConstantsService, AppConstantsService } from "./app-constants.service";
-import { IAppLanguageService, AppLanguageService } from "./app-language.service";
-import { ICacheHelperService, CacheHelperService } from "./cache-helper.service";
-import { IConnectionService, ConnectionService } from "./connection.service";
-import { IDelayExecutionService, DelayExecutionService } from "./delay-execution.service";
+import { AppConstantsService, IAppConstantsService } from "./app-constants.service";
+import { AppLanguageService, IAppLanguageService } from "./app-language.service";
+import { CacheHelperService, ICacheHelperService } from "./cache-helper.service";
+import { ConnectionService, IConnectionService } from "./connection.service";
+import { DelayExecutionService, IDelayExecutionService } from "./delay-execution.service";
 import { ILocalStorageService, LocalStorageService } from "./local-storage.service";
 import { ILocalizedStringService, LocalizedStringService } from "./localized-string.service";
 import { ILocationChangeService, LocationChangeService } from "./location-change.service";

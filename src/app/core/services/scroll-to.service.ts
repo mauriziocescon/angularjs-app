@@ -32,9 +32,9 @@ export interface IScrollToService {
 export class ScrollToService implements IScrollToService {
     public static $inject = ["$document", "$window", "$timeout"];
 
-    private document: ng.IDocumentService;
-    private window: ng.IWindowService;
-    private timeout: ng.ITimeoutService;
+    protected document: ng.IDocumentService;
+    protected window: ng.IWindowService;
+    protected timeout: ng.ITimeoutService;
 
     constructor($document: ng.IDocumentService,
                 $window: ng.IWindowService,

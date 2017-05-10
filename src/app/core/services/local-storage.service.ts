@@ -36,9 +36,9 @@ export interface ILocalStorageService {
 export class LocalStorageService implements ILocalStorageService {
     public static $inject = ["AppConstantsService"];
 
-    private appConstantsService: IAppConstantsService;
+    protected appConstantsService: IAppConstantsService;
 
-    private prefix: string;
+    protected prefix: string;
 
     constructor(AppConstantsService: IAppConstantsService) {
         this.appConstantsService = AppConstantsService;

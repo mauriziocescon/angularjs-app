@@ -31,8 +31,8 @@ export interface IDelayExecutionService {
 export class DelayExecutionService implements IDelayExecutionService {
     public static $inject = ["$timeout"];
 
-    private timeout: ng.ITimeoutService;
-    private functionList: {[key: string]: ng.IPromise<any>};
+    protected timeout: ng.ITimeoutService;
+    protected functionList: {[key: string]: ng.IPromise<any>};
 
     constructor($timeout: ng.ITimeoutService) {
         this.timeout = $timeout;

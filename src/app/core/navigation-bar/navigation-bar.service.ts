@@ -6,9 +6,10 @@ export interface INavigationBarService {
 export class NavigationBarService implements INavigationBarService {
     public static $inject = [];
 
-    private title: string;
+    protected title: string;
 
     constructor() {
+        // do nothing
     }
 
     public setTitle(title: string): void {

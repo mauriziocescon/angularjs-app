@@ -138,14 +138,14 @@ export interface IUtilitiesService {
 export class UtilitiesService implements IUtilitiesService {
     public static $inject = ["$rootScope", "$document", "$window", "$timeout", "AngularStats", "AppConstantsService"];
 
-    private static WARNING_TIME_SCOPE = 1000;
+    protected static WARNING_TIME_SCOPE = 1000;
 
-    private rootScope: ng.IRootScopeService;
-    private document: ng.IDocumentService;
-    private window: ng.IWindowService;
-    private timeout: ng.ITimeoutService;
-    private angularStats: AngularStats;
-    private appConstantsService: IAppConstantsService;
+    protected rootScope: ng.IRootScopeService;
+    protected document: ng.IDocumentService;
+    protected window: ng.IWindowService;
+    protected timeout: ng.ITimeoutService;
+    protected angularStats: AngularStats;
+    protected appConstantsService: IAppConstantsService;
 
     constructor($rootScope: ng.IRootScopeService,
                 $document: ng.IDocumentService,
@@ -203,8 +203,9 @@ export class UtilitiesService implements IUtilitiesService {
     }
 
     public isDefinedAndNotEmpty(text: string): boolean {
-        if (!TypeDetect.isString(text) || text === "")
+        if (!TypeDetect.isString(text) || text === "") {
             return false;
+        }
 
         return (text as string).replace(/^\s*/, "").replace(/\s*$/, "").length > 0;
     }
@@ -215,7 +216,8 @@ export class UtilitiesService implements IUtilitiesService {
         } else {
             // "arguments": https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/arguments
             // format method from format4js library
-            return String["format"].apply(this, arguments);
+            const format = "format";
+            return String[format].apply(this, arguments);
         }
     }
 
@@ -248,8 +250,9 @@ export class UtilitiesService implements IUtilitiesService {
     }
 
     public getPath(url: string): string {
-        if (TypeDetect.isString(url) === false || this.isDefinedAndNotEmpty(url) === false)
+        if (TypeDetect.isString(url) === false || this.isDefinedAndNotEmpty(url) === false) {
             return "/";
+        }
 
         return url.indexOf("!") === -1 ? (url.startsWith("/") === true ? url : "/") : url.slice(url.indexOf("!") + 1);
     }
@@ -364,8 +367,8 @@ export class UtilitiesService implements IUtilitiesService {
 
         if (parts.length > 1) {
             // Parse each part into a named link
-            for (let i = 0; i < parts.length; i++) {
-                const section = parts[i].split(";");
+            for (const part of parts) {
+                const section = part.split(";");
                 if (section.length !== 2) {
                     throw new Error("section could not be split on ';'");
                 }

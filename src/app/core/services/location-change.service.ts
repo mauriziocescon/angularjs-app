@@ -24,14 +24,14 @@ export interface ILocationChangeService {
 }
 
 export class LocationChangeService implements ILocationChangeService {
-    static $inject = ["$rootScope", "$location", "UtilitiesService"];
+    public static $inject = ["$rootScope", "$location", "UtilitiesService"];
 
-    private rootScope: ng.IRootScopeService;
-    private location: ng.ILocationService;
-    private utilitiesService: IUtilitiesService;
+    protected rootScope: ng.IRootScopeService;
+    protected location: ng.ILocationService;
+    protected utilitiesService: IUtilitiesService;
 
-    private semaphoreQueue: Array<string>;
-    private lastUrlBlock: string;
+    protected semaphoreQueue: string[];
+    protected lastUrlBlock: string;
 
     constructor($rootScope: ng.IRootScopeService,
                 $location: ng.ILocationService,
@@ -74,7 +74,7 @@ export class LocationChangeService implements ILocationChangeService {
         return false;
     }
 
-    private locationChangeStart(event: ng.IAngularEvent, nextLocation: string, currentLocation: string): void {
+    protected locationChangeStart(event: ng.IAngularEvent, nextLocation: string, currentLocation: string): void {
         if (this.semaphoreQueue.length > 0) {
             event.preventDefault();
             this.lastUrlBlock = this.utilitiesService.getPath(nextLocation);

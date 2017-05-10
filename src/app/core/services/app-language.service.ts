@@ -37,11 +37,11 @@ export interface IAppLanguageService {
 export class AppLanguageService implements IAppLanguageService {
     public static $inject = ["$locale", "tmhDynamicLocale", "AppConstantsService", "LocalStorageService"];
 
-    private locale: ng.ILocaleService;
-    private tmhDynamicLocale: ng.dynamicLocale.tmhDynamicLocaleService;
-    private appConstantsService: IAppConstantsService;
-    private localStorageService: ILocalStorageService;
-    private selectedLanguageId: string;
+    protected locale: ng.ILocaleService;
+    protected tmhDynamicLocale: ng.dynamicLocale.tmhDynamicLocaleService;
+    protected appConstantsService: IAppConstantsService;
+    protected localStorageService: ILocalStorageService;
+    protected selectedLanguageId: string;
 
     constructor($locale: ng.ILocaleService,
                 tmhDynamicLocale: ng.dynamicLocale.tmhDynamicLocaleService,
@@ -88,8 +88,9 @@ export class AppLanguageService implements IAppLanguageService {
         return this.appConstantsService.Languages.SUPPORTED_LANG[0];
     }
 
-    private getBrowserLang(): string {
-        let lang: string = navigator["browserLanguage"];
+    protected getBrowserLang(): string {
+        const browserLanguage = "browserLanguage";
+        let lang: string = navigator[browserLanguage];
 
         if (lang === undefined) {
             lang = navigator.language;

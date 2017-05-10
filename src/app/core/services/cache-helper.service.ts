@@ -33,7 +33,7 @@ export interface ICacheHelper {
 }
 
 export class CacheHelper implements ICacheHelper {
-    private currentCache: ng.ICacheObject;
+    protected currentCache: ng.ICacheObject;
 
     constructor(currentCache: ng.ICacheObject) {
         this.currentCache = currentCache;
@@ -105,13 +105,13 @@ export interface ICacheHelperService {
 export class CacheHelperService implements ICacheHelperService {
     public static $inject = ["$rootScope", "$cacheFactory", "UtilitiesService"];
 
-    private rootScope: ng.IRootScopeService;
-    private cacheFactory: ng.ICacheFactoryService;
-    private utilitiesService: IUtilitiesService;
+    protected rootScope: ng.IRootScopeService;
+    protected cacheFactory: ng.ICacheFactoryService;
+    protected utilitiesService: IUtilitiesService;
 
-    private cacheNames: string[];
-    private urlStack: string[];
-    private clearDefer: ng.IPromise<any>;
+    protected cacheNames: string[];
+    protected urlStack: string[];
+    protected clearDefer: ng.IPromise<any>;
 
     constructor($rootScope: ng.IRootScopeService, $cacheFactory: ng.ICacheFactoryService, UtilitiesService: IUtilitiesService) {
         this.rootScope = $rootScope;
@@ -162,7 +162,7 @@ export class CacheHelperService implements ICacheHelperService {
         this.urlStack = [];
     }
 
-    private deleteNotReferredCache(): void {
+    protected deleteNotReferredCache(): void {
         const newCacheNameList = [];
         for (let i = 0; i < this.cacheNames.length; i++) {
             const cacheName = this.cacheNames[i];
@@ -179,7 +179,7 @@ export class CacheHelperService implements ICacheHelperService {
         this.cacheNames = newCacheNameList;
     }
 
-    private locationChangeStart(event: ng.IAngularEvent, nextLocation: string, currentLocation: string, newState?: string, oldState?: string): void {
+    protected locationChangeStart(event: ng.IAngularEvent, nextLocation: string, currentLocation: string, newState?: string, oldState?: string): void {
         if (event.defaultPrevented === true) {
             return;
         }

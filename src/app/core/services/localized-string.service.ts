@@ -24,11 +24,11 @@ export interface ILocalizedStringService {
 export class LocalizedStringService implements ILocalizedStringService {
     public static $inject = ["AppLanguageService", "UtilitiesService"];
 
-    private appLanguageService: IAppLanguageService;
-    private utilitiesService: IUtilitiesService;
+    protected appLanguageService: IAppLanguageService;
+    protected utilitiesService: IUtilitiesService;
 
-    private specificDictionary: any;
-    private defaultDictionary: any;
+    protected specificDictionary: any;
+    protected defaultDictionary: any;
 
     constructor(AppLanguageService: IAppLanguageService,
                 UtilitiesService: IUtilitiesService) {
