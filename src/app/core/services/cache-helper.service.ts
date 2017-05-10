@@ -42,8 +42,9 @@ export class CacheHelper implements ICacheHelper {
     public getValueForKey(key: string, defaultValue?: any): any {
         const returnValue = this.currentCache.get(key);
 
-        if (returnValue !== undefined)
+        if (returnValue !== undefined) {
             return returnValue;
+        }
 
         return defaultValue;
     }
@@ -60,7 +61,6 @@ export class CacheHelper implements ICacheHelper {
         this.currentCache.removeAll();
     }
 }
-
 
 /**
  * Helper to simplify the usage of
@@ -152,21 +152,21 @@ export class CacheHelperService implements ICacheHelperService {
     }
 
     public destroyAllCache(): void {
-        for (let i = 0; i < this.cacheNames.length; i++) {
-            const cache = this.cacheFactory.get(this.cacheNames[i]);
+        for (const cacheName of this.cacheNames) {
+            const cache = this.cacheFactory.get(cacheName);
             if (cache !== undefined) {
                 cache.destroy();
             }
         }
+
         this.cacheNames = [];
         this.urlStack = [];
     }
 
     protected deleteNotReferredCache(): void {
         const newCacheNameList = [];
-        for (let i = 0; i < this.cacheNames.length; i++) {
-            const cacheName = this.cacheNames[i];
 
+        for (const cacheName of this.cacheNames) {
             if (this.urlStack.indexOf(cacheName) === -1) {
                 const cache = this.cacheFactory.get(cacheName);
                 if (cache !== undefined) {
@@ -176,6 +176,7 @@ export class CacheHelperService implements ICacheHelperService {
                 newCacheNameList.push(cacheName);
             }
         }
+
         this.cacheNames = newCacheNameList;
     }
 

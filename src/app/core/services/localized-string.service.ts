@@ -1,6 +1,6 @@
 import { IAppLanguageService } from "./app-language.service";
-import { IUtilitiesService } from "./utilities.service";
 import { LOCALIZED_STRINGS_OBJECT } from "./localized-string.model";
+import { IUtilitiesService } from "./utilities.service";
 
 /**
  * Retrieves the value from the

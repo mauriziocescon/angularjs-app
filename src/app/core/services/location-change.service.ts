@@ -1,5 +1,5 @@
-import { IUtilitiesService } from "./utilities.service";
 import { Enum } from "../../shared/shared.module";
+import { IUtilitiesService } from "./utilities.service";
 
 /**
  * Manage $location changes

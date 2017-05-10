@@ -113,7 +113,8 @@ describe("PhotosController", () => {
 
     it("controller.name is defined after $onInit", () => {
         const controller = componentController("photos", null, null) as PhotosController;
-        controller["stateParams"] = {albumId: 1};
+        const stateParams = "stateParams";
+        controller[stateParams] = {albumId: 1};
         controller.$onInit();
         httpBackend.flush();
         expect(controller.name).toBe("PhotosComponent", "controller.name is not equal to PhotosComponent");
@@ -121,14 +122,16 @@ describe("PhotosController", () => {
 
     it("expect controller fetches data after $onInit", () => {
         const controller = componentController("photos", null, null) as PhotosController;
-        controller["stateParams"] = {albumId: 1};
+        const stateParams = "stateParams";
+        controller[stateParams] = {albumId: 1};
         controller.$onInit();
         httpBackend.flush();
     });
 
     it("controller.photos is not undefined after $onInit", () => {
         const controller = componentController("photos", null, null) as PhotosController;
-        controller["stateParams"] = {albumId: 1};
+        const stateParams = "stateParams";
+        controller[stateParams] = {albumId: 1};
         controller.$onInit();
         httpBackend.flush();
         expect(controller.dataSource).not.toBeUndefined("controller.photos is undefined...");
@@ -136,7 +139,8 @@ describe("PhotosController", () => {
 
     it("controller.photos is not null after $onInit", () => {
         const controller = componentController("photos", null, null) as PhotosController;
-        controller["stateParams"] = {albumId: 1};
+        const stateParams = "stateParams";
+        controller[stateParams] = {albumId: 1};
         controller.$onInit();
         httpBackend.flush();
         expect(controller.dataSource).not.toBeNull("controller.photos is null...");
@@ -144,7 +148,8 @@ describe("PhotosController", () => {
 
     it("controller.isLoadingData is false after $onInit", () => {
         const controller = componentController("photos", null, null) as PhotosController;
-        controller["stateParams"] = {albumId: 1};
+        const stateParams = "stateParams";
+        controller[stateParams] = {albumId: 1};
         controller.$onInit();
         httpBackend.flush();
         expect(controller.isLoadingData).toBeFalsy("isLoadingData is true after the $onInit...");

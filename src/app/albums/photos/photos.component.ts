@@ -105,7 +105,8 @@ export class PhotosController {
     }
 
     public loadDataSource(): void {
-        this.photosService.getPhotosForAlbum(this.stateParams["albumId"], this.pageNumber).then((response: ResponseWs<Photo[]>) => {
+        const albumId = "albumId";
+        this.photosService.getPhotosForAlbum(this.stateParams[albumId], this.pageNumber).then((response: ResponseWs<Photo[]>) => {
 
             if (response.isSuccess()) {
                 this.photos = this.photos === undefined ? response.getData() : this.photos.concat(response.getData());

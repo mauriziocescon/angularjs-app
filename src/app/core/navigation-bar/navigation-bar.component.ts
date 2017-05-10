@@ -60,7 +60,7 @@ export class NavigationBarController {
     }
 
     public $onDestroy(): void {
-
+        // do nothing
     }
 
     public goToAlbums(): void {

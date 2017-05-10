@@ -27,7 +27,7 @@ export interface IAppLanguageService {
     /**
      * return the entire list of supported languages
      */
-    getSupportedLanguagesList(): Array<string>;
+    getSupportedLanguagesList(): string[];
     /**
      * return the default language Id
      */
