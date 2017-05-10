@@ -27,7 +27,7 @@ export interface IAppConstantsService {
 export class AppConstantsService {
     public static $inject = ["$window"];
 
-    private window: ng.IWindowService;
+    protected window: ng.IWindowService;
 
     protected application: Constants.Application;
     protected languages: Constants.Languages;

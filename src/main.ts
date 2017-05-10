@@ -22,6 +22,7 @@ import "stacktrace-js";
 
 import { appDev } from "./app/app-dev.module";
 import { app } from "./app/app.module";
+import { Logger } from "./app/shared/shared.module";
 
 class Main {
 
@@ -54,7 +55,7 @@ class Main {
         navigator.serviceWorker.register("/serviceworker.js").then((reg) => {
 
             // Registration was successful
-            console.log("ServiceWorker registration successful with scope: ", reg.scope);
+            Logger.log("ServiceWorker registration successful with scope: ", reg.scope);
 
             if (!navigator.serviceWorker.controller) {
                 return;
@@ -76,7 +77,7 @@ class Main {
 
         }).catch((error: string) => {
             // registration failed :(
-            console.log("ServiceWorker registration failed: ", error);
+            Logger.log("ServiceWorker registration failed: ", error);
         });
 
         // Ensure refresh is only called once.
