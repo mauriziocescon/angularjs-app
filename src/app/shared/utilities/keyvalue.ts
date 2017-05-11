@@ -1,17 +1,17 @@
 export class KeyValue {
-    protected _key: any;
-    protected _value: any;
+    protected k: any;
+    protected v: any;
 
     constructor(key: any, value: any) {
-        this._key = key;
-        this._value = value;
+        this.k = key;
+        this.v = value;
     }
 
     public get key(): any {
-        return this._key;
+        return this.k;
     }
 
     public get value(): any {
-        return this._value;
+        return this.v;
     }
 }
