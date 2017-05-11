@@ -9,26 +9,26 @@ import { Comment } from "./post-comments.model";
 describe("PostCommentsController", () => {
     let httpBackend: ng.IHttpBackendService;
     let componentController: ng.IComponentControllerService;
-    let AppConstantsService: IAppConstantsService;
-    let UtilitiesService: IUtilitiesService;
+    let appConstantsService: IAppConstantsService;
+    let utilitiesService: IUtilitiesService;
 
     // Set up the module
     beforeEach(angular.mock.module("app"));
 
-    beforeEach(inject((_$httpBackend_, _$componentController_, _AppConstantsService_, _UtilitiesService_) => {
+    beforeEach(inject(($httpBackend, $componentController, AppConstantsService, UtilitiesService) => {
 
         // Set up the mock http service responses
-        httpBackend = _$httpBackend_;
+        httpBackend = $httpBackend;
 
         // The $componentController service is used to create instances of controllers
-        componentController = _$componentController_;
+        componentController = $componentController;
 
-        AppConstantsService = _AppConstantsService_;
-        UtilitiesService = _UtilitiesService_;
+        appConstantsService = AppConstantsService;
+        utilitiesService = UtilitiesService;
 
         // returns a list of comments for a particular post
         httpBackend.whenGET((url: string) => {
-            return url.startsWith(AppConstantsService.Application.WS_URL + "/comments");
+            return url.startsWith(appConstantsService.Application.WS_URL + "/comments");
         }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
 
             const response = [];
