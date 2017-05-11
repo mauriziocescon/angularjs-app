@@ -1,3 +1,5 @@
+import { Logger } from "../shared/shared.module";
+
 import {
     IAppLanguageService,
     ICacheHelperService,
@@ -6,7 +8,6 @@ import {
     ILocationChangeService,
     IUtilitiesService,
 } from "./services/services.module";
-import { Logger } from "../shared/utilities/utilities.module";
 
 export const servicesSetupFunc = (AppLanguageService: IAppLanguageService,
                                   CacheHelperService: ICacheHelperService,

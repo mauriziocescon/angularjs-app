@@ -1,5 +1,6 @@
-import { IAppConstantsService } from "./app-constants.service";
 import { Enum, Logger } from "../../shared/shared.module";
+
+import { IAppConstantsService } from "./app-constants.service";
 
 /**
  * Manage data in
@@ -62,7 +63,7 @@ export class LocalStorageService implements ILocalStorageService {
                 localStorage.removeItem(this.prefix + "_" + key.toString());
             } else {
                 const result = JSON.stringify(data);
-                localStorage.setItem(this.prefix + "_" + key.toString(), result)
+                localStorage.setItem(this.prefix + "_" + key.toString(), result);
             }
         } catch (e) {
             Logger.warn(e);
