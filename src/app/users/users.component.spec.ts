@@ -29,7 +29,7 @@ describe("UsersController", () => {
         // returns the current list of users
         httpBackend.whenGET((url: string) => {
             return url.startsWith(appConstantsService.Application.WS_URL + "/users");
-        }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
+        }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
 
             const response = [];
 

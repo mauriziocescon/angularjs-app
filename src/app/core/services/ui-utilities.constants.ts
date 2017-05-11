@@ -1,3 +1,4 @@
+// tslint:disable:max-classes-per-file
 import { Enum } from "../../shared/shared.module";
 
 export interface IUIUtilitiesConstants {

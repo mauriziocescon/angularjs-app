@@ -18,7 +18,7 @@ export interface IUtilitiesService {
      * @param scope
      * @param args
      */
-    defer(func: Function, n: number, scope: any, ...args: any[]): ng.IPromise<any>;
+    defer(func: Function, n: number, scope: any, ...args: any[]): ng.IPromise<any>; // tslint:disable-line:ban-types
     /**
      * Cancel the defer func
      *
@@ -32,7 +32,7 @@ export interface IUtilitiesService {
      * @param scope
      * @param args
      */
-    call(func: Function, scope: any, ...args: any[]): void;
+    call(func: Function, scope: any, ...args: any[]): void; // tslint:disable-line:ban-types
     /**
      * Deeply copy the object
      *
@@ -161,6 +161,7 @@ export class UtilitiesService implements IUtilitiesService {
         this.appConstantsService = AppConstantsService;
     }
 
+    // tslint:disable-next-line:ban-types
     public defer(func: Function, n: number, scope: any, ...args: any[]): ng.IPromise<any> {
         return this.timeout(() => {
             func.apply(scope, args);
@@ -173,6 +174,7 @@ export class UtilitiesService implements IUtilitiesService {
         }
     }
 
+    // tslint:disable-next-line:ban-types
     public call(func: Function, scope: any, ...args: any[]): void {
         func.apply(scope, args);
     }
@@ -190,6 +192,7 @@ export class UtilitiesService implements IUtilitiesService {
     }
 
     public createUUID(): string {
+        // tslint:disable:no-bitwise
         let d = new Date().getTime();
         if (this.window.performance && typeof this.window.performance.now === "function") {
             d += performance.now(); // use high-precision timer if available
@@ -199,6 +202,7 @@ export class UtilitiesService implements IUtilitiesService {
             d = Math.floor(d / 16);
             return (c === "x" ? r : (r & 0x3 | 0x8)).toString(16);
         });
+        // tslint:enable:no-bitwise
         return uuid;
     }
 
@@ -297,12 +301,20 @@ export class UtilitiesService implements IUtilitiesService {
             if (TypeDetect.isArray(response)) {
                 const rs = response as Array<ng.IHttpPromiseCallbackArg<any>>;
                 rs.forEach((r: ng.IHttpPromiseCallbackArg<any>) => {
-                    Logger.log("\nRESPONSE BODY: (" + r.config.method + " " + r.config.url + ", Status: " + r.status.toString() + ", StatusText: " + r.statusText + ") in " + time + " ms: \n" + JSON.stringify(r.data, null, 2) + "\n\n\n\n");
+                    Logger.log("\nRESPONSE BODY: (" + r.config.method + " " + r.config.url +
+                        ", Status: " + r.status.toString() +
+                        ", StatusText: " + r.statusText +
+                        ") in " + time + " ms \n" +
+                        JSON.stringify(r.data, null, 2) + "\n\n\n\n");
                 });
             }
             else {
                 const r = response as ng.IHttpPromiseCallbackArg<any>;
-                Logger.log("\nRESPONSE BODY: (" + r.config.method + " " + r.config.url + ", Status: " + r.status.toString() + ", StatusText: " + r.statusText + ") in " + time + " ms: \n" + JSON.stringify(r.data, null, 2) + "\n\n\n\n");
+                Logger.log("\nRESPONSE BODY: (" + r.config.method + " " + r.config.url +
+                    ", Status: " + r.status.toString() +
+                    ", StatusText: " + r.statusText +
+                    ") in " + time + " ms \n" +
+                    JSON.stringify(r.data, null, 2) + "\n\n\n\n");
             }
         }
     }

@@ -7,7 +7,9 @@ export class Logger {
     public static exception(scope: any, exc: Error): void {
         try {
             const errback = (err) => {
+                // tslint:disable:no-console
                 console.log(err.message);
+                // tslint:enable:no-console
             };
 
             const callback = (stackframes: StackTrace.StackFrame[]) => {
@@ -56,18 +58,20 @@ export class Logger {
         }
     }
 
-    // todo --ec: needs more work
     public static log(mex: string, ...args: any[]): void {
+        // tslint:disable:no-console
         if (console !== undefined) {
             console.log(mex);
         }
+        // tslint:enable:no-console
     }
 
-    // todo --ec: needs more work
     public static warn(mex: string, ...args: any[]) {
+        // tslint:disable:no-console
         if (console !== undefined) {
             console.warn(mex);
         }
+        // tslint:enable:no-console
     }
 
     protected static getPath(url: string): string {

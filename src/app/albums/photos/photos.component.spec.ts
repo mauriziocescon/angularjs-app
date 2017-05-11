@@ -36,7 +36,7 @@ describe("PhotosController", () => {
         httpBackend.whenGET((url: string) => {
             return url.startsWith(appConstantsService.Application.WS_URL + "/photos") &&
                 (/(&|\?)id\=/g).test(url) === true;
-        }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
+        }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
 
             const response = [];
             const fakeText = "Lorem ipsum dolor sit amet, vidit clita vitae no vix. " +
@@ -65,7 +65,7 @@ describe("PhotosController", () => {
         // returns photos for album
         httpBackend.whenGET((url: string) => {
             return url.startsWith(AppConstantsService.Application.WS_URL + "/photos") && (/(&|\?)albumId\=/g).test(url) === true;
-        }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
+        }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
 
             const response = [];
             const fakeText = "Lorem ipsum dolor sit amet, vidit clita vitae no vix. " +

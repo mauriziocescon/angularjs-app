@@ -18,7 +18,7 @@ export interface IDelayExecutionService {
      * @param key
      * @param delay
      */
-    execute(func: Function, key: Enum, delay?: number): void;
+    execute(func: Function, key: Enum, delay?: number): void; // tslint:disable-line:ban-types
     /**
      * Cancel the execution of
      * func with key

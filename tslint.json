@@ -4,8 +4,7 @@
   },
   "extends": "tslint:recommended",
   "rules": {
-    "max-classes-per-file": [true, 5],
-    "max-line-length": [true, 250],
-    "one-line": [true, "check-catch", "check-finally"]
+    "max-line-length": [true, 220],
+    "one-line": [false, "check-else"]
   }
 }

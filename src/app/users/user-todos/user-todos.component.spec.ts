@@ -29,7 +29,7 @@ describe("UserTodosController", () => {
         // returns the current list of todos per userId
         httpBackend.whenGET((url: string) => {
             return url.startsWith(appConstantsService.Application.WS_URL + "/todos");
-        }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
+        }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
 
             const response = [];
 

@@ -10,7 +10,7 @@ export let userPostsRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
     $httpBackend.whenGET((url: string) => {
         return AppConstantsService.Application.MOCK_BACKEND === true &&
             url.startsWith(AppConstantsService.Application.WS_URL + "/posts");
-    }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
+    }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
 
         const response = [];
         const fakeText = "Lorem ipsum dolor sit amet, vidit clita vitae no vix. " +

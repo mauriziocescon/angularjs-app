@@ -1,7 +1,8 @@
+// tslint:disable:max-classes-per-file
 import { Logger } from "../../shared/shared.module";
 
 import { IAppConstantsService } from "./app-constants.service";
-import { IUIUtilitiesConstants, uiUtilitiesConstants } from "./ui-utilities.constants";
+import { IUIUtilitiesConstants } from "./ui-utilities.constants";
 import { IUtilitiesService } from "./utilities.service";
 
 /**

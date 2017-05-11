@@ -29,7 +29,7 @@ describe("PostCommentsController", () => {
         // returns a list of comments for a particular post
         httpBackend.whenGET((url: string) => {
             return url.startsWith(appConstantsService.Application.WS_URL + "/comments");
-        }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
+        }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
 
             const response = [];
             const fakeText = "Lorem ipsum dolor sit amet, vidit clita vitae no vix. " +

@@ -1,3 +1,4 @@
+// tslint:disable:max-classes-per-file
 import { IUtilitiesService } from "./utilities.service";
 
 /**

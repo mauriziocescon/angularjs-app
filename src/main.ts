@@ -1,7 +1,7 @@
-/* tslint:disable:no-string-literal */
+// tslint:disable:no-string-literal
 import * as $ from "jquery";
 window["$"] = window["jQuery"] = $; // jQuery is global for other objs
-/* tslint:enable:no-string-literal */
+// tslint:enable:no-string-literal
 
 import * as angular from "angular";
 
@@ -36,7 +36,7 @@ class Main {
     protected static loadAngular(): void {
         const config: ng.IAngularBootstrapConfig = {strictDi: /* @echo STRICT_DI */};
 
-        // start angular
+        // tslint:disable:no-consecutive-blank-lines
 
         // @if MOCK_BACKEND = "false"
         angular.bootstrap(document.querySelector(app), [app], config);
@@ -45,6 +45,8 @@ class Main {
         // @if MOCK_BACKEND = "true"
         angular.bootstrap(document.querySelector(app), [appDev], config);
         // @endif
+
+        // tslint:enable:no-consecutive-blank-lines
 
         // register service worker
         // Main.registerServiceWorker();
