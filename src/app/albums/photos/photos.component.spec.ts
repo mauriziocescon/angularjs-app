@@ -12,13 +12,13 @@ describe("PhotosController", () => {
     let httpBackend: ng.IHttpBackendService;
     let componentController: ng.IComponentControllerService;
     let state: ng.ui.IStateService;
-    let AppConstantsService: IAppConstantsService;
-    let UtilitiesService: IUtilitiesService;
+    let appConstantsService: IAppConstantsService;
+    let utilitiesService: IUtilitiesService;
 
     // Set up the module
     beforeEach(angular.mock.module("app"));
 
-    beforeEach(inject(($httpBackend, $componentController, $state, appConstantsService, utilitiesService) => {
+    beforeEach(inject(($httpBackend, $componentController, $state, AppConstantsService, UtilitiesService) => {
 
         // Set up the mock http service responses
         httpBackend = $httpBackend;
