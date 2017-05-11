@@ -44,7 +44,7 @@ export class LocationChangeService implements ILocationChangeService {
 
     public start(): void {
         this.rootScope.$on("$locationChangeStart", (event: ng.IAngularEvent, nextLocation, currentLocation) => {
-            this.locationChangeStart(event, nextLocation, currentLocation)
+            this.locationChangeStart(event, nextLocation, currentLocation);
         });
     }
 
