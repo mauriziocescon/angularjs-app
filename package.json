@@ -80,7 +80,7 @@
     "@types/service_worker_api": "0.0.9",
     "@types/stacktrace-js": "0.0.30",
     "babel-core": "6.24.1",
-    "babel-preset-es2017": "6.24.1",
+    "babel-preset-latest": "6.24.1",
     "babelify": "7.3.0",
     "bootstrap-sass": "3.3.7",
     "browser-sync": "2.18.8",
