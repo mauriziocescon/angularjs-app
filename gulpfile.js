@@ -213,7 +213,7 @@ gulp.task("tslint", () => {
 
 gulp.task("compile-ts-dev", () => {
     return watchedBrowserify
-        .transform(babelify, {presets: ["es2015"], extensions: [".tsx", ".ts"]})
+        .transform(babelify, {presets: ["es2017"], extensions: [".tsx", ".ts"]})
         .bundle()
         .on("error", (e) => {
             gulpUtil.log(gulpUtil.colors.red("Bundle error:", e.message));
@@ -232,7 +232,7 @@ gulp.task("compile-ts-spec", () => {
     })
         .external(paths.dependencies)
         .plugin(tsify)
-        .transform(babelify, {presets: ["es2015"], extensions: [".tsx", ".ts"]})
+        .transform(babelify, {presets: ["es2017"], extensions: [".tsx", ".ts"]})
         .bundle()
         .pipe(vinylSourceStream(appendVersionToFileName("app.js")))
         .pipe(vinylBuffer())
@@ -248,7 +248,7 @@ gulp.task("compile-ts-prod", () => {
     })
         .external(paths.dependencies)
         .plugin(tsify)
-        .transform(babelify, {presets: ["es2015"], extensions: [".tsx", ".ts"]})
+        .transform(babelify, {presets: ["es2017"], extensions: [".tsx", ".ts"]})
         .bundle()
         .pipe(vinylSourceStream(appendVersionToFileName("app.js")))
         .pipe(vinylBuffer())
