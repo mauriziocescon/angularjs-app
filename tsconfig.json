@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "allowUnreachableCode": true,
     "diagnostics": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -14,8 +15,8 @@
     "pretty": true,
     "removeComments": false,
     "sourceMap": true,
-    "target": "ES2015",
-    "types": ["jasmine", "service_worker_api"]
+    "target": "ES2017",
+    "types": ["jasmine"]
   },
   "exclude": [
     "node_modules",
