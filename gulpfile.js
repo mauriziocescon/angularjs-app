@@ -1,4 +1,3 @@
-
 /*--------------------------*/
 /* Build scripts            */
 /*--------------------------*/
@@ -185,7 +184,9 @@ gulp.task("sass-prod", () => {
 });
 
 gulp.task("bundle-vendors", () => {
-    return browserify()
+    return browserify({
+        debug: true
+    })
         .require(paths.dependencies)
         .bundle()
         .pipe(vinylSourceStream(appendVersionToFileName("vendors.js")))
@@ -231,8 +232,9 @@ gulp.task("compile-ts-dev", () => {
 gulp.task("compile-ts-spec", () => {
     return browserify({
         basedir: ".",
-        entries: paths.browserifyEntries.concat(glob.sync("dist/tmp_ts/**/*.spec.ts")),
         cache: {},
+        debug: true,
+        entries: paths.browserifyEntries.concat(glob.sync("dist/tmp_ts/**/*.spec.ts")),
         packageCache: {}
     })
         .external(paths.dependencies)
@@ -248,6 +250,7 @@ gulp.task("compile-ts-prod", () => {
     return browserify({
         basedir: ".",
         cache: {},
+        debug: true,
         entries: paths.browserifyEntries,
         packageCache: {}
     })
@@ -260,9 +263,7 @@ gulp.task("compile-ts-prod", () => {
         .pipe(gulpNgAnnotate())
         .pipe(gulpSourcemaps.init({loadMaps: true}))
         .pipe(gulpUglify({mangle: false}))
-        .pipe(gulpSourcemaps.write(".", {
-            sourceRoot: "../src"
-        }))
+        .pipe(gulpSourcemaps.write("../src"))
         .pipe(gulp.dest("dist/js/"));
 });
 
