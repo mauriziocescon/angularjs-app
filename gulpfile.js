@@ -166,6 +166,12 @@ gulp.task("sass-dev", () => {
         .pipe(gulpSourcemaps.init({loadMaps: true}))
         .pipe(gulpSass().on("error", gulpSass.logError))
         .pipe(gulpRename(appendVersionToFileName("app.css")))
+        .pipe(gulpSourcemaps.mapSources((sourcePath, file) => {
+            if (sourcePath.startsWith("node_modules")) {
+                return sourcePath;
+            }
+            return "../src/" + sourcePath;
+        }))
         .pipe(gulpSourcemaps.write("./"))
         .pipe(gulp.dest("dist/css/"));
 });
@@ -179,6 +185,12 @@ gulp.task("sass-prod", () => {
             console.log(details.name + ": " + details.stats.minifiedSize);
         }))
         .pipe(gulpRename(appendVersionToFileName("app.css")))
+        .pipe(gulpSourcemaps.mapSources((sourcePath, file) => {
+            if (sourcePath.startsWith("node_modules")) {
+                return sourcePath;
+            }
+            return "../src/" + sourcePath;
+        }))
         .pipe(gulpSourcemaps.write("./"))
         .pipe(gulp.dest("dist/css/"));
 });
@@ -193,6 +205,12 @@ gulp.task("bundle-vendors", () => {
         .pipe(vinylBuffer())
         .pipe(gulpSourcemaps.init({loadMaps: true}))
         .pipe(gulpUglify({mangle: false}))
+        .pipe(gulpSourcemaps.mapSources((sourcePath, file) => {
+            if (sourcePath.startsWith("node_modules")) {
+                return "../" + sourcePath;
+            }
+            return "../src/" + sourcePath;
+        }))
         .pipe(gulpSourcemaps.write("./"))
         .pipe(gulp.dest("dist/js/"));
 });
@@ -226,6 +244,12 @@ gulp.task("compile-ts-dev", () => {
         })
         .pipe(vinylSourceStream(appendVersionToFileName("app.js")))
         .pipe(vinylBuffer())
+        .pipe(gulpSourcemaps.init({loadMaps: true}))
+        .pipe(gulpSourcemaps.mapSources((sourcePath, file) => {
+            // change dist/tmp_ts to src
+            return "../src/" + sourcePath.substring(12);
+        }))
+        .pipe(gulpSourcemaps.write("./"))
         .pipe(gulp.dest("dist/js/"));
 });
 
@@ -243,6 +267,12 @@ gulp.task("compile-ts-spec", () => {
         .bundle()
         .pipe(vinylSourceStream(appendVersionToFileName("app.js")))
         .pipe(vinylBuffer())
+        .pipe(gulpSourcemaps.init({loadMaps: true}))
+        .pipe(gulpSourcemaps.mapSources((sourcePath, file) => {
+            // change dist/tmp_ts to src
+            return "../src/" + sourcePath.substring(12);
+        }))
+        .pipe(gulpSourcemaps.write("./"))
         .pipe(gulp.dest("dist/js/"));
 });
 
@@ -263,7 +293,11 @@ gulp.task("compile-ts-prod", () => {
         .pipe(gulpNgAnnotate())
         .pipe(gulpSourcemaps.init({loadMaps: true}))
         .pipe(gulpUglify({mangle: false}))
-        .pipe(gulpSourcemaps.write("../src"))
+        .pipe(gulpSourcemaps.mapSources((sourcePath, file) => {
+            // change dist/tmp_ts to src
+            return "../src/" + sourcePath.substring(12);
+        }))
+        .pipe(gulpSourcemaps.write("./"))
         .pipe(gulp.dest("dist/js/"));
 });
 
