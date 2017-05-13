@@ -17,7 +17,6 @@ const gulpInject = require("gulp-inject");
 const gulpNgAnnotate = require("gulp-ng-annotate");
 const gulpPreprocess = require("gulp-preprocess");
 const gulpRename = require("gulp-rename");
-const gulpReplace = require("gulp-replace");
 const gulpSass = require("gulp-sass");
 const gulpSourcemaps = require("gulp-sourcemaps");
 const gulpTslint = require("gulp-tslint");
@@ -261,14 +260,10 @@ gulp.task("compile-ts-prod", () => {
         .pipe(gulpNgAnnotate())
         .pipe(gulpSourcemaps.init({loadMaps: true}))
         .pipe(gulpUglify({mangle: false}))
-        .pipe(gulpSourcemaps.write("./"))
+        .pipe(gulpSourcemaps.write(".", {
+            sourceRoot: "../src"
+        }))
         .pipe(gulp.dest("dist/js/"));
-});
-
-gulp.task("fix-map-file", () => {
-    return gulp.src(["./dist/tmp_ts/*.map"])
-        .pipe(gulpReplace("dist/tmp_ts", "src"))
-        .pipe(gulp.dest("./dist/js/"));
 });
 
 gulp.task("injectFileNames", () => {
@@ -296,7 +291,6 @@ gulp.task("watch", () => {
         runSequence(
             "preprocess-ts",
             "compile-ts-dev",
-            "fix-map-file",
             "injectFileNames",
             "refresh"
         );
@@ -351,7 +345,6 @@ gulp.task("default", () => {
         "preprocess-ts",
         "tslint",
         "compile-ts-dev",
-        "fix-map-file",
         "injectFileNames",
         "start-browsersynch",
         "watch"
