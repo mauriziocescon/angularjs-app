@@ -165,19 +165,23 @@ gulp.task("copy-fonts", () => {
 
 gulp.task("sass-dev", () => {
     return gulp.src(paths.sass)
+        .pipe(gulpSourcemaps.init({loadMaps: true}))
         .pipe(gulpSass().on("error", gulpSass.logError))
         .pipe(gulpRename(appendVersionToFileName("app.css")))
+        .pipe(gulpSourcemaps.write("./"))
         .pipe(gulp.dest("dist/css/"));
 });
 
 gulp.task("sass-prod", () => {
     return gulp.src(paths.sass)
+        .pipe(gulpSourcemaps.init({loadMaps: true}))
         .pipe(gulpSass().on("error", gulpSass.logError))
         .pipe(gulpCleanCSS({debug: true}, (details) => {
             console.log(details.name + ": " + details.stats.originalSize);
             console.log(details.name + ": " + details.stats.minifiedSize);
         }))
         .pipe(gulpRename(appendVersionToFileName("app.css")))
+        .pipe(gulpSourcemaps.write("./"))
         .pipe(gulp.dest("dist/css/"));
 });
 
@@ -187,7 +191,9 @@ gulp.task("bundle-vendors", () => {
         .bundle()
         .pipe(vinylSourceStream(appendVersionToFileName("vendors.js")))
         .pipe(vinylBuffer())
+        .pipe(gulpSourcemaps.init({loadMaps: true}))
         .pipe(gulpUglify({mangle: false}))
+        .pipe(gulpSourcemaps.write("./"))
         .pipe(gulp.dest("dist/js/"));
 });
 
@@ -290,7 +296,7 @@ gulp.task("watch", () => {
         runSequence(
             "preprocess-ts",
             "compile-ts-dev",
-            // "fix-map-file",
+            "fix-map-file",
             "injectFileNames",
             "refresh"
         );
@@ -345,7 +351,7 @@ gulp.task("default", () => {
         "preprocess-ts",
         "tslint",
         "compile-ts-dev",
-        // "fix-map-file",
+        "fix-map-file",
         "injectFileNames",
         "start-browsersynch",
         "watch"
