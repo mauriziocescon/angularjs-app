@@ -262,7 +262,7 @@ export class UtilitiesService implements IUtilitiesService {
     }
 
     public getCurrentPath(): string {
-        const path = this.getPath(window.location.href.toString());
+        const path = this.getPath(this.window.location.href.toString());
 
         if (this.isDefinedAndNotEmpty(path) === true) {
             return path;
