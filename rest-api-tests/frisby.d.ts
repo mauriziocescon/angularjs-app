@@ -2,22 +2,22 @@ declare namespace frisby {
 
     export function globalSetup(request: IFrisbyGlobalSetup): IFrisbyGlobalSetup;
 
-    export  function create(msg: string): Frisby;
+    export function create(msg: string): IFrisby;
 
     interface IFrisbyGlobalSetup {
         request?: IGlobalSetupRequest;
     }
 
     interface IGlobalSetupRequest {
-        headers?: Object;
+        headers?: any;
         inspectOnFailure?: boolean;
         json?: boolean;
         baseUri?: string;
     }
 
-    interface Frisby {
+    interface IFrisby {
 
-        constructor(msg: string): Frisby;
+        constructor(msg: string): IFrisby;
 
         /**
          * Timeout getter and setter
@@ -25,21 +25,21 @@ declare namespace frisby {
          *
          * @return IFrisby
          */
-        timeout: (int: number)=> Frisby;
+        timeout: (int: number) => IFrisby;
 
         /**
          *  Reset Frisby global and setup options
          *
          *  @return IFrisby
          */
-        reset: ()=> Frisby;
+        reset: () => IFrisby;
 
         /**
          * Set negation test
          *
          * @return IFrisby
          */
-        not: ()=> Frisby;
+        not: () => IFrisby;
 
         /**
          *  Add HTTP header by key and value
@@ -49,7 +49,7 @@ declare namespace frisby {
          *
          *  @return IFrisby
          */
-        addHeader: (header: string, content: string)=> Frisby;
+        addHeader: (header: string, content: string) => IFrisby;
 
         /**
          * Add group of HTTP headers together
@@ -58,7 +58,7 @@ declare namespace frisby {
          *
          * @return IFrisby
          */
-        addHeaders: (headers: Array<{header: string, content: string}>)=> Frisby;
+        addHeaders: (headers: Array<{header: string, content: string}>) => IFrisby;
 
         /**
          * Set group of HTTP headers together
@@ -67,19 +67,18 @@ declare namespace frisby {
          *
          * @return IFrisby
          */
-        setHeaders: (headers: Array<{header: string, content: string}>)=> Frisby;
+        setHeaders: (headers: Array<{header: string, content: string}>) => IFrisby;
 
         /**
          * Remove HTTP header from outgoing request by key
          *
-         *@param key header key
+         * @param key header key
          *
          * @return IFrisby
          */
-        removeHeader: (key: string)=> Frisby;
+        removeHeader: (key: string) => IFrisby;
 
     }
 }
-
 
 export = frisby;
