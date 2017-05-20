@@ -225,7 +225,7 @@ gulp.task("preprocess-ts", () => {
 });
 
 gulp.task("tslint", () => {
-    return gulp.src("dist/tmp_ts/**/")
+    return gulp.src(["dist/tmp_ts/**/", "e2e-tests/**/", "rest-api-tests/**/"])
         .pipe(gulpTslint({
             formatter: "stylish"
         }))

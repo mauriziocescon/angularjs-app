@@ -1,4 +1,4 @@
-import { browser, WebDriver, element, by, By, $, $$, ExpectedConditions } from "protractor";
+import { browser } from "protractor";
 
 describe("Protractor Demo App", () => {
     it("should have a title", () => {
