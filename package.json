@@ -34,8 +34,17 @@
   },
   "keywords": [
     "angular",
+    "bootstrap",
+    "browser-sync",
+    "browserify",
+    "cescon",
+    "es2017",
+    "gulp",
     "maurizio",
-    "cescon"
+    "sass",
+    "typescript",
+    "vendor",
+    "watchify"
   ],
   "licenses": [
     {
@@ -113,7 +122,6 @@
     "karma-spec-reporter": "0.0.31",
     "protractor": "5.1.1",
     "run-sequence": "1.2.2",
-    "stylelint": "7.10.1 ",
     "tsify": "3.0.1",
     "tslint": "5.2.0",
     "typescript": "2.3.2",
