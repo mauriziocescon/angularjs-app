@@ -45,6 +45,6 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 2. Run ``npm run frisby`` on the console
 
-## Major future developments 
+## Major future improvements 
 
 1. Improvement of some layouts (Users / To-Do / Posts)
