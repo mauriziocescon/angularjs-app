@@ -47,4 +47,4 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 ## Major future improvements 
 
-1. Improvement of some layouts (Users / To-Do / Posts)
+1. Layouts Users / To-Do / Posts
