@@ -41,12 +41,14 @@
                     </div>
                 </div>
                 <div class="col-xs-2">
-                    <button class="btn btn-default pull-right" ng-click="$ctrl.goToUserTodos(user, $event)"><mc-localized-string key="TODOS"></mc-localized-string></button>
-                    <button class="btn btn-default pull-right" ng-click="$ctrl.goToUserPosts(user, $event)"><mc-localized-string key="POSTS"></mc-localized-string></button>
+                    <button type="button" class="btn btn-default pull-right" ng-click="$ctrl.goToUserTodos(user, $event)"><mc-localized-string key="TODOS"></mc-localized-string></button>
+                    <button type="button" class="btn btn-default pull-right" ng-click="$ctrl.goToUserPosts(user, $event)"><mc-localized-string key="POSTS"></mc-localized-string></button>
                 </div>
             </div>
         </div>
-        <div class="full-width-message"><mc-localized-string key="LOAD_COMPLETED"></mc-localized-string></div>
+        <div class="col-xs-12">
+            <div class="full-width-message"><mc-localized-string key="LOAD_COMPLETED"></mc-localized-string></div>
+        </div>
     </div>
 
     <div class="full-width-message" ng-show="$ctrl.isLoadingData"><mc-localized-string key="LOADING"></mc-localized-string></div>

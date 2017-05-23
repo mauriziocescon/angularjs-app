@@ -48,11 +48,10 @@ $input-group-addon-bg: $tertiary-color;
 // Common style
 
 .full-width-message {
-  display: inline-block;
+  width: 100%;
   padding-top: 20px;
   padding-bottom: 20px;
-  width: 100%;
-  font-size: 1.5em;
+  font-size: 1.5 * $font-size-base;
   text-align: center;
   font-weight: bold;
 }

@@ -5,6 +5,6 @@
 <div class="modal-body text-center">{{ ::$ctrl.modalMessage }}</div>
 
 <div class="modal-footer">
-    <button class="btn btn-default active" ng-if="$ctrl.modalYesButtonLabel" ng-click="$ctrl.yes()">{{ ::$ctrl.modalYesButtonLabel }}</button>
-    <button class="btn btn-default" ng-if="$ctrl.modalNoButtonLabel" ng-click="$ctrl.no()">{{ ::$ctrl.modalNoButtonLabel }}</button>
+    <button type="button" class="btn btn-default active" ng-if="$ctrl.modalYesButtonLabel" ng-click="$ctrl.yes()">{{ ::$ctrl.modalYesButtonLabel }}</button>
+    <button type="button" class="btn btn-default" ng-if="$ctrl.modalNoButtonLabel" ng-click="$ctrl.no()">{{ ::$ctrl.modalNoButtonLabel }}</button>
 </div>
