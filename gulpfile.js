@@ -10,6 +10,7 @@ const fs = require("fs");
 const glob = require("glob");
 const gulp = require("gulp");
 const gulpAngularTemplateCache = require("gulp-angular-templatecache");
+const gulpBootlint = require("gulp-bootlint");
 const gulpCleanCSS = require("gulp-clean-css");
 const gulpFlatten = require("gulp-flatten");
 const gulpInject = require("gulp-inject");
@@ -137,6 +138,15 @@ gulp.task("cache-uib-templates", () => {
             standalone: false
         }))
         .pipe(gulp.dest("dist/js/"));
+});
+
+gulp.task("bootlint", () => {
+    // return gulp.src(["src/index.html", ...paths.htmlTemplates])
+    //     .pipe(gulpBootlint({
+    //         disabledIds: ["E001", "W001", "W002", "W003", "W005"],
+    //         loglevel: "debug"
+    //     }));
+    return;
 });
 
 gulp.task("cache-html-templates", () => {
@@ -371,6 +381,7 @@ gulp.task("default", () => {
         ["copy-base-files",
             "copy-i18n",
             "cache-uib-templates",
+            "bootlint",
             "cache-html-templates",
             "copy-imgs",
             "copy-fonts",
@@ -397,6 +408,7 @@ gulp.task("test", () => {
         ["copy-base-files",
             "copy-i18n",
             "cache-uib-templates",
+            "bootlint",
             "cache-html-templates",
             "copy-imgs",
             "copy-fonts",
@@ -424,6 +436,7 @@ gulp.task("prod", () => {
             "copy-imgs",
             "copy-fonts",
             "cache-uib-templates",
+            "bootlint",
             "cache-html-templates",
             "sass-prod",
             "bundle-vendors"
