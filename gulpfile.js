@@ -141,12 +141,11 @@ gulp.task("cache-uib-templates", () => {
 });
 
 gulp.task("bootlint", () => {
-    // return gulp.src(["src/index.html", ...paths.htmlTemplates])
-    //     .pipe(gulpBootlint({
-    //         disabledIds: ["E001", "W001", "W002", "W003", "W005"],
-    //         loglevel: "debug"
-    //     }));
-    return;
+    return gulp.src(["src/index.html", ...paths.htmlTemplates])
+        .pipe(gulpBootlint({
+            disabledIds: ["E001", "W001", "W002", "W003", "W005"],
+            loglevel: "debug"
+        }));
 });
 
 gulp.task("cache-html-templates", () => {
