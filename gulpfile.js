@@ -19,6 +19,7 @@ const gulpPreprocess = require("gulp-preprocess");
 const gulpRename = require("gulp-rename");
 const gulpSass = require("gulp-sass");
 const gulpSourcemaps = require("gulp-sourcemaps");
+const gulpStylelint = require("gulp-stylelint");
 const gulpTslint = require("gulp-tslint");
 const gulpUglify = require("gulp-uglify");
 const gulpUtil = require("gulp-util");
@@ -53,6 +54,16 @@ const paths = {
         "src/assets/fonts/**/",
         "node_modules/bootstrap-sass/assets/fonts/**/",
         "node_modules/font-awesome/fonts/**/"
+    ],
+    htmlTemplatesLint: [
+        "src/index.html",
+        "src/app*/**/*.html",
+        "!src/app*/shared/uib-custom/**/"
+    ],
+    sassLint: ["src/**/*.scss"],
+    tsLint: [
+        "dist/tmp_ts/**/",
+        "e2e-tests/**/*.ts"
     ],
     preprocessTs: ["src/**/*.ts"],
     browserifyEntries: ["dist/tmp_ts/main.ts"],
@@ -113,6 +124,24 @@ gulp.task("empty-dist", () => {
     return del.sync(["dist/**/*"]);
 });
 
+gulp.task("bootlint", () => {
+    return gulp.src(paths.htmlTemplatesLint)
+        .pipe(gulpBootlint({
+            disabledIds: ["E001", "W001", "W002", "W003", "W005"],
+            loglevel: "debug"
+        }));
+});
+
+gulp.task("sass-lint", () => {
+    return gulp.src(paths.sassLint)
+        .pipe(gulpStylelint({
+            reporters: [
+                {formatter: "verbose", console: true}
+            ],
+            failAfterError: false
+        }));
+});
+
 gulp.task("copy-base-files", () => {
     return gulp.src(paths.baseFiles)
         .pipe(gulpPreprocess({
@@ -138,14 +167,6 @@ gulp.task("cache-uib-templates", () => {
             standalone: false
         }))
         .pipe(gulp.dest("dist/js/"));
-});
-
-gulp.task("bootlint", () => {
-    return gulp.src(["src/index.html", ...paths.htmlTemplates])
-        .pipe(gulpBootlint({
-            disabledIds: ["E001", "W001", "W002", "W003", "W005"],
-            loglevel: "debug"
-        }));
 });
 
 gulp.task("cache-html-templates", () => {
@@ -234,7 +255,7 @@ gulp.task("preprocess-ts", () => {
 });
 
 gulp.task("tslint", () => {
-    return gulp.src(["dist/tmp_ts/**/", "e2e-tests/**/*.ts"])
+    return gulp.src(paths.tsLint)
         .pipe(gulpTslint({
             formatter: "stylish"
         }))
@@ -377,10 +398,11 @@ gulp.task("karma", (done) => {
 gulp.task("default", () => {
     runSequence(
         "empty-dist",
+        "bootlint",
+        "sass-lint",
         ["copy-base-files",
             "copy-i18n",
             "cache-uib-templates",
-            "bootlint",
             "cache-html-templates",
             "copy-imgs",
             "copy-fonts",
@@ -404,10 +426,11 @@ gulp.task("default", () => {
 gulp.task("test", () => {
     runSequence(
         "empty-dist",
+        "bootlint",
+        "sass-lint",
         ["copy-base-files",
             "copy-i18n",
             "cache-uib-templates",
-            "bootlint",
             "cache-html-templates",
             "copy-imgs",
             "copy-fonts",
@@ -430,12 +453,13 @@ gulp.task("test", () => {
 gulp.task("prod", () => {
     runSequence(
         "empty-dist",
+        "bootlint",
+        "sass-lint",
         ["copy-base-files",
             "copy-i18n",
             "copy-imgs",
             "copy-fonts",
             "cache-uib-templates",
-            "bootlint",
             "cache-html-templates",
             "sass-prod",
             "bundle-vendors"
