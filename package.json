@@ -93,7 +93,7 @@
     "babelify": "7.3.0",
     "bootstrap-sass": "3.3.7",
     "browser-sync": "2.18.12",
-    "browserify": "14.3.0",
+    "browserify": "14.4.0",
     "del": "2.2.2",
     "frisby": "0.8.5",
     "gulp": "3.9.1",
