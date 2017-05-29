@@ -5,7 +5,6 @@ $primary-color:     $app-black !default;
 $secondary-color:   $app-white !default;
 $tertiary-color:    $app-green-1 !default;
 
-
 // -------------------------------------------------------
 // Bootstrap variables
 
@@ -39,10 +38,8 @@ $btn-default-bg: $tertiary-color;
 
 $input-group-addon-bg: $tertiary-color;
 
-
 // -------------------------------------------------------
 // Font awesome variables
-
 
 // -------------------------------------------------------
 // Common style
@@ -75,12 +72,16 @@ $input-group-addon-bg: $tertiary-color;
   cursor: pointer;
 }
 
-input.ng-invalid, select.ng-invalid, textarea.ng-invalid {
+input.ng-invalid,
+select.ng-invalid,
+textarea.ng-invalid {
   color: red;
   border-color: red;
 }
 
-input.ng-invalid-mc-custom-validator-error, select.ng-invalid-mc-custom-validator-error, textarea.ng-invalid-mc-custom-validator-error {
+input.ng-invalid-mc-custom-validator-error,
+select.ng-invalid-mc-custom-validator-error,
+textarea.ng-invalid-mc-custom-validator-error {
   color: red;
   border-color: red;
 }
