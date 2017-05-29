@@ -119,7 +119,7 @@ export class UIUtilitiesService implements IUIUtilitiesService {
                 },
             };
 
-            const modalInstance: ng.ui.bootstrap.IModalServiceInstance = this.uibModal.open(modalSettings);
+            const modalInstance: ng.ui.bootstrap.IModalInstanceService = this.uibModal.open(modalSettings);
             modalInstance.result.then(() => {
                 callback(true);
             }, () => {
