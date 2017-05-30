@@ -4,8 +4,8 @@
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
-  color: $primary-color;
-  border: 1px solid $primary-color;
+  color: $secondary-color;
+  border: 1px solid $secondary-color;
 }
 
 select::-ms-expand {
@@ -13,5 +13,5 @@ select::-ms-expand {
 }
 
 option:not(:checked) {
-  background-color: $app-white !important;
+  background-color: $accent-color !important;
 }

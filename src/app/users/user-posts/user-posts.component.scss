@@ -12,10 +12,6 @@
       font-weight: bold;
     }
 
-    & .post-body {
-      // empty
-    }
-
     & .arrow {
       background-size: contain;
       background-repeat: no-repeat;
@@ -34,7 +30,7 @@
 
   .post:hover {
     background-color: $app-gray-1;
-    color: $app-gray-2;
+    color: $gray-color;
     transition: background-color 0.7s;
   }
 }

@@ -3,15 +3,11 @@
     padding: 10px 20px;
     border: 1px solid;
     border-radius: 15px;
-    background-color: $app-gray-2;
-    color: white;
+    background-color: $gray-color;
+    color: $app-white;
 
     & .comment-title {
       font-weight: bold;
-    }
-
-    & .comment-body {
-      // empty
     }
   }
 }

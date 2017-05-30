@@ -8,21 +8,17 @@
     padding-bottom: 10px;
     border-bottom: 1px solid $app-black;
 
-    & .todo-body {
-      // empty
-    }
-
     & .todo-check {
       & > .done {
         @extend .fa-check;
 
-        color: $tertiary-color;
+        color: $primary-color;
       }
 
       & > .pending {
         @extend .fa-close;
 
-        color: $app-red-3;
+        color: $danger-color;
       }
     }
   }

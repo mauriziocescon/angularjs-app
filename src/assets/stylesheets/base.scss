@@ -1,9 +1,11 @@
 // -------------------------------------------------------
 // App variables
 
-$primary-color: $app-black !default;
+$primary-color: $app-green-1 !default;
 $accent-color: $app-white !default;
-$tertiary-color: $app-green-1 !default;
+$secondary-color: $app-black !default;
+$danger-color: $app-red-3 !default;
+$gray-color: $app-gray-2 !default;
 
 // -------------------------------------------------------
 // Bootstrap variables
@@ -21,22 +23,22 @@ $navbar-margin-bottom: 0;
 $navbar-border-radius: 0;
 
 $navbar-default-color: $accent-color;
-$navbar-default-bg: $primary-color;
+$navbar-default-bg: $secondary-color;
 $navbar-default-border: $accent-color;
 
 $navbar-default-link-color: $accent-color;
 $navbar-default-link-hover-color: $accent-color;
 $navbar-default-link-hover-bg: $app-transparent;
-$navbar-default-link-active-color: $primary-color;
+$navbar-default-link-active-color: $secondary-color;
 $navbar-default-link-active-bg: $accent-color;
 $navbar-default-link-disabled-color: $accent-color;
-$navbar-default-link-disabled-bg: $primary-color;
+$navbar-default-link-disabled-bg: $secondary-color;
 
 //== Buttons
 $btn-default-color: $accent-color;
-$btn-default-bg: $tertiary-color;
+$btn-default-bg: $primary-color;
 
-$input-group-addon-bg: $tertiary-color;
+$input-group-addon-bg: $primary-color;
 
 // -------------------------------------------------------
 // Font awesome variables
@@ -75,19 +77,19 @@ $input-group-addon-bg: $tertiary-color;
 input.ng-invalid,
 select.ng-invalid,
 textarea.ng-invalid {
-  color: red;
-  border-color: red;
+  color: $danger-color;
+  border-color: $danger-color;
 }
 
 input.ng-invalid-mc-custom-validator-error,
 select.ng-invalid-mc-custom-validator-error,
 textarea.ng-invalid-mc-custom-validator-error {
-  color: red;
-  border-color: red;
+  color: $danger-color;
+  border-color: $danger-color;
 }
 
 // angular-loading-bar override style
 #loading-bar .bar {
-  background: $tertiary-color !important;
+  background: $primary-color !important;
   height: 4px !important;
 }
