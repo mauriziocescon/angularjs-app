@@ -5,11 +5,10 @@ import { Logger } from "../shared.module";
  * At the click event, mc-toggle is evaluated and
  * - on or off function is called,
  * - on or off class is added to the element (the other one is removed),
- * - all elements selected by toggle-on-selector having class on
- * are switched to off (except the clicked one).
+ * - on or off class is added to the sub-elements with selector toggle-on-selector
  *
- * With keep-watching="true", a watcher i set to
- * the mc-toggle function.
+ * With keep-watching="true", a watcher is set to
+ * mc-toggle function.
  * If the toggle is fired by the user click, the event
  * is passed to on / off functions.
  *
@@ -28,21 +27,36 @@ export const mcToggleDirective = () => {
     };
 
     const setClass = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, state: boolean) => {
+        const toggleOnSelector = "toggleOnSelector";
 
         if (state === true) {
-            $(element).addClass("on");
             $(element).removeClass("off");
-        } else {
-            $(element).addClass("off");
-            $(element).removeClass("on");
-        }
+            $(element).addClass("on");
 
-        const toggleOnSelector = "toggleOnSelector";
-        if (attrs[toggleOnSelector]) {
-            const selector = [attrs[toggleOnSelector], ".on"].join(",");
-            const elements = $(selector).not(element);
-            elements.removeClass("on");
-            elements.addClass("off");
+            if (attrs[toggleOnSelector]) {
+                const subElement = element.find(attrs[toggleOnSelector]);
+                const selector = [attrs[toggleOnSelector], ".on"].join(",");
+
+                // remove on and add off everywhere
+                const elements = $(selector).not(subElement);
+                elements.removeClass("on");
+                elements.addClass("off");
+
+                // add on for childrens of element
+                subElement.removeClass("off");
+                subElement.addClass("on");
+            }
+        } else {
+            $(element).removeClass("on");
+            $(element).addClass("off");
+
+            if (attrs[toggleOnSelector]) {
+                const subElement = element.find(attrs[toggleOnSelector]);
+
+                // remove on and add off
+                subElement.removeClass("on");
+                subElement.addClass("off");
+            }
         }
     };
 
