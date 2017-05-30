@@ -16,11 +16,13 @@
         <div class="col-xs-12 post" ng-repeat="post in $ctrl.dataSource track by post.id">
             <div class="row" mc-toggle="$ctrl.isOpen(post)" on="$ctrl.open(post)" off="$ctrl.close(post)" toggle-on-selector=".arrow">
                 <div class="col-xs-11">
-                    <div class="col-xs-12">
-                        <span class="post-title">{{ ::$ctrl.getPostTitle(post) }}</span>
-                    </div>
-                    <div class="col-xs-12">
-                        <span class="post-body">{{ ::post.body }}</span>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <span class="post-title">{{ ::$ctrl.getPostTitle(post) }}</span>
+                        </div>
+                        <div class="col-xs-12">
+                            <span class="post-body">{{ ::post.body }}</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xs-1 arrow"></div>

@@ -3,10 +3,14 @@
     <div class="row" ng-show="$ctrl.showData">
         <div class="col-xs-12 comment" ng-repeat="comment in ::$ctrl.dataSource track by comment.id">
             <div class="row">
-                <span class="comment-title">{{ ::$ctrl.getCommentTitle(comment) }}</span>
+                <div class="col-xs-12">
+                    <span class="comment-title">{{ ::$ctrl.getCommentTitle(comment) }}</span>
+                </div>
             </div>
             <div class="row">
-                <span class="comment-body">{{ ::comment.body }}</span>
+                <div class="col-xs-12">
+                    <span class="comment-body">{{ ::comment.body }}</span>
+                </div>
             </div>
         </div>
     </div>
