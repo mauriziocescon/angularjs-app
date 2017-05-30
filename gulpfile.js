@@ -138,7 +138,7 @@ gulp.task("sass-lint", () => {
             reporters: [
                 {formatter: "verbose", console: true}
             ],
-            failAfterError: false
+            failAfterError: true
         }));
 });
 
