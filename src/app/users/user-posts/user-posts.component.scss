@@ -1,7 +1,6 @@
 .posts {
-
   .addon {
-    color: $secondary-color;
+    color: $accent-color;
   }
 
   .post {
@@ -14,7 +13,7 @@
     }
 
     & .post-body {
-
+      // empty
     }
 
     & .arrow {
@@ -36,10 +35,6 @@
   .post:hover {
     background-color: $app-gray-1;
     color: $app-gray-2;
-    -webkit-transition: background-color 0.7s;
-    -moz-transition: background-color 0.7s;
-    -ms-transition: background-color 0.7s;
-    -o-transition: background-color 0.7s;
     transition: background-color 0.7s;
   }
 }

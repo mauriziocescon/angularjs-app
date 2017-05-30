@@ -1,5 +1,4 @@
 .photos {
-
   .photo {
     width: 100%;
     display: inline-block;
@@ -10,6 +9,7 @@
       display: inline-block;
       width: 30%;
       max-width: 250px;
+
       @include image-on-background;
     }
 
