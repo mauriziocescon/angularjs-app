@@ -13,11 +13,9 @@
     }
 
     & .arrow {
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-image: url("../imgs/chevron-right.svg");
-      height: 35px;
-      width: 20px;
+      @extend .fa-angle-right;
+
+      color: $primary-color;
     }
   }
 

@@ -5,7 +5,7 @@ import {
     IAppLanguageService,
     ILocalizedStringService,
     IUtilitiesService,
-} from "../services/services.module";
+} from "../../core/services/services.module";
 import { INavigationBarService } from "./navigation-bar.service";
 
 export class NavigationBarController {

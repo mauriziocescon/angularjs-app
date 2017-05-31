@@ -1,6 +1,6 @@
 import * as angular from "angular";
 
-import { IAppConstantsService, IUtilitiesService } from "../services/services.module";
+import { IAppConstantsService, IUtilitiesService } from "../../core/services/services.module";
 import { NavigationBarController } from "./navigation-bar.component";
 
 // Addition of angular-mocks and jasmine references is done on the gulpfile

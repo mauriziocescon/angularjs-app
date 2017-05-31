@@ -12,12 +12,16 @@
       & > .done {
         @extend .fa-check;
 
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
         color: $primary-color;
       }
 
       & > .pending {
         @extend .fa-close;
 
+        opacity: 0.6;
+        transition: opacity 0.5s ease-in-out;
         color: $danger-color;
       }
     }
