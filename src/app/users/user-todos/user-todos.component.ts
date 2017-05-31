@@ -1,12 +1,12 @@
 import {
     IDelayExecutionService,
     ILocalizedStringService,
-    INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
 } from "../../app.module";
 import {
     Enum,
+    INavigationBarService,
     ISharedFilterService,
     Logger,
     ResponseWs,

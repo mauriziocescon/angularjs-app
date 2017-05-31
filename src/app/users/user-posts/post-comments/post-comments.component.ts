@@ -1,10 +1,10 @@
 import {
     ILocalizedStringService,
-    INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
 } from "../../../app.module";
 import {
+    INavigationBarService,
     ISharedFilterService,
     Logger,
     ResponseWs,
