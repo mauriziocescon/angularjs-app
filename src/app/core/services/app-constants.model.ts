@@ -5,6 +5,8 @@ export class Application {
     public APP_NAME = "demo";
     public WS_URL = "http://jsonplaceholder.typicode.com";
 
+    // tslint:disable:no-consecutive-blank-lines
+
     // @if MOCK_BACKEND = "false"
     public MOCK_BACKEND = false;
     public CAN_MOCK_WS_FAIL = false;
@@ -20,6 +22,8 @@ export class Application {
     public LOG_WS_REQUEST = true;
     public LOG_WS_RESPONSE = true;
     // @endif
+
+    // tslint:enable:no-consecutive-blank-lines
 }
 
 export class Languages {

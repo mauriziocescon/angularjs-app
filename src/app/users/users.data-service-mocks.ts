@@ -18,8 +18,8 @@ export let usersRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
             const user = new User();
 
             user.id = i;
-            user.name = "name " + i.toString() + " fds fsf f fs fsfdf ds f f gjkfd gf gkflk gfk gkfdlg fd";
-            user.username = "username " + i.toString() + " gf gkf l";
+            user.name = "name " + i.toString() + " mock";
+            user.username = "username " + i.toString() + " username";
             user.email = user.name + "@email.com";
             user.address = new Address();
             user.address.street = "street";
