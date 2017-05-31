@@ -6,7 +6,6 @@ import { servicesSetupFunc } from "./core-run.module";
 
 export * from "./services/services.module";
 
-
 const coreModule = angular.module("app.core", [
     "tmh.dynamicLocale",
     mcServices,
