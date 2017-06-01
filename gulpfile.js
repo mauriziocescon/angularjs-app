@@ -48,7 +48,7 @@ const paths = {
         "src/app*/**/*.html",
         "!src/app*/shared/uib-custom/**/"
     ],
-    sass: ["src/main.scss"],
+    sass: ["src/styles.scss"],
     imgs: ["src/assets*/imgs/**/"],
     fonts: [
         "src/assets/fonts/**/",
