@@ -11,21 +11,16 @@
   },
   "scripts": {
     "postinstall": "gulp prod --mock=false --strictDi=true",
-
     "prestart": "gulp prod --mock=false --strictDi=true",
     "start": "http-server ./dist -a localhost -p 8000 -o -c-1 -i false",
-
     "serve": "gulp default --mock=false --strictDi=false",
     "serve-mock": "gulp default --mock=true --strictDi=false",
     "build": "gulp prod --mock=false --strictDi=true",
     "build-mock": "gulp prod --mock=true --strictDi=true",
-
     "pretest": "gulp test --mock=false --strictDi=true",
     "test": "karma start karma.conf.js",
-
     "preprotractor": "tsc --project e2e-tests && webdriver-manager update",
     "protractor": "protractor protractor.conf.js",
-
     "test-api": "jasmine-node rest-api-tests/"
   },
   "repository": {

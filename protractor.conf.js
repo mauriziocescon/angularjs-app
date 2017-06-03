@@ -7,12 +7,12 @@ exports.config = {
     ],
     multiCapabilities: [
         // { browserName: "firefox" },
-        { browserName: "chrome" }
+        {browserName: "chrome"}
     ],
     jasmineNodeOpts: {
         showColors: true,
-        isVerbose : true,
-        includeStackTrace : true,
+        isVerbose: true,
+        includeStackTrace: true,
         defaultTimeoutInterval: 30000
     }
 };
