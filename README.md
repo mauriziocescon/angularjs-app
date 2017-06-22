@@ -27,6 +27,10 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 1. [TSLint](https://github.com/palantir/tslint)
 
+2. [Stylelint](https://github.com/stylelint/stylelint)
+
+3. [Bootlint](https://github.com/twbs/bootlint)
+
 ## Unit-tests (karma + jasmine)
 
 1. The unit-tests are written in typescript using Jasmine. You find all the files searching for *__.spec.ts*
