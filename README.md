@@ -23,13 +23,9 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 1. The app contains a [manifest.json](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/) and the entire [service-worker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers) business in order to cache the app (by default sw is disabled: uncomment ``Main.registerServiceWorker();`` to have it working)
 
-## Analysis tools
+## Tooling
 
-1. [TSLint](https://github.com/palantir/tslint)
-
-2. [Stylelint](https://github.com/stylelint/stylelint)
-
-3. [Bootlint](https://github.com/twbs/bootlint)
+[Angular 1.x](https://angularjs.org/), [Typescript](https://www.typescriptlang.org/), [Bootstrap 3.x](http://getbootstrap.com/), [UI-Router](https://ui-router.github.io/), [Sass](http://sass-lang.com/), [Gulp](http://gulpjs.com/), [Babel](https://babeljs.io/), [Browserify](http://browserify.org/), [Browsersync](https://www.browsersync.io/), [TSLint](https://github.com/palantir/tslint), [Stylelint](https://github.com/stylelint/stylelint), [Bootlint](https://github.com/twbs/bootlint)
 
 ## Unit-tests (karma + jasmine)
 
