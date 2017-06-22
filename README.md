@@ -43,11 +43,11 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 9. [Browsersync](https://www.browsersync.io/) 
 
-10. [TSLint](https://github.com/palantir/tslint) 
+10. [TSLint](https://palantir.github.io/tslint/) 
 
-11. [Stylelint](https://github.com/stylelint/stylelint) 
+11. [Stylelint](https://stylelint.io/) 
 
-12. [Bootlint](https://github.com/twbs/bootlint)
+12. [Bootlint](http://www.bootlint.com/)
 
 ## Unit-tests (karma + jasmine)
 
