@@ -25,7 +25,29 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 ## Tooling
 
-[Angular 1.x](https://angularjs.org/), [Typescript](https://www.typescriptlang.org/), [Bootstrap 3.x](http://getbootstrap.com/), [UI-Router](https://ui-router.github.io/), [Sass](http://sass-lang.com/), [Gulp](http://gulpjs.com/), [Babel](https://babeljs.io/), [Browserify](http://browserify.org/), [Browsersync](https://www.browsersync.io/), [TSLint](https://github.com/palantir/tslint), [Stylelint](https://github.com/stylelint/stylelint), [Bootlint](https://github.com/twbs/bootlint)
+1. [Angular 1.x](https://angularjs.org/) 
+
+2. [Typescript](https://www.typescriptlang.org/) 
+
+3. [Bootstrap 3.x](http://getbootstrap.com/) 
+
+4. [UI-Router](https://ui-router.github.io/) 
+
+5. [Sass](http://sass-lang.com/) 
+
+6. [Gulp](http://gulpjs.com/) 
+
+7. [Babel](https://babeljs.io/) 
+
+8. [Browserify](http://browserify.org/) 
+
+9. [Browsersync](https://www.browsersync.io/) 
+
+10. [TSLint](https://github.com/palantir/tslint) 
+
+11. [Stylelint](https://github.com/stylelint/stylelint) 
+
+12. [Bootlint](https://github.com/twbs/bootlint)
 
 ## Unit-tests (karma + jasmine)
 
