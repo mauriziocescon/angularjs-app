@@ -1,12 +1,12 @@
 import {
     IDelayExecutionService,
     ILocalizedStringService,
+    INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
 } from "../app.module";
 import {
     Enum,
-    INavigationBarService,
     ISharedFilterService,
     Logger,
     ResponseWs,
@@ -16,7 +16,7 @@ import { IUsersService } from "./users.data-service";
 import { User } from "./users.model";
 
 export class UsersController {
-    public static $inject = ["$filter", "$location", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UsersService"];
+    public static $inject = ["$filter", "$location", "DelayExecutionService", "LocalizedStringService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "UsersService"];
     public name: string;
     public textFilter: string;
 
@@ -24,9 +24,9 @@ export class UsersController {
     protected location: ng.ILocationService;
     protected delayExecutionService: IDelayExecutionService;
     protected localizedStringService: ILocalizedStringService;
+    protected navigationBarService: INavigationBarService;
     protected uiUtilitiesService: IUIUtilitiesService;
     protected utilitiesService: IUtilitiesService;
-    protected navigationBarService: INavigationBarService;
     protected usersService: IUsersService;
 
     protected users: User[];
@@ -37,17 +37,17 @@ export class UsersController {
                 $location: ng.ILocationService,
                 DelayExecutionService: IDelayExecutionService,
                 LocalizedStringService: ILocalizedStringService,
+                NavigationBarService: INavigationBarService,
                 UIUtilitiesService: IUIUtilitiesService,
                 UtilitiesService: IUtilitiesService,
-                NavigationBarService: INavigationBarService,
                 UsersService: IUsersService) {
         this.filter = $filter;
         this.location = $location;
         this.delayExecutionService = DelayExecutionService;
         this.localizedStringService = LocalizedStringService;
+        this.navigationBarService = NavigationBarService;
         this.uiUtilitiesService = UIUtilitiesService;
         this.utilitiesService = UtilitiesService;
-        this.navigationBarService = NavigationBarService;
         this.usersService = UsersService;
 
         this.name = "UsersComponent";

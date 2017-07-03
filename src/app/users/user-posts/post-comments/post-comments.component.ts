@@ -1,10 +1,10 @@
 import {
     ILocalizedStringService,
+    INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
 } from "../../../app.module";
 import {
-    INavigationBarService,
     ISharedFilterService,
     Logger,
     ResponseWs,
@@ -14,14 +14,14 @@ import { IPostCommentsService } from "./post-comments.data-service";
 import { Comment } from "./post-comments.model";
 
 export class PostCommentsController {
-    public static $inject = ["$filter", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "PostCommentsService"];
+    public static $inject = ["$filter", "LocalizedStringService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "PostCommentsService"];
     public name: string;
 
     protected filter: ISharedFilterService;
     protected localizedStringService: ILocalizedStringService;
+    protected navigationBarService: INavigationBarService;
     protected uiUtilitiesService: IUIUtilitiesService;
     protected utilitiesService: IUtilitiesService;
-    protected navigationBarService: INavigationBarService;
     protected postCommentsService: IPostCommentsService;
 
     protected postId: number;
@@ -30,15 +30,15 @@ export class PostCommentsController {
 
     constructor($filter: ISharedFilterService,
                 LocalizedStringService: ILocalizedStringService,
+                NavigationBarService: INavigationBarService,
                 UIUtilitiesService: IUIUtilitiesService,
                 UtilitiesService: IUtilitiesService,
-                NavigationBarService: INavigationBarService,
                 PostCommentsService: IPostCommentsService) {
         this.filter = $filter;
         this.localizedStringService = LocalizedStringService;
+        this.navigationBarService = NavigationBarService;
         this.uiUtilitiesService = UIUtilitiesService;
         this.utilitiesService = UtilitiesService;
-        this.navigationBarService = NavigationBarService;
         this.postCommentsService = PostCommentsService;
 
         this.name = "PostCommentsComponent";

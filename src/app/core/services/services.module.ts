@@ -8,6 +8,7 @@ import { DelayExecutionService, IDelayExecutionService } from "./delay-execution
 import { ILocalStorageService, LocalStorageService } from "./local-storage.service";
 import { ILocalizedStringService, LocalizedStringService } from "./localized-string.service";
 import { ILocationChangeService, LocationChangeService } from "./location-change.service";
+import { INavigationBarService, NavigationBarService } from "./navigation-bar.service";
 import { IScrollToService, ScrollToService } from "./scroll-to.service";
 import { ISharedDataService, SharedDataService } from "./shared-data.service";
 import { uiUtilitiesConstants } from "./ui-utilities.constants";
@@ -23,6 +24,7 @@ export { IDelayExecutionService } from "./delay-execution.service";
 export { ILocalStorageService } from "./local-storage.service";
 export { ILocalizedStringService } from "./localized-string.service";
 export { ILocationChangeService } from "./location-change.service";
+export { INavigationBarService } from "./navigation-bar.service";
 export { IScrollToService } from "./scroll-to.service";
 export { ISharedDataService } from "./shared-data.service";
 export { IUIUtilitiesService } from "./ui-utilities.service";
@@ -37,6 +39,7 @@ export const mcServices = angular.module("core.mcServices", [])
     .service("LocalStorageService", LocalStorageService)
     .service("LocalizedStringService", LocalizedStringService)
     .service("LocationChangeService", LocationChangeService)
+    .service("NavigationBarService", NavigationBarService)
     .service("ScrollToService", ScrollToService)
     .service("SharedDataService", SharedDataService)
     .constant("UIUtilitiesConstants", uiUtilitiesConstants)

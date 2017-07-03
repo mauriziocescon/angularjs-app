@@ -4,12 +4,12 @@ import {
     IAppConstantsService,
     IAppLanguageService,
     ILocalizedStringService,
+    INavigationBarService,
     IUtilitiesService,
 } from "../../core/services/services.module";
-import { INavigationBarService } from "./navigation-bar.service";
 
 export class NavigationBarController {
-    public static $inject = ["$location", "AppConstantsService", "AppLanguageService", "LocalizedStringService", "UtilitiesService", "NavigationBarService"];
+    public static $inject = ["$location", "AppConstantsService", "AppLanguageService", "LocalizedStringService", "NavigationBarService", "UtilitiesService"];
     public name: string;
     public selectedLanguageId: string;
 
@@ -17,8 +17,8 @@ export class NavigationBarController {
     protected appConstantsService: IAppConstantsService;
     protected appLanguageService: IAppLanguageService;
     protected localizedStringService: ILocalizedStringService;
-    protected utilitiesService: IUtilitiesService;
     protected navigationBarService: INavigationBarService;
+    protected utilitiesService: IUtilitiesService;
 
     protected languages: string[];
 
@@ -26,14 +26,14 @@ export class NavigationBarController {
                 AppConstantsService: IAppConstantsService,
                 AppLanguageService: IAppLanguageService,
                 LocalizedStringService: ILocalizedStringService,
-                UtilitiesService: IUtilitiesService,
-                NavigationBarService: INavigationBarService) {
+                NavigationBarService: INavigationBarService,
+                UtilitiesService: IUtilitiesService) {
         this.location = $location;
         this.appConstantsService = AppConstantsService;
         this.appLanguageService = AppLanguageService;
         this.localizedStringService = LocalizedStringService;
-        this.utilitiesService = UtilitiesService;
         this.navigationBarService = NavigationBarService;
+        this.utilitiesService = UtilitiesService;
 
         this.name = "NavigationBarComponent";
     }

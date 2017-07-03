@@ -1,12 +1,12 @@
 import {
     IDelayExecutionService,
     ILocalizedStringService,
+    INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
 } from "../../app.module";
 import {
     Enum,
-    INavigationBarService,
     ISharedFilterService,
     Logger,
     ResponseWs,
@@ -16,7 +16,7 @@ import { IUserTodosService } from "./user-todos.data-service";
 import { Todo } from "./user-todos.model";
 
 export class UserTodosController {
-    public static $inject = ["$filter", "$location", "$stateParams", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UserTodosService"];
+    public static $inject = ["$filter", "$location", "$stateParams", "DelayExecutionService", "LocalizedStringService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "UserTodosService"];
     public name: string;
     public textFilter: string;
 
@@ -25,9 +25,9 @@ export class UserTodosController {
     protected stateParams: ng.ui.IStateParamsService;
     protected delayExecutionService: IDelayExecutionService;
     protected localizedStringService: ILocalizedStringService;
+    protected navigationBarService: INavigationBarService;
     protected uiUtilitiesService: IUIUtilitiesService;
     protected utilitiesService: IUtilitiesService;
-    protected navigationBarService: INavigationBarService;
     protected todosService: IUserTodosService;
 
     protected todos: Todo[];
@@ -39,18 +39,18 @@ export class UserTodosController {
                 $stateParams: ng.ui.IStateParamsService,
                 DelayExecutionService: IDelayExecutionService,
                 LocalizedStringService: ILocalizedStringService,
+                NavigationBarService: INavigationBarService,
                 UIUtilitiesService: IUIUtilitiesService,
                 UtilitiesService: IUtilitiesService,
-                NavigationBarService: INavigationBarService,
                 UserTodosService: IUserTodosService) {
         this.filter = $filter;
         this.location = $location;
         this.stateParams = $stateParams;
         this.delayExecutionService = DelayExecutionService;
         this.localizedStringService = LocalizedStringService;
+        this.navigationBarService = NavigationBarService;
         this.uiUtilitiesService = UIUtilitiesService;
         this.utilitiesService = UtilitiesService;
-        this.navigationBarService = NavigationBarService;
         this.todosService = UserTodosService;
 
         this.name = "UserTodosComponent";

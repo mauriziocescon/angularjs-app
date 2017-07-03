@@ -1,12 +1,12 @@
 import {
     IDelayExecutionService,
     ILocalizedStringService,
+    INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
 } from "../app.module";
 import {
     Enum,
-    INavigationBarService,
     ISharedFilterService,
     Logger,
     ResponseWs,
@@ -16,7 +16,7 @@ import { IAlbumsService } from "./albums.data-service";
 import { Album } from "./albums.model";
 
 export class AlbumsController {
-    public static $inject = ["$filter", "$state", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "AlbumsService"];
+    public static $inject = ["$filter", "$state", "DelayExecutionService", "LocalizedStringService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "AlbumsService"];
     public name: string;
     public textFilter: string;
 
@@ -24,9 +24,9 @@ export class AlbumsController {
     protected state: ng.ui.IStateService;
     protected delayExecutionService: IDelayExecutionService;
     protected localizedStringService: ILocalizedStringService;
+    protected navigationBarService: INavigationBarService;
     protected uiUtilitiesService: IUIUtilitiesService;
     protected utilitiesService: IUtilitiesService;
-    protected navigationBarService: INavigationBarService;
     protected albumsService: IAlbumsService;
 
     protected albums: Album[];
@@ -40,17 +40,17 @@ export class AlbumsController {
                 $state: ng.ui.IStateService,
                 DelayExecutionService: IDelayExecutionService,
                 LocalizedStringService: ILocalizedStringService,
+                NavigationBarService: INavigationBarService,
                 UIUtilitiesService: IUIUtilitiesService,
                 UtilitiesService: IUtilitiesService,
-                NavigationBarService: INavigationBarService,
                 AlbumsService: IAlbumsService) {
         this.filter = $filter;
         this.state = $state;
         this.delayExecutionService = DelayExecutionService;
         this.localizedStringService = LocalizedStringService;
+        this.navigationBarService = NavigationBarService;
         this.uiUtilitiesService = UIUtilitiesService;
         this.utilitiesService = UtilitiesService;
-        this.navigationBarService = NavigationBarService;
         this.albumsService = AlbumsService;
 
         this.name = "AlbumsComponent";

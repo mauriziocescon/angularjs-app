@@ -1,12 +1,12 @@
 import {
     IDelayExecutionService,
     ILocalizedStringService,
+    INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
 } from "../../app.module";
 import {
     Enum,
-    INavigationBarService,
     ISharedFilterService,
     Logger,
     ResponseWs,
@@ -16,7 +16,7 @@ import { IUserPostsService } from "./user-posts.data-service";
 import { Post } from "./user-posts.model";
 
 export class UserPostsController {
-    public static $inject = ["$filter", "$stateParams", "DelayExecutionService", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "UserPostsService"];
+    public static $inject = ["$filter", "$stateParams", "DelayExecutionService", "LocalizedStringService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "UserPostsService"];
     public name: string;
     public textFilter: string;
 
@@ -24,9 +24,9 @@ export class UserPostsController {
     protected stateParams: ng.ui.IStateParamsService;
     protected delayExecutionService: IDelayExecutionService;
     protected localizedStringService: ILocalizedStringService;
+    protected navigationBarService: INavigationBarService;
     protected uiUtilitiesService: IUIUtilitiesService;
     protected utilitiesService: IUtilitiesService;
-    protected navigationBarService: INavigationBarService;
     protected userPostsService: IUserPostsService;
 
     protected posts: Post[];
@@ -38,17 +38,17 @@ export class UserPostsController {
                 $stateParams: ng.ui.IStateParamsService,
                 DelayExecutionService: IDelayExecutionService,
                 LocalizedStringService: ILocalizedStringService,
+                NavigationBarService: INavigationBarService,
                 UIUtilitiesService: IUIUtilitiesService,
                 UtilitiesService: IUtilitiesService,
-                NavigationBarService: INavigationBarService,
                 UserPostsService: IUserPostsService) {
         this.filter = $filter;
         this.stateParams = $stateParams;
         this.delayExecutionService = DelayExecutionService;
         this.localizedStringService = LocalizedStringService;
+        this.navigationBarService = NavigationBarService;
         this.uiUtilitiesService = UIUtilitiesService;
         this.utilitiesService = UtilitiesService;
-        this.navigationBarService = NavigationBarService;
         this.userPostsService = UserPostsService;
 
         this.name = "UserPostsComponent";

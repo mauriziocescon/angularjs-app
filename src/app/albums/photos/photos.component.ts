@@ -1,10 +1,11 @@
 import {
     ILocalizedStringService,
+    INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
 } from "../../app.module";
 import {
-    INavigationBarService,
+
     ISharedFilterService,
     Logger,
     ResponseWs,
@@ -14,15 +15,15 @@ import { IPhotosService } from "./photos.data-service";
 import { Photo } from "./photos.model";
 
 export class PhotosController {
-    public static $inject = ["$filter", "$stateParams", "LocalizedStringService", "UIUtilitiesService", "UtilitiesService", "NavigationBarService", "PhotosService"];
+    public static $inject = ["$filter", "$stateParams", "LocalizedStringService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "PhotosService"];
     public name: string;
 
     protected filter: ISharedFilterService;
     protected stateParams: ng.ui.IStateParamsService;
     protected localizedStringService: ILocalizedStringService;
+    protected navigationBarService: INavigationBarService;
     protected uiUtilitiesService: IUIUtilitiesService;
     protected utilitiesService: IUtilitiesService;
-    protected navigationBarService: INavigationBarService;
     protected photosService: IPhotosService;
 
     protected photos: Photo[];
@@ -33,16 +34,16 @@ export class PhotosController {
     constructor($filter: ISharedFilterService,
                 $stateParams: ng.ui.IStateParamsService,
                 LocalizedStringService: ILocalizedStringService,
+                NavigationBarService: INavigationBarService,
                 UIUtilitiesService: IUIUtilitiesService,
                 UtilitiesService: IUtilitiesService,
-                NavigationBarService: INavigationBarService,
                 PhotosService: IPhotosService) {
         this.filter = $filter;
         this.stateParams = $stateParams;
         this.localizedStringService = LocalizedStringService;
+        this.navigationBarService = NavigationBarService;
         this.uiUtilitiesService = UIUtilitiesService;
         this.utilitiesService = UtilitiesService;
-        this.navigationBarService = NavigationBarService;
         this.photosService = PhotosService;
 
         this.name = "PhotosComponent";
