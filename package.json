@@ -10,6 +10,7 @@
     "npm": ">=3.10.10"
   },
   "scripts": {
+    "postinstall": "gulp prod --mock=false --strictDi=true",
     "prestart": "gulp prod --mock=false --strictDi=true",
     "start": "http-server ./dist -a localhost -p 8000 -o -c-1 -i false",
     "serve": "gulp default --mock=false --strictDi=false",
