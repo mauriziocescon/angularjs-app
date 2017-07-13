@@ -136,7 +136,7 @@ export class UsersController {
         });
     }
 
-    public goToUserPosts(user: User): void {
+    public goToUserPosts(user: User, event: ng.IAngularEvent): void {
         event.preventDefault();
         event.stopPropagation();
         this.location.path("/user-posts/" + user.id);
