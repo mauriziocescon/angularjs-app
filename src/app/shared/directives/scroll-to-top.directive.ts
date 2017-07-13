@@ -33,7 +33,7 @@ export const mcScrollToTopDirective = ($window: ng.IWindowService, ScrollToServi
     directive.restrict = "A";
     directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
         try {
-            $(element).click(() => {
+            $(element).on("click", () => {
                 ScrollToService.scrollTo(0);
             });
 
