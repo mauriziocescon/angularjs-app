@@ -69,7 +69,7 @@
     "stacktrace-js": "2.0.0"
   },
   "devDependencies": {
-    "@types/angular": "1.6.20",
+    "@types/angular": "1.6.26",
     "@types/angular-animate": "1.5.8",
     "@types/angular-dynamic-locale": "0.1.33",
     "@types/angular-loading-bar": "0.0.32",

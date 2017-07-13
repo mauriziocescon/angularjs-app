@@ -151,13 +151,13 @@ export class UtilitiesService implements IUtilitiesService {
                 $document: ng.IDocumentService,
                 $window: ng.IWindowService,
                 $timeout: ng.ITimeoutService,
-                AngularStats: AngularStats,
+                AngularStatsService: AngularStats,
                 AppConstantsService: IAppConstantsService) {
         this.rootScope = $rootScope;
         this.document = $document;
         this.window = $window;
         this.timeout = $timeout;
-        this.angularStats = AngularStats;
+        this.angularStats = AngularStatsService;
         this.appConstantsService = AppConstantsService;
     }
 
