@@ -17,10 +17,10 @@ export const mcOnMouseWheelDirective = () => {
             const mcOnMouseWheel = "mcOnMouseWheel";
             const mousewheelHandler = scope.$eval(attrs[mcOnMouseWheel]);
 
-            $(element).bind("mousewheel DOMMouseScroll", mousewheelHandler());
+            $(element).on("mousewheel DOMMouseScroll", mousewheelHandler());
 
             scope.$on("$destroy", (event: ng.IAngularEvent) => {
-                $(element).unbind("mousewheel DOMMouseScroll");
+                $(element).off("mousewheel DOMMouseScroll");
             });
         } catch (e) {
             Logger.exception(scope, e);

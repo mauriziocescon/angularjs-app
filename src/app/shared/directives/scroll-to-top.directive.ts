@@ -45,7 +45,7 @@ export const mcScrollToTopDirective = ($window: ng.IWindowService, ScrollToServi
             onScroll(element, attrs);
 
             scope.$on("$destroy", (event: ng.IAngularEvent) => {
-                $(element).unbind("click");
+                $(element).off("click");
                 $window.removeEventListener("scroll", scrollFunc, false);
             });
         } catch (e) {

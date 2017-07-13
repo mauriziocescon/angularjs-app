@@ -100,7 +100,7 @@ export const mcToggleDirective = () => {
                 });
             }
 
-            $(element).click((eventObject: JQueryEventObject) => {
+            $(element).on("click", (eventObject: JQueryEventObject) => {
                 execute(scope, element, attrs, getState(scope, attrs) !== true, eventObject);
             });
 
@@ -109,7 +109,7 @@ export const mcToggleDirective = () => {
                     clearWatcher();
                 }
 
-                $(element).unbind("click");
+                $(element).off("click");
             });
         } catch (e) {
             Logger.exception(scope, e);

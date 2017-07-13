@@ -17,12 +17,12 @@ export const mcFallbackImageUrlDirective = () => {
             const mcFallbackImageUrl = "mcFallbackImageUrl";
             const fallbackImageUrl = scope.$eval(attrs[mcFallbackImageUrl]);
 
-            $(element).bind("error", () => {
+            $(element).on("error", () => {
                 $(element).attr("src", fallbackImageUrl);
             });
 
             scope.$on("$destroy", (event: ng.IAngularEvent) => {
-                $(element).unbind("error");
+                $(element).off("error");
             });
         } catch (e) {
             Logger.exception(scope, e);

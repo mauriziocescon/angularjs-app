@@ -16,14 +16,14 @@ export const mcOnScrollDirective = (UtilitiesService: IUtilitiesService) => {
         try {
             const raw = element[0];
 
-            element.bind("scroll", (eventObject: JQueryEventObject) => {
+            element.on("scroll", (eventObject: JQueryEventObject) => {
                 const mcOnScroll = "mcOnScroll";
                 const callback: () => void = scope.$eval(attrs[mcOnScroll]);
                 UtilitiesService.call(callback, scope, raw.scrollLeft, raw.scrollTop);
             });
 
             scope.$on("$destroy", (event: ng.IAngularEvent) => {
-                element.unbind("scroll");
+                element.off("scroll");
             });
         } catch (e) {
             Logger.exception(scope, e);
