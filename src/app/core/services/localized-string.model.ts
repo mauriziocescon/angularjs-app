@@ -84,7 +84,7 @@ export const LOCALIZED_STRINGS_OBJECT = {
         PHOTOS: "Foto",
         POSTS: "Posts",
         RESET: "Reset",
-        RETRY: "Tocca per ricaricare",
+        RETRY: "Riprova",
         SELECT_LANGUAGE: "Cambia lingua",
         TODOS: "To-do",
         USERS: "Utenti",
