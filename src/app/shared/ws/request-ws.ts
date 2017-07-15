@@ -2,7 +2,7 @@ import * as ng from "angular";
 import { IUtilitiesService } from "../../app.module";
 
 export class RequestWs<T> {
-    public promise: ng.IPromise<T>;
+    public promise: ng.IHttpPromise<T>;
     public canceler: ng.IDeferred<any>;
     public timeout: ng.IPromise<any>;
 

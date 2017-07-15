@@ -78,7 +78,7 @@ export class PhotosService implements IPhotosService {
         this.getPhotosRequests = [];
 
         const promises = ids.map((id: number) => {
-            const request = new RequestWs();
+            const request = new RequestWs<any>();
             this.getPhotosRequests.push(request);
             this.setupGetPhotoRequest(id, request);
             return request.promise;
