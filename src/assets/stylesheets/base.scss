@@ -66,9 +66,11 @@ $input-group-addon-bg: $primary-color;
 }
 
 .go-up {
+  // stylelint-disable at-rule-no-unknown
   @extend .fa;
   @extend .fa-3x;
   @extend .fa-chevron-circle-up;
+  // stylelint-enable at-rule-no-unknown
 
   position: fixed;
   background-size: contain;

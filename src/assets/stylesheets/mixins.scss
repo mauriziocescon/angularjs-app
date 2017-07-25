@@ -1,6 +1,7 @@
 // -------------------------------------------------------
 // Mixins
 
+// stylelint-disable at-rule-no-unknown
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
   -moz-border-radius: $radius;
@@ -13,3 +14,4 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+// stylelint-enable at-rule-no-unknown

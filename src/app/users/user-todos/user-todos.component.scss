@@ -10,7 +10,7 @@
 
     & .todo-check {
       & > .done {
-        @extend .fa-check;
+        @extend .fa-check; // stylelint-disable-line at-rule-no-unknown
 
         opacity: 1;
         transition: opacity 0.5s ease-in-out;
@@ -18,7 +18,7 @@
       }
 
       & > .pending {
-        @extend .fa-close;
+        @extend .fa-close; // stylelint-disable-line at-rule-no-unknown
 
         opacity: 0.6;
         transition: opacity 0.5s ease-in-out;

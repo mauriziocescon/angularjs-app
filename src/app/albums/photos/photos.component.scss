@@ -10,7 +10,7 @@
       width: 30%;
       max-width: 250px;
 
-      @include image-on-background;
+      @include image-on-background; // stylelint-disable-line at-rule-no-unknown
     }
 
     & > .photo-desc {

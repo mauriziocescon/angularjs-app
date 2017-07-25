@@ -13,7 +13,7 @@
     }
 
     & .arrow {
-      @extend .fa-angle-right;
+      @extend .fa-angle-right; // stylelint-disable-line at-rule-no-unknown
 
       color: $primary-color;
     }
