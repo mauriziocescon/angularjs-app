@@ -342,7 +342,8 @@ gulp.task("start-browsersynch", () => {
     return browserSync.init({
         server: {
             files: ["./dist/**", "!./dist/tmp_ts/**"],
-            baseDir: "./dist"
+            baseDir: "./dist",
+            port: 8008,
         }
     });
 });
