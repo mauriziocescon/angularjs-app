@@ -1,4 +1,4 @@
-var frisby = require("frisby");
+const frisby = require("frisby");
 
 /**
  * Take a look at @{Link http://frisbyjs.com/docs/api/}
