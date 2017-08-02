@@ -8,7 +8,7 @@ export let postCommentsRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
     // returns a list of comments for a particular post
     $httpBackend.whenGET((url: string) => {
         return AppConstantsService.Application.MOCK_BACKEND === true &&
-            url.startsWith(AppConstantsService.Application.WS_URL + "/comments");
+            url.startsWith(AppConstantsService.Api.comments);
     }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
 
         const response = [];

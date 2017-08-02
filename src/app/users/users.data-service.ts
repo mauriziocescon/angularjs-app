@@ -60,7 +60,7 @@ export class UsersService implements IUsersService {
         // setup a timeout for the request
         this.getUsersRequest.setupTimeout(this, this.utilitiesService);
 
-        const url = this.appConstantsService.Application.WS_URL + "/users";
+        const url = this.appConstantsService.Api.users;
         this.utilitiesService.logRequest(url);
         const startTime = this.utilitiesService.getTimeFrom1970();
 

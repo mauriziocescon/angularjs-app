@@ -52,7 +52,7 @@ export class PostCommentsService implements IPostCommentsService {
         // setup a timeout for the request
         this.getPostCommentsRequest.setupTimeout(this, this.utilitiesService);
 
-        const url = this.appConstantsService.Application.WS_URL + "/comments";
+        const url = this.appConstantsService.Api.comments;
         this.utilitiesService.logRequest(url);
         const startTime = this.utilitiesService.getTimeFrom1970();
 

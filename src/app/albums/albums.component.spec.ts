@@ -28,7 +28,7 @@ describe("AlbumsController", () => {
 
         // returns a list of albums
         httpBackend.whenGET((url: string) => {
-            return url.startsWith(appConstantsService.Application.WS_URL + "/albums");
+            return url.startsWith(appConstantsService.Api.albums);
         }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
 
             const response = [];

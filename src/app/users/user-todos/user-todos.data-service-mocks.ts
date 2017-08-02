@@ -9,7 +9,7 @@ export let userTodosRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
     // returns the current list of todos per user
     $httpBackend.whenGET((url: string) => {
         return AppConstantsService.Application.MOCK_BACKEND === true &&
-            url.startsWith(AppConstantsService.Application.WS_URL + "/todos");
+            url.startsWith(AppConstantsService.Api.todos);
     }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
 
         const response = [];

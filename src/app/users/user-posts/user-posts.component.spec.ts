@@ -28,7 +28,7 @@ describe("UserPostsController", () => {
 
         // returns a list of posts
         httpBackend.whenGET((url: string) => {
-            return url.startsWith(appConstantsService.Application.WS_URL + "/posts");
+            return url.startsWith(appConstantsService.Api.posts);
         }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
 
             const response = [];

@@ -34,7 +34,7 @@ describe("PhotosController", () => {
 
         // returns one photo
         httpBackend.whenGET((url: string) => {
-            return url.startsWith(appConstantsService.Application.WS_URL + "/photos") &&
+            return url.startsWith(appConstantsService.Api.photos) &&
                 (/(&|\?)id\=/g).test(url) === true;
         }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
 
@@ -64,7 +64,7 @@ describe("PhotosController", () => {
 
         // returns photos for album
         httpBackend.whenGET((url: string) => {
-            return url.startsWith(AppConstantsService.Application.WS_URL + "/photos") && (/(&|\?)albumId\=/g).test(url) === true;
+            return url.startsWith(AppConstantsService.Api.photos) && (/(&|\?)albumId\=/g).test(url) === true;
         }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
 
             const response = [];

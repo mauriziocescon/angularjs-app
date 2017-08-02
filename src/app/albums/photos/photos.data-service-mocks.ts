@@ -9,7 +9,7 @@ export let photosRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
     // returns one photo
     $httpBackend.whenGET((url: string) => {
         return AppConstantsService.Application.MOCK_BACKEND === true &&
-            url.startsWith(AppConstantsService.Application.WS_URL + "/photos") &&
+            url.startsWith(AppConstantsService.Api.photos) &&
             (/(&|\?)id\=/g).test(url) === true;
     }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
 
@@ -40,7 +40,7 @@ export let photosRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
     // returns photos for album
     $httpBackend.whenGET((url: string) => {
         return AppConstantsService.Application.MOCK_BACKEND === true &&
-            url.startsWith(AppConstantsService.Application.WS_URL + "/photos") &&
+            url.startsWith(AppConstantsService.Api.photos) &&
             (/(&|\?)albumId\=/g).test(url) === true;
     }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
 

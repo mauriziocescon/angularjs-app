@@ -9,7 +9,7 @@ export let albumsRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
     // returns a list of albums
     $httpBackend.whenGET((url: string) => {
         return AppConstantsService.Application.MOCK_BACKEND === true &&
-            url.startsWith(AppConstantsService.Application.WS_URL + "/albums");
+            url.startsWith(AppConstantsService.Api.albums);
     }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
 
         const response = [];

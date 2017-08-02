@@ -60,7 +60,7 @@ export class AlbumsService implements IAlbumsService {
         // setup a timeout for the request
         this.getAlbumsRequest.setupTimeout(this, this.utilitiesService);
 
-        const url = this.appConstantsService.Application.WS_URL + "/albums";
+        const url = this.appConstantsService.Api.albums;
         this.utilitiesService.logRequest(url);
         const startTime = this.utilitiesService.getTimeFrom1970();
 

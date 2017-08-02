@@ -60,7 +60,7 @@ export class UserTodosService implements IUserTodosService {
         // setup a timeout for the request
         this.getUserTodosRequest.setupTimeout(this, this.utilitiesService);
 
-        const url = this.appConstantsService.Application.WS_URL + "/todos";
+        const url = this.appConstantsService.Api.todos;
         this.utilitiesService.logRequest(url);
         const startTime = this.utilitiesService.getTimeFrom1970();
 

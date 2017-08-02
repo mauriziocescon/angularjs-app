@@ -7,6 +7,10 @@ import * as Constants from "./app-constants.model";
  */
 export interface IAppConstantsService {
     /**
+     * Api
+     */
+    Api: Constants.Api;
+    /**
      * Application
      */
     Application: Constants.Application;
@@ -29,6 +33,7 @@ export class AppConstantsService {
 
     protected window: ng.IWindowService;
 
+    protected api: Constants.Api;
     protected application: Constants.Application;
     protected languages: Constants.Languages;
     protected localStorageKey: Constants.LocalStorageKey;
@@ -37,10 +42,15 @@ export class AppConstantsService {
     constructor($window: ng.IWindowService) {
         this.window = $window;
 
+        this.api = new Constants.Api();
         this.application = new Constants.Application();
         this.languages = new Constants.Languages();
         this.localStorageKey = new Constants.LocalStorageKey();
         this.validator = new Constants.Validator();
+    }
+
+    public get Api(): Constants.Api {
+        return this.api;
     }
 
     public get Application(): Constants.Application {

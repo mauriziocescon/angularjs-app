@@ -120,7 +120,7 @@ export class PhotosService implements IPhotosService {
         // setup a timeout for the request
         this.getPhotosForAlbumRequests.setupTimeout(this, this.utilitiesService);
 
-        const url = this.appConstantsService.Application.WS_URL + "/photos";
+        const url = this.appConstantsService.Api.photos;
         this.utilitiesService.logRequest(url);
         const startTime = this.utilitiesService.getTimeFrom1970();
 
@@ -176,7 +176,7 @@ export class PhotosService implements IPhotosService {
         // setup a timeout for the request
         request.setupTimeout(this, this.utilitiesService);
 
-        const url = this.appConstantsService.Application.WS_URL + "/photos";
+        const url = this.appConstantsService.Api.photos;
         this.utilitiesService.logRequest(url, config);
 
         // fetch data
