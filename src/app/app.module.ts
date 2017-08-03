@@ -23,6 +23,7 @@ const appModule = angular.module("app", [
     "ngAnimate",
     "ngSanitize",
     "ngTouch",
+    "pascalprecht.translate",
     "tmh.dynamicLocale",
     "ui.bootstrap",
     "ui.router",

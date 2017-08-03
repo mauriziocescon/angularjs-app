@@ -9,7 +9,8 @@ import {
     IUtilitiesService,
 } from "./services/services.module";
 
-export const servicesSetupFunc = (AppLanguageService: IAppLanguageService,
+export const servicesSetupFunc = ($translateService: ng.translate.ITranslateService,
+                                  AppLanguageService: IAppLanguageService,
                                   CacheHelperService: ICacheHelperService,
                                   ConnectionService: IConnectionService,
                                   LocalizedStringService: ILocalizedStringService,
@@ -22,6 +23,9 @@ export const servicesSetupFunc = (AppLanguageService: IAppLanguageService,
     ConnectionService.start();
     LocalizedStringService.start();
     LocationChangeService.start();
+
+    // set language
+    $translateService.use(AppLanguageService.getLanguageId());
 };
 
-servicesSetupFunc.$inject = ["AppLanguageService", "CacheHelperService", "ConnectionService", "LocalizedStringService", "LocationChangeService", "UtilitiesService"];
+servicesSetupFunc.$inject = ["$translate", "AppLanguageService", "CacheHelperService", "ConnectionService", "LocalizedStringService", "LocationChangeService", "UtilitiesService"];

@@ -13,8 +13,8 @@
                 <form class="navbar-form navbar-left hidden-xs">
                     <button type="button" class="btn btn-default fa fa-line-chart" ng-if="$ctrl.canShowAnalysis" uib-popover-html="$ctrl.analysis" popover-class="popover-analysis" popover-append-to-body popover-placement="bottom" popover-trigger="click" popover-is-open="$ctrl.isPopoverOpened" ng-click="$ctrl.isPopoverOpened = !$ctrl.isPopoverOpened"></button>
                 </form>
-                <li><a href="" ng-click="$ctrl.goToUsers()"><span class="fa fa-users menu-icon"></span><mc-localized-string key="USERS"></mc-localized-string></a></li>
-                <li><a href="" ng-click="$ctrl.goToAlbums()"><span class="fa fa-book menu-icon"></span><mc-localized-string key="ALBUMS"></mc-localized-string></a></li>
+                <li><a href="" ng-click="$ctrl.goToUsers()"><span class="fa fa-users menu-icon"></span>{{ "USERS" | translate }}</a></li>
+                <li><a href="" ng-click="$ctrl.goToAlbums()"><span class="fa fa-book menu-icon"></span>{{ "ALBUMS" | translate }}</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ ::$ctrl.selectedLanguageId }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">

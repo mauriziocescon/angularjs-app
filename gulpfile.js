@@ -55,6 +55,9 @@ const paths = {
         "node_modules/bootstrap-sass/assets/fonts/**/",
         "node_modules/font-awesome/fonts/**/"
     ],
+    i18n: [
+        "src/assets/i18n/**/*.json",
+    ],
     htmlTemplatesLint: [
         "src/index.html",
         "src/app*/**/*.html",
@@ -77,6 +80,9 @@ const paths = {
         "angular-sanitize",
         "angular-stats",
         "angular-touch",
+        "angular-translate",
+        "angular-translate-loader-static-files",
+        "angular-translate-storage-local",
         "angular-ui-bootstrap",
         "angular-ui-router",
         "angular-ui-scroll",
@@ -86,7 +92,7 @@ const paths = {
         "ng-infinite-scroll",
         "stacktrace-js"
     ],
-    i18n: [
+    locales: [
         "node_modules/angular-i18n/angular-locale_de.js",
         "node_modules/angular-i18n/angular-locale_en.js",
         "node_modules/angular-i18n/angular-locale_en-gb.js",
@@ -150,9 +156,9 @@ gulp.task("copy-base-files", () => {
         .pipe(gulp.dest("dist/"));
 });
 
-gulp.task("copy-i18n", () => {
-    return gulp.src(paths.i18n)
-        .pipe(gulp.dest("dist/lib/"));
+gulp.task("copy-locales", () => {
+    return gulp.src(paths.locales)
+        .pipe(gulp.dest("dist/locales/"));
 });
 
 gulp.task("cache-uib-templates", () => {
@@ -189,6 +195,11 @@ gulp.task("copy-imgs", () => {
 gulp.task("copy-fonts", () => {
     return gulp.src(paths.fonts)
         .pipe(gulp.dest("dist/fonts/"));
+});
+
+gulp.task("copy-i18n", () => {
+    return gulp.src(paths.i18n)
+        .pipe(gulp.dest("dist/i18n/"));
 });
 
 gulp.task("sass-dev", () => {
@@ -402,11 +413,12 @@ gulp.task("default", () => {
         "bootlint",
         "sass-lint",
         ["copy-base-files",
-            "copy-i18n",
+            "copy-locales",
             "cache-uib-templates",
             "cache-html-templates",
             "copy-imgs",
             "copy-fonts",
+            "copy-i18n",
             "sass-dev",
             "bundle-vendors"
         ],
@@ -430,11 +442,12 @@ gulp.task("test", () => {
         "bootlint",
         "sass-lint",
         ["copy-base-files",
-            "copy-i18n",
+            "copy-locales",
             "cache-uib-templates",
             "cache-html-templates",
             "copy-imgs",
             "copy-fonts",
+            "copy-i18n",
             "sass-dev",
             "bundle-vendors"
         ],
@@ -457,9 +470,10 @@ gulp.task("prod", () => {
         "bootlint",
         "sass-lint",
         ["copy-base-files",
-            "copy-i18n",
+            "copy-locales",
             "copy-imgs",
             "copy-fonts",
+            "copy-i18n",
             "cache-uib-templates",
             "cache-html-templates",
             "sass-prod",
