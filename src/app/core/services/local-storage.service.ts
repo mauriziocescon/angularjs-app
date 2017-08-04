@@ -47,7 +47,7 @@ export class LocalStorageService implements ILocalStorageService {
         this.prefix = this.appConstantsService.Application.APP_NAME;
     }
 
-    public getData(key: Enum): any {
+    public getData<T>(key: Enum): T {
         try {
             const result = localStorage.getItem(this.prefix + "_" + key.toString());
             return result !== undefined ? JSON.parse(result) : undefined;
