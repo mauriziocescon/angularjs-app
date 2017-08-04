@@ -56,7 +56,7 @@ export class NavigationBarController {
 
     public $onInit(): void {
         this.selectedLanguageId = this.appLanguageService.getLanguageId();
-        this.languages = this.appConstantsService.Languages.SUPPORTED_LANG;
+        this.languages = this.appLanguageService.getSupportedLanguagesList();
     }
 
     public $onDestroy(): void {
