@@ -24,12 +24,12 @@
             </div>
         </div>
         <div class="col-xs-12">
-            <div class="full-width-message"><mc-localized-string key="LOAD_COMPLETED"></mc-localized-string></div>
+            <div class="full-width-message">{{ "LOAD_COMPLETED" | translate }}</div>
         </div>
     </div>
 
-    <div class="full-width-message" ng-show="$ctrl.isLoadingData"><mc-localized-string key="LOADING"></mc-localized-string></div>
-    <div class="full-width-message" ng-show="$ctrl.hasNoData"><mc-localized-string key="NO_RESULT"></mc-localized-string></div>
-    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSource()"><mc-localized-string key="RETRY"></mc-localized-string></div>
+    <div class="full-width-message" ng-show="$ctrl.isLoadingData">{{ "LOADING" | translate }}</div>
+    <div class="full-width-message" ng-show="$ctrl.hasNoData">{{ "NO_RESULT" | translate }}</div>
+    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSource()">{{ "RETRY" | translate }}</div>
     <div class="go-up" mc-scroll-to-top></div>
 </div>
