@@ -22,41 +22,41 @@
                             <div class="user-value">{{ ::$ctrl.getUserNameDesc(user) }}</div>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <div class="user-label"><mc-localized-string key="ADDRESS"></mc-localized-string></div>
+                            <div class="user-label">{{ "ADDRESS" | translate }}</div>
                             <div class="user-value">{{ ::$ctrl.getUserAddressDesc(user) }}</div>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <div class="user-label"><mc-localized-string key="EMAIL"></mc-localized-string></div>
+                            <div class="user-label">{{ "EMAIL" | translate }}</div>
                             <div class="user-value">{{ ::user.email }}</div>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <div class="user-label"><mc-localized-string key="PHONE"></mc-localized-string></div>
+                            <div class="user-label">{{ "PHONE" | translate }}</div>
                             <div class="user-value">{{ ::user.phone }}</div>
                         </div>
 
                         <div class="col-xs-12 col-md-6">
-                            <div class="user-label"><mc-localized-string key="WEBSITE"></mc-localized-string></div>
+                            <div class="user-label">{{ "WEBSITE" | translate }}</div>
                             <div class="user-value">{{ ::user.website }}</div>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <div class="user-label"><mc-localized-string key="COMPANY"></mc-localized-string></div>
+                            <div class="user-label">{{ "COMPANY" | translate }}</div>
                             <div class="user-value">{{ ::$ctrl.getUserCompanyDesc(user) }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-2">
-                    <button type="button" class="btn btn-default pull-right" ng-click="$ctrl.goToUserTodos(user, $event)"><mc-localized-string key="TODOS"></mc-localized-string></button>
-                    <button type="button" class="btn btn-default pull-right" ng-click="$ctrl.goToUserPosts(user, $event)"><mc-localized-string key="POSTS"></mc-localized-string></button>
+                    <button type="button" class="btn btn-default pull-right" ng-click="$ctrl.goToUserTodos(user, $event)">{{ "TODOS" | translate }}</button>
+                    <button type="button" class="btn btn-default pull-right" ng-click="$ctrl.goToUserPosts(user, $event)">{{ "POSTS" | translate }}</button>
                 </div>
             </div>
         </div>
         <div class="col-xs-12">
-            <div class="full-width-message"><mc-localized-string key="LOAD_COMPLETED"></mc-localized-string></div>
+            <div class="full-width-message">{{ "LOAD_COMPLETED" | translate }}</div>
         </div>
     </div>
 
-    <div class="full-width-message" ng-show="$ctrl.isLoadingData"><mc-localized-string key="LOADING"></mc-localized-string></div>
-    <div class="full-width-message" ng-show="$ctrl.hasNoData"><mc-localized-string key="NO_RESULT"></mc-localized-string></div>
-    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSource()"><mc-localized-string key="RETRY"></mc-localized-string></div>
+    <div class="full-width-message" ng-show="$ctrl.isLoadingData">{{ "LOADING" | translate }}</div>
+    <div class="full-width-message" ng-show="$ctrl.hasNoData">{{ "NO_RESULT" | translate }}</div>
+    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSource()">{{ "RETRY" | translate }}</div>
     <div class="go-up" mc-scroll-to-top></div>
 </div>
