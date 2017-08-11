@@ -22,11 +22,13 @@ export class NavigationBarController {
     protected languages: string[];
 
     constructor($location: ng.ILocationService,
+                $translate: ng.translate.ITranslateService,
                 AppConstantsService: IAppConstantsService,
                 AppLanguageService: IAppLanguageService,
                 NavigationBarService: INavigationBarService,
                 UtilitiesService: IUtilitiesService) {
         this.location = $location;
+        this.translate = $translate;
         this.appConstantsService = AppConstantsService;
         this.appLanguageService = AppLanguageService;
         this.navigationBarService = NavigationBarService;
