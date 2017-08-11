@@ -4,7 +4,7 @@ import {
     IAppConstantsService,
     IAppLanguageService,
     INavigationBarService,
-    IUtilitiesService
+    IUtilitiesService,
 } from "../../core/services/services.module";
 import { NavigationBarController } from "./navigation-bar.component";
 
