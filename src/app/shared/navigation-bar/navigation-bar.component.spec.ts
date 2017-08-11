@@ -1,6 +1,11 @@
 import * as angular from "angular";
 
-import { IAppConstantsService, IUtilitiesService } from "../../core/services/services.module";
+import {
+    IAppConstantsService,
+    IAppLanguageService,
+    INavigationBarService,
+    IUtilitiesService
+} from "../../core/services/services.module";
 import { NavigationBarController } from "./navigation-bar.component";
 
 // Addition of angular-mocks and jasmine references is done on the gulpfile
@@ -8,12 +13,14 @@ describe("NavigationBarController", () => {
     let httpBackend: ng.IHttpBackendService;
     let componentController: ng.IComponentControllerService;
     let appConstantsService: IAppConstantsService;
+    let appLanguageService: IAppLanguageService;
+    let navigationBarService: INavigationBarService;
     let utilitiesService: IUtilitiesService;
 
     // Set up the module
     beforeEach(angular.mock.module("app"));
 
-    beforeEach(inject(($httpBackend, $componentController, AppConstantsService, UtilitiesService) => {
+    beforeEach(inject(($httpBackend, $componentController, AppConstantsService, AppLanguageService, NavigationBarService, UtilitiesService) => {
 
         // Set up the mock http service responses
         httpBackend = $httpBackend;
@@ -22,6 +29,8 @@ describe("NavigationBarController", () => {
         componentController = $componentController;
 
         appConstantsService = AppConstantsService;
+        appLanguageService = AppLanguageService;
+        navigationBarService = NavigationBarService;
         utilitiesService = UtilitiesService;
     }));
 
