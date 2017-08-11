@@ -1,6 +1,5 @@
 import {
     IDelayExecutionService,
-    ILocalizedStringService,
     INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
@@ -16,14 +15,14 @@ import { IAlbumsService } from "./albums.data-service";
 import { Album } from "./albums.model";
 
 export class AlbumsController {
-    public static $inject = ["$filter", "$state", "DelayExecutionService", "LocalizedStringService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "AlbumsService"];
+    public static $inject = ["$filter", "$state", "$translate", "DelayExecutionService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "AlbumsService"];
     public name: string;
     public textFilter: string;
 
     protected filter: ISharedFilterService;
     protected state: ng.ui.IStateService;
+    protected translate: ng.translate.ITranslateService;
     protected delayExecutionService: IDelayExecutionService;
-    protected localizedStringService: ILocalizedStringService;
     protected navigationBarService: INavigationBarService;
     protected uiUtilitiesService: IUIUtilitiesService;
     protected utilitiesService: IUtilitiesService;
@@ -38,16 +37,16 @@ export class AlbumsController {
 
     constructor($filter: ISharedFilterService,
                 $state: ng.ui.IStateService,
+                $translate: ng.translate.ITranslateService,
                 DelayExecutionService: IDelayExecutionService,
-                LocalizedStringService: ILocalizedStringService,
                 NavigationBarService: INavigationBarService,
                 UIUtilitiesService: IUIUtilitiesService,
                 UtilitiesService: IUtilitiesService,
                 AlbumsService: IAlbumsService) {
         this.filter = $filter;
         this.state = $state;
+        this.translate = $translate;
         this.delayExecutionService = DelayExecutionService;
-        this.localizedStringService = LocalizedStringService;
         this.navigationBarService = NavigationBarService;
         this.uiUtilitiesService = UIUtilitiesService;
         this.utilitiesService = UtilitiesService;
@@ -76,19 +75,17 @@ export class AlbumsController {
         return this.isLoadingData === true || this.loadCompleted === true || this.albums === undefined || this.albums.length === 0;
     }
 
-    public get textFilterPlaceholder(): string {
-        return this.localizedStringService.getLocalizedString("INPUT_TEXT_PLACEHOLDER");
-    }
-
     public get dataSource(): Album[] {
         return this.albums;
     }
 
     public $onInit(): void {
-        this.navigationBarService.setTitle(this.localizedStringService.getLocalizedString("ALBUMS"));
-        this.loadAlbumsKey = new Enum("ALBUMS");
-        this.busy = false;
-        this.loadDataSourceFirstPage();
+        this.translate(["ALBUMS"]).then((translations: any) => {
+            this.navigationBarService.setTitle(translations.ALBUMS);
+            this.loadAlbumsKey = new Enum("ALBUMS");
+            this.busy = false;
+            this.loadDataSourceFirstPage();
+        });
     }
 
     public $onDestroy(): void {
@@ -145,10 +142,14 @@ export class AlbumsController {
             }
             else if (response.hasBeenCanceled() === false) {
                 // we do not notify the user in case of cancel request
-                this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA"), response.getMessage(), this.localizedStringService.getLocalizedString("CLOSE"));
+                this.translate(["ERROR_ACCESS_DATA", "CLOSE"]).then((translations: any) => {
+                    this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA, response.getMessage(), translations.CLOSE);
+                });
             }
         }).catch((reason: any) => {
-            this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA_COMPONENT"), reason.toString(), this.localizedStringService.getLocalizedString("CLOSE"));
+            this.translate(["ERROR_ACCESS_DATA_COMPONENT", "CLOSE"]).then((translations: any) => {
+                this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA_COMPONENT, reason.toString(), translations.CLOSE);
+            });
             Logger.log(reason);
         }).finally(() => {
             this.busy = false;

@@ -1,5 +1,3 @@
-import { IAppLanguageService } from "./core/core.module";
-
 export const appConfigFunc = ($translateProvider: ng.translate.ITranslateProvider,
                               tmhDynamicLocaleProvider: ng.dynamicLocale.tmhDynamicLocaleProvider,
                               cfpLoadingBarProvider: ng.loadingBar.ILoadingBarProvider) => {
