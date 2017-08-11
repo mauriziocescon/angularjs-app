@@ -1,5 +1,4 @@
 import {
-    ILocalizedStringService,
     INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
@@ -14,11 +13,11 @@ import { IPostCommentsService } from "./post-comments.data-service";
 import { Comment } from "./post-comments.model";
 
 export class PostCommentsController {
-    public static $inject = ["$filter", "LocalizedStringService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "PostCommentsService"];
+    public static $inject = ["$filter", "$translate", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "PostCommentsService"];
     public name: string;
 
     protected filter: ISharedFilterService;
-    protected localizedStringService: ILocalizedStringService;
+    protected translate: ng.translate.ITranslateService;
     protected navigationBarService: INavigationBarService;
     protected uiUtilitiesService: IUIUtilitiesService;
     protected utilitiesService: IUtilitiesService;
@@ -29,13 +28,13 @@ export class PostCommentsController {
     protected busy: boolean;
 
     constructor($filter: ISharedFilterService,
-                LocalizedStringService: ILocalizedStringService,
+                $translate: ng.translate.ITranslateService,
                 NavigationBarService: INavigationBarService,
                 UIUtilitiesService: IUIUtilitiesService,
                 UtilitiesService: IUtilitiesService,
                 PostCommentsService: IPostCommentsService) {
         this.filter = $filter;
-        this.localizedStringService = LocalizedStringService;
+        this.translate = $translate;
         this.navigationBarService = NavigationBarService;
         this.uiUtilitiesService = UIUtilitiesService;
         this.utilitiesService = UtilitiesService;
@@ -88,10 +87,14 @@ export class PostCommentsController {
             }
             else if (response.hasBeenCanceled() === false) {
                 // we do not notify the user in case of cancel request
-                this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA"), response.getMessage(), this.localizedStringService.getLocalizedString("CLOSE"));
+                this.translate(["ERROR_ACCESS_DATA", "CLOSE"]).then((translations: any) => {
+                    this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA, response.getMessage(), translations.CLOSE);
+                });
             }
         }).catch((reason: any) => {
-            this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA_COMPONENT"), reason.toString(), this.localizedStringService.getLocalizedString("CLOSE"));
+            this.translate(["ERROR_ACCESS_DATA_COMPONENT", "CLOSE"]).then((translations: any) => {
+                this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA_COMPONENT, reason.toString(), translations.CLOSE);
+            });
             Logger.log(reason);
         }).finally(() => {
             this.busy = false;

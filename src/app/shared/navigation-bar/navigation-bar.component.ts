@@ -3,20 +3,19 @@ import * as ng from "angular";
 import {
     IAppConstantsService,
     IAppLanguageService,
-    ILocalizedStringService,
     INavigationBarService,
     IUtilitiesService,
 } from "../../core/services/services.module";
 
 export class NavigationBarController {
-    public static $inject = ["$location", "AppConstantsService", "AppLanguageService", "LocalizedStringService", "NavigationBarService", "UtilitiesService"];
+    public static $inject = ["$location", "$translate", "AppConstantsService", "AppLanguageService", "NavigationBarService", "UtilitiesService"];
     public name: string;
     public selectedLanguageId: string;
 
     protected location: ng.ILocationService;
+    protected translate: ng.translate.ITranslateService;
     protected appConstantsService: IAppConstantsService;
     protected appLanguageService: IAppLanguageService;
-    protected localizedStringService: ILocalizedStringService;
     protected navigationBarService: INavigationBarService;
     protected utilitiesService: IUtilitiesService;
 
@@ -25,13 +24,11 @@ export class NavigationBarController {
     constructor($location: ng.ILocationService,
                 AppConstantsService: IAppConstantsService,
                 AppLanguageService: IAppLanguageService,
-                LocalizedStringService: ILocalizedStringService,
                 NavigationBarService: INavigationBarService,
                 UtilitiesService: IUtilitiesService) {
         this.location = $location;
         this.appConstantsService = AppConstantsService;
         this.appLanguageService = AppLanguageService;
-        this.localizedStringService = LocalizedStringService;
         this.navigationBarService = NavigationBarService;
         this.utilitiesService = UtilitiesService;
 

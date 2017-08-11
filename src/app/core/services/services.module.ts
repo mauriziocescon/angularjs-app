@@ -6,7 +6,6 @@ import { CacheHelperService, ICacheHelperService } from "./cache-helper.service"
 import { ConnectionService, IConnectionService } from "./connection.service";
 import { DelayExecutionService, IDelayExecutionService } from "./delay-execution.service";
 import { ILocalStorageService, LocalStorageService } from "./local-storage.service";
-import { ILocalizedStringService, LocalizedStringService } from "./localized-string.service";
 import { ILocationChangeService, LocationChangeService } from "./location-change.service";
 import { INavigationBarService, NavigationBarService } from "./navigation-bar.service";
 import { IScrollToService, ScrollToService } from "./scroll-to.service";
@@ -22,7 +21,6 @@ export { ICacheHelperService } from "./cache-helper.service";
 export { IConnectionService } from "./connection.service";
 export { IDelayExecutionService } from "./delay-execution.service";
 export { ILocalStorageService } from "./local-storage.service";
-export { ILocalizedStringService } from "./localized-string.service";
 export { ILocationChangeService } from "./location-change.service";
 export { INavigationBarService } from "./navigation-bar.service";
 export { IScrollToService } from "./scroll-to.service";
@@ -37,7 +35,6 @@ export const mcServices = angular.module("core.mcServices", [])
     .service("ConnectionService", ConnectionService)
     .service("DelayExecutionService", DelayExecutionService)
     .service("LocalStorageService", LocalStorageService)
-    .service("LocalizedStringService", LocalizedStringService)
     .service("LocationChangeService", LocationChangeService)
     .service("NavigationBarService", NavigationBarService)
     .service("ScrollToService", ScrollToService)
