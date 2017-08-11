@@ -27,5 +27,23 @@
   "USERS": "Utenti",
   "WARNING": "Attenzione",
   "WEBSITE": "Website",
-  "YES": "Sì"
+  "YES": "Sì",
+
+
+
+  "_ALBUMS": {
+    "ALBUMS": "Albums",
+  },
+  "_NAVIGATION_BAR": {
+    "ALBUMS": "Albums",
+  },
+  "_PHOTOS": {
+
+  },
+  "_USERS_POSTS": {
+
+  },
+  "_USERS": {
+    "ADDRESS": "Indirizzo",
+  }
 }
