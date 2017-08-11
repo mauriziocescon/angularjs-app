@@ -1,5 +1,4 @@
 import {
-    ILocalizedStringService,
     INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
@@ -15,12 +14,12 @@ import { IPhotosService } from "./photos.data-service";
 import { Photo } from "./photos.model";
 
 export class PhotosController {
-    public static $inject = ["$filter", "$stateParams", "LocalizedStringService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "PhotosService"];
+    public static $inject = ["$filter", "$stateParams", "$translate", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "PhotosService"];
     public name: string;
 
     protected filter: ISharedFilterService;
     protected stateParams: ng.ui.IStateParamsService;
-    protected localizedStringService: ILocalizedStringService;
+    protected translate: ng.translate.ITranslateService;
     protected navigationBarService: INavigationBarService;
     protected uiUtilitiesService: IUIUtilitiesService;
     protected utilitiesService: IUtilitiesService;
@@ -33,14 +32,14 @@ export class PhotosController {
 
     constructor($filter: ISharedFilterService,
                 $stateParams: ng.ui.IStateParamsService,
-                LocalizedStringService: ILocalizedStringService,
+                $translate: ng.translate.ITranslateService,
                 NavigationBarService: INavigationBarService,
                 UIUtilitiesService: IUIUtilitiesService,
                 UtilitiesService: IUtilitiesService,
                 PhotosService: IPhotosService) {
         this.filter = $filter;
         this.stateParams = $stateParams;
-        this.localizedStringService = LocalizedStringService;
+        this.translate = $translate;
         this.navigationBarService = NavigationBarService;
         this.uiUtilitiesService = UIUtilitiesService;
         this.utilitiesService = UtilitiesService;
@@ -74,9 +73,11 @@ export class PhotosController {
     }
 
     public $onInit(): void {
-        this.navigationBarService.setTitle(this.localizedStringService.getLocalizedString("PHOTOS"));
-        this.busy = false;
-        this.loadDataSourceFirstPage();
+        this.translate(["PHOTOS"]).then((translations: any) => {
+            this.navigationBarService.setTitle(translations.PHOTOS);
+            this.busy = false;
+            this.loadDataSourceFirstPage();
+        });
     }
 
     public $onDestroy(): void {
@@ -119,10 +120,14 @@ export class PhotosController {
             }
             else if (response.hasBeenCanceled() === false) {
                 // we do not notify the user in case of cancel request
-                this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA"), response.getMessage(), this.localizedStringService.getLocalizedString("CLOSE"));
+                this.translate(["ERROR_ACCESS_DATA", "CLOSE"]).then((translations: any) => {
+                    this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA, response.getMessage(), translations.CLOSE);
+                });
             }
         }).catch((reason: any) => {
-            this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA_COMPONENT"), reason.toString(), this.localizedStringService.getLocalizedString("CLOSE"));
+            this.translate(["ERROR_ACCESS_DATA_COMPONENT", "CLOSE"]).then((translations: any) => {
+                this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA_COMPONENT, reason.toString(), translations.CLOSE);
+            });
             Logger.log(reason);
         }).finally(() => {
             this.busy = false;

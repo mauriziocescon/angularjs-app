@@ -1,6 +1,5 @@
 import {
     IDelayExecutionService,
-    ILocalizedStringService,
     INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
@@ -16,15 +15,15 @@ import { IUserTodosService } from "./user-todos.data-service";
 import { Todo } from "./user-todos.model";
 
 export class UserTodosController {
-    public static $inject = ["$filter", "$location", "$stateParams", "DelayExecutionService", "LocalizedStringService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "UserTodosService"];
+    public static $inject = ["$filter", "$location", "$stateParams", "$translate", "DelayExecutionService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "UserTodosService"];
     public name: string;
     public textFilter: string;
 
     protected filter: ISharedFilterService;
     protected location: ng.ILocationService;
     protected stateParams: ng.ui.IStateParamsService;
+    protected translate: ng.translate.ITranslateService;
     protected delayExecutionService: IDelayExecutionService;
-    protected localizedStringService: ILocalizedStringService;
     protected navigationBarService: INavigationBarService;
     protected uiUtilitiesService: IUIUtilitiesService;
     protected utilitiesService: IUtilitiesService;
@@ -37,8 +36,8 @@ export class UserTodosController {
     constructor($filter: ISharedFilterService,
                 $location: ng.ILocationService,
                 $stateParams: ng.ui.IStateParamsService,
+                $translate: ng.translate.ITranslateService,
                 DelayExecutionService: IDelayExecutionService,
-                LocalizedStringService: ILocalizedStringService,
                 NavigationBarService: INavigationBarService,
                 UIUtilitiesService: IUIUtilitiesService,
                 UtilitiesService: IUtilitiesService,
@@ -46,8 +45,8 @@ export class UserTodosController {
         this.filter = $filter;
         this.location = $location;
         this.stateParams = $stateParams;
+        this.translate = $translate;
         this.delayExecutionService = DelayExecutionService;
-        this.localizedStringService = LocalizedStringService;
         this.navigationBarService = NavigationBarService;
         this.uiUtilitiesService = UIUtilitiesService;
         this.utilitiesService = UtilitiesService;
@@ -72,19 +71,17 @@ export class UserTodosController {
         return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
     }
 
-    public get textFilterPlaceholder(): string {
-        return this.localizedStringService.getLocalizedString("INPUT_TEXT_PLACEHOLDER");
-    }
-
     public get dataSource(): Todo[] {
         return this.todos;
     }
 
     public $onInit(): void {
-        this.navigationBarService.setTitle(this.localizedStringService.getLocalizedString("TODOS"));
-        this.loadTodosKey = new Enum("TODOS");
-        this.busy = false;
-        this.loadDataSource();
+        this.translate(["TODOS"]).then((translations: any) => {
+            this.navigationBarService.setTitle(this.localizedStringService.getLocalizedString("TODOS"));
+            this.loadTodosKey = new Enum("TODOS");
+            this.busy = false;
+            this.loadDataSource();
+        });
     }
 
     public $onDestroy(): void {
@@ -126,10 +123,14 @@ export class UserTodosController {
             }
             else if (response.hasBeenCanceled() === false) {
                 // we do not notify the user in case of cancel request
-                this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA"), response.getMessage(), this.localizedStringService.getLocalizedString("CLOSE"));
+                this.translate(["ERROR_ACCESS_DATA", "CLOSE"]).then((translations: any) => {
+                    this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA, response.getMessage(), translations.CLOSE);
+                });
             }
         }).catch((reason: any) => {
-            this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA_COMPONENT"), reason.toString(), this.localizedStringService.getLocalizedString("CLOSE"));
+            this.translate(["ERROR_ACCESS_DATA_COMPONENT", "CLOSE"]).then((translations: any) => {
+                this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA_COMPONENT, reason.toString(), translations.CLOSE);
+            });
             Logger.log(reason);
         }).finally(() => {
             this.busy = false;

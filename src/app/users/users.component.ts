@@ -1,6 +1,5 @@
 import {
     IDelayExecutionService,
-    ILocalizedStringService,
     INavigationBarService,
     IUIUtilitiesService,
     IUtilitiesService,
@@ -16,14 +15,14 @@ import { IUsersService } from "./users.data-service";
 import { User } from "./users.model";
 
 export class UsersController {
-    public static $inject = ["$filter", "$location", "DelayExecutionService", "LocalizedStringService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "UsersService"];
+    public static $inject = ["$filter", "$location", "$translate", "DelayExecutionService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "UsersService"];
     public name: string;
     public textFilter: string;
 
     protected filter: ISharedFilterService;
     protected location: ng.ILocationService;
+    protected translate: ng.translate.ITranslateService;
     protected delayExecutionService: IDelayExecutionService;
-    protected localizedStringService: ILocalizedStringService;
     protected navigationBarService: INavigationBarService;
     protected uiUtilitiesService: IUIUtilitiesService;
     protected utilitiesService: IUtilitiesService;
@@ -35,16 +34,16 @@ export class UsersController {
 
     constructor($filter: ISharedFilterService,
                 $location: ng.ILocationService,
+                $translate: ng.translate.ITranslateService,
                 DelayExecutionService: IDelayExecutionService,
-                LocalizedStringService: ILocalizedStringService,
                 NavigationBarService: INavigationBarService,
                 UIUtilitiesService: IUIUtilitiesService,
                 UtilitiesService: IUtilitiesService,
                 UsersService: IUsersService) {
         this.filter = $filter;
         this.location = $location;
+        this.translate = $translate;
         this.delayExecutionService = DelayExecutionService;
-        this.localizedStringService = LocalizedStringService;
         this.navigationBarService = NavigationBarService;
         this.uiUtilitiesService = UIUtilitiesService;
         this.utilitiesService = UtilitiesService;
@@ -69,19 +68,17 @@ export class UsersController {
         return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
     }
 
-    public get textFilterPlaceholder(): string {
-        return this.localizedStringService.getLocalizedString("INPUT_TEXT_PLACEHOLDER");
-    }
-
     public get dataSource(): User[] {
         return this.users;
     }
 
     public $onInit(): void {
-        this.navigationBarService.setTitle(this.localizedStringService.getLocalizedString("USERS"));
-        this.loadUsersKey = new Enum("USERS");
-        this.busy = false;
-        this.loadDataSource();
+        this.translate(["USERS"]).then((translations: any) => {
+            this.navigationBarService.setTitle(translations.USERS);
+            this.loadUsersKey = new Enum("USERS");
+            this.busy = false;
+            this.loadDataSource();
+        });
     }
 
     public $onDestroy(): void {
@@ -126,10 +123,14 @@ export class UsersController {
             }
             else if (response.hasBeenCanceled() === false) {
                 // we do not notify the user in case of cancel request
-                this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA"), response.getMessage(), this.localizedStringService.getLocalizedString("CLOSE"));
+                this.translate(["ERROR_ACCESS_DATA", "CLOSE"]).then((translations: any) => {
+                    this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA, response.getMessage(), translations.CLOSE);
+                });
             }
         }).catch((reason: any) => {
-            this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA_COMPONENT"), reason.toString(), this.localizedStringService.getLocalizedString("CLOSE"));
+            this.translate(["ERROR_ACCESS_DATA_COMPONENT", "CLOSE"]).then((translations: any) => {
+                this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA_COMPONENT, reason.toString(), translations.CLOSE);
+            });
             Logger.log(reason);
         }).finally(() => {
             this.busy = false;
