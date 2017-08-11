@@ -77,7 +77,7 @@ export class UserTodosController {
 
     public $onInit(): void {
         this.translate(["TODOS"]).then((translations: any) => {
-            this.navigationBarService.setTitle(this.localizedStringService.getLocalizedString("TODOS"));
+            this.navigationBarService.setTitle(translations.TODOS);
             this.loadTodosKey = new Enum("TODOS");
             this.busy = false;
             this.loadDataSource();
