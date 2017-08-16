@@ -29,8 +29,8 @@ export let photosRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
         photo.albumId = UtilitiesService.parseQueryString(url).albumId;
         photo.id = params.id;
         photo.title = fakeText.substring(0, (Math.random() * 10000) % 20);
-        photo.url = ["imgs/chevron-circle-up.svg", "imgs/chevron-down.svg", "imgs/chevron-up.svg", "imgs/chevron-left.svg", "imgs/chevron-right.svg"][Math.round(Math.random() * 1000) % 5];
-        photo.thumbnailUrl = ["imgs/chevron-circle-up.svg", "imgs/chevron-down.svg", "imgs/chevron-up.svg", "imgs/chevron-left.svg", "imgs/chevron-right.svg"][Math.round(Math.random() * 1000) % 5];
+        photo.url = ["chevron-circle-up.svg", "chevron-down.svg", "chevron-up.svg", "chevron-left.svg", "chevron-right.svg"][Math.round(Math.random() * 1000) % 5];
+        photo.thumbnailUrl = ["chevron-circle-up.svg", "chevron-down.svg", "chevron-up.svg", "chevron-left.svg", "chevron-right.svg"][Math.round(Math.random() * 1000) % 5];
 
         response.push(photo);
 
@@ -62,8 +62,8 @@ export let photosRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
             photo.albumId = parseInt(params.albumId, null);
             photo.id = i;
             photo.title = fakeText.substring(0, (Math.random() * 10000) % 20);
-            photo.url = ["imgs/chevron-circle-up.svg", "imgs/chevron-down.svg", "imgs/chevron-up.svg", "imgs/chevron-left.svg", "imgs/chevron-right.svg"][Math.round(Math.random() * 1000) % 5];
-            photo.thumbnailUrl = ["imgs/chevron-circle-up.svg", "imgs/chevron-down.svg", "imgs/chevron-up.svg", "imgs/chevron-left.svg", "imgs/chevron-right.svg"][Math.round(Math.random() * 1000) % 5];
+            photo.url = ["chevron-circle-up.svg", "chevron-down.svg", "chevron-up.svg", "chevron-left.svg", "chevron-right.svg"][Math.round(Math.random() * 1000) % 5];
+            photo.thumbnailUrl = ["chevron-circle-up.svg", "chevron-down.svg", "chevron-up.svg", "chevron-left.svg", "chevron-right.svg"][Math.round(Math.random() * 1000) % 5];
 
             response.push(photo);
         }
