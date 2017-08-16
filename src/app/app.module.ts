@@ -1,11 +1,6 @@
 import * as angular from "angular";
 import { angularStats } from "angular-stats";
 
-// locales
-import "angular-i18n/angular-locale_de.js";
-import "angular-i18n/angular-locale_en.js";
-import "angular-i18n/angular-locale_it.js";
-
 import { core } from "./core/core.module";
 import { shared } from "./shared/shared.module";
 

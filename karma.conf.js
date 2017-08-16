@@ -10,10 +10,10 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            "dist/js/vendors*.js",
-            "dist/js/app*.js",
-            "dist/js/templates*.js",
-            "dist/js/uibtemplates*.js"
+            "dist/vendors*.js",
+            "dist/app*.js",
+            "dist/templates*.js",
+            "dist/uibtemplates*.js"
         ],
 
         // list of files to exclude

@@ -35,7 +35,7 @@ const yargs = require("yargs");
 const package = JSON.parse(fs.readFileSync("./package.json"));
 const version = package.version;
 const mock = yargs.argv.mock;
-const strictDi = yargs.argv.strictDi;
+const prod = yargs.argv.prod;
 
 const paths = {
     baseFiles: [
@@ -52,7 +52,6 @@ const paths = {
     imgs: ["src/assets*/imgs/**/"],
     fonts: [
         "src/assets/fonts/**/",
-        "node_modules/bootstrap-sass/assets/fonts/**/",
         "node_modules/font-awesome/fonts/**/"
     ],
     i18n: [
@@ -106,8 +105,10 @@ const paths = {
 /* Utilities                */
 /*--------------------------*/
 
-function appendVersionToFileName(fileName) {
-    return fileName.substring(0, fileName.lastIndexOf(".")) + "-" + version + fileName.substring(fileName.lastIndexOf("."));
+const hash = new Date().getTime() + "-" + version;
+
+function appendHashToFileName(fileName) {
+    return fileName.substring(0, fileName.lastIndexOf(".")) + "-" + hash + fileName.substring(fileName.lastIndexOf("."));
 }
 
 const watchedBrowserify = watchify(browserify({
@@ -151,7 +152,7 @@ gulp.task("sass-lint", () => {
 gulp.task("copy-base-files", () => {
     return gulp.src(paths.baseFiles)
         .pipe(gulpPreprocess({
-            context: {"VERSION": version}
+            context: {"HASH": hash}
         }))
         .pipe(gulp.dest("dist/"));
 });
@@ -167,34 +168,34 @@ gulp.task("cache-uib-templates", () => {
             const arr = path.dirname.split("/");
             path.dirname = arr[arr.length - 1] || arr[arr.length - 2];
         }))
-        .pipe(gulpAngularTemplateCache(appendVersionToFileName("uibtemplates.js"), {
+        .pipe(gulpAngularTemplateCache(appendHashToFileName("uibtemplates.js"), {
             root: "uib/template",
             module: "ui.bootstrap.tpls",
             standalone: false
         }))
-        .pipe(gulp.dest("dist/js/"));
+        .pipe(gulp.dest("dist/"));
 });
 
 gulp.task("cache-html-templates", () => {
     return gulp.src(paths.htmlTemplates)
         .pipe(gulpRename({dirname: ""}))
-        .pipe(gulpAngularTemplateCache(appendVersionToFileName("templates.js"), {
+        .pipe(gulpAngularTemplateCache(appendHashToFileName("templates.js"), {
             root: "",
             module: "app-templates",
             standalone: true
         }))
-        .pipe(gulp.dest("dist/js/"));
+        .pipe(gulp.dest("dist/"));
 });
 
 gulp.task("copy-imgs", () => {
     return gulp.src(paths.imgs)
         .pipe(gulpFlatten())
-        .pipe(gulp.dest("dist/imgs/"));
+        .pipe(gulp.dest("dist/"));
 });
 
 gulp.task("copy-fonts", () => {
     return gulp.src(paths.fonts)
-        .pipe(gulp.dest("dist/fonts/"));
+        .pipe(gulp.dest("dist/"));
 });
 
 gulp.task("copy-i18n", () => {
@@ -206,7 +207,7 @@ gulp.task("sass-dev", () => {
     return gulp.src(paths.sass)
         .pipe(gulpSourcemaps.init({loadMaps: true}))
         .pipe(gulpSass().on("error", gulpSass.logError))
-        .pipe(gulpRename(appendVersionToFileName("app.css")))
+        .pipe(gulpRename(appendHashToFileName("app.css")))
         .pipe(gulpSourcemaps.mapSources((sourcePath, file) => {
             if (sourcePath.startsWith("node_modules")) {
                 return sourcePath;
@@ -214,7 +215,7 @@ gulp.task("sass-dev", () => {
             return "../src/" + sourcePath;
         }))
         .pipe(gulpSourcemaps.write("./"))
-        .pipe(gulp.dest("dist/css/"));
+        .pipe(gulp.dest("dist/"));
 });
 
 gulp.task("sass-prod", () => {
@@ -225,7 +226,7 @@ gulp.task("sass-prod", () => {
             console.log(details.name + ": " + details.stats.originalSize);
             console.log(details.name + ": " + details.stats.minifiedSize);
         }))
-        .pipe(gulpRename(appendVersionToFileName("app.css")))
+        .pipe(gulpRename(appendHashToFileName("app.css")))
         .pipe(gulpSourcemaps.mapSources((sourcePath, file) => {
             if (sourcePath.startsWith("node_modules")) {
                 return sourcePath;
@@ -233,7 +234,7 @@ gulp.task("sass-prod", () => {
             return "../src/" + sourcePath;
         }))
         .pipe(gulpSourcemaps.write("./"))
-        .pipe(gulp.dest("dist/css/"));
+        .pipe(gulp.dest("dist/"));
 });
 
 gulp.task("bundle-vendors", () => {
@@ -242,7 +243,7 @@ gulp.task("bundle-vendors", () => {
     })
         .require(paths.dependencies)
         .bundle()
-        .pipe(vinylSourceStream(appendVersionToFileName("vendors.js")))
+        .pipe(vinylSourceStream(appendHashToFileName("vendors.js")))
         .pipe(vinylBuffer())
         .pipe(gulpSourcemaps.init({loadMaps: true}))
         .pipe(gulpUglify({mangle: false}))
@@ -253,14 +254,14 @@ gulp.task("bundle-vendors", () => {
             return "../src/" + sourcePath;
         }))
         .pipe(gulpSourcemaps.write("./"))
-        .pipe(gulp.dest("dist/js/"));
+        .pipe(gulp.dest("dist/"));
 });
 
 gulp.task("preprocess-ts", () => {
     return gulp.src(paths.preprocessTs)
         .pipe(gulpPreprocess({
             includeExtensions: [".tsx", ".ts"],
-            context: {"MOCK_BACKEND": mock, "STRICT_DI": strictDi}
+            context: {"MOCK_BACKEND": mock, "PROD": prod}
         }))
         .pipe(gulp.dest("dist/tmp_ts/"));
 });
@@ -283,7 +284,7 @@ gulp.task("compile-ts-dev", () => {
         .on("error", (e) => {
             gulpUtil.log(gulpUtil.colors.red("Bundle error:", e.message));
         })
-        .pipe(vinylSourceStream(appendVersionToFileName("app.js")))
+        .pipe(vinylSourceStream(appendHashToFileName("app.js")))
         .pipe(vinylBuffer())
         .pipe(gulpSourcemaps.init({loadMaps: true}))
         .pipe(gulpSourcemaps.mapSources((sourcePath, file) => {
@@ -291,7 +292,7 @@ gulp.task("compile-ts-dev", () => {
             return "../src/" + sourcePath.substring(12);
         }))
         .pipe(gulpSourcemaps.write("./"))
-        .pipe(gulp.dest("dist/js/"));
+        .pipe(gulp.dest("dist/"));
 });
 
 gulp.task("compile-ts-spec", () => {
@@ -306,7 +307,7 @@ gulp.task("compile-ts-spec", () => {
         .plugin(tsify)
         .transform(babelify, {presets: ["es2015"], extensions: [".tsx", ".ts"]})
         .bundle()
-        .pipe(vinylSourceStream(appendVersionToFileName("app.js")))
+        .pipe(vinylSourceStream(appendHashToFileName("app.js")))
         .pipe(vinylBuffer())
         .pipe(gulpSourcemaps.init({loadMaps: true}))
         .pipe(gulpSourcemaps.mapSources((sourcePath, file) => {
@@ -314,7 +315,7 @@ gulp.task("compile-ts-spec", () => {
             return "../src/" + sourcePath.substring(12);
         }))
         .pipe(gulpSourcemaps.write("./"))
-        .pipe(gulp.dest("dist/js/"));
+        .pipe(gulp.dest("dist/"));
 });
 
 gulp.task("compile-ts-prod", () => {
@@ -329,7 +330,7 @@ gulp.task("compile-ts-prod", () => {
         .plugin(tsify)
         .transform(babelify, {presets: ["es2015"], extensions: [".tsx", ".ts"]})
         .bundle()
-        .pipe(vinylSourceStream(appendVersionToFileName("app.js")))
+        .pipe(vinylSourceStream(appendHashToFileName("app.js")))
         .pipe(vinylBuffer())
         .pipe(gulpNgAnnotate())
         .pipe(gulpSourcemaps.init({loadMaps: true}))
@@ -339,13 +340,13 @@ gulp.task("compile-ts-prod", () => {
             return "../src/" + sourcePath.substring(12);
         }))
         .pipe(gulpSourcemaps.write("./"))
-        .pipe(gulp.dest("dist/js/"));
+        .pipe(gulp.dest("dist/"));
 });
 
 gulp.task("injectFileNames", () => {
     return gulp.src("./dist/index.html")
-        .pipe(gulpInject(gulp.src(["./dist/js/vendors*.js"]), {relative: true, name: "head"}))
-        .pipe(gulpInject(gulp.src(["./dist/js/**/*js", "./dist/css/**/*.css", "!./dist/js/vendors*.js"]), {relative: true}))
+        .pipe(gulpInject(gulp.src(["./dist/vendors*.js"]), {relative: true, name: "head"}))
+        .pipe(gulpInject(gulp.src(["./dist/**/*js", "./dist/**/*.css", "!./dist/vendors*.js"]), {relative: true}))
         .pipe(gulp.dest("./dist"));
 });
 

@@ -37,7 +37,7 @@ class Main {
     }
 
     protected static loadAngular(): void {
-        const config: ng.IAngularBootstrapConfig = {strictDi: /* @echo STRICT_DI */};
+        const config: ng.IAngularBootstrapConfig = {strictDi: true};
 
         // tslint:disable:no-consecutive-blank-lines
 
@@ -51,8 +51,10 @@ class Main {
 
         // tslint:enable:no-consecutive-blank-lines
 
+        // @if PROD = "true"
         // register service worker
-        // Main.registerServiceWorker();
+        Main.registerServiceWorker();
+        // @endif
     }
 
     protected static registerServiceWorker(): void {

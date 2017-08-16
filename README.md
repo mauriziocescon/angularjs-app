@@ -21,7 +21,7 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 ## Progressive web app 
 
-1. The app contains a [manifest.json](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/) and the entire [service-worker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers) business in order to cache the app (by default sw is disabled: uncomment ``Main.registerServiceWorker();`` to have it working)
+1. The app contains a [manifest.json](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/) and the entire [service-worker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers) business in order to cache the app (sw is enabled only for ``npm run build``)
 
 ## Libs & Tooling
 
