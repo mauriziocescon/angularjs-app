@@ -74,7 +74,7 @@ export class UserPostsController {
     }
 
     public $onInit(): void {
-        this.translate(["POSTS"]).then((translations: any) => {
+        this.translate(["USER_POSTS.POSTS"]).then((translations: any) => {
             this.navigationBarService.setTitle(translations.POSTS);
             this.loadPostsKey = new Enum("POSTS");
             this.busy = false;
@@ -129,13 +129,13 @@ export class UserPostsController {
             }
             else if (response.hasBeenCanceled() === false) {
                 // we do not notify the user in case of cancel request
-                this.translate(["ERROR_ACCESS_DATA", "CLOSE"]).then((translations: any) => {
-                    this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA, response.getMessage(), translations.CLOSE);
+                this.translate(["USER_POSTS.ERROR_ACCESS_DATA", "USER_POSTS.CLOSE"]).then((translations: any) => {
+                    this.uiUtilitiesService.modalAlert(translations["USER_POSTS.ERROR_ACCESS_DATA"], response.getMessage(), translations["USER_POSTS.CLOSE"]);
                 });
             }
         }).catch((reason: any) => {
-            this.translate(["ERROR_ACCESS_DATA_COMPONENT", "CLOSE"]).then((translations: any) => {
-                this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA_COMPONENT, reason.toString(), translations.CLOSE);
+            this.translate(["USER_POSTS.ERROR_ACCESS_DATA_COMPONENT", "USER_POSTS.CLOSE"]).then((translations: any) => {
+                this.uiUtilitiesService.modalAlert(translations["USER_POSTS.ERROR_ACCESS_DATA"], reason.toString(), translations["USER_POSTS.CLOSE"]);
             });
             Logger.log(reason);
         }).finally(() => {

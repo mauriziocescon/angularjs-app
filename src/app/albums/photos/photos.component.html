@@ -11,9 +11,9 @@
 
     <div class="clearfix"></div>
 
-    <div class="full-width-message" ng-show="$ctrl.isLoadingData">{{ "LOADING" | translate }}</div>
-    <div class="full-width-message" ng-show="$ctrl.hasNoData">{{ "NO_RESULT" | translate }}</div>
-    <div class="full-width-message" ng-show="$ctrl.isLoadCompleted">{{ "LOAD_COMPLETED" | translate }}</div>
-    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSourceFirstPage()">{{ "RETRY" | translate }}</div>
+    <div class="full-width-message" ng-show="$ctrl.isLoadingData">{{ "PHOTOS.LOADING" | translate }}</div>
+    <div class="full-width-message" ng-show="$ctrl.hasNoData">{{ "PHOTOS.NO_RESULT" | translate }}</div>
+    <div class="full-width-message" ng-show="$ctrl.isLoadCompleted">{{ "PHOTOS.LOAD_COMPLETED" | translate }}</div>
+    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSourceFirstPage()">{{ "PHOTOS.RETRY" | translate }}</div>
     <div class="go-up" mc-scroll-to-top></div>
 </div>

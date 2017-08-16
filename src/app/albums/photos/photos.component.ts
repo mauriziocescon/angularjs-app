@@ -73,8 +73,8 @@ export class PhotosController {
     }
 
     public $onInit(): void {
-        this.translate(["PHOTOS"]).then((translations: any) => {
-            this.navigationBarService.setTitle(translations.PHOTOS);
+        this.translate(["PHOTOS.PHOTOS"]).then((translations: any) => {
+            this.navigationBarService.setTitle(translations["PHOTOS.PHOTOS"]);
             this.busy = false;
             this.loadDataSourceFirstPage();
         });
@@ -120,13 +120,13 @@ export class PhotosController {
             }
             else if (response.hasBeenCanceled() === false) {
                 // we do not notify the user in case of cancel request
-                this.translate(["ERROR_ACCESS_DATA", "CLOSE"]).then((translations: any) => {
-                    this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA, response.getMessage(), translations.CLOSE);
+                this.translate(["PHOTOS.ERROR_ACCESS_DATA", "PHOTOS.CLOSE"]).then((translations: any) => {
+                    this.uiUtilitiesService.modalAlert(translations["PHOTOS.ERROR_ACCESS_DATA"], response.getMessage(), translations["PHOTOS.CLOSE"]);
                 });
             }
         }).catch((reason: any) => {
-            this.translate(["ERROR_ACCESS_DATA_COMPONENT", "CLOSE"]).then((translations: any) => {
-                this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA_COMPONENT, reason.toString(), translations.CLOSE);
+            this.translate(["PHOTOS.ERROR_ACCESS_DATA_COMPONENT", "PHOTOS.CLOSE"]).then((translations: any) => {
+                this.uiUtilitiesService.modalAlert(translations["PHOTOS.ERROR_ACCESS_DATA"], reason.toString(), translations["PHOTOS.CLOSE"]);
             });
             Logger.log(reason);
         }).finally(() => {

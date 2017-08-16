@@ -1,49 +1,70 @@
 {
-  "ADDRESS": "Indirizzo",
-  "ALBUMS": "Albums",
-  "BACKWARD": "Indietro",
-  "CANCEL": "Annulla",
-  "CLOSE": "Chiudi",
-  "COMPANY": "Azienda",
-  "DATE": "Data",
-  "DESCRIPTION": "Descrizione",
-  "EMAIL": "Email",
-  "ERROR_ACCESS_DATA": "Errore accesso ai dati",
-  "FORWARD": "Avanti",
-  "INPUT_TEXT_PLACEHOLDER": "Inserisci testo",
-  "LOADING": "Caricamento...",
-  "LOAD_COMPLETED": "Caricamento completato",
-  "NAME": "Nome",
-  "NO": "No",
-  "NO_RESULT": "Vuoto",
-  "OK": "Ok",
-  "PHONE": "Telefono",
-  "PHOTOS": "Foto",
-  "POSTS": "Posts",
-  "RESET": "Reset",
-  "RETRY": "Riprova",
-  "SELECT_LANGUAGE": "Cambia lingua",
-  "TODOS": "To-do",
-  "USERS": "Utenti",
-  "WARNING": "Attenzione",
-  "WEBSITE": "Website",
-  "YES": "Sì",
-
-
-
-  "_ALBUMS": {
-    "ALBUMS": "Albums"
+  "ALBUMS": {
+    "ALBUMS": "Albums",
+    "CLOSE": "Chiudi",
+    "ERROR_ACCESS_DATA": "Errore accesso ai dati",
+    "INPUT_TEXT_PLACEHOLDER": "Inserisci testo",
+    "LOAD_COMPLETED": "Caricamento completato",
+    "LOADING": "Caricamento...",
+    "NO_RESULT": "Vuoto",
+    "RETRY": "Riprova"
   },
-  "_NAVIGATION_BAR": {
-    "ALBUMS": "Albums"
+  "NAVIGATION_BAR": {
+    "ALBUMS": "Albums",
+    "USERS": "Utenti"
   },
-  "_PHOTOS": {
-
+  "PHOTOS": {
+    "CLOSE": "Chiudi",
+    "ERROR_ACCESS_DATA": "Errore accesso ai dati",
+    "LOAD_COMPLETED": "Caricamento completato",
+    "LOADING": "Caricamento...",
+    "NO_RESULT": "Vuoto",
+    "PHOTOS": "Foto",
+    "RETRY": "Riprova"
   },
-  "_USERS_POSTS": {
-
+  "POST_COMMENTS": {
+    "CLOSE": "Chiudi",
+    "ERROR_ACCESS_DATA": "Errore accesso ai dati",
+    "LOADING": "Caricamento...",
+    "NO_RESULT": "Vuoto",
+    "RETRY": "Riprova"
   },
-  "_USERS": {
-    "ADDRESS": "Indirizzo"
+  "USER_POSTS": {
+    "CLOSE": "Chiudi",
+    "ERROR_ACCESS_DATA": "Errore accesso ai dati",
+    "INPUT_TEXT_PLACEHOLDER": "Inserisci testo",
+    "LOAD_COMPLETED": "Caricamento completato",
+    "LOADING": "Caricamento...",
+    "NO_RESULT": "Vuoto",
+    "POSTS": "Posts",
+    "RETRY": "Riprova"
+  },
+  "USER_TODOS": {
+    "CLOSE": "Chiudi",
+    "ERROR_ACCESS_DATA": "Errore accesso ai dati",
+    "INPUT_TEXT_PLACEHOLDER": "Inserisci testo",
+    "LOAD_COMPLETED": "Caricamento completato",
+    "LOADING": "Caricamento...",
+    "NO_RESULT": "Vuoto",
+    "TODOS": "To-do",
+    "RETRY": "Riprova"
+  },
+  "USERS": {
+    "ADDRESS": "Indirizzo",
+    "CLOSE": "Chiudi",
+    "COMPANY": "Azienda",
+    "EMAIL": "Email",
+    "ERROR_ACCESS_DATA": "Errore accesso ai dati",
+    "INPUT_TEXT_PLACEHOLDER": "Inserisci testo",
+    "LOAD_COMPLETED": "Caricamento completato",
+    "LOADING": "Caricamento...",
+    "NAME": "Nome",
+    "NO_RESULT": "Vuoto",
+    "PHONE": "Telefono",
+    "POSTS": "Posts",
+    "RETRY": "Riprova",
+    "TODOS": "To-do",
+    "USERS": "Utenti",
+    "WEBSITE": "Website"
   }
 }

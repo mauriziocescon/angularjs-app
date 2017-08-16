@@ -87,13 +87,13 @@ export class PostCommentsController {
             }
             else if (response.hasBeenCanceled() === false) {
                 // we do not notify the user in case of cancel request
-                this.translate(["ERROR_ACCESS_DATA", "CLOSE"]).then((translations: any) => {
-                    this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA, response.getMessage(), translations.CLOSE);
+                this.translate(["POST_COMMENTS.ERROR_ACCESS_DATA", "POST_COMMENTS.CLOSE"]).then((translations: any) => {
+                    this.uiUtilitiesService.modalAlert(translations["POST_COMMENTS.ERROR_ACCESS_DATA"], response.getMessage(), translations["POST_COMMENTS.CLOSE"]);
                 });
             }
         }).catch((reason: any) => {
-            this.translate(["ERROR_ACCESS_DATA_COMPONENT", "CLOSE"]).then((translations: any) => {
-                this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA_COMPONENT, reason.toString(), translations.CLOSE);
+            this.translate(["POST_COMMENTS.ERROR_ACCESS_DATA_COMPONENT", "POST_COMMENTS.CLOSE"]).then((translations: any) => {
+                this.uiUtilitiesService.modalAlert(translations["POST_COMMENTS.ERROR_ACCESS_DATA"], reason.toString(), translations["POST_COMMENTS.CLOSE"]);
             });
             Logger.log(reason);
         }).finally(() => {

@@ -76,8 +76,8 @@ export class UserTodosController {
     }
 
     public $onInit(): void {
-        this.translate(["TODOS"]).then((translations: any) => {
-            this.navigationBarService.setTitle(translations.TODOS);
+        this.translate(["USER_TODOS.TODOS"]).then((translations: any) => {
+            this.navigationBarService.setTitle(translations["USER_TODOS.TODOS"]);
             this.loadTodosKey = new Enum("TODOS");
             this.busy = false;
             this.loadDataSource();
@@ -123,13 +123,13 @@ export class UserTodosController {
             }
             else if (response.hasBeenCanceled() === false) {
                 // we do not notify the user in case of cancel request
-                this.translate(["ERROR_ACCESS_DATA", "CLOSE"]).then((translations: any) => {
-                    this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA, response.getMessage(), translations.CLOSE);
+                this.translate(["USER_TODOS.ERROR_ACCESS_DATA", "USER_TODOS.CLOSE"]).then((translations: any) => {
+                    this.uiUtilitiesService.modalAlert(translations["USER_TODOS.ERROR_ACCESS_DATA"], response.getMessage(), translations["USER_TODOS.CLOSE"]);
                 });
             }
         }).catch((reason: any) => {
-            this.translate(["ERROR_ACCESS_DATA_COMPONENT", "CLOSE"]).then((translations: any) => {
-                this.uiUtilitiesService.modalAlert(translations.ERROR_ACCESS_DATA_COMPONENT, reason.toString(), translations.CLOSE);
+            this.translate(["USER_TODOS.ERROR_ACCESS_DATA_COMPONENT", "USER_TODOS.CLOSE"]).then((translations: any) => {
+                this.uiUtilitiesService.modalAlert(translations["USER_TODOS.ERROR_ACCESS_DATA"], reason.toString(), translations["USER_TODOS.CLOSE"]);
             });
             Logger.log(reason);
         }).finally(() => {
