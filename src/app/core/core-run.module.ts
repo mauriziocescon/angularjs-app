@@ -15,7 +15,7 @@ export const servicesSetupFunc = ($translateService: ng.translate.ITranslateServ
                                   LocationChangeService: ILocationChangeService,
                                   UtilitiesService: IUtilitiesService) => {
     // setup services
-    // Logger.log("ANGULAR CORE OK  " + UtilitiesService.getNow().toISOString());
+    Logger.log("ANGULAR CORE OK  " + UtilitiesService.getNow().toISOString());
     AppLanguageService.start();
     CacheHelperService.start();
     ConnectionService.start();

@@ -5,6 +5,7 @@ export const appConfigFunc = ($translateProvider: ng.translate.ITranslateProvide
         prefix: "i18n/",
         suffix: ".json",
     });
+    $translateProvider.preferredLanguage("en");
     tmhDynamicLocaleProvider.localeLocationPattern("locales/angular-locale_{{locale}}.js");
     cfpLoadingBarProvider.includeSpinner = false;
 };
