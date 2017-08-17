@@ -75,7 +75,7 @@ export class UserPostsController {
 
     public $onInit(): void {
         this.translate(["USER_POSTS.POSTS"]).then((translations: any) => {
-            this.navigationBarService.setTitle(translations.POSTS);
+            this.navigationBarService.setTitle(translations["USER_POSTS.POSTS"]);
             this.loadPostsKey = new Enum("POSTS");
             this.busy = false;
             this.loadDataSource();
