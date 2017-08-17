@@ -1,6 +1,7 @@
 export const appConfigFunc = ($translateProvider: ng.translate.ITranslateProvider,
                               tmhDynamicLocaleProvider: ng.dynamicLocale.tmhDynamicLocaleProvider,
                               cfpLoadingBarProvider: ng.loadingBar.ILoadingBarProvider) => {
+    $translateProvider.useMissingTranslationHandlerLog();
     $translateProvider.useStaticFilesLoader({
         prefix: "i18n/",
         suffix: ".json",
