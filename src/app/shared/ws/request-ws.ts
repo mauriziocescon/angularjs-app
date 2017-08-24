@@ -6,7 +6,7 @@ export class RequestWs<T> {
     public canceler: ng.IDeferred<any>;
     public timeout: ng.IPromise<any>;
 
-    constructor(promise?: ng.IPromise<T>, canceler?: ng.IDeferred<any>, timeout?: ng.IPromise<any>) {
+    constructor(promise?: ng.IHttpPromise<T>, canceler?: ng.IDeferred<any>, timeout?: ng.IPromise<any>) {
         this.promise = promise;
         this.canceler = canceler;
         this.timeout = timeout;
