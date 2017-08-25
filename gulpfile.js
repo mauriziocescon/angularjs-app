@@ -52,7 +52,8 @@ const paths = {
     imgs: ["src/assets*/imgs/**/"],
     fonts: [
         "src/assets/fonts/**/",
-        "node_modules/font-awesome/fonts/**/"
+        "node_modules/font-awesome/fonts/**/",
+        "node_modules/roboto-fontface/fonts/**/"
     ],
     i18n: [
         "src/assets/i18n/**/*.json",
