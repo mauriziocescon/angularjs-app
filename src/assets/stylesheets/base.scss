@@ -1,9 +1,9 @@
 // -------------------------------------------------------
 // App variables
 
-$primary-color: #987c3b !default;
-$accent-color: #fff !default;
-$secondary-color: #1d2c4b !default;
+$primary-color: #987c3b;
+$accent-color: #fff;
+$secondary-color: #1d2c4b;
 $info-color: #03a9f4;
 $success-color: #4caf50;
 $warning-color: #ff9800;
@@ -22,7 +22,7 @@ $brand-danger: $danger-color;
 
 //== Typography
 $font-size-base: 16px;
-$font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !default;
+$font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 
 //== Grid system
 $grid-gutter-width: 8px;
