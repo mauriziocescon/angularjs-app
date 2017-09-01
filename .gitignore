@@ -32,7 +32,7 @@ Icon?
 .Trashes
 
 # nodejs npm modules
-/node_modules
+node_modules
 npm-debug.log
 
 # bower
@@ -50,6 +50,9 @@ npm-debug.log
 
 # IDEA
 .idea
+
+# Webpack - awesome-typescript-loader
+.awcache
 
 # DIST
 dist
