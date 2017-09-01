@@ -12,7 +12,7 @@ import {
 import { Album } from "./albums.model";
 
 export interface IAlbumsService {
-    getAlbums(textFilter: string, page: number): ng.IPromise<ResponseWs<Album[]>>;
+    getAlbums(textFilter: string | undefined, page: number): ng.IPromise<ResponseWs<Album[]>>;
     cancelOngoingRequests(): void;
 }
 
@@ -44,7 +44,7 @@ export class AlbumsService implements IAlbumsService {
         return {};
     }
 
-    public getAlbums(textFilter: string, page: number): ng.IPromise<ResponseWs<Album[]>> {
+    public getAlbums(textFilter: string | undefined, page: number): ng.IPromise<ResponseWs<Album[]>> {
 
         // reset request
         this.getAlbumsRequest.reset(this.utilitiesService);

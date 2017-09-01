@@ -15,7 +15,10 @@ describe("AlbumsController", () => {
     // Set up the module
     beforeEach(angular.mock.module("app"));
 
-    beforeEach(inject(($httpBackend, $componentController, AppConstantsService, UtilitiesService) => {
+    beforeEach(inject(($httpBackend: ng.IHttpBackendService,
+                       $componentController: ng.IComponentControllerService,
+                       AppConstantsService: IAppConstantsService,
+                       UtilitiesService: IUtilitiesService) => {
 
         // Set up the mock http service responses
         httpBackend = $httpBackend;
@@ -41,7 +44,7 @@ describe("AlbumsController", () => {
                 "Eu errem albucius invenire qui, unum dolorem ne nec. Torquatos concludaturque ius " +
                 "et, cu viderer minimum voluptua duo, ex eligendi abhorreant vis. Sea posse legimus " +
                 "vituperata no, per at etiam deserunt inimicus.";
-            const page = parseInt(params._page, null);
+            const page = parseInt(params._page, undefined);
 
             for (let i = (page * 10) - 10; i < page * 10; i++) {
                 const album = new Album();
@@ -73,34 +76,34 @@ describe("AlbumsController", () => {
     });
 
     it("controller.name is defined after $onInit", () => {
-        const controller = componentController("albums", null, null) as AlbumsController;
+        const controller = componentController("albums", {}) as AlbumsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.name).toBe("AlbumsComponent", "controller.name is not equal to AlbumsComponent");
     });
 
     it("expect controller fetches data after $onInit", () => {
-        const controller = componentController("albums", null, null) as AlbumsController;
+        const controller = componentController("albums", {}) as AlbumsController;
         controller.$onInit();
         httpBackend.flush();
     });
 
     it("controller.albums is not undefined after $onInit", () => {
-        const controller = componentController("albums", null, null) as AlbumsController;
+        const controller = componentController("albums", {}) as AlbumsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.dataSource).not.toBeUndefined("controller.albums is undefined...");
     });
 
     it("controller.albums is not null after $onInit", () => {
-        const controller = componentController("albums", null, null) as AlbumsController;
+        const controller = componentController("albums", {}) as AlbumsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.dataSource).not.toBeNull("controller.albums is null...");
     });
 
     it("controller.isLoadingData is false after $onInit", () => {
-        const controller = componentController("albums", null, null) as AlbumsController;
+        const controller = componentController("albums", {}) as AlbumsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.isLoadingData).toBeFalsy("isLoadingData is true after $onInit...");

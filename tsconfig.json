@@ -1,20 +1,15 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "allowUnreachableCode": true,
-    "diagnostics": false,
+    "allowJs": false,
+    "diagnostics": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "noEmitOnError": false,
-    "noFallthroughCasesInSwitch": false,
-    "noImplicitAny": false,
-    "noImplicitReturns": false,
-    "noImplicitThis": false,
     "pretty": true,
     "removeComments": false,
     "sourceMap": true,
+    "strict": false,
     "target": "ES2017",
     "types": [
       "jasmine"

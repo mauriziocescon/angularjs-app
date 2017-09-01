@@ -17,7 +17,7 @@ import { Album } from "./albums.model";
 export class AlbumsController {
     public static $inject = ["$filter", "$state", "$translate", "DelayExecutionService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "AlbumsService"];
     public name: string;
-    public textFilter: string;
+    public textFilter: string | undefined;
 
     protected filter: ISharedFilterService;
     protected state: ng.ui.IStateService;
@@ -28,7 +28,7 @@ export class AlbumsController {
     protected utilitiesService: IUtilitiesService;
     protected albumsService: IAlbumsService;
 
-    protected albums: Album[];
+    protected albums: Album[] | undefined;
     protected pageNumber: number;
     protected loadCompleted: boolean;
     protected busy: boolean;
@@ -75,7 +75,7 @@ export class AlbumsController {
         return this.isLoadingData === true || this.loadCompleted === true || this.albums === undefined || this.albums.length === 0;
     }
 
-    public get dataSource(): Album[] {
+    public get dataSource(): Album[] | undefined {
         return this.albums;
     }
 
