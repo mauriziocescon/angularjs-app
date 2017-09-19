@@ -1,4 +1,4 @@
-module.exports = function (config) {
+module.exports = (config) => {
     config.set({
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -13,7 +13,7 @@ module.exports = function (config) {
             "dist/vendors*.js",
             "dist/app*.js",
             "dist/templates*.js",
-            "dist/uibtemplates*.js"
+            "dist/uibtemplates*.js",
         ],
 
         // list of files to exclude
@@ -25,7 +25,7 @@ module.exports = function (config) {
             require("karma-ie-launcher"),
             require("karma-jasmine"),
             require("karma-phantomjs-launcher"),
-            require("karma-spec-reporter")
+            require("karma-spec-reporter"),
         ],
 
         // preprocess matching files before serving them to the browser
@@ -44,7 +44,12 @@ module.exports = function (config) {
         colors: true,
 
         // level of logging
-        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+        // possible values:
+        // - config.LOG_DISABLE
+        // - config.LOG_ERROR
+        // - config.LOG_WARN
+        // - config.LOG_INFO
+        // - config.LOG_DEBUG
         logLevel: config.LOG_INFO,
 
         // enable / disable watching file and executing tests whenever any file changes
@@ -74,6 +79,6 @@ module.exports = function (config) {
         // When a browser crashes, karma will try to relaunch.
         // This defines how many times karma should relaunch
         // a browser before giving up
-        retryLimit: 0
+        retryLimit: 0,
     });
 };
