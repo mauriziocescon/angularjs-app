@@ -2,9 +2,9 @@ import * as ng from "angular";
 import { IUtilitiesService } from "../../app.module";
 
 export class RequestWs<T> {
-    public promise: ng.IHttpPromise<T>;
-    public canceler: ng.IDeferred<any>;
-    public timeout: ng.IPromise<any>;
+    public promise: ng.IHttpPromise<T> | undefined;
+    public canceler: ng.IDeferred<any> | undefined;
+    public timeout: ng.IPromise<any> | undefined;
 
     constructor(promise?: ng.IHttpPromise<T>, canceler?: ng.IDeferred<any>, timeout?: ng.IPromise<any>) {
         this.promise = promise;
@@ -21,7 +21,9 @@ export class RequestWs<T> {
     public reset(utilitiesService: IUtilitiesService): void {
 
         // reset request timeout
-        utilitiesService.clearDefer(this.timeout);
+        if (this.timeout) {
+            utilitiesService.clearDefer(this.timeout);
+        }
 
         // cancel ongoing request or do nothing
         this.cancel();

@@ -67,11 +67,11 @@ export class UserTodosService implements IUserTodosService {
         // fetch data
         this.getUserTodosRequest.promise = this.http.get<Todo[]>(url, config);
 
-        return this.getUserTodosRequest.promise.then((response: ng.IHttpPromiseCallbackArg<Todo[]>) => {
+        return this.getUserTodosRequest.promise.then((response: ng.IHttpResponse<Todo[]>) => {
             this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
 
-        }, (response: ng.IHttpPromiseCallbackArg<Todo[]>) => {
+        }, (response: ng.IHttpResponse<Todo[]>) => {
             this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });

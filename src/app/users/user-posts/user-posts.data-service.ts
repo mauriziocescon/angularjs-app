@@ -67,11 +67,11 @@ export class UserPostsService implements IUserPostsService {
         // fetch data
         this.getUserPostsRequest.promise = this.http.get<Post[]>(url, config);
 
-        return this.getUserPostsRequest.promise.then((response: ng.IHttpPromiseCallbackArg<Post[]>) => {
+        return this.getUserPostsRequest.promise.then((response: ng.IHttpResponse<Post[]>) => {
             this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
 
-        }, (response: ng.IHttpPromiseCallbackArg<Post[]>) => {
+        }, (response: ng.IHttpResponse<Post[]>) => {
             this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });

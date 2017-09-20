@@ -59,11 +59,11 @@ export class PostCommentsService implements IPostCommentsService {
         // fetch data
         this.getPostCommentsRequest.promise = this.http.get<Comment[]>(url, config);
 
-        return this.getPostCommentsRequest.promise.then((response: ng.IHttpPromiseCallbackArg<Comment[]>) => {
+        return this.getPostCommentsRequest.promise.then((response: ng.IHttpResponse<Comment[]>) => {
             this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
 
-        }, (response: ng.IHttpPromiseCallbackArg<Comment[]>) => {
+        }, (response: ng.IHttpResponse<Comment[]>) => {
             this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });

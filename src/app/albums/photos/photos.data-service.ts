@@ -57,7 +57,7 @@ export class PhotosService implements IPhotosService {
 
         const startTime = this.utilitiesService.getTimeFrom1970();
 
-        return this.getPhotoRequest.promise.then((response: ng.IHttpPromiseCallbackArg<Photo[]>) => {
+        return this.getPhotoRequest.promise.then((response: ng.IHttpResponse<Photo[]>) => {
             this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
 
@@ -86,11 +86,11 @@ export class PhotosService implements IPhotosService {
 
         const startTime = this.utilitiesService.getTimeFrom1970();
 
-        return this.q.all(promises).then((responses: Array<ng.IHttpPromiseCallbackArg<Photo[]>>) => {
+        return this.q.all(promises).then((responses: Array<ng.IHttpResponse<Photo[]>>) => {
             this.utilitiesService.logResponse(responses, startTime);
 
             let photos = [];
-            responses.forEach((response: ng.IHttpPromiseCallbackArg<Photo[]>) => {
+            responses.forEach((response: ng.IHttpResponse<Photo[]>) => {
                 photos = photos.concat(response.data);
             });
 
@@ -98,7 +98,7 @@ export class PhotosService implements IPhotosService {
                     return response.status === -1;
                 }) !== -1);
 
-        }, (response: ng.IHttpPromiseCallbackArg<Photo>) => {
+        }, (response: ng.IHttpResponse<Photo>) => {
             this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });
@@ -127,7 +127,7 @@ export class PhotosService implements IPhotosService {
         // fetch data
         this.getPhotosForAlbumRequests.promise = this.http.get<Photo[]>(url, config);
 
-        return this.getPhotosForAlbumRequests.promise.then((response: ng.IHttpPromiseCallbackArg<Photo[]>) => {
+        return this.getPhotosForAlbumRequests.promise.then((response: ng.IHttpResponse<Photo[]>) => {
             this.utilitiesService.logResponse(response, startTime);
             let info = this.utilitiesService.parseLinkHeaders(response.headers);
 
@@ -144,7 +144,7 @@ export class PhotosService implements IPhotosService {
             const lastPage = parseInt(this.utilitiesService.parseQueryString(info.last)._page, null);
             return new ResponseWs(response.status === 200, response.statusText, response.data, page === lastPage, response.status === -1);
 
-        }, (response: ng.IHttpPromiseCallbackArg<Photo[]>) => {
+        }, (response: ng.IHttpResponse<Photo[]>) => {
             this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });

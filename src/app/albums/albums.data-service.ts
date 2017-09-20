@@ -12,7 +12,7 @@ import {
 import { Album } from "./albums.model";
 
 export interface IAlbumsService {
-    getAlbums(textFilter: string | undefined, page: number): ng.IPromise<ResponseWs<Album[]>>;
+    getAlbums(textFilter: string | undefined, page: number): ng.IPromise<ResponseWs<Album[] | undefined>>;
     cancelOngoingRequests(): void;
 }
 
@@ -44,7 +44,7 @@ export class AlbumsService implements IAlbumsService {
         return {};
     }
 
-    public getAlbums(textFilter: string | undefined, page: number): ng.IPromise<ResponseWs<Album[]>> {
+    public getAlbums(textFilter: string | undefined, page: number): ng.IPromise<ResponseWs<Album[] | undefined>> {
 
         // reset request
         this.getAlbumsRequest.reset(this.utilitiesService);
@@ -67,7 +67,7 @@ export class AlbumsService implements IAlbumsService {
         // fetch data
         this.getAlbumsRequest.promise = this.http.get<Album[]>(url, config);
 
-        return this.getAlbumsRequest.promise.then((response: ng.IHttpPromiseCallbackArg<Album[]>) => {
+        return this.getAlbumsRequest.promise.then((response: ng.IHttpResponse<Album[]>) => {
             this.utilitiesService.logResponse(response, startTime);
             let info = this.utilitiesService.parseLinkHeaders(response.headers);
 
@@ -81,10 +81,10 @@ export class AlbumsService implements IAlbumsService {
                 };
             }
 
-            const lastPage = parseInt(this.utilitiesService.parseQueryString(info.last)._page, null);
+            const lastPage = parseInt(this.utilitiesService.parseQueryString(info.last)._page, undefined);
             return new ResponseWs(response.status === 200, response.statusText, response.data, page === lastPage, response.status === -1);
 
-        }, (response: ng.IHttpPromiseCallbackArg<Album[]>) => {
+        }, (response: ng.IHttpResponse<Album[]>) => {
             this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });

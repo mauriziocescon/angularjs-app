@@ -67,11 +67,11 @@ export class UsersService implements IUsersService {
         // fetch data
         this.getUsersRequest.promise = this.http.get<User[]>(url, config);
 
-        return this.getUsersRequest.promise.then((response: ng.IHttpPromiseCallbackArg<User[]>) => {
+        return this.getUsersRequest.promise.then((response: ng.IHttpResponse<User[]>) => {
             this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
 
-        }, (response: ng.IHttpPromiseCallbackArg<User[]>) => {
+        }, (response: ng.IHttpResponse<User[]>) => {
             this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });
