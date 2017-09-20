@@ -25,7 +25,7 @@ export class PhotosController {
     protected utilitiesService: IUtilitiesService;
     protected photosService: IPhotosService;
 
-    protected photos: Photo[];
+    protected photos: Photo[] | undefined;
     protected pageNumber: number;
     protected loadCompleted: boolean;
     protected busy: boolean;
@@ -68,7 +68,7 @@ export class PhotosController {
         return this.isLoadingData === true || this.loadCompleted === true || this.photos === undefined || this.photos.length === 0;
     }
 
-    public get dataSource(): Photo[] {
+    public get dataSource(): Photo[] | undefined {
         return this.photos;
     }
 
