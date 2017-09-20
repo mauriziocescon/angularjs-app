@@ -116,7 +116,7 @@ describe("PhotosController", () => {
     });
 
     it("controller.name is defined after $onInit", () => {
-        const controller = componentController("photos", null, null) as PhotosController;
+        const controller = componentController("photos", {}, null) as PhotosController;
         const stateParams = "stateParams";
         controller[stateParams] = {albumId: 1};
         controller.$onInit();
@@ -125,7 +125,7 @@ describe("PhotosController", () => {
     });
 
     it("expect controller fetches data after $onInit", () => {
-        const controller = componentController("photos", null, null) as PhotosController;
+        const controller = componentController("photos", {}, null) as PhotosController;
         const stateParams = "stateParams";
         controller[stateParams] = {albumId: 1};
         controller.$onInit();
@@ -133,7 +133,7 @@ describe("PhotosController", () => {
     });
 
     it("controller.photos is not undefined after $onInit", () => {
-        const controller = componentController("photos", null, null) as PhotosController;
+        const controller = componentController("photos", {}, null) as PhotosController;
         const stateParams = "stateParams";
         controller[stateParams] = {albumId: 1};
         controller.$onInit();
@@ -142,7 +142,7 @@ describe("PhotosController", () => {
     });
 
     it("controller.photos is not null after $onInit", () => {
-        const controller = componentController("photos", null, null) as PhotosController;
+        const controller = componentController("photos", {}, null) as PhotosController;
         const stateParams = "stateParams";
         controller[stateParams] = {albumId: 1};
         controller.$onInit();
@@ -151,7 +151,7 @@ describe("PhotosController", () => {
     });
 
     it("controller.isLoadingData is false after $onInit", () => {
-        const controller = componentController("photos", null, null) as PhotosController;
+        const controller = componentController("photos", {}, null) as PhotosController;
         const stateParams = "stateParams";
         controller[stateParams] = {albumId: 1};
         controller.$onInit();
