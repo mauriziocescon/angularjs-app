@@ -21,7 +21,7 @@ export class ResponseWs<T> {
         return this.message;
     }
 
-    public getData(): T {
+    public getData(): T | undefined {
         return this.success ? this.data : undefined;
     }
 
