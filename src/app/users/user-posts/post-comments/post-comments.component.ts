@@ -24,7 +24,7 @@ export class PostCommentsController {
     protected postCommentsService: IPostCommentsService;
 
     protected postId: number;
-    protected comments: Comment[];
+    protected comments: Comment[] | undefined;
     protected busy: boolean;
 
     constructor($filter: ISharedFilterService,
@@ -59,7 +59,7 @@ export class PostCommentsController {
         return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
     }
 
-    public get dataSource(): Comment[] {
+    public get dataSource(): Comment[] | undefined {
         return this.comments;
     }
 

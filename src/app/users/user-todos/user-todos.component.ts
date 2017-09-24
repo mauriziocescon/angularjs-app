@@ -29,7 +29,7 @@ export class UserTodosController {
     protected utilitiesService: IUtilitiesService;
     protected todosService: IUserTodosService;
 
-    protected todos: Todo[];
+    protected todos: Todo[] | undefined;
     protected busy: boolean;
     protected loadTodosKey: Enum;
 
@@ -71,7 +71,7 @@ export class UserTodosController {
         return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
     }
 
-    public get dataSource(): Todo[] {
+    public get dataSource(): Todo[] | undefined {
         return this.todos;
     }
 

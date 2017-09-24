@@ -28,7 +28,7 @@ export class UserPostsController {
     protected utilitiesService: IUtilitiesService;
     protected userPostsService: IUserPostsService;
 
-    protected posts: Post[];
+    protected posts: Post[] | undefined;
     protected busy: boolean;
     protected openedPost: Post;
     protected loadPostsKey: Enum;
@@ -69,7 +69,7 @@ export class UserPostsController {
         return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
     }
 
-    public get dataSource(): Post[] {
+    public get dataSource(): Post[] | undefined {
         return this.posts;
     }
 

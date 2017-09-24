@@ -28,7 +28,7 @@ export class UsersController {
     protected utilitiesService: IUtilitiesService;
     protected usersService: IUsersService;
 
-    protected users: User[];
+    protected users: User[] | undefined;
     protected busy: boolean;
     protected loadUsersKey: Enum;
 
@@ -68,7 +68,7 @@ export class UsersController {
         return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
     }
 
-    public get dataSource(): User[] {
+    public get dataSource(): User[] | undefined {
         return this.users;
     }
 

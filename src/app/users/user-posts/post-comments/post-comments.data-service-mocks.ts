@@ -25,7 +25,7 @@ export let postCommentsRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
         for (let i = 0; i < Math.round(Math.random() * 150); i++) {
             const comment = new Comment();
 
-            comment.postId = parseInt(params.postId, null);
+            comment.postId = parseInt(params.postId, undefined);
             comment.id = i;
             comment.name = fakeText.substring(0, (Math.random() * 10000) % 20);
             comment.email = fakeText.substring(0, (Math.random() * 10000) % 20);
