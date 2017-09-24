@@ -117,7 +117,7 @@ export interface IUtilitiesService {
      * @param url
      * @param requestData
      */
-    logResponse(response: ng.IHttpPromiseCallbackArg<any> | Array<ng.IHttpPromiseCallbackArg<any>>, startTime: number): void;
+    logResponse(response: ng.IHttpResponse<any> | Array<ng.IHttpResponse<any>>, startTime: number): void;
     /**
      * Create a random response
      * with common http code
@@ -293,14 +293,14 @@ export class UtilitiesService implements IUtilitiesService {
         }
     }
 
-    public logResponse(response: ng.IHttpPromiseCallbackArg<any> | Array<ng.IHttpPromiseCallbackArg<any>>, startTime: number): void {
+    public logResponse(response: ng.IHttpResponse<any> | Array<ng.IHttpResponse<any>>, startTime: number): void {
         if (this.appConstantsService.Application.LOG_WS_RESPONSE === true) {
 
             const time = (this.getTimeFrom1970() - startTime).toString();
 
             if (TypeDetect.isArray(response)) {
-                const rs = response as Array<ng.IHttpPromiseCallbackArg<any>>;
-                rs.forEach((r: ng.IHttpPromiseCallbackArg<any>) => {
+                const rs = response as Array<ng.IHttpResponse<any>>;
+                rs.forEach((r: ng.IHttpResponse<any>) => {
                     Logger.log("\nRESPONSE BODY: (" + r.config.method + " " + r.config.url +
                         ", Status: " + r.status.toString() +
                         ", StatusText: " + r.statusText +
@@ -309,7 +309,7 @@ export class UtilitiesService implements IUtilitiesService {
                 });
             }
             else {
-                const r = response as ng.IHttpPromiseCallbackArg<any>;
+                const r = response as ng.IHttpResponse<any>;
                 Logger.log("\nRESPONSE BODY: (" + r.config.method + " " + r.config.url +
                     ", Status: " + r.status.toString() +
                     ", StatusText: " + r.statusText +
