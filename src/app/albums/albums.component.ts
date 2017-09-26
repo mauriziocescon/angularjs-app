@@ -133,7 +133,8 @@ export class AlbumsController {
         this.albumsService.getAlbums(this.textFilter, this.pageNumber).then((response: ResponseWs<Album[]>) => {
 
             if (response.isSuccess()) {
-                this.albums = this.albums === undefined ? response.getData() : this.albums.concat(response.getData());
+                const data = response.getData();
+                this.albums = this.albums === undefined ? data : this.albums.concat(data ? data : []);
                 this.loadCompleted = response.isLastPage();
 
                 if (!this.loadCompleted) {
