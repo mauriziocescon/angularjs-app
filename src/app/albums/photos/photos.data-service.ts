@@ -12,7 +12,7 @@ import {
 import { Photo } from "./photos.model";
 
 export interface IPhotosService {
-    getPhoto(id: number): ng.IPromise<ResponseWs<Photo[]>>;
+    getPhoto(id: number): ng.IPromise<ResponseWs<Photo[] | undefined>>;
     getPhotos(ids: number[]): ng.IPromise<ResponseWs<Photo[]>>;
     getPhotosForAlbum(albumId: number, page: number): ng.IPromise<ResponseWs<Photo[]>>;
     cancelOngoingRequests(): void;
@@ -50,7 +50,7 @@ export class PhotosService implements IPhotosService {
         return {};
     }
 
-    public getPhoto(id: number): ng.IPromise<ResponseWs<Photo[]>> {
+    public getPhoto(id: number): ng.IPromise<ResponseWs<Photo[] | undefined>> {
 
         // fetch data using the generic currentGetPhotoRequest
         this.setupGetPhotoRequest(id, this.getPhotoRequest);

@@ -111,7 +111,8 @@ export class PhotosController {
         this.photosService.getPhotosForAlbum(this.stateParams[albumId], this.pageNumber).then((response: ResponseWs<Photo[]>) => {
 
             if (response.isSuccess()) {
-                this.photos = this.photos === undefined ? response.getData() : this.photos.concat(response.getData());
+                const data = response.getData();
+                this.photos = this.photos === undefined ? data : this.photos.concat(data ? data : []);
                 this.loadCompleted = response.isLastPage();
 
                 if (!this.loadCompleted) {
