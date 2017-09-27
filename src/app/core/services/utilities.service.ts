@@ -57,7 +57,7 @@ export interface IUtilitiesService {
      *
      * @param text
      */
-    isDefinedAndNotEmpty(text: string): boolean;
+    isDefinedAndNotEmpty(text: string | undefined): boolean;
     /**
      * Get today
      */
@@ -81,7 +81,7 @@ export interface IUtilitiesService {
      *
      * @param url
      */
-    getPath(url: string): string;
+    getPath(url: string | undefined): string;
     /**
      *
      */
@@ -199,7 +199,7 @@ export class UtilitiesService implements IUtilitiesService {
         return uuid;
     }
 
-    public isDefinedAndNotEmpty(text: string): boolean {
+    public isDefinedAndNotEmpty(text: string | undefined): boolean {
         if (!TypeDetect.isString(text) || text === "") {
             return false;
         }
@@ -237,7 +237,7 @@ export class UtilitiesService implements IUtilitiesService {
         }
     }
 
-    public getPath(url: string): string {
+    public getPath(url: string | undefined): string {
         if (TypeDetect.isString(url) === false || this.isDefinedAndNotEmpty(url) === false) {
             return "/";
         }
