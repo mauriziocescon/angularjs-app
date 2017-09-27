@@ -57,7 +57,7 @@ export interface IUtilitiesService {
      *
      * @param text
      */
-    isDefinedAndNotEmpty(text: string | undefined): boolean;
+    isDefinedAndNotEmpty(text: string): boolean;
     /**
      * Get today
      */
@@ -81,7 +81,7 @@ export interface IUtilitiesService {
      *
      * @param url
      */
-    getPath(url: string | undefined): string;
+    getPath(url: string): string;
     /**
      *
      */
@@ -91,7 +91,7 @@ export interface IUtilitiesService {
      *
      * @param url
      */
-    parseQueryString(url): any;
+    parseQueryString(url: string): any;
     /**
      * Count the number of scopes / watchers
      * for every component. Analyze the DOM
@@ -107,8 +107,8 @@ export interface IUtilitiesService {
     /**
      * Log an $http response
      *
-     * @param url
-     * @param requestData
+     * @param {angular.IHttpResponse<any> | Array<angular.IHttpResponse<any>>} response
+     * @param {number} startTime
      */
     logResponse(response: ng.IHttpResponse<any> | Array<ng.IHttpResponse<any>>, startTime: number): void;
     /**
@@ -199,7 +199,7 @@ export class UtilitiesService implements IUtilitiesService {
         return uuid;
     }
 
-    public isDefinedAndNotEmpty(text: string | undefined): boolean {
+    public isDefinedAndNotEmpty(text: string): boolean {
         if (!TypeDetect.isString(text) || text === "") {
             return false;
         }
@@ -226,8 +226,10 @@ export class UtilitiesService implements IUtilitiesService {
             script.setAttribute("src", src);
             script.setAttribute("type", "text/javascript");
             script.setAttribute("charset", "utf-8");
-            const head: HTMLElement = this.document[0].getElementById("head");
-            head.appendChild(script);
+            const head = this.document[0].getElementById("head");
+            if (head) {
+                head.appendChild(script);
+            }
         }
         else {
             const line = "<script type='text/javascript' charset='utf-8' src='" + src + "'></script>";
@@ -235,7 +237,7 @@ export class UtilitiesService implements IUtilitiesService {
         }
     }
 
-    public getPath(url: string | undefined): string {
+    public getPath(url: string): string {
         if (TypeDetect.isString(url) === false || this.isDefinedAndNotEmpty(url) === false) {
             return "/";
         }
