@@ -17,6 +17,5 @@ import "angular-ui-bootstrap";
 import "angular-ui-router";
 import "angular-ui-scroll";
 import "babel-polyfill";
-import "format4js";
 import "ng-infinite-scroll";
 import "stacktrace-js";

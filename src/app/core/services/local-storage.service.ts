@@ -13,7 +13,7 @@ export interface ILocalStorageService {
      *
      * @param key
      */
-    getData<T>(key: Enum): T;
+    getData<T>(key: Enum): T | undefined;
     /**
      * Set fata for key
      *
@@ -47,7 +47,7 @@ export class LocalStorageService implements ILocalStorageService {
         this.prefix = this.appConstantsService.Application.APP_NAME;
     }
 
-    public getData<T>(key: Enum): T {
+    public getData<T>(key: Enum): T | undefined {
         try {
             const result = localStorage.getItem(this.prefix + "_" + key.toString());
             return result !== null ? JSON.parse(result) : undefined;
