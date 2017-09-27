@@ -50,7 +50,7 @@ export class LocalStorageService implements ILocalStorageService {
     public getData<T>(key: Enum): T {
         try {
             const result = localStorage.getItem(this.prefix + "_" + key.toString());
-            return result !== undefined ? JSON.parse(result) : undefined;
+            return result !== null ? JSON.parse(result) : undefined;
         } catch (e) {
             Logger.warn(e);
             return undefined;
