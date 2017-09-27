@@ -31,7 +31,7 @@ export class LocationChangeService implements ILocationChangeService {
     protected utilitiesService: IUtilitiesService;
 
     protected semaphoreQueue: string[];
-    protected lastUrlBlock: string;
+    protected lastUrlBlock: string | undefined;
 
     constructor($rootScope: ng.IRootScopeService,
                 $location: ng.ILocationService,
@@ -63,7 +63,7 @@ export class LocationChangeService implements ILocationChangeService {
         if (index !== -1) {
             this.semaphoreQueue.splice(index);
 
-            if (this.semaphoreQueue.length === 0 && this.utilitiesService.isDefinedAndNotEmpty(this.lastUrlBlock) === true) {
+            if (this.semaphoreQueue.length === 0 && this.utilitiesService.isDefinedAndNotEmpty(this.lastUrlBlock) === true && this.lastUrlBlock) {
                 this.location.path(this.lastUrlBlock);
                 this.lastUrlBlock = undefined;
                 this.rootScope.$apply();

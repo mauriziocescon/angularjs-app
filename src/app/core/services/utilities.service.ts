@@ -238,7 +238,7 @@ export class UtilitiesService implements IUtilitiesService {
     }
 
     public getPath(url: string | undefined): string {
-        if (TypeDetect.isString(url) === false || this.isDefinedAndNotEmpty(url) === false) {
+        if (TypeDetect.isString(url) === false || this.isDefinedAndNotEmpty(url) === false || !url) {
             return "/";
         }
 
