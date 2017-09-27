@@ -13,8 +13,8 @@ import { Photo } from "./photos.model";
 
 export interface IPhotosService {
     getPhoto(id: number): ng.IPromise<ResponseWs<Photo[] | undefined>>;
-    getPhotos(ids: number[]): ng.IPromise<ResponseWs<Photo[]>>;
-    getPhotosForAlbum(albumId: number, page: number): ng.IPromise<ResponseWs<Photo[]>>;
+    getPhotos(ids: number[]): ng.IPromise<ResponseWs<Photo[] | undefined>>;
+    getPhotosForAlbum(albumId: number, page: number): ng.IPromise<ResponseWs<Photo[] | undefined>>;
     cancelOngoingRequests(): void;
 }
 
@@ -67,7 +67,7 @@ export class PhotosService implements IPhotosService {
         });
     }
 
-    public getPhotos(ids: number[]): ng.IPromise<ResponseWs<Photo[]>> {
+    public getPhotos(ids: number[]): ng.IPromise<ResponseWs<Photo[] | undefined>> {
 
         // reset requests timeout
         this.getPhotosRequests.forEach((request: RequestWs<Photo>) => {
@@ -89,7 +89,7 @@ export class PhotosService implements IPhotosService {
         return this.q.all(promises).then((responses: Array<ng.IHttpResponse<Photo[]>>) => {
             this.utilitiesService.logResponse(responses, startTime);
 
-            let photos = [];
+            let photos: Photo[] = [];
             responses.forEach((response: ng.IHttpResponse<Photo[]>) => {
                 photos = photos.concat(response.data);
             });
@@ -104,7 +104,7 @@ export class PhotosService implements IPhotosService {
         });
     }
 
-    public getPhotosForAlbum(albumId: number, page: number): ng.IPromise<ResponseWs<Photo[]>> {
+    public getPhotosForAlbum(albumId: number, page: number): ng.IPromise<ResponseWs<Photo[] | undefined>> {
 
         // reset request
         this.getPhotosForAlbumRequests.reset(this.utilitiesService);

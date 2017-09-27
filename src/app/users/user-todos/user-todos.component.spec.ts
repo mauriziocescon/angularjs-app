@@ -15,7 +15,10 @@ describe("UserTodosController", () => {
     // Set up the module
     beforeEach(angular.mock.module("app"));
 
-    beforeEach(inject(($httpBackend, $componentController, AppConstantsService, UtilitiesService) => {
+    beforeEach(inject(($httpBackend: ng.IHttpBackendService,
+                       $componentController: ng.IComponentControllerService,
+                       AppConstantsService: IAppConstantsService,
+                       UtilitiesService: IUtilitiesService) => {
 
         // Set up the mock http service responses
         httpBackend = $httpBackend;
@@ -54,34 +57,34 @@ describe("UserTodosController", () => {
     });
 
     it("controller.name is defined after $onInit", () => {
-        const controller = componentController("userTodos", null, null) as UserTodosController;
+        const controller = componentController("userTodos", {}, null) as UserTodosController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.name).toBe("UserTodosComponent", "controller.name is not equal to UserTodosComponent");
     });
 
     it("expect controller fetches data after $onInit", () => {
-        const controller = componentController("userTodos", null, null) as UserTodosController;
+        const controller = componentController("userTodos", {}, null) as UserTodosController;
         controller.$onInit();
         httpBackend.flush();
     });
 
     it("controller.todos is not undefined after $onInit", () => {
-        const controller = componentController("userTodos", null, null) as UserTodosController;
+        const controller = componentController("userTodos", {}, null) as UserTodosController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.dataSource).not.toBeUndefined("controller.todos is undefined...");
     });
 
     it("controller.todos is not null after $onInit", () => {
-        const controller = componentController("userTodos", null, null) as UserTodosController;
+        const controller = componentController("userTodos", {}, null) as UserTodosController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.dataSource).not.toBeNull("controller.todos is null...");
     });
 
     it("controller.isLoadingData is false after $onInit", () => {
-        const controller = componentController("userTodos", null, null) as UserTodosController;
+        const controller = componentController("userTodos", {}, null) as UserTodosController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.isLoadingData).toBeFalsy("isLoadingData is true after the loading...");

@@ -14,7 +14,10 @@ describe("AppController", () => {
     // Set up the module
     beforeEach(angular.mock.module("app"));
 
-    beforeEach(inject(($httpBackend, $componentController, AppConstantsService, UtilitiesService) => {
+    beforeEach(inject(($httpBackend: ng.IHttpBackendService,
+                       $componentController: ng.IComponentControllerService,
+                       AppConstantsService: IAppConstantsService,
+                       UtilitiesService: IUtilitiesService) => {
 
         // Set up the mock http service responses
         httpBackend = $httpBackend;
@@ -27,7 +30,7 @@ describe("AppController", () => {
     }));
 
     it("controller.name is defined after $onInit", () => {
-        const controller = componentController("app", null, null) as AppController;
+        const controller = componentController("app", {}, null) as AppController;
         expect(controller.name).toBe("AppComponent", "controller.name is not equal to AppComponent");
     });
 });

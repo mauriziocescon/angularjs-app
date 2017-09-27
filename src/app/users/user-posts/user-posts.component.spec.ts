@@ -15,7 +15,10 @@ describe("UserPostsController", () => {
     // Set up the module
     beforeEach(angular.mock.module("app"));
 
-    beforeEach(inject(($httpBackend, $componentController, AppConstantsService, UtilitiesService) => {
+    beforeEach(inject(($httpBackend: ng.IHttpBackendService,
+                       $componentController: ng.IComponentControllerService,
+                       AppConstantsService: IAppConstantsService,
+                       UtilitiesService: IUtilitiesService) => {
 
         // Set up the mock http service responses
         httpBackend = $httpBackend;
@@ -54,34 +57,34 @@ describe("UserPostsController", () => {
     });
 
     it("controller.name is defined after $onInit", () => {
-        const controller = componentController("userPosts", null, null) as UserPostsController;
+        const controller = componentController("userPosts", {}, null) as UserPostsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.name).toBe("UserPostsComponent", "controller.name is not equal to UserPostsComponent");
     });
 
     it("expect controller fetches data after $onInit", () => {
-        const controller = componentController("userPosts", null, null) as UserPostsController;
+        const controller = componentController("userPosts", {}, null) as UserPostsController;
         controller.$onInit();
         httpBackend.flush();
     });
 
     it("controller.posts is not undefined after $onInit", () => {
-        const controller = componentController("userPosts", null, null) as UserPostsController;
+        const controller = componentController("userPosts", {}, null) as UserPostsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.dataSource).not.toBeUndefined("controller.posts is undefined...");
     });
 
     it("controller.posts is not null after $onInit", () => {
-        const controller = componentController("userPosts", null, null) as UserPostsController;
+        const controller = componentController("userPosts", {}, null) as UserPostsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.dataSource).not.toBeNull("controller.posts is null...");
     });
 
     it("controller.isLoadingData is false after $onInit", () => {
-        const controller = componentController("userPosts", null, null) as UserPostsController;
+        const controller = componentController("userPosts", {}, null) as UserPostsController;
         controller.$onInit();
         httpBackend.flush();
         expect(controller.isLoadingData).toBeFalsy("isLoadingData is true after the loading...");
