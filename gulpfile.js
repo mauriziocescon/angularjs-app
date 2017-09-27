@@ -88,7 +88,6 @@ const paths = {
         "angular-ui-scroll",
         "babel-polyfill",
         "bootstrap-sass",
-        "format4js",
         "ng-infinite-scroll",
         "stacktrace-js"
     ],
