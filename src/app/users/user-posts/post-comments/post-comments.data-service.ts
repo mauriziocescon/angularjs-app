@@ -4,7 +4,7 @@ import { RequestWs, ResponseWs } from "../../../shared/shared.module";
 import { Comment } from "./post-comments.model";
 
 export interface IPostCommentsService {
-    getPostComments(postId: string): ng.IPromise<ResponseWs<Comment[]>>;
+    getPostComments(postId: string): ng.IPromise<ResponseWs<Comment[] | undefined>>;
     cancelOngoingRequests(): void;
 }
 
@@ -36,7 +36,7 @@ export class PostCommentsService implements IPostCommentsService {
         return {};
     }
 
-    public getPostComments(postId: string): ng.IPromise<ResponseWs<Comment[]>> {
+    public getPostComments(postId: string): ng.IPromise<ResponseWs<Comment[] | undefined>> {
 
         // reset request
         this.getPostCommentsRequest.reset(this.utilitiesService);

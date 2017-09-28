@@ -32,7 +32,7 @@ describe("NavigationBarController", () => {
     }));
 
     it("controller.name is defined after $onInit", () => {
-        const controller = componentController("navigationBar", null, null) as NavigationBarController;
+        const controller = componentController("navigationBar", {}, null) as NavigationBarController;
         controller.$onInit();
         expect(controller.name).toBe("NavigationBarComponent", "controller.name is not equal to NavigationBarComponent");
     });

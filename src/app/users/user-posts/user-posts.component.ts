@@ -30,7 +30,7 @@ export class UserPostsController {
 
     protected posts: Post[] | undefined;
     protected busy: boolean;
-    protected openedPost: Post;
+    protected openedPost: Post | undefined;
     protected loadPostsKey: Enum;
 
     constructor($filter: ISharedFilterService,

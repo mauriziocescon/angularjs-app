@@ -12,7 +12,7 @@ import {
 import {Post} from "./user-posts.model";
 
 export interface IUserPostsService {
-    getPosts(userId: string, textFilter: string): ng.IPromise<ResponseWs<Post[]>>;
+    getPosts(userId: string, textFilter: string): ng.IPromise<ResponseWs<Post[] | undefined>>;
     cancelOngoingRequests(): void;
 }
 
@@ -44,7 +44,7 @@ export class UserPostsService implements IUserPostsService {
         return {};
     }
 
-    public getPosts(userId: string, textFilter: string): ng.IPromise<ResponseWs<Post[]>> {
+    public getPosts(userId: string, textFilter: string): ng.IPromise<ResponseWs<Post[] | undefined>> {
 
         // reset request
         this.getUserPostsRequest.reset(this.utilitiesService);

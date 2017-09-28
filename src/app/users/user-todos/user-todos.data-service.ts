@@ -12,7 +12,7 @@ import {
 import { Todo } from "./user-todos.model";
 
 export interface IUserTodosService {
-    getTodos(userId: string, textFilter: string): ng.IPromise<ResponseWs<Todo[]>>;
+    getTodos(userId: string, textFilter: string): ng.IPromise<ResponseWs<Todo[] | undefined>>;
     cancelOngoingRequests(): void;
 }
 
@@ -44,7 +44,7 @@ export class UserTodosService implements IUserTodosService {
         return {};
     }
 
-    public getTodos(userId: string, textFilter: string): ng.IPromise<ResponseWs<Todo[]>> {
+    public getTodos(userId: string, textFilter: string): ng.IPromise<ResponseWs<Todo[] | undefined>> {
 
         // reset request
         this.getUserTodosRequest.reset(this.utilitiesService);

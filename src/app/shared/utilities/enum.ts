@@ -1,7 +1,7 @@
 export class Enum {
 
     public static toEnum(val: string): Enum {
-        return (val === undefined || val === null) ? undefined : new Enum(val);
+        return new Enum(val);
     }
 
     protected value: string;

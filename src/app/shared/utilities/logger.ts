@@ -6,7 +6,7 @@ export class Logger {
 
     public static exception(scope: any, exc: Error): void {
         try {
-            const errback = (err) => {
+            const errback = (err: Error) => {
                 // tslint:disable:no-console
                 console.log(err.message);
                 // tslint:enable:no-console
