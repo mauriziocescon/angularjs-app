@@ -139,13 +139,17 @@ export class UsersController {
 
     public goToUserPosts(user: User, event: ng.IAngularEvent): void {
         event.preventDefault();
-        event.stopPropagation();
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        }
         this.location.path("/user-posts/" + user.id);
     }
 
     public goToUserTodos(user: User, event: ng.IAngularEvent): void {
         event.preventDefault();
-        event.stopPropagation();
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        }
         this.location.path("/user-todos/" + user.id);
     }
 }

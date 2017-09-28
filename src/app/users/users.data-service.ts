@@ -12,7 +12,7 @@ import {
 import { User } from "./users.model";
 
 export interface IUsersService {
-    getUsers(textFilter: string | undefined): ng.IPromise<ResponseWs<User[]>>;
+    getUsers(textFilter: string | undefined): ng.IPromise<ResponseWs<User[] | undefined>>;
     cancelOngoingRequests(): void;
 }
 
@@ -44,7 +44,7 @@ export class UsersService implements IUsersService {
         return {};
     }
 
-    public getUsers(textFilter: string | undefined): ng.IPromise<ResponseWs<User[]>> {
+    public getUsers(textFilter: string | undefined): ng.IPromise<ResponseWs<User[] | undefined>> {
 
         // reset request
         this.getUsersRequest.reset(this.utilitiesService);
