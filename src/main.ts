@@ -25,11 +25,11 @@ class Main {
 
         if (element) {
             // @if MOCK_BACKEND = "false"
-            angular.bootstrap(document.querySelector(app), [app], config);
+            angular.bootstrap(element, [app], config);
             // @endif
 
             // @if MOCK_BACKEND = "true"
-            angular.bootstrap(document.querySelector(app), [appDev], config);
+            angular.bootstrap(element, [appDev], config);
             // @endif
         }
 
