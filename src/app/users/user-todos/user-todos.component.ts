@@ -17,7 +17,7 @@ import { Todo } from "./user-todos.model";
 export class UserTodosController {
     public static $inject = ["$filter", "$location", "$stateParams", "$translate", "DelayExecutionService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "UserTodosService"];
     public name: string;
-    public textFilter: string;
+    public textFilter: string | undefined;
 
     protected filter: ISharedFilterService;
     protected location: ng.ILocationService;

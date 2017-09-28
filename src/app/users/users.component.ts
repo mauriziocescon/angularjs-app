@@ -17,7 +17,7 @@ import { User } from "./users.model";
 export class UsersController {
     public static $inject = ["$filter", "$location", "$translate", "DelayExecutionService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "UsersService"];
     public name: string;
-    public textFilter: string;
+    public textFilter: string | undefined;
 
     protected filter: ISharedFilterService;
     protected location: ng.ILocationService;

@@ -17,7 +17,7 @@ import { Post } from "./user-posts.model";
 export class UserPostsController {
     public static $inject = ["$filter", "$stateParams", "$translate", "DelayExecutionService", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "UserPostsService"];
     public name: string;
-    public textFilter: string;
+    public textFilter: string | undefined;
 
     protected filter: ISharedFilterService;
     protected stateParams: ng.ui.IStateParamsService;
@@ -91,7 +91,7 @@ export class UserPostsController {
     }
 
     public isOpen(post: Post): boolean {
-        return this.openedPost && post.id === this.openedPost.id;
+        return (this.openedPost !== undefined && this.openedPost.id === post.id);
     }
 
     public open(post: Post): void {
