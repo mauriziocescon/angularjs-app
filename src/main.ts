@@ -1,6 +1,6 @@
 // tslint:disable:no-string-literal
 import * as $ from "jquery";
-window["$"] = window["jQuery"] = $; // jQuery is global for other objs
+// window["$"] = window["jQuery"] = $; // jQuery is global for other objs
 // tslint:enable:no-string-literal
 
 import * as angular from "angular";
@@ -18,17 +18,20 @@ class Main {
     }
 
     protected static loadAngular(): void {
-        const config: ng.IAngularBootstrapConfig = {strictDi: true};
-
         // tslint:disable:no-consecutive-blank-lines
 
-        // @if MOCK_BACKEND = "false"
-        angular.bootstrap(document.querySelector(app), [app], config);
-        // @endif
+        const config: ng.IAngularBootstrapConfig = {strictDi: true};
+        const element = document.querySelector(app);
 
-        // @if MOCK_BACKEND = "true"
-        angular.bootstrap(document.querySelector(app), [appDev], config);
-        // @endif
+        if (element) {
+            // @if MOCK_BACKEND = "false"
+            angular.bootstrap(document.querySelector(app), [app], config);
+            // @endif
+
+            // @if MOCK_BACKEND = "true"
+            angular.bootstrap(document.querySelector(app), [appDev], config);
+            // @endif
+        }
 
         // tslint:enable:no-consecutive-blank-lines
 
