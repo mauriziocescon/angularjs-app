@@ -1,6 +1,9 @@
 // tslint:disable:no-string-literal
 import * as $ from "jquery";
-// window["$"] = window["jQuery"] = $; // jQuery is global for other objs
+
+// @ts-ignore: Element implicitly has an 'any' type because type 'Window' has no index signature
+window["$"] = window["jQuery"] = $; // jQuery is global for other objs
+
 // tslint:enable:no-string-literal
 
 import * as angular from "angular";
@@ -46,7 +49,7 @@ class Main {
             return;
         }
 
-        navigator.serviceWorker.register("/serviceworker.js").then((reg) => {
+        navigator.serviceWorker.register("/serviceworker.js").then((reg: ServiceWorkerRegistration) => {
 
             // Registration was successful
             Logger.log("ServiceWorker registration successful with scope: ", reg.scope);
@@ -76,26 +79,29 @@ class Main {
 
         // Ensure refresh is only called once.
         // This works around a bug in "force update on reload".
-        let refreshing;
+        let refreshing = false;
         navigator.serviceWorker.oncontrollerchange = () => {
-            if (refreshing) {
-                return;
+            if (!refreshing) {
+                window.location.reload();
+                refreshing = true;
             }
-            window.location.reload();
-            refreshing = true;
         };
     }
 
-    protected static trackInstalling(worker): void {
-        worker.addEventListener("statechange", () => {
-            if (worker.state === "installed") {
-                Main.updateReady(worker);
-            }
-        });
+    protected static trackInstalling(worker: ServiceWorker | null): void {
+        if (worker) {
+            worker.addEventListener("statechange", () => {
+                if (worker.state === "installed") {
+                    Main.updateReady(worker);
+                }
+            });
+        }
     }
 
-    protected static updateReady(worker): void {
-        worker.postMessage({action: "skipWaiting"});
+    protected static updateReady(worker: ServiceWorker | null): void {
+        if (worker) {
+            worker.postMessage({action: "skipWaiting"});
+        }
     }
 }
 

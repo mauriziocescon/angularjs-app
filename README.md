@@ -27,7 +27,7 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 1. [Angular 1.x](https://angularjs.org/) 
 
-2. [Typescript](https://www.typescriptlang.org/) 
+2. [Typescript](https://www.typescriptlang.org/) (with ``--strict true``) 
 
 3. [Bootstrap 3.x](http://getbootstrap.com/) 
 
