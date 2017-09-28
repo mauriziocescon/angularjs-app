@@ -60,7 +60,7 @@ export const mcToggleDirective = () => {
         }
     };
 
-    const callStateFunction = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, state: boolean, eventObject: JQueryEventObject) => {
+    const callStateFunction = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, state: boolean, eventObject?: JQueryEventObject) => {
         const on = "on";
         const off = "off";
 
@@ -88,7 +88,7 @@ export const mcToggleDirective = () => {
             const keepWatching = "keepWatching";
             const keepWatchingAttrs = scope.$eval(attrs[keepWatching]) === true;
             setClass(scope, element, attrs, getState(scope, attrs));
-            let clearWatcher;
+            let clearWatcher: () => void | undefined;
 
             if (keepWatchingAttrs) {
                 clearWatcher = scope.$watch(() => {

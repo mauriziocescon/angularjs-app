@@ -16,7 +16,10 @@ describe("NavigationBarController", () => {
     // Set up the module
     beforeEach(angular.mock.module("app"));
 
-    beforeEach(inject(($httpBackend, $componentController, AppConstantsService, UtilitiesService) => {
+    beforeEach(inject(($httpBackend: ng.IHttpBackendService,
+                       $componentController: ng.IComponentControllerService,
+                       AppConstantsService: IAppConstantsService,
+                       UtilitiesService: IUtilitiesService) => {
 
         // Set up the mock http service responses
         httpBackend = $httpBackend;

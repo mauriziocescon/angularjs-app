@@ -256,7 +256,7 @@ export class UtilitiesService implements IUtilitiesService {
     }
 
     public parseQueryString(url: string): any {
-        const urlParams = {};
+        const urlParams: {[key: string]: string} = {};
 
         url.replace(new RegExp("([^?=&]+)(=([^&]*))?", "g"), (substring: string, ...args: any[]) => {
             return urlParams[args[0]] = args[2];
@@ -359,7 +359,7 @@ export class UtilitiesService implements IUtilitiesService {
 
         // Split parts by comma
         const parts = headers("link").split(",");
-        const links = {};
+        const links: {[key: string]: string} = {};
 
         if (parts.length > 1) {
             // Parse each part into a named link
