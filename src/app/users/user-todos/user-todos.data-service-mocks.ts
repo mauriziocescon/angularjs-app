@@ -26,7 +26,7 @@ export let userTodosRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
         for (let i = 0; Math.round(Math.random() * 25); i++) {
             const todo = new Todo();
 
-            todo.userId = parseInt(params.userId, undefined);
+            todo.userId = parseInt(params.userId, 10);
             todo.id = i;
             todo.title = fakeText.substring(0, (Math.random() * 10000) % 100);
             todo.completed = Math.random() < 0.5;

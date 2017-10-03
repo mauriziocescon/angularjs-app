@@ -81,12 +81,12 @@ describe("PhotosController", () => {
                 "Eu errem albucius invenire qui, unum dolorem ne nec. Torquatos concludaturque ius " +
                 "et, cu viderer minimum voluptua duo, ex eligendi abhorreant vis. Sea posse legimus " +
                 "vituperata no, per at etiam deserunt inimicus.";
-            const page = parseInt(params._page, undefined);
+            const page = parseInt(params._page, 10);
 
             for (let i = (page * 10) - 10; i < page * 10; i++) {
                 const photo = new Photo();
 
-                photo.albumId = parseInt(params.albumId, undefined);
+                photo.albumId = parseInt(params.albumId, 10);
                 photo.id = i;
                 photo.title = fakeText.substring(0, (Math.random() * 10000) % 20);
                 photo.url = ["chevron-circle-up.svg", "chevron-down.svg", "chevron-up.svg", "chevron-left.svg", "chevron-right.svg"][Math.round(Math.random() * 1000) % 5];

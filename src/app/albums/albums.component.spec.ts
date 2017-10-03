@@ -44,7 +44,7 @@ describe("AlbumsController", () => {
                 "Eu errem albucius invenire qui, unum dolorem ne nec. Torquatos concludaturque ius " +
                 "et, cu viderer minimum voluptua duo, ex eligendi abhorreant vis. Sea posse legimus " +
                 "vituperata no, per at etiam deserunt inimicus.";
-            const page = parseInt(params._page, undefined);
+            const page = parseInt(params._page, 10);
 
             for (let i = (page * 10) - 10; i < page * 10; i++) {
                 const album = new Album();

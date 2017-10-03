@@ -48,7 +48,7 @@ describe("PostCommentsController", () => {
             for (let i = 0; i < Math.round(Math.random() * 150); i++) {
                 const comment = new Comment();
 
-                comment.postId = parseInt(params.postId, undefined);
+                comment.postId = parseInt(params.postId, 10);
                 comment.id = i;
                 comment.name = fakeText.substring(0, (Math.random() * 10000) % 20);
                 comment.email = fakeText.substring(0, (Math.random() * 10000) % 20);

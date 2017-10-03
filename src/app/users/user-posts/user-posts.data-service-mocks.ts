@@ -26,7 +26,7 @@ export let userPostsRunFuncMocks = ($httpBackend: ng.IHttpBackendService,
         for (let i = 0; i < Math.round(Math.random() * 150); i++) {
             const post = new Post();
 
-            post.userId = parseInt(params.userId, undefined);
+            post.userId = parseInt(params.userId, 10);
             post.id = i;
             post.title = fakeText.substring(0, (Math.random() * 10000) % 20);
             post.body = fakeText.substring(0, (Math.random() * 10000) % fakeText.length);

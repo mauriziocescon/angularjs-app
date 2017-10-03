@@ -39,7 +39,7 @@ describe("UserPostsController", () => {
             for (let i = 0; i < 20; i++) {
                 const post = new Post();
 
-                post.userId = parseInt(params.userId, undefined);
+                post.userId = parseInt(params.userId, 10);
                 post.id = i;
                 post.title = "title";
                 post.body = "body of the post";

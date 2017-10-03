@@ -39,7 +39,7 @@ describe("UserTodosController", () => {
             for (let i = 0; i < 10; i++) {
                 const todo = new Todo();
 
-                todo.userId = parseInt(params.userId, undefined);
+                todo.userId = parseInt(params.userId, 10);
                 todo.id = i;
                 todo.title = "title " + i.toString();
                 todo.completed = Math.random() > 0.5;

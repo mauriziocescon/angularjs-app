@@ -141,7 +141,7 @@ export class PhotosService implements IPhotosService {
                 };
             }
 
-            const lastPage = parseInt(this.utilitiesService.parseQueryString(info.last)._page, undefined);
+            const lastPage = parseInt(this.utilitiesService.parseQueryString(info.last)._page, 10);
             return new ResponseWs(response.status === 200, response.statusText, response.data, page === lastPage, response.status === -1);
 
         }, (response: ng.IHttpResponse<Photo[]>) => {
