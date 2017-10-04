@@ -272,7 +272,7 @@ export class UtilitiesService implements IUtilitiesService {
     public logRequest(url: string, requestData?: any): void {
         if (this.appConstantsService.Application.LOG_WS_REQUEST === true) {
             let log = "\nREQUEST BODY (" + url;
-            log += "): \n" + requestData ? JSON.stringify(requestData, null, 2) : "" + "\n\n";
+            log += "): \n" + requestData ? JSON.stringify(requestData, null, "\t") : "" + "\n\n";
             Logger.log(log);
         }
     }
@@ -289,7 +289,7 @@ export class UtilitiesService implements IUtilitiesService {
                         ", Status: " + r.status.toString() +
                         ", StatusText: " + r.statusText +
                         ") in " + time + " ms \n" +
-                        JSON.stringify(r.data, null, 2) + "\n\n\n\n");
+                        JSON.stringify(r.data, null, "\t") + "\n\n\n\n");
                 });
             }
             else {
@@ -298,7 +298,7 @@ export class UtilitiesService implements IUtilitiesService {
                     ", Status: " + r.status.toString() +
                     ", StatusText: " + r.statusText +
                     ") in " + time + " ms \n" +
-                    JSON.stringify(r.data, null, 2) + "\n\n\n\n");
+                    JSON.stringify(r.data, null, "\t") + "\n\n\n\n");
             }
         }
     }
