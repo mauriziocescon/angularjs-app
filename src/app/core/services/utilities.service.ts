@@ -1,6 +1,6 @@
 import * as angular from "angular";
 
-import { AngularStats } from "angular-stats";
+import { IAngularStats } from "angular-stats";
 
 import { Logger, TypeDetect } from "../../shared/shared.module";
 
@@ -137,14 +137,14 @@ export class UtilitiesService implements IUtilitiesService {
     protected document: ng.IDocumentService;
     protected window: ng.IWindowService;
     protected timeout: ng.ITimeoutService;
-    protected angularStats: AngularStats;
+    protected angularStats: IAngularStats;
     protected appConstantsService: IAppConstantsService;
 
     constructor($rootScope: ng.IRootScopeService,
                 $document: ng.IDocumentService,
                 $window: ng.IWindowService,
                 $timeout: ng.ITimeoutService,
-                AngularStatsService: AngularStats,
+                AngularStatsService: IAngularStats,
                 AppConstantsService: IAppConstantsService) {
         this.rootScope = $rootScope;
         this.document = $document;
