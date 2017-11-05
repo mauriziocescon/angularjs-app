@@ -2,12 +2,12 @@
 import { Enum } from "../../shared/shared.module";
 
 export class Api {
-    public albums = "http://jsonplaceholder.typicode.com/albums";
-    public comments = "http://jsonplaceholder.typicode.com/comments";
-    public photos = "http://jsonplaceholder.typicode.com/photos";
-    public posts = "http://jsonplaceholder.typicode.com/posts";
-    public todos = "http://jsonplaceholder.typicode.com/todos";
-    public users = "http://jsonplaceholder.typicode.com/users";
+    public albums = "https://jsonplaceholder.typicode.com/albums";
+    public comments = "https://jsonplaceholder.typicode.com/comments";
+    public photos = "https://jsonplaceholder.typicode.com/photos";
+    public posts = "https://jsonplaceholder.typicode.com/posts";
+    public todos = "https://jsonplaceholder.typicode.com/todos";
+    public users = "https://jsonplaceholder.typicode.com/users";
 }
 
 export class Application {
