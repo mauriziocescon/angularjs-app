@@ -4,7 +4,7 @@ const frisby = require("frisby");
  * Take a look at @{Link http://frisbyjs.com/docs/api/}
  */
 frisby.create("Get jsonplaceholder todos")
-    .get("http://jsonplaceholder.typicode.com/todos")
+    .get("https://jsonplaceholder.typicode.com/todos")
     //.inspectJSON()
     .expectStatus(200)
     .expectHeaderContains("Content-Type", "application/json; charset=utf-8")
