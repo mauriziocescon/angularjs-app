@@ -1,22 +1,28 @@
-const frisby = require("frisby");
-
 /**
  * Take a look at @{Link http://frisbyjs.com/docs/api/}
  */
-frisby.create("Get jsonplaceholder photos")
-    .get("https://jsonplaceholder.typicode.com/photos?id=10")
-    //.inspectJSON()
-    .expectStatus(200)
-    .expectHeaderContains("Content-Type", "application/json; charset=utf-8")
-    .expectJSONLength("*", 5)   // 5 fields for each photo
-    .expectJSON("*", {
-        id: function(val) { expect(val).toBe(10); }, // Custom matcher callback
-    })
-    .expectJSONTypes("*", {
-        albumId: Number,
-        id: Number,
-        title: String,
-        url: String,
-        thumbnailUrl: String
-    })
-    .toss();
+const frisby = require("frisby");
+const Joi = frisby.Joi;
+
+it("Get jsonplaceholder photos", function(done) {
+    frisby
+        .get("https://jsonplaceholder.typicode.com/photos?id=10")
+        .expect("status", 200)
+        .expect("header", {
+            "Content-Type": "application/json; charset=utf-8",
+        })
+        .expect("jsonTypes", "*", {
+            albumId: Joi.number(),
+            id: Joi.number(),
+            title: Joi.string(),
+            url: Joi.string(),
+            thumbnailUrl: Joi.string(),
+        })
+        .then(function(response) {
+            expect(response.json.length).toBe(5); // 5 fields for each photo
+            // .expectJSON("*", {
+            //     id: function(val) { expect(val).toBe(10); }, // Custom matcher callback
+            // })
+        })
+        .done(done);
+});

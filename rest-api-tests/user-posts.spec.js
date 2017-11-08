@@ -1,21 +1,29 @@
-const frisby = require("frisby");
-
 /**
  * Take a look at @{Link http://frisbyjs.com/docs/api/}
  */
-frisby.create("Get jsonplaceholder posts")
-    .get("https://jsonplaceholder.typicode.com/posts?userId=10")
-    //.inspectJSON()
-    .expectStatus(200)
-    .expectHeaderContains("Content-Type", "application/json; charset=utf-8")
-    .expectJSONLength("*", 4)   // 4 fields for each post
-    .expectJSON("*", {
-        userId: function(val) { expect(val).toBe(10); }, // Custom matcher callback
-    })
-    .expectJSONTypes("*", {
-        userId: Number,
-        id: Number,
-        title: String,
-        body: String
-    })
-    .toss();
+const frisby = require("frisby");
+const Joi = frisby.Joi;
+
+it("Get jsonplaceholder posts", function(done) {
+    frisby
+        .get("https://jsonplaceholder.typicode.com/posts?userId=10")
+        .expect("status", 200)
+        .expect("header", {
+            "Content-Type": "application/json; charset=utf-8",
+        })
+        .expect("jsonTypes", "*", {
+            userId: Joi.number(),
+            id: Joi.number(),
+            title: Joi.string(),
+            body: Joi.string(),
+        })
+        .then(function(response) {
+            // expectJSONLength("*", 4);   // 4 fields for each post
+            // expectJSON("*", {
+            //     userId: function(val) {
+            //         expect(val).toBe(10);
+            //     }, // Custom matcher callback
+            // });
+        })
+        .done(done);
+});
