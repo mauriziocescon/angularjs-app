@@ -73,7 +73,7 @@
   },
   "devDependencies": {
     "@types/angular": "1.6.39",
-    "@types/angular-animate": "1.5.8",
+    "@types/angular-animate": "1.5.9",
     "@types/angular-dynamic-locale": "0.1.33",
     "@types/angular-loading-bar": "0.0.35",
     "@types/angular-mocks": "1.5.11",
@@ -85,7 +85,7 @@
     "@types/bootstrap": "3.3.36",
     "@types/jasmine": "2.6.3",
     "@types/jquery": "3.2.16",
-    "@types/node": "8.0.50",
+    "@types/node": "8.0.51",
     "@types/selenium-webdriver": "3.0.8",
     "@types/service_worker_api": "0.0.9",
     "@types/stacktrace-js": "0.0.32",

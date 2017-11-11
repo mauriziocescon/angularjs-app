@@ -11,15 +11,6 @@ it("Get jsonplaceholder todos: status", (done) => {
         .done(done);
 });
 
-it("Get jsonplaceholder todos: header", (done) => {
-    frisby
-        .get("https://jsonplaceholder.typicode.com/todos?userId=10")
-        .expect("header", {
-            "Content-Type": "application/json; charset=utf-8",
-        })
-        .done(done);
-});
-
 it("Get jsonplaceholder todos: jsonTypes", (done) => {
     frisby
         .get("https://jsonplaceholder.typicode.com/todos?userId=10")

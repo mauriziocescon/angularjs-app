@@ -11,15 +11,6 @@ it("Get jsonplaceholder albums: status", (done) => {
         .done(done);
 });
 
-it("Get jsonplaceholder albums: header", (done) => {
-    frisby
-        .get("https://jsonplaceholder.typicode.com/albums?_page=1")
-        .expect("header", {
-            "Content-Type": "application/json; charset=utf-8",
-        })
-        .done(done);
-});
-
 it("Get jsonplaceholder albums: jsonTypes", (done) => {
     frisby
         .get("https://jsonplaceholder.typicode.com/albums?_page=1")

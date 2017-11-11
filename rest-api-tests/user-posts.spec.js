@@ -11,15 +11,6 @@ it("Get jsonplaceholder user-posts: status", (done) => {
         .done(done);
 });
 
-it("Get jsonplaceholder user-posts: header", (done) => {
-    frisby
-        .get("https://jsonplaceholder.typicode.com/posts?userId=10")
-        .expect("header", {
-            "Content-Type": "application/json; charset=utf-8",
-        })
-        .done(done);
-});
-
 it("Get jsonplaceholder user-posts: jsonTypes", (done) => {
     frisby
         .get("https://jsonplaceholder.typicode.com/posts?userId=10")

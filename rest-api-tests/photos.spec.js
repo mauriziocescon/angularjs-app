@@ -11,15 +11,6 @@ it("Get jsonplaceholder photos: status", (done) => {
         .done(done);
 });
 
-it("Get jsonplaceholder photos: header", (done) => {
-    frisby
-        .get("https://jsonplaceholder.typicode.com/photos?id=10")
-        .expect("header", {
-            "Content-Type": "application/json; charset=utf-8",
-        })
-        .done(done);
-});
-
 it("Get jsonplaceholder photos: jsonTypes", (done) => {
     frisby
         .get("https://jsonplaceholder.typicode.com/photos?id=10")

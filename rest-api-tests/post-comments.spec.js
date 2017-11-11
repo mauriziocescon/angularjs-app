@@ -11,15 +11,6 @@ it("Get jsonplaceholder post-comments: status", (done) => {
         .done(done);
 });
 
-it("Get jsonplaceholder post-comments: header", (done) => {
-    frisby
-        .get("https://jsonplaceholder.typicode.com/comments?postId=1")
-        .expect("header", {
-            "Content-Type": "application/json; charset=utf-8",
-        })
-        .done(done);
-});
-
 it("Get jsonplaceholder post-comments: jsonTypes", (done) => {
     frisby
         .get("https://jsonplaceholder.typicode.com/comments?postId=1")
