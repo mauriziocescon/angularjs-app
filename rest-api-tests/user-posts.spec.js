@@ -27,12 +27,13 @@ it("Get jsonplaceholder user-posts: json", (done) => {
     frisby
         .get("https://jsonplaceholder.typicode.com/posts?userId=10")
         .then((response) => {
-            // expectJSONLength("*", 4);   // 4 fields for each post
-            // expectJSON("*", {
-            //     userId: function(val) {
-            //         expect(val).toBe(10);
-            //     }, // Custom matcher callback
-            // });
+            response.json.forEach((post) => {
+                expect(Object.keys(post).length).toBe(4); // 4 fields for each post
+            });
+
+            response.json.forEach((post) => {
+                expect(post.userId).toBe(10); // id = 10
+            });
         })
         .done(done);
 });

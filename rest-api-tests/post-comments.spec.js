@@ -28,12 +28,13 @@ it("Get jsonplaceholder post-comments: json", (done) => {
     frisby
         .get("https://jsonplaceholder.typicode.com/comments?postId=1")
         .then((response) => {
-            // expectJSONLength("*", 5); // 5 fields for each comment
-            // expectJSON("*", {
-            //     postId: function(val) {
-            //         expect(val).toBe(1);
-            //     }, // Custom matcher callback
-            // });
+            response.json.forEach((comment) => {
+                expect(Object.keys(comment).length).toBe(5); // 5 fields for each comment
+            });
+
+            response.json.forEach((comment) => {
+                expect(comment.postId).toBe(1); // id = 1
+            });
         })
         .done(done);
 });

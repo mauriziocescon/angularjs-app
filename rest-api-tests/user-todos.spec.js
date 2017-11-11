@@ -27,7 +27,9 @@ it("Get jsonplaceholder todos: json", (done) => {
     frisby
         .get("https://jsonplaceholder.typicode.com/todos?userId=10")
         .then((response) => {
-            // expectJSONLength("*", 4);   // 4 fields for each todo
+            response.json.forEach((todo) => {
+                expect(Object.keys(todo).length).toBe(4); // 4 fields for each todo
+            });
         })
         .done(done);
 });

@@ -44,7 +44,9 @@ it("Get jsonplaceholder users: json", (done) => {
     frisby
         .get("https://jsonplaceholder.typicode.com/users?id=10")
         .then((response) => {
-            // expectJSONLength("*", 8);   // 8 fields for each user
+            response.json.forEach((user) => {
+                expect(Object.keys(user).length).toBe(8); // 8 fields for each user
+            });
         })
         .done(done);
 });

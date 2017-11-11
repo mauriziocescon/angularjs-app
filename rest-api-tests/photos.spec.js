@@ -28,10 +28,13 @@ it("Get jsonplaceholder photos: json", (done) => {
     frisby
         .get("https://jsonplaceholder.typicode.com/photos?id=10")
         .then((response) => {
-            // expectJSONLength("*", 5); // 5 fields for each photo
-            // .expectJSON("*", {
-            //     id: function(val) { expect(val).toBe(10); }, // Custom matcher callback
-            // })
+            response.json.forEach((photo) => {
+                expect(Object.keys(photo).length).toBe(5); // 5 fields for each photo
+            });
+
+            response.json.forEach((photo) => {
+                expect(photo.id).toBe(10); // id = 10
+            });
         })
         .done(done);
 });

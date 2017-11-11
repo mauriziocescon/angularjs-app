@@ -26,8 +26,11 @@ it("Get jsonplaceholder albums: json", (done) => {
     frisby
         .get("https://jsonplaceholder.typicode.com/albums?_page=1")
         .then((response) => {
-            expect(response.json.length).toBe(10); // 10 photos for each page
-            // expectJSONLength("*", 3);   // 3 fields for each album
+            expect(response.json.length).toBe(10); // 10 albums for each page
+
+            response.json.forEach((album) => {
+                expect(Object.keys(album).length).toBe(3); // 3 fields for each album
+            });
         })
         .done(done);
 });
