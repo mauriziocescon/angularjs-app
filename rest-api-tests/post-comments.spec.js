@@ -4,21 +4,21 @@
 const frisby = require("frisby");
 const Joi = frisby.Joi;
 
-it("Get jsonplaceholder comments", function(done) {
+it("Get jsonplaceholder comments", (done) => {
     frisby
         .get("https://jsonplaceholder.typicode.com/comments?postId=1")
         .expect("status", 200)
-        .expect("header", {
-            "Content-Type": "application/json; charset=utf-8",
-        })
-        .expect("jsonTypes", "*", {
-            postId: Joi.number(),
-            id: Joi.number(),
-            name: Joi.string(),
-            email: Joi.string(),
-            body: Joi.string(),
-        })
-        .then(function(response) {
+        // .expect("header", {
+        //     "Content-Type": "application/json; charset=utf-8",
+        // })
+        // .expect("jsonTypes", "*", {
+        //     postId: Joi.number(),
+        //     id: Joi.number(),
+        //     name: Joi.string(),
+        //     email: Joi.string(),
+        //     body: Joi.string(),
+        // })
+        .then((response) => {
             // expectJSONLength("*", 5); // 5 fields for each comment
             // expectJSON("*", {
             //     postId: function(val) {
