@@ -4,19 +4,37 @@
 const frisby = require("frisby");
 const Joi = frisby.Joi;
 
-it("Get jsonplaceholder posts", (done) => {
+it("Get jsonplaceholder user-posts: status", (done) => {
     frisby
         .get("https://jsonplaceholder.typicode.com/posts?userId=10")
         .expect("status", 200)
-        // .expect("header", {
-        //     "Content-Type": "application/json; charset=utf-8",
-        // })
-        // .expect("jsonTypes", "*", {
-        //     userId: Joi.number(),
-        //     id: Joi.number(),
-        //     title: Joi.string(),
-        //     body: Joi.string(),
-        // })
+        .done(done);
+});
+
+it("Get jsonplaceholder user-posts: header", (done) => {
+    frisby
+        .get("https://jsonplaceholder.typicode.com/posts?userId=10")
+        .expect("header", {
+            "Content-Type": "application/json; charset=utf-8",
+        })
+        .done(done);
+});
+
+it("Get jsonplaceholder user-posts: jsonTypes", (done) => {
+    frisby
+        .get("https://jsonplaceholder.typicode.com/posts?userId=10")
+        .expect("jsonTypes", "*", {
+            userId: Joi.number(),
+            id: Joi.number(),
+            title: Joi.string(),
+            body: Joi.string(),
+        })
+        .done(done);
+});
+
+it("Get jsonplaceholder user-posts: json", (done) => {
+    frisby
+        .get("https://jsonplaceholder.typicode.com/posts?userId=10")
         .then((response) => {
             // expectJSONLength("*", 4);   // 4 fields for each post
             // expectJSON("*", {

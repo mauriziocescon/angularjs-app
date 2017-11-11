@@ -4,20 +4,38 @@
 const frisby = require("frisby");
 const Joi = frisby.Joi;
 
-it("Get jsonplaceholder photos", (done) => {
+it("Get jsonplaceholder photos: status", (done) => {
     frisby
         .get("https://jsonplaceholder.typicode.com/photos?id=10")
         .expect("status", 200)
-        // .expect("header", {
-        //     "Content-Type": "application/json; charset=utf-8",
-        // })
-        // .expect("jsonTypes", "*", {
-        //     albumId: Joi.number(),
-        //     id: Joi.number(),
-        //     title: Joi.string(),
-        //     url: Joi.string(),
-        //     thumbnailUrl: Joi.string(),
-        // })
+        .done(done);
+});
+
+it("Get jsonplaceholder photos: header", (done) => {
+    frisby
+        .get("https://jsonplaceholder.typicode.com/photos?id=10")
+        .expect("header", {
+            "Content-Type": "application/json; charset=utf-8",
+        })
+        .done(done);
+});
+
+it("Get jsonplaceholder photos: jsonTypes", (done) => {
+    frisby
+        .get("https://jsonplaceholder.typicode.com/photos?id=10")
+        .expect("jsonTypes", "*", {
+            albumId: Joi.number(),
+            id: Joi.number(),
+            title: Joi.string(),
+            url: Joi.string(),
+            thumbnailUrl: Joi.string(),
+        })
+        .done(done);
+});
+
+it("Get jsonplaceholder photos: json", (done) => {
+    frisby
+        .get("https://jsonplaceholder.typicode.com/photos?id=10")
         .then((response) => {
             // expectJSONLength("*", 5); // 5 fields for each photo
             // .expectJSON("*", {
