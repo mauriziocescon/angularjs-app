@@ -17,7 +17,7 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
    
 ## Backend implementation 
 
-1. REST APIs from [jsonplaceholder](https://jsonplaceholder.typicode.com)
+1. REST APIs from [JSONPlaceholder](https://jsonplaceholder.typicode.com)
 
 ## Progressive web app 
 
@@ -63,9 +63,7 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 ## Lightweight rest-api tests
 
-1. Take a look at [Frisby](http://frisbyjs.com) and write your own tests inside *rest-api-tests*
-
-2. Run ``npm run frisby`` on the console
+1. Run ``npm run test-api`` in order to execute tests inside *rest-api-tests* with [Frisby](http://frisbyjs.com)
 
 ## Major future improvements 
 
