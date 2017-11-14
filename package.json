@@ -28,14 +28,17 @@
     "url": "https://github.com/mauriziocescon/angular-1-x-app"
   },
   "keywords": [
-    "angular",
+    "angularjs",
     "bootstrap",
     "browser-sync",
     "browserify",
     "cescon",
     "es2017",
+    "frisby",
     "gulp",
+    "karma",
     "maurizio",
+    "protractor",
     "sass",
     "typescript",
     "vendor",
