@@ -1,5 +1,5 @@
 export const environment = {
-    apiUrl: "/",
+    apiUrl: "/api/",
     production: true,
 
     CAN_MOCK_WS_FAIL: false,
