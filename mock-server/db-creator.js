@@ -8,7 +8,27 @@ if (fs.existsSync("./mock-server/db.json")) {
 }
 
 // db creation
-const data = {users: []};
+const data = {
+    albums: [],
+    comments: [],
+    users: [],
+};
+
+// albums
+for (let i = 0; i < 100; i++) {
+    data.albums.push({
+        userId: i,
+        id: faker.name.findName(),
+        title: "quidem molestiae enim",
+    });
+}
+
+// comments
+for (let i = 0; i < 100; i++) {
+    data.comments.push({
+       
+    });
+}
 
 // users
 for (let i = 0; i < faker.random.number(100); i++) {
