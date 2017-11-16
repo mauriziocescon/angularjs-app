@@ -6,6 +6,7 @@ exports.config = {
         "./e2e-tests/tmp/**/*.e2e-spec.js",
     ],
     multiCapabilities: [
+        // {browserName: "safari"},
         // { browserName: "firefox" },
         {browserName: "chrome"},
     ],
