@@ -20,7 +20,7 @@ module.exports = (env) => {
                 },
             }),
 
-            new ExtractTextPlugin("[name].css"),
+            new ExtractTextPlugin("[name].[hash].css"),
 
             // Generate a manifest file which contains a mapping of all asset filenames
             // to their corresponding output file so that tools can pick it up without
@@ -90,7 +90,7 @@ module.exports = (env) => {
                 {
                     test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
                     use: [
-                        {loader: "file-loader", options: {name: "[name].[ext]"}},
+                        {loader: "file-loader", options: {name: "[name].[hash].[ext]"}},
                     ],
                 },
             ],
@@ -98,7 +98,7 @@ module.exports = (env) => {
 
         output: {
             path: path.resolve(__dirname, "../dist"),
-            filename: "[name].js",
+            filename: "[name].[hash].js",
         },
     });
 };
