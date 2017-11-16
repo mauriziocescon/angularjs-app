@@ -3,16 +3,16 @@ exports.config = {
     baseUrl: "http://localhost:8000/",
     rootElement: "#protractor-root",
     specs: [
-        "./e2e-tests/tmp/**/*.e2e-spec.js"
+        "./e2e-tests/tmp/**/*.e2e-spec.js",
     ],
     multiCapabilities: [
         // { browserName: "firefox" },
-        {browserName: "chrome"}
+        {browserName: "chrome"},
     ],
     jasmineNodeOpts: {
         showColors: true,
         isVerbose: true,
         includeStackTrace: true,
-        defaultTimeoutInterval: 30000
-    }
+        defaultTimeoutInterval: 30000,
+    },
 };

@@ -1,3 +1,4 @@
+// tslint:disable:object-literal-sort-keys
 module.exports = (config) => {
     config.set({
 
@@ -10,20 +11,20 @@ module.exports = (config) => {
 
         // list of files / patterns to load in the browser
         files: [
-            "dist/vendors*.js",
-            "dist/app*.js",
-            "dist/templates*.js",
-            "dist/uibtemplates*.js",
+            "dist/vendor.js",
+            "dist/app.js",
+            "dist/test.js",
+            "dist/lazy.js",
         ],
 
         // list of files to exclude
         exclude: [],
 
         plugins: [
+            require("karma-jasmine"),
             require("karma-chrome-launcher"),
             require("karma-firefox-launcher"),
             require("karma-ie-launcher"),
-            require("karma-jasmine"),
             require("karma-phantomjs-launcher"),
             require("karma-spec-reporter"),
         ],

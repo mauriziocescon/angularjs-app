@@ -17,8 +17,7 @@
     ]
   },
   "exclude": [
-    "node_modules",
-    "src"
+    "node_modules"
   ],
   "compileOnSave": false,
   "atom": {
