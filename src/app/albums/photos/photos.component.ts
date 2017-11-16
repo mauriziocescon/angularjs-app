@@ -1,3 +1,5 @@
+import template from "./photos.component.html";
+
 import {
     INavigationBarService,
     IUIUtilitiesService,
@@ -139,7 +141,7 @@ export class PhotosController {
 export const PhotosComponent: ng.IComponentOptions = {
     bindings: {},
     controller: PhotosController,
-    templateUrl: () => {
-        return "photos.component.html";
+    template: () => {
+        return template;
     },
 };

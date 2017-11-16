@@ -1,3 +1,5 @@
+import template from "./user-posts.component.html";
+
 import {
     IDelayExecutionService,
     INavigationBarService,
@@ -147,7 +149,7 @@ export class UserPostsController {
 export const UserPostsComponent: ng.IComponentOptions = {
     bindings: {},
     controller: UserPostsController,
-    templateUrl: () => {
-        return "user-posts.component.html";
+    template: () => {
+        return template;
     },
 };

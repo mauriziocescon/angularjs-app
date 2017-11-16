@@ -13,7 +13,6 @@ module.exports = (env) => {
         entry: {
             vendor: "./src/vendor.ts",
             app: "./src/main.ts",
-            lazy: "./src/lazy.ts",
         },
 
         // Enable sourcemaps for debugging webpack's output.
@@ -53,7 +52,6 @@ module.exports = (env) => {
 
             // insert file dynamically
             new HtmlWebpackPlugin({
-                excludeChunks: ["lazy"],
                 template: "src/index.html",
                 inject: "head",
             }),

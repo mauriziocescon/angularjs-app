@@ -1,5 +1,6 @@
 import "jquery";
 
+import "angular";
 import "angular-animate";
 import "angular-mocks";
 import "angular-sanitize";
@@ -19,3 +20,8 @@ import "angular-ui-scroll";
 import "babel-polyfill";
 import "ng-infinite-scroll";
 import "stacktrace-js";
+
+// Take a look at http://thesassway.com/beginner/how-to-structure-a-sass-project
+// for more information
+
+import "./styles.scss";

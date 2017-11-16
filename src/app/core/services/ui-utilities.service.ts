@@ -1,6 +1,9 @@
 // tslint:disable:max-classes-per-file
 import { Logger } from "../../shared/shared.module";
 
+import modalAlertTemplate from "../../shared/modals/modal-alert/modal-alert.template.html";
+import modalConfirmerTemplate from "../../shared/modals/modal-confirmer/modal-confirmer.template.html";
+
 import { IAppConstantsService } from "./app-constants.service";
 import { IUIUtilitiesConstants } from "./ui-utilities.constants";
 import { IUtilitiesService } from "./utilities.service";
@@ -75,7 +78,7 @@ export class UIUtilitiesService implements IUIUtilitiesService {
     public modalAlert(title: string, message: string, buttonLabel: string): void {
         try {
             const modalSettings: ng.ui.bootstrap.IModalSettings = {};
-            modalSettings.templateUrl = "modal-alert.template.html";
+            modalSettings.template = modalAlertTemplate;
             modalSettings.controller = "ModalAlertController";
             modalSettings.controllerAs = "$ctrl";
             modalSettings.size = "xs";
@@ -100,7 +103,7 @@ export class UIUtilitiesService implements IUIUtilitiesService {
     public modalConfirmer(title: string, message: string, yesButtonLabel: string, noButtonLabel: string, callback: (result: boolean) => void): void {
         try {
             const modalSettings: ng.ui.bootstrap.IModalSettings = {};
-            modalSettings.templateUrl = "modal-confirmer.template.html";
+            modalSettings.template = modalConfirmerTemplate;
             modalSettings.controller = "ModalConfirmerController";
             modalSettings.controllerAs = "$ctrl";
             modalSettings.size = "xs";

@@ -1,3 +1,5 @@
+import template from "./post-comments.component.html";
+
 import {
     INavigationBarService,
     IUIUtilitiesService,
@@ -105,7 +107,7 @@ export class PostCommentsController {
 export const PostCommentsComponent: ng.IComponentOptions = {
     bindings: {postId: "<"},
     controller: PostCommentsController,
-    templateUrl: () => {
-        return "post-comments.component.html";
+    template: () => {
+        return template;
     },
 };

@@ -1,7 +1,7 @@
 {
   "name": "Demo",
   "short_name": "Demo",
-  "description": "Demo illustrating angular structure",
+  "description": "Demo illustrating angularjs structure",
   "background_color": "white",
   "dir": "auto",
   "display": "standalone",

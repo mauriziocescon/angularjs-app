@@ -3,7 +3,7 @@ export const appConfigFunc = ($translateProvider: ng.translate.ITranslateProvide
                               cfpLoadingBarProvider: ng.loadingBar.ILoadingBarProvider) => {
     $translateProvider.useMissingTranslationHandlerLog();
     $translateProvider.useStaticFilesLoader({
-        prefix: "i18n/",
+        prefix: "assets/i18n/",
         suffix: ".json",
     });
     $translateProvider.preferredLanguage("en");

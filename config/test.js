@@ -18,11 +18,6 @@ module.exports = (env) => {
 
         plugins: [
 
-            // copy lazy
-            new CopyPlugin([{
-                from: "../lazy/dist",
-            }]),
-
             new webpack.DefinePlugin({
                 "process.env": {
                     "ENV": JSON.stringify("test"),

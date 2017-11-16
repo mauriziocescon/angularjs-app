@@ -1,5 +1,7 @@
 import * as ng from "angular";
 
+import template from "./navigation-bar.component.html";
+
 import {
     IAppConstantsService,
     IAppLanguageService,
@@ -81,7 +83,7 @@ export class NavigationBarController {
 export const NavigationBarComponent: ng.IComponentOptions = {
     bindings: {},
     controller: NavigationBarController,
-    templateUrl: () => {
-        return "navigation-bar.component.html";
+    template: () => {
+        return template;
     },
 };

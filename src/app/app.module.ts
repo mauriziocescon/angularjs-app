@@ -18,7 +18,6 @@ export * from "./core/core.module";
 const appModule = angular.module("app", [
     "angular-loading-bar",
     angularStats,
-    "app-templates",
     "infinite-scroll",
     "ngAnimate",
     "ngLocale",

@@ -1,3 +1,5 @@
+import template from "./albums.component.html";
+
 import {
     IDelayExecutionService,
     INavigationBarService,
@@ -165,7 +167,7 @@ export class AlbumsController {
 export const AlbumsComponent: ng.IComponentOptions = {
     bindings: {},
     controller: AlbumsController,
-    templateUrl: () => {
-        return "albums.component.html";
+    template: () => {
+        return template;
     },
 };

@@ -1,3 +1,5 @@
+import template from "./app.component.html";
+
 export class AppController {
     public static $inject = [];
     public name: string;
@@ -9,7 +11,7 @@ export class AppController {
 
 export const AppComponent: ng.IComponentOptions = {
     controller: AppController,
-    templateUrl: () => {
-        return "app.component.html";
+    template: () => {
+        return template;
     },
 };
