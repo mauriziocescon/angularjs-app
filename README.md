@@ -3,25 +3,23 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 ## How to build the app
 
-1. Before starting, take a look at the following [page](http://www.typescriptlang.org/docs/handbook/gulp.html); it's also noteworthy [The Future of Declaration Files](https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/)
+1. Download and install [NodeJS](https://nodejs.org/en/)
 
-2. Download and install [NodeJS](https://nodejs.org/en/)
+2. On the console, run ``npm install``
 
-3. From the console, run ``npm install``
+3. Run ``npm run build`` in order to build the code inside *dist* for distribution 
 
-4. On the console, run ``npm run build`` in order to build the code inside *dist* 
-
-5. On the console, run ``npm run serve`` in order to launch the application 
-
-6. If you want to mock the backend, run ``npm run serve-mock`` or ``npm run build-mock``
+4. Run ``npm run serve`` in order to launch the application for development 
    
 ## Backend implementation 
 
-1. REST APIs from [JSONPlaceholder](https://jsonplaceholder.typicode.com)
+1. Based on [json-server](https://github.com/typicode/json-server) with mocks from [faker](https://github.com/Marak/faker.js) (APIs available at `http://localhost:5000/api/`)
+
+2. Run ``npm start`` in order to launch the server (``http://localhost:5000``) with the distribution version of the app 
 
 ## Progressive web app 
 
-Definition of mock responses using [json-server](https://github.com/typicode/json-server) and [faker](https://github.com/Marak/faker.js) (APIs available at `http://localhost:5000/api/`)
+1. The app contains a [manifest.json](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/) and the entire [service-worker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers) business in order to cache the app (sw is enabled only for ``npm run build``)
 
 ## Libs & Tooling
 
@@ -61,6 +59,6 @@ Definition of mock responses using [json-server](https://github.com/typicode/jso
 
 1. Run ``npm run test-api`` in order to execute tests inside *rest-api-tests* with [Frisby](http://frisbyjs.com)
 
-## Major future improvements 
+## Working with editors/IDEs supporting “safe write”
 
-1. Layouts Users / To-Do / Posts
+1. Take a look at the following [page](https://webpack.github.io/docs/webpack-dev-server.html#working-with-editors-ides-supporting-safe-write) if you use IntelliJ or VIM 
