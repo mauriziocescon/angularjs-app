@@ -2,6 +2,8 @@ import * as StackTrace from "stacktrace-js";
 
 import { TypeDetect } from "./type-detect";
 
+import { environment } from "../../../environments/environment";
+
 export class Logger {
 
     public static exception(scope: any, exc: Error): void {
@@ -46,9 +48,9 @@ export class Logger {
                 const msg = "\n" + location + "\n" + className + " : " + exceptionName + " : " + decodeURI(exceptionMessage) + " at\n" + decodeURI(stringifiedStack) + "\n\n";
                 Logger.log(msg);
 
-                // @if MOCK_BACKEND = "true"
-                alert(msg);
-                // @endif
+                if (!environment.production) {
+                    alert(msg);
+                }
             };
 
             StackTrace.fromError(exc).then(callback).catch(errback);

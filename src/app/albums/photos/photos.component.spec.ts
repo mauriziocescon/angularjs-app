@@ -7,6 +7,8 @@ import { IAppConstantsService, IUtilitiesService } from "../../app.module";
 import { PhotosController } from "./photos.component";
 import { Photo } from "./photos.model";
 
+import { environment } from "../../../environments/environment";
+
 // Addition of angular-mocks and jasmine references is done on the gulpfile
 describe("PhotosController", () => {
     let httpBackend: ng.IHttpBackendService;
@@ -99,13 +101,13 @@ describe("PhotosController", () => {
             const prevPage = Math.max(page - 1, 1);
             const nextPage = page + 1;
             headers = {
-                link: "<http://jsonplaceholder.typicode.com/photos?_page=1>; rel=\"first\", " +
-                "<http://jsonplaceholder.typicode.com/photos?_page=" + prevPage.toString() + ">; rel=\"prev\", " +
-                "<http://jsonplaceholder.typicode.com/photos?_page=" + nextPage.toString() + ">; rel=\"next\", " +
-                "<http://jsonplaceholder.typicode.com/photos?_page=10>; rel=\"last\"",
+                link: `<${environment.apiUrl}photos?_page=1>; rel="first", ` +
+                `<${environment.apiUrl}photos?_page=${prevPage.toString()}>; rel="prev", ` +
+                `<${environment.apiUrl}photos?_page=${nextPage.toString()}>; rel="next", ` +
+                `<${environment.apiUrl}photos?_page=10>; rel="last"`,
             };
 
-            return AppConstantsService.Application.CAN_MOCK_WS_FAIL ? UtilitiesService.randomHttpStatusCode(response, headers) : [200, response, headers, "ok"];
+            return [200, response, headers, "ok"];
         });
 
     }));

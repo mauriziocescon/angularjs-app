@@ -11,6 +11,8 @@ import {
 
 import { Album } from "./albums.model";
 
+import { environment } from "../../environments/environment";
+
 export interface IAlbumsService {
     getAlbums(textFilter: string | undefined, page: number): ng.IPromise<ResponseWs<Album[] | undefined>>;
     cancelOngoingRequests(): void;
@@ -61,23 +63,20 @@ export class AlbumsService implements IAlbumsService {
         this.getAlbumsRequest.setupTimeout(this, this.utilitiesService);
 
         const url = this.appConstantsService.Api.albums;
-        this.utilitiesService.logRequest(url);
-        const startTime = this.utilitiesService.getTimeFrom1970();
 
         // fetch data
         this.getAlbumsRequest.promise = this.http.get<Album[]>(url, config);
 
         return this.getAlbumsRequest.promise.then((response: ng.IHttpResponse<Album[]>) => {
-            this.utilitiesService.logResponse(response, startTime);
             let info = this.utilitiesService.parseLinkHeaders(response.headers);
 
             if (!info.last) {
                 // default value: when there are no
                 // pages, info is empty
                 info = {
-                    first: "http://jsonplaceholder.typicode.com/default?_page=1",
-                    last: "http://jsonplaceholder.typicode.com/default?_page=1",
-                    next: "http://jsonplaceholder.typicode.com/default?_page=1",
+                    first: environment.apiUrl + "albums?_page=1",
+                    last: environment.apiUrl + "albums?_page=1",
+                    next: environment.apiUrl + "albums?_page=1",
                 };
             }
 
@@ -85,7 +84,6 @@ export class AlbumsService implements IAlbumsService {
             return new ResponseWs(response.status === 200, response.statusText, response.data, page === lastPage, response.status === -1);
 
         }, (response: ng.IHttpResponse<Album[]>) => {
-            this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });
     }

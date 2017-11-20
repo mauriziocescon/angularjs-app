@@ -1,37 +1,20 @@
 // tslint:disable:max-classes-per-file
 import { Enum } from "../../shared/shared.module";
 
+import { environment } from "../../../environments/environment";
+
 export class Api {
-    public albums = "https://jsonplaceholder.typicode.com/albums";
-    public comments = "https://jsonplaceholder.typicode.com/comments";
-    public photos = "https://jsonplaceholder.typicode.com/photos";
-    public posts = "https://jsonplaceholder.typicode.com/posts";
-    public todos = "https://jsonplaceholder.typicode.com/todos";
-    public users = "https://jsonplaceholder.typicode.com/users";
+    public albums = environment.apiUrl + "albums";
+    public comments = environment.apiUrl + "comments";
+    public photos = environment.apiUrl + "photos";
+    public posts = environment.apiUrl + "posts";
+    public todos = environment.apiUrl + "todos";
+    public users = environment.apiUrl + "users";
 }
 
 export class Application {
     public APP_NAME = "demo";
-
-    // tslint:disable:no-consecutive-blank-lines
-
-    // @if MOCK_BACKEND = "false"
-    public MOCK_BACKEND = false;
-    public CAN_MOCK_WS_FAIL = false;
     public SHOW_ANALYSIS = true;
-    public LOG_WS_REQUEST = false;
-    public LOG_WS_RESPONSE = false;
-    // @endif
-
-    // @if MOCK_BACKEND = "true"
-    public MOCK_BACKEND = true;
-    public CAN_MOCK_WS_FAIL = true;
-    public SHOW_ANALYSIS = true;
-    public LOG_WS_REQUEST = true;
-    public LOG_WS_RESPONSE = true;
-    // @endif
-
-    // tslint:enable:no-consecutive-blank-lines
 }
 
 export class Languages {

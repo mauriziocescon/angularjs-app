@@ -2,7 +2,7 @@ import * as angular from "angular";
 
 import { IAngularStats } from "angular-stats";
 
-import { Logger, TypeDetect } from "../../shared/shared.module";
+import { TypeDetect } from "../../shared/shared.module";
 
 import { IAppConstantsService } from "./app-constants.service";
 
@@ -25,6 +25,7 @@ export interface IUtilitiesService {
      * @param promise
      */
     clearDefer(promise: ng.IPromise<any>): void;
+
     /**
      * Call func on a particular scope
      *
@@ -39,6 +40,7 @@ export interface IUtilitiesService {
      * @param original
      */
     clone<T>(original: T): T;
+
     /**
      * Compare the objects
      * using angular equal
@@ -47,10 +49,12 @@ export interface IUtilitiesService {
      * @param value2
      */
     equals<T>(value1: T, value2: T): boolean;
+
     /**
      * Create a unique id
      */
     createUUID(): string;
+
     /**
      * Determine is a string is
      * not undefined and not empty
@@ -58,18 +62,22 @@ export interface IUtilitiesService {
      * @param text
      */
     isDefinedAndNotEmpty(text: string | undefined): boolean;
+
     /**
      * Get today
      */
     getToday(): Date;
+
     /**
      * Get now
      */
     getNow(): Date;
+
     /**
      * Get absolute time
      */
     getTimeFrom1970(): number;
+
     /**
      * Add a script to the DOM
      * and load it
@@ -77,40 +85,31 @@ export interface IUtilitiesService {
      * @param src
      */
     addScript(src: string): void;
+
     /**
      *
      * @param url
      */
     getPath(url: string | undefined): string;
+
     /**
      *
      */
     getCurrentPath(): string;
+
     /**
      * Return params of a url
      *
      * @param url
      */
     parseQueryString(url: string): any;
+
     /**
      * Count the number of scopes / watchers
      * for every component. Analyze the DOM
      */
     analyzeWebApp(): string;
-    /**
-     * Log an $http request
-     *
-     * @param url
-     * @param requestData
-     */
-    logRequest(url: string, requestData?: any): void;
-    /**
-     * Log an $http response
-     *
-     * @param {angular.IHttpResponse<any> | Array<angular.IHttpResponse<any>>} response
-     * @param {number} startTime
-     */
-    logResponse(response: ng.IHttpResponse<any> | Array<ng.IHttpResponse<any>>, startTime: number): void;
+
     /**
      * Create a random response
      * with common http code
@@ -119,6 +118,7 @@ export interface IUtilitiesService {
      * @param headers
      */
     randomHttpStatusCode(data?: any, headers?: any): any;
+
     /**
      * Parse link property
      * inside headers
@@ -267,40 +267,6 @@ export class UtilitiesService implements IUtilitiesService {
 
     public analyzeWebApp(): string {
         return this.angularStats.analyzeWebApp();
-    }
-
-    public logRequest(url: string, requestData?: any): void {
-        if (this.appConstantsService.Application.LOG_WS_REQUEST === true) {
-            let log = "\nREQUEST BODY (" + url;
-            log += "): \n" + requestData ? JSON.stringify(requestData, null, "\t") : "" + "\n\n";
-            Logger.log(log);
-        }
-    }
-
-    public logResponse(response: ng.IHttpResponse<any> | Array<ng.IHttpResponse<any>>, startTime: number): void {
-        if (this.appConstantsService.Application.LOG_WS_RESPONSE === true) {
-
-            const time = (this.getTimeFrom1970() - startTime).toString();
-
-            if (TypeDetect.isArray(response)) {
-                const rs = response as Array<ng.IHttpResponse<any>>;
-                rs.forEach((r: ng.IHttpResponse<any>) => {
-                    Logger.log("\nRESPONSE BODY: (" + r.config.method + " " + r.config.url +
-                        ", Status: " + r.status.toString() +
-                        ", StatusText: " + r.statusText +
-                        ") in " + time + " ms \n" +
-                        JSON.stringify(r.data, null, "\t") + "\n\n\n\n");
-                });
-            }
-            else {
-                const r = response as ng.IHttpResponse<any>;
-                Logger.log("\nRESPONSE BODY: (" + r.config.method + " " + r.config.url +
-                    ", Status: " + r.status.toString() +
-                    ", StatusText: " + r.statusText +
-                    ") in " + time + " ms \n" +
-                    JSON.stringify(r.data, null, "\t") + "\n\n\n\n");
-            }
-        }
     }
 
     public randomHttpStatusCode(data?: any, headers?: any): any {

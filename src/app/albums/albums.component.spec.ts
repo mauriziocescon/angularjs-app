@@ -5,6 +5,8 @@ import { IAppConstantsService, IUtilitiesService } from "../app.module";
 import { AlbumsController } from "./albums.component";
 import { Album } from "./albums.model";
 
+import { environment } from "../../environments/environment";
+
 // Addition of angular-mocks and jasmine references is done on the gulpfile
 describe("AlbumsController", () => {
     let httpBackend: ng.IHttpBackendService;
@@ -60,10 +62,11 @@ describe("AlbumsController", () => {
             const prevPage = Math.max(page - 1, 1);
             const nextPage = page + 1;
             headers = {
-                link: "<http://jsonplaceholder.typicode.com/albums?_page=1>; rel=\"first\", " +
-                "<http://jsonplaceholder.typicode.com/albums?_page=" + prevPage.toString() + ">; rel=\"prev\", " +
-                "<http://jsonplaceholder.typicode.com/albums?_page=" + nextPage.toString() + ">; rel=\"next\", " +
-                "<http://jsonplaceholder.typicode.com/albums?_page=10>; rel=\"last\"",
+                link: `<${environment.apiUrl}albums?_page=1>; rel="first", ` +
+                `<${environment.apiUrl}albums?_page=${prevPage.toString()}>; rel="prev", ` +
+                `<${environment.apiUrl}albums?_page=${nextPage.toString()}>; rel="next", ` +
+                `<${environment.apiUrl}albums?_page=10>; rel="last"`,
+
             };
 
             return [200, response, headers, "ok"];

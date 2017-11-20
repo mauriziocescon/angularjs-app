@@ -11,6 +11,8 @@ import {
 
 import { Photo } from "./photos.model";
 
+import { environment } from "../../../environments/environment";
+
 export interface IPhotosService {
     getPhoto(id: number): ng.IPromise<ResponseWs<Photo[] | undefined>>;
     getPhotos(ids: number[]): ng.IPromise<ResponseWs<Photo[] | undefined>>;
@@ -55,14 +57,10 @@ export class PhotosService implements IPhotosService {
         // fetch data using the generic currentGetPhotoRequest
         this.setupGetPhotoRequest(id, this.getPhotoRequest);
 
-        const startTime = this.utilitiesService.getTimeFrom1970();
-
         return this.getPhotoRequest.promise.then((response: ng.IHttpResponse<Photo[]>) => {
-            this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
 
         }).catch((response: ng.IHttpResponse<Photo>) => {
-            this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });
     }
@@ -84,10 +82,7 @@ export class PhotosService implements IPhotosService {
             return request.promise;
         });
 
-        const startTime = this.utilitiesService.getTimeFrom1970();
-
         return this.q.all(promises).then((responses: Array<ng.IHttpResponse<Photo[]>>) => {
-            this.utilitiesService.logResponse(responses, startTime);
 
             let photos: Photo[] = [];
             responses.forEach((response: ng.IHttpResponse<Photo[]>) => {
@@ -99,7 +94,6 @@ export class PhotosService implements IPhotosService {
                 }) !== -1);
 
         }, (response: ng.IHttpResponse<Photo>) => {
-            this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });
     }
@@ -121,23 +115,20 @@ export class PhotosService implements IPhotosService {
         this.getPhotosForAlbumRequests.setupTimeout(this, this.utilitiesService);
 
         const url = this.appConstantsService.Api.photos;
-        this.utilitiesService.logRequest(url);
-        const startTime = this.utilitiesService.getTimeFrom1970();
 
         // fetch data
         this.getPhotosForAlbumRequests.promise = this.http.get<Photo[]>(url, config);
 
         return this.getPhotosForAlbumRequests.promise.then((response: ng.IHttpResponse<Photo[]>) => {
-            this.utilitiesService.logResponse(response, startTime);
             let info = this.utilitiesService.parseLinkHeaders(response.headers);
 
             if (!info.last) {
                 // default value: when there are no
                 // pages, info is empty
                 info = {
-                    first: "http://jsonplaceholder.typicode.com/default?_page=1",
-                    last: "http://jsonplaceholder.typicode.com/default?_page=1",
-                    next: "http://jsonplaceholder.typicode.com/default?_page=1",
+                    first: environment.apiUrl + "albums?_page=1",
+                    last: environment.apiUrl + "albums?_page=1",
+                    next: environment.apiUrl + "albums?_page=1",
                 };
             }
 
@@ -145,7 +136,6 @@ export class PhotosService implements IPhotosService {
             return new ResponseWs(response.status === 200, response.statusText, response.data, page === lastPage, response.status === -1);
 
         }, (response: ng.IHttpResponse<Photo[]>) => {
-            this.utilitiesService.logResponse(response, startTime);
             return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
         });
     }
@@ -177,7 +167,6 @@ export class PhotosService implements IPhotosService {
         request.setupTimeout(this, this.utilitiesService);
 
         const url = this.appConstantsService.Api.photos;
-        this.utilitiesService.logRequest(url, config);
 
         // fetch data
         request.promise = this.http.get(url, config);

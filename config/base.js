@@ -1,5 +1,6 @@
 // tslint:disable:object-literal-sort-keys max-line-length no-console
 const webpack = require("webpack");
+const fs = require("fs");
 const path = require("path");
 const CleanPlugin = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
@@ -27,8 +28,10 @@ module.exports = (env) => {
 
             // environment variables
             new webpack.NormalModuleReplacementPlugin(/\/environments\/environment/, (resource) => {
-                const newResource = `environments/environment${env.name === "dev" ? "" : `.${env.name}`}`;
-                resource.request = resource.request.replace("environments/environment", newResource);
+                const newResource = `environments/environment.${env.name}`;
+                if (fs.existsSync(newResource)) {
+                    resource.request = resource.request.replace("environments/environment", newResource);
+                }
             }),
 
             // scope hoisting
@@ -102,7 +105,6 @@ module.exports = (env) => {
                     enforce: "pre",
                     use: [
                         {loader: "tslint-loader", options: {emitErrors: false, formatter: "stylish"}},
-                        {loader: "preprocess-loader", options: {MOCK_BACKEND: env.mock}},
                     ],
                 },
 
