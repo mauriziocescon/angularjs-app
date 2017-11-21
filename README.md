@@ -57,7 +57,9 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 ## Lightweight rest-api tests
 
-1. Run ``npm run test-api`` in order to execute tests inside *rest-api-tests* with [Frisby](http://frisbyjs.com)
+1. Run ``npm start`` in order to launch the server (``http://localhost:5000``) with the distribution version of the app 
+
+2. Run ``npm run test-api`` in order to execute tests inside *rest-api-tests* with [Frisby](http://frisbyjs.com)
 
 ## Working with editors/IDEs supporting “safe write”
 
