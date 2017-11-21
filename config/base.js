@@ -34,6 +34,9 @@ module.exports = (env) => {
                 }
             }),
 
+            // hot module replacement
+            new webpack.HotModuleReplacementPlugin({}),
+
             // scope hoisting
             new webpack.optimize.ModuleConcatenationPlugin(),
 

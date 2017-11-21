@@ -69,7 +69,7 @@ for (let i = 0; i < 200; i++) {
 }
 
 // users
-for (let i = 0; i < faker.random.number(100); i++) {
+for (let i = 0; i < 10; i++) {
     data.users.push({
         id: i + 1,
         name: faker.name.findName(),
