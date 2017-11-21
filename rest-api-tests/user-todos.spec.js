@@ -6,14 +6,14 @@ const Joi = frisby.Joi;
 
 it("Get jsonplaceholder todos: status", (done) => {
     frisby
-        .get("https://jsonplaceholder.typicode.com/todos?userId=10")
+        .get("http://localhost:5000/todos?userId=10")
         .expect("status", 200)
         .done(done);
 });
 
 it("Get jsonplaceholder todos: jsonTypes", (done) => {
     frisby
-        .get("https://jsonplaceholder.typicode.com/todos?userId=10")
+        .get("http://localhost:5000/todos?userId=10")
         .expect("jsonTypes", "*", {
             userId: Joi.number(),
             id: Joi.number(),
@@ -25,7 +25,7 @@ it("Get jsonplaceholder todos: jsonTypes", (done) => {
 
 it("Get jsonplaceholder todos: json", (done) => {
     frisby
-        .get("https://jsonplaceholder.typicode.com/todos?userId=10")
+        .get("http://localhost:5000/todos?userId=10")
         .then((response) => {
             response.json.forEach((todo) => {
                 expect(Object.keys(todo).length).toBe(4); // 4 fields for each todo

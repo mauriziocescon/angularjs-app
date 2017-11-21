@@ -6,14 +6,14 @@ const Joi = frisby.Joi;
 
 it("Get jsonplaceholder post-comments: status", (done) => {
     frisby
-        .get("https://jsonplaceholder.typicode.com/comments?postId=1")
+        .get("http://localhost:5000/comments?postId=1")
         .expect("status", 200)
         .done(done);
 });
 
 it("Get jsonplaceholder post-comments: jsonTypes", (done) => {
     frisby
-        .get("https://jsonplaceholder.typicode.com/comments?postId=1")
+        .get("http://localhost:5000/comments?postId=1")
         .expect("jsonTypes", "*", {
             postId: Joi.number(),
             id: Joi.number(),
@@ -26,7 +26,7 @@ it("Get jsonplaceholder post-comments: jsonTypes", (done) => {
 
 it("Get jsonplaceholder post-comments: json", (done) => {
     frisby
-        .get("https://jsonplaceholder.typicode.com/comments?postId=1")
+        .get("http://localhost:5000/comments?postId=1")
         .then((response) => {
             response.json.forEach((comment) => {
                 expect(Object.keys(comment).length).toBe(5); // 5 fields for each comment
