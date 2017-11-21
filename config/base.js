@@ -6,7 +6,7 @@ const CleanPlugin = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const StyleLintPlugin = require("stylelint-webpack-plugin");
-const {CheckerPlugin} = require("awesome-typescript-loader");
+const { CheckerPlugin } = require("awesome-typescript-loader");
 
 module.exports = (env) => {
     return {
