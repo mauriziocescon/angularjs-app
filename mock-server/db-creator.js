@@ -17,8 +17,16 @@ const data = {
     users: [],
 };
 
+// do items
+const numberOfAlbums = 100;
+const numberOfComments = 500;
+const numberOfPhotos = 5000;
+const numberOfPosts = 100;
+const numberOfTodos = 200;
+const numberOfUsers = 10;
+
 // albums
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < numberOfAlbums; i++) {
     data.albums.push({
         userId: parseInt(i / 10) + 1,
         id: i + 1,
@@ -27,7 +35,7 @@ for (let i = 0; i < 100; i++) {
 }
 
 // comments
-for (let i = 0; i < 500; i++) {
+for (let i = 0; i < numberOfComments; i++) {
     data.comments.push({
         postId: parseInt(i / 5) + 1,
         id: i + 1,
@@ -38,7 +46,7 @@ for (let i = 0; i < 500; i++) {
 }
 
 // photos
-for (let i = 0; i < 5000; i++) {
+for (let i = 0; i < numberOfPhotos; i++) {
     data.photos.push({
         albumId: parseInt(i / 50) + 1,
         id: i + 1,
@@ -49,7 +57,7 @@ for (let i = 0; i < 5000; i++) {
 }
 
 // posts
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < numberOfPosts; i++) {
     data.posts.push({
         userId: parseInt(i / 10) + 1,
         id: i + 1,
@@ -59,7 +67,7 @@ for (let i = 0; i < 100; i++) {
 }
 
 // todos
-for (let i = 0; i < 200; i++) {
+for (let i = 0; i < numberOfTodos; i++) {
     data.todos.push({
         userId: parseInt(i / 20) + 1,
         id: i + 1,
@@ -69,7 +77,7 @@ for (let i = 0; i < 200; i++) {
 }
 
 // users
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < numberOfUsers; i++) {
     data.users.push({
         id: i + 1,
         name: faker.name.findName(),
