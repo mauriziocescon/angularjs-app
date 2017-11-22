@@ -6,6 +6,11 @@ const middlewares = jsonServer.defaults({
     static: "dist",
 });
 
+// set the port of our application
+// process.env.PORT lets the port be set by Heroku
+const port = process.env.PORT || 5000;
+
+
 // Add middlewares
 app.use(middlewares);
 
@@ -94,6 +99,6 @@ app.get("*", (req, res) => {
 });
 
 // Start listening
-app.listen(5000, () => {
+app.listen(port, () => {
     console.log("JSON Server is running! Open the browser at http://localhost:5000");
 });
