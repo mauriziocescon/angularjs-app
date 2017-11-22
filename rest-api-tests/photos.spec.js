@@ -4,14 +4,14 @@
 const frisby = require("frisby");
 const Joi = frisby.Joi;
 
-it("Get jsonplaceholder photos: status", (done) => {
+it("Get  photos: status", (done) => {
     frisby
         .get("http://localhost:5000/photos?id=10")
         .expect("status", 200)
         .done(done);
 });
 
-it("Get jsonplaceholder photos: jsonTypes", (done) => {
+it("Get photos: jsonTypes", (done) => {
     frisby
         .get("http://localhost:5000/photos?id=10")
         .expect("jsonTypes", "*", {
@@ -24,7 +24,7 @@ it("Get jsonplaceholder photos: jsonTypes", (done) => {
         .done(done);
 });
 
-it("Get jsonplaceholder photos: json", (done) => {
+it("Get photos: json", (done) => {
     frisby
         .get("http://localhost:5000/photos?id=10")
         .then((response) => {

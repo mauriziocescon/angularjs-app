@@ -4,14 +4,14 @@
 const frisby = require("frisby");
 const Joi = frisby.Joi;
 
-it("Get jsonplaceholder post-comments: status", (done) => {
+it("Get post-comments: status", (done) => {
     frisby
         .get("http://localhost:5000/comments?postId=1")
         .expect("status", 200)
         .done(done);
 });
 
-it("Get jsonplaceholder post-comments: jsonTypes", (done) => {
+it("Get post-comments: jsonTypes", (done) => {
     frisby
         .get("http://localhost:5000/comments?postId=1")
         .expect("jsonTypes", "*", {
@@ -24,7 +24,7 @@ it("Get jsonplaceholder post-comments: jsonTypes", (done) => {
         .done(done);
 });
 
-it("Get jsonplaceholder post-comments: json", (done) => {
+it("Get post-comments: json", (done) => {
     frisby
         .get("http://localhost:5000/comments?postId=1")
         .then((response) => {

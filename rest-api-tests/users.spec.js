@@ -4,14 +4,14 @@
 const frisby = require("frisby");
 const Joi = frisby.Joi;
 
-it("Get jsonplaceholder users: status", (done) => {
+it("Get users: status", (done) => {
     frisby
         .get("http://localhost:5000/users?id=10")
         .expect("status", 200)
         .done(done);
 });
 
-it("Get jsonplaceholder users: jsonTypes", (done) => {
+it("Get users: jsonTypes", (done) => {
     frisby
         .get("http://localhost:5000/users?id=10")
         .expect("jsonTypes", "*", {
@@ -40,7 +40,7 @@ it("Get jsonplaceholder users: jsonTypes", (done) => {
         .done(done);
 });
 
-it("Get jsonplaceholder users: json", (done) => {
+it("Get users: json", (done) => {
     frisby
         .get("http://localhost:5000/users?id=10")
         .then((response) => {

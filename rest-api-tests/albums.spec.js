@@ -4,14 +4,14 @@
 const frisby = require("frisby");
 const Joi = frisby.Joi;
 
-it("Get jsonplaceholder albums: status", (done) => {
+it("Get albums: status", (done) => {
     frisby
         .get("http://localhost:5000/albums?_page=1")
         .expect("status", 200)
         .done(done);
 });
 
-it("Get jsonplaceholder albums: jsonTypes", (done) => {
+it("Get albums: jsonTypes", (done) => {
     frisby
         .get("http://localhost:5000/albums?_page=1")
         .expect("jsonTypes", "*", {
@@ -22,7 +22,7 @@ it("Get jsonplaceholder albums: jsonTypes", (done) => {
         .done(done);
 });
 
-it("Get jsonplaceholder albums: json", (done) => {
+it("Get albums: json", (done) => {
     frisby
         .get("http://localhost:5000/albums?_page=1")
         .then((response) => {
