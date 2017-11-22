@@ -17,6 +17,8 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 2. Run ``npm start`` in order to launch the server (``http://localhost:5000``) with the distribution version of the app 
 
+3. The server randomly simulates delays and errors for testing purposes
+
 ## Progressive web app 
 
 1. The app contains a [manifest.json](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/) and the entire [service-worker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers) business in order to cache the app (sw is enabled only for ``npm run build``)
