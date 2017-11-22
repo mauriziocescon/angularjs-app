@@ -5,6 +5,5 @@
 export const environment = {
     // json-server mock server
     apiUrl: "http://localhost:5000/api/",
-    baseUrl: "http://localhost:5000/",
     production: false,
 };
