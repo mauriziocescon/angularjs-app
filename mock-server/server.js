@@ -100,5 +100,5 @@ app.get("*", (req, res) => {
 
 // Start listening
 app.listen(port, () => {
-    console.log("JSON Server is running! Open the browser at http://localhost:5000");
+    console.log(`JSON Server is running! Open the browser at http://localhost:${port}`);
 });
