@@ -13,7 +13,7 @@
     "postinstall": "node ./mock-server/db-creator.js",
     "prestart": "npm run build",
     "start": "npm run json-server",
-    "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false;",
+    "heroku-prebuild": "heroku config:set NPM_CONFIG_PRODUCTION=false",
     "json-server": "nodemon ./mock-server/server.js",
     "serve": "webpack-dev-server --d --progress --profile --colors --env.name=dev | npm run json-server",
     "build": "webpack --progress --profile --colors --env.name=prod",
