@@ -27,10 +27,10 @@ module.exports = (env) => {
         plugins: [
 
             // environment variables
-            new webpack.NormalModuleReplacementPlugin(/\/environments\/environment/, (resource) => {
-                const newResource = `environments/environment.${env.name}`;
-                if (fs.existsSync(newResource)) {
-                    resource.request = resource.request.replace("environments/environment", newResource);
+            new webpack.NormalModuleReplacementPlugin(/\.\.\/environments\/environment/, (resource) => {
+                const newRequest = path.resolve(__dirname, `../src/environments/environment.${env.name}.ts`);
+                if (fs.existsSync(newRequest)) {
+                    resource.request = resource.request + `.${env.name}`;
                 }
             }),
 
