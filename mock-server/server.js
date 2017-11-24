@@ -10,7 +10,6 @@ const middlewares = jsonServer.defaults({
 // process.env.PORT lets the port be set by Heroku
 const port = process.env.PORT || 5000;
 
-
 // Add middlewares
 app.use(middlewares);
 
