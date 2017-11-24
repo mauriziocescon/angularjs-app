@@ -11,7 +11,7 @@
   },
   "scripts": {
     "postinstall": "node ./mock-server/db-creator.js",
-    "start": "npm run build | npm run json-server",
+    "start": "npm run json-server",
     "json-server": "node ./mock-server/server.js",
     "json-server-watch": "nodemon ./mock-server/server.js",
     "serve": "webpack-dev-server --d --progress --profile --colors --env.name=dev | npm run json-server-watch",

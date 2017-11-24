@@ -15,7 +15,7 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 1. Based on [json-server](https://github.com/typicode/json-server) with mocks from [faker](https://github.com/Marak/faker.js) (APIs available at `http://localhost:5000/api/`)
 
-2. Run ``npm start`` in order to launch the server (``http://localhost:5000``) with the distribution version of the app 
+2. Run ``npm run build`` and ``npm start`` in order to launch the server (``http://localhost:5000``) with the distribution version of the app 
 
 3. The server randomly simulates delays and errors for testing purposes
 
