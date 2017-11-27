@@ -1,7 +1,6 @@
 // tslint:disable:object-literal-sort-keys max-line-length no-console
 const webpack = require("webpack");
 const path = require("path");
-const CopyPlugin = require("copy-webpack-plugin");
 const webpackMerge = require("webpack-merge");
 const commonConfig = require("./base.js");
 
