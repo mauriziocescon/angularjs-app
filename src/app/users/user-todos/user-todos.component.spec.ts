@@ -3,7 +3,7 @@ import * as angular from "angular";
 import { IAppConstantsService, IUtilitiesService } from "../../app.module";
 
 import { UserTodosController } from "./user-todos.component";
-import { Todo} from "./user-todos.model";
+import { Todo } from "./user-todos.model";
 
 // Addition of angular-mocks and jasmine references is done on the gulpfile
 describe("UserTodosController", () => {
@@ -28,6 +28,14 @@ describe("UserTodosController", () => {
 
         appConstantsService = AppConstantsService;
         utilitiesService = UtilitiesService;
+
+        // returns a list i18n strings
+        httpBackend.whenGET((url: string) => {
+            return url.startsWith("assets/i18n/");
+        }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
+            const response = {};
+            return [200, response, headers, "ok"];
+        });
 
         // returns the current list of todos per userId
         httpBackend.whenGET((url: string) => {

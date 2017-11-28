@@ -2,7 +2,7 @@ import * as angular from "angular";
 
 import { IAppConstantsService, IUtilitiesService } from "../app.module";
 
-import { UsersController} from "./users.component";
+import { UsersController } from "./users.component";
 import { Address, Company, Coordinates, User } from "./users.model";
 
 // Addition of angular-mocks and jasmine references is done on the gulpfile
@@ -28,6 +28,14 @@ describe("UsersController", () => {
 
         appConstantsService = AppConstantsService;
         utilitiesService = UtilitiesService;
+
+        // returns a list i18n strings
+        httpBackend.whenGET((url: string) => {
+            return url.startsWith("assets/i18n/");
+        }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
+            const response = {};
+            return [200, response, headers, "ok"];
+        });
 
         // returns the current list of users
         httpBackend.whenGET((url: string) => {

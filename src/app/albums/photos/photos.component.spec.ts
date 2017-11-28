@@ -38,6 +38,14 @@ describe("PhotosController", () => {
         appConstantsService = AppConstantsService;
         utilitiesService = UtilitiesService;
 
+        // returns a list i18n strings
+        httpBackend.whenGET((url: string) => {
+            return url.startsWith("assets/i18n/");
+        }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
+            const response = {};
+            return [200, response, headers, "ok"];
+        });
+
         // returns one photo
         httpBackend.whenGET((url: string) => {
             return url.startsWith(appConstantsService.Api.photos) &&
