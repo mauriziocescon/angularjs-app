@@ -87,9 +87,13 @@ export class UserTodosService implements IUserTodosService {
         // configure new request
         this.changeUserTodoRequest.canceler = this.q.defer();
         const config: ng.IRequestShortcutConfig = {
-            params: {userId, id},
             // set a promise that let you cancel the current request
             timeout: this.changeUserTodoRequest.canceler.promise,
+        };
+        const data = {
+            completed: value,
+            id,
+            userId: parseInt(userId, 10),
         };
 
         // setup a timeout for the request
@@ -98,7 +102,7 @@ export class UserTodosService implements IUserTodosService {
         const url = this.appConstantsService.Api.todos;
 
         // fetch data
-        this.changeUserTodoRequest.promise = this.http.post<Todo[]>(url, config);
+        this.changeUserTodoRequest.promise = this.http.put<Todo[]>(url, data, config);
 
         return this.changeUserTodoRequest.promise
             .then((response: ng.IHttpResponse<Todo[]>) => {
