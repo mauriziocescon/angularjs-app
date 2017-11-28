@@ -41,6 +41,7 @@ export class UserTodosService implements IUserTodosService {
         this.utilitiesService = UtilitiesService;
 
         this.getUserTodosRequest = new RequestWs();
+        this.changeUserTodoRequest = new RequestWs();
         this.http.defaults = this.httpDefaults;
     }
 
