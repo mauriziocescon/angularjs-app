@@ -52,7 +52,7 @@ for (let i = 0; i < numberOfPhotos; i++) {
         id: i + 1,
         title: faker.lorem.text(),
         url: faker.image.imageUrl(),
-        thumbnailUrl: faker.image.imageUrl(250),
+        thumbnailUrl: faker.image.imageUrl(250, 250),
     });
 }
 
