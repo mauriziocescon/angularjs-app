@@ -75,12 +75,13 @@ export class UsersController {
     }
 
     public $onInit(): void {
-        this.translate(["USERS.USERS"]).then((translations: any) => {
-            this.navigationBarService.setTitle(translations["USERS.USERS"]);
-            this.loadUsersKey = new Enum("USERS");
-            this.busy = false;
-            this.loadDataSource();
-        });
+        this.translate(["USERS.USERS"])
+            .then((translations: any) => {
+                this.navigationBarService.setTitle(translations["USERS.USERS"]);
+                this.loadUsersKey = new Enum("USERS");
+                this.busy = false;
+                this.loadDataSource();
+            });
     }
 
     public $onDestroy(): void {
@@ -118,25 +119,30 @@ export class UsersController {
         this.busy = true;
         this.users = undefined;
 
-        this.usersService.getUsers(this.textFilter).then((response: ResponseWs<User[]>) => {
+        this.usersService.getUsers(this.textFilter)
+            .then((response: ResponseWs<User[]>) => {
 
-            if (response.isSuccess()) {
-                this.users = response.getData();
-            }
-            else if (response.hasBeenCanceled() === false) {
-                // we do not notify the user in case of cancel request
-                this.translate(["USERS.ERROR_ACCESS_DATA", "USERS.CLOSE"]).then((translations: any) => {
-                    this.uiUtilitiesService.modalAlert(translations["USERS.ERROR_ACCESS_DATA"], response.getMessage(), translations["USERS.CLOSE"]);
-                });
-            }
-        }).catch((reason: any) => {
-            this.translate(["USERS.ERROR_ACCESS_DATA_COMPONENT", "USERS.CLOSE"]).then((translations: any) => {
-                this.uiUtilitiesService.modalAlert(translations["USERS.ERROR_ACCESS_DATA"], reason.toString(), translations["USERS.CLOSE"]);
+                if (response.isSuccess()) {
+                    this.users = response.getData();
+                }
+                else if (response.hasBeenCanceled() === false) {
+                    // we do not notify the user in case of cancel request
+                    this.translate(["USERS.ERROR_ACCESS_DATA", "USERS.CLOSE"])
+                        .then((translations: any) => {
+                            this.uiUtilitiesService.modalAlert(translations["USERS.ERROR_ACCESS_DATA"], response.getMessage(), translations["USERS.CLOSE"]);
+                        });
+                }
+            })
+            .catch((reason: any) => {
+                this.translate(["USERS.ERROR_ACCESS_DATA_COMPONENT", "USERS.CLOSE"])
+                    .then((translations: any) => {
+                        this.uiUtilitiesService.modalAlert(translations["USERS.ERROR_ACCESS_DATA"], reason.toString(), translations["USERS.CLOSE"]);
+                    });
+                Logger.log(reason);
+            })
+            .finally(() => {
+                this.busy = false;
             });
-            Logger.log(reason);
-        }).finally(() => {
-            this.busy = false;
-        });
     }
 
     public goToUserPosts(user: User, event: ng.IAngularEvent): void {

@@ -82,25 +82,30 @@ export class PostCommentsController {
         this.busy = true;
         this.comments = undefined;
 
-        this.postCommentsService.getPostComments(this.postId.toString()).then((response: ResponseWs<Comment[]>) => {
+        this.postCommentsService.getPostComments(this.postId.toString())
+            .then((response: ResponseWs<Comment[]>) => {
 
-            if (response.isSuccess()) {
-                this.comments = response.getData();
-            }
-            else if (response.hasBeenCanceled() === false) {
-                // we do not notify the user in case of cancel request
-                this.translate(["POST_COMMENTS.ERROR_ACCESS_DATA", "POST_COMMENTS.CLOSE"]).then((translations: any) => {
-                    this.uiUtilitiesService.modalAlert(translations["POST_COMMENTS.ERROR_ACCESS_DATA"], response.getMessage(), translations["POST_COMMENTS.CLOSE"]);
-                });
-            }
-        }).catch((reason: any) => {
-            this.translate(["POST_COMMENTS.ERROR_ACCESS_DATA_COMPONENT", "POST_COMMENTS.CLOSE"]).then((translations: any) => {
-                this.uiUtilitiesService.modalAlert(translations["POST_COMMENTS.ERROR_ACCESS_DATA"], reason.toString(), translations["POST_COMMENTS.CLOSE"]);
+                if (response.isSuccess()) {
+                    this.comments = response.getData();
+                }
+                else if (response.hasBeenCanceled() === false) {
+                    // we do not notify the user in case of cancel request
+                    this.translate(["POST_COMMENTS.ERROR_ACCESS_DATA", "POST_COMMENTS.CLOSE"])
+                        .then((translations: any) => {
+                            this.uiUtilitiesService.modalAlert(translations["POST_COMMENTS.ERROR_ACCESS_DATA"], response.getMessage(), translations["POST_COMMENTS.CLOSE"]);
+                        });
+                }
+            })
+            .catch((reason: any) => {
+                this.translate(["POST_COMMENTS.ERROR_ACCESS_DATA_COMPONENT", "POST_COMMENTS.CLOSE"])
+                    .then((translations: any) => {
+                        this.uiUtilitiesService.modalAlert(translations["POST_COMMENTS.ERROR_ACCESS_DATA"], reason.toString(), translations["POST_COMMENTS.CLOSE"]);
+                    });
+                Logger.log(reason);
+            })
+            .finally(() => {
+                this.busy = false;
             });
-            Logger.log(reason);
-        }).finally(() => {
-            this.busy = false;
-        });
     }
 }
 

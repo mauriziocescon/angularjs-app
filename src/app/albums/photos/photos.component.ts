@@ -79,11 +79,12 @@ export class PhotosController {
     }
 
     public $onInit(): void {
-        this.translate(["PHOTOS.PHOTOS"]).then((translations: any) => {
-            this.navigationBarService.setTitle(translations["PHOTOS.PHOTOS"]);
-            this.busy = false;
-            this.loadDataSourceFirstPage();
-        });
+        this.translate(["PHOTOS.PHOTOS"])
+            .then((translations: any) => {
+                this.navigationBarService.setTitle(translations["PHOTOS.PHOTOS"]);
+                this.busy = false;
+                this.loadDataSourceFirstPage();
+            });
     }
 
     public $onDestroy(): void {
@@ -114,31 +115,36 @@ export class PhotosController {
 
     public loadDataSource(): void {
         const albumId = "albumId";
-        this.photosService.getPhotosForAlbum(this.stateParams[albumId], this.pageNumber).then((response: ResponseWs<Photo[]>) => {
+        this.photosService.getPhotosForAlbum(this.stateParams[albumId], this.pageNumber)
+            .then((response: ResponseWs<Photo[]>) => {
 
-            if (response.isSuccess()) {
-                const data = response.getData();
-                this.photos = this.photos === undefined ? data : this.photos.concat(data ? data : []);
-                this.loadCompleted = response.isLastPage();
+                if (response.isSuccess()) {
+                    const data = response.getData();
+                    this.photos = this.photos === undefined ? data : this.photos.concat(data ? data : []);
+                    this.loadCompleted = response.isLastPage();
 
-                if (!this.loadCompleted) {
-                    this.pageNumber++;
+                    if (!this.loadCompleted) {
+                        this.pageNumber++;
+                    }
                 }
-            }
-            else if (response.hasBeenCanceled() === false) {
-                // we do not notify the user in case of cancel request
-                this.translate(["PHOTOS.ERROR_ACCESS_DATA", "PHOTOS.CLOSE"]).then((translations: any) => {
-                    this.uiUtilitiesService.modalAlert(translations["PHOTOS.ERROR_ACCESS_DATA"], response.getMessage(), translations["PHOTOS.CLOSE"]);
-                });
-            }
-        }).catch((reason: any) => {
-            this.translate(["PHOTOS.ERROR_ACCESS_DATA_COMPONENT", "PHOTOS.CLOSE"]).then((translations: any) => {
-                this.uiUtilitiesService.modalAlert(translations["PHOTOS.ERROR_ACCESS_DATA"], reason.toString(), translations["PHOTOS.CLOSE"]);
+                else if (response.hasBeenCanceled() === false) {
+                    // we do not notify the user in case of cancel request
+                    this.translate(["PHOTOS.ERROR_ACCESS_DATA", "PHOTOS.CLOSE"])
+                        .then((translations: any) => {
+                            this.uiUtilitiesService.modalAlert(translations["PHOTOS.ERROR_ACCESS_DATA"], response.getMessage(), translations["PHOTOS.CLOSE"]);
+                        });
+                }
+            })
+            .catch((reason: any) => {
+                this.translate(["PHOTOS.ERROR_ACCESS_DATA_COMPONENT", "PHOTOS.CLOSE"])
+                    .then((translations: any) => {
+                        this.uiUtilitiesService.modalAlert(translations["PHOTOS.ERROR_ACCESS_DATA"], reason.toString(), translations["PHOTOS.CLOSE"]);
+                    });
+                Logger.log(reason);
+            })
+            .finally(() => {
+                this.busy = false;
             });
-            Logger.log(reason);
-        }).finally(() => {
-            this.busy = false;
-        });
     }
 }
 

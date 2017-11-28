@@ -82,12 +82,13 @@ export class AlbumsController {
     }
 
     public $onInit(): void {
-        this.translate(["ALBUMS.ALBUMS"]).then((translations: any) => {
-            this.navigationBarService.setTitle(translations["ALBUMS.ALBUMS"]);
-            this.loadAlbumsKey = new Enum("ALBUMS");
-            this.busy = false;
-            this.loadDataSourceFirstPage();
-        });
+        this.translate(["ALBUMS.ALBUMS"])
+            .then((translations: any) => {
+                this.navigationBarService.setTitle(translations["ALBUMS.ALBUMS"]);
+                this.loadAlbumsKey = new Enum("ALBUMS");
+                this.busy = false;
+                this.loadDataSourceFirstPage();
+            });
     }
 
     public $onDestroy(): void {
@@ -132,31 +133,36 @@ export class AlbumsController {
     }
 
     public loadDataSource(): void {
-        this.albumsService.getAlbums(this.textFilter, this.pageNumber).then((response: ResponseWs<Album[]>) => {
+        this.albumsService.getAlbums(this.textFilter, this.pageNumber)
+            .then((response: ResponseWs<Album[]>) => {
 
-            if (response.isSuccess()) {
-                const data = response.getData();
-                this.albums = this.albums === undefined ? data : this.albums.concat(data ? data : []);
-                this.loadCompleted = response.isLastPage();
+                if (response.isSuccess()) {
+                    const data = response.getData();
+                    this.albums = this.albums === undefined ? data : this.albums.concat(data ? data : []);
+                    this.loadCompleted = response.isLastPage();
 
-                if (!this.loadCompleted) {
-                    this.pageNumber++;
+                    if (!this.loadCompleted) {
+                        this.pageNumber++;
+                    }
                 }
-            }
-            else if (response.hasBeenCanceled() === false) {
-                // we do not notify the user in case of cancel request
-                this.translate(["ALBUMS.ERROR_ACCESS_DATA", "ALBUMS.CLOSE"]).then((translations: any) => {
-                    this.uiUtilitiesService.modalAlert(translations["ALBUMS.ERROR_ACCESS_DATA"], response.getMessage(), translations["ALBUMS.CLOSE"]);
-                });
-            }
-        }).catch((reason: any) => {
-            this.translate(["ALBUMS.ERROR_ACCESS_DATA_COMPONENT", "ALBUMS.CLOSE"]).then((translations: any) => {
-                this.uiUtilitiesService.modalAlert(translations["ALBUMS.ERROR_ACCESS_DATA"], reason.toString(), translations["ALBUMS.CLOSE"]);
+                else if (response.hasBeenCanceled() === false) {
+                    // we do not notify the user in case of cancel request
+                    this.translate(["ALBUMS.ERROR_ACCESS_DATA", "ALBUMS.CLOSE"])
+                        .then((translations: any) => {
+                            this.uiUtilitiesService.modalAlert(translations["ALBUMS.ERROR_ACCESS_DATA"], response.getMessage(), translations["ALBUMS.CLOSE"]);
+                        });
+                }
+            })
+            .catch((reason: any) => {
+                this.translate(["ALBUMS.ERROR_ACCESS_DATA_COMPONENT", "ALBUMS.CLOSE"])
+                    .then((translations: any) => {
+                        this.uiUtilitiesService.modalAlert(translations["ALBUMS.ERROR_ACCESS_DATA"], reason.toString(), translations["ALBUMS.CLOSE"]);
+                    });
+                Logger.log(reason);
+            })
+            .finally(() => {
+                this.busy = false;
             });
-            Logger.log(reason);
-        }).finally(() => {
-            this.busy = false;
-        });
     }
 
     public goToPhotos(album: Album): void {

@@ -13,6 +13,9 @@ import { Todo } from "./user-todos.model";
 
 export interface IUserTodosService {
     getTodos(userId: string, textFilter: string | undefined): ng.IPromise<ResponseWs<Todo[] | undefined>>;
+
+    changeTodo(userId: string, id: number, value: boolean): ng.IPromise<ResponseWs<Todo[] | undefined>>;
+
     cancelOngoingRequests(): void;
 }
 
@@ -26,6 +29,7 @@ export class UserTodosService implements IUserTodosService {
 
     // requests
     protected getUserTodosRequest: RequestWs<Todo[]>;
+    protected changeUserTodoRequest: RequestWs<any>;
 
     constructor($http: ng.IHttpService,
                 $q: ng.IQService,
@@ -65,17 +69,49 @@ export class UserTodosService implements IUserTodosService {
         // fetch data
         this.getUserTodosRequest.promise = this.http.get<Todo[]>(url, config);
 
-        return this.getUserTodosRequest.promise.then((response: ng.IHttpResponse<Todo[]>) => {
-            return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
+        return this.getUserTodosRequest.promise
+            .then((response: ng.IHttpResponse<Todo[]>) => {
+                return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
 
-        }, (response: ng.IHttpResponse<Todo[]>) => {
-            return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
-        });
+            }, (response: ng.IHttpResponse<Todo[]>) => {
+                return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
+            });
+    }
+
+    public changeTodo(userId: string, id: number, value: boolean): ng.IPromise<ResponseWs<Todo[] | undefined>> {
+
+        // reset request
+        this.changeUserTodoRequest.reset(this.utilitiesService);
+
+        // configure new request
+        this.changeUserTodoRequest.canceler = this.q.defer();
+        const config: ng.IRequestShortcutConfig = {
+            params: {userId, id},
+            // set a promise that let you cancel the current request
+            timeout: this.changeUserTodoRequest.canceler.promise,
+        };
+
+        // setup a timeout for the request
+        this.changeUserTodoRequest.setupTimeout(this, this.utilitiesService);
+
+        const url = this.appConstantsService.Api.todos;
+
+        // fetch data
+        this.changeUserTodoRequest.promise = this.http.post<Todo[]>(url, config);
+
+        return this.changeUserTodoRequest.promise
+            .then((response: ng.IHttpResponse<Todo[]>) => {
+                return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
+
+            }, (response: ng.IHttpResponse<Todo[]>) => {
+                return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
+            });
     }
 
     public cancelOngoingRequests(): void {
 
         // reset requests
         this.getUserTodosRequest.reset(this.utilitiesService);
+        this.changeUserTodoRequest.reset(this.utilitiesService);
     }
 }

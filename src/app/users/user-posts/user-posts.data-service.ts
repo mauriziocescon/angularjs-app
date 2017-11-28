@@ -9,10 +9,11 @@ import {
     ResponseWs,
 } from "../../shared/shared.module";
 
-import {Post} from "./user-posts.model";
+import { Post } from "./user-posts.model";
 
 export interface IUserPostsService {
     getPosts(userId: string, textFilter: string | undefined): ng.IPromise<ResponseWs<Post[] | undefined>>;
+
     cancelOngoingRequests(): void;
 }
 
@@ -65,12 +66,13 @@ export class UserPostsService implements IUserPostsService {
         // fetch data
         this.getUserPostsRequest.promise = this.http.get<Post[]>(url, config);
 
-        return this.getUserPostsRequest.promise.then((response: ng.IHttpResponse<Post[]>) => {
-            return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
+        return this.getUserPostsRequest.promise
+            .then((response: ng.IHttpResponse<Post[]>) => {
+                return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
 
-        }, (response: ng.IHttpResponse<Post[]>) => {
-            return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
-        });
+            }, (response: ng.IHttpResponse<Post[]>) => {
+                return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
+            });
     }
 
     public cancelOngoingRequests(): void {

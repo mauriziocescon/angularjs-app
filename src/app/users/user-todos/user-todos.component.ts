@@ -78,12 +78,13 @@ export class UserTodosController {
     }
 
     public $onInit(): void {
-        this.translate(["USER_TODOS.TODOS"]).then((translations: any) => {
-            this.navigationBarService.setTitle(translations["USER_TODOS.TODOS"]);
-            this.loadTodosKey = new Enum("TODOS");
-            this.busy = false;
-            this.loadDataSource();
-        });
+        this.translate(["USER_TODOS.TODOS"])
+            .then((translations: any) => {
+                this.navigationBarService.setTitle(translations["USER_TODOS.TODOS"]);
+                this.loadTodosKey = new Enum("TODOS");
+                this.busy = false;
+                this.loadDataSource();
+            });
     }
 
     public $onDestroy(): void {
@@ -118,29 +119,44 @@ export class UserTodosController {
         this.todos = undefined;
 
         const userId = "userId";
-        this.todosService.getTodos(this.stateParams[userId], this.textFilter).then((response: ResponseWs<Todo[]>) => {
+        this.todosService.getTodos(this.stateParams[userId], this.textFilter)
+            .then((response: ResponseWs<Todo[]>) => {
 
-            if (response.isSuccess()) {
-                this.todos = response.getData();
-            }
-            else if (response.hasBeenCanceled() === false) {
-                // we do not notify the user in case of cancel request
-                this.translate(["USER_TODOS.ERROR_ACCESS_DATA", "USER_TODOS.CLOSE"]).then((translations: any) => {
-                    this.uiUtilitiesService.modalAlert(translations["USER_TODOS.ERROR_ACCESS_DATA"], response.getMessage(), translations["USER_TODOS.CLOSE"]);
-                });
-            }
-        }).catch((reason: any) => {
-            this.translate(["USER_TODOS.ERROR_ACCESS_DATA_COMPONENT", "USER_TODOS.CLOSE"]).then((translations: any) => {
-                this.uiUtilitiesService.modalAlert(translations["USER_TODOS.ERROR_ACCESS_DATA"], reason.toString(), translations["USER_TODOS.CLOSE"]);
+                if (response.isSuccess()) {
+                    this.todos = response.getData();
+                }
+                else if (response.hasBeenCanceled() === false) {
+                    // we do not notify the user in case of cancel request
+                    this.translate(["USER_TODOS.ERROR_ACCESS_DATA", "USER_TODOS.CLOSE"])
+                        .then((translations: any) => {
+                            this.uiUtilitiesService.modalAlert(translations["USER_TODOS.ERROR_ACCESS_DATA"], response.getMessage(), translations["USER_TODOS.CLOSE"]);
+                        });
+                }
+            })
+            .catch((reason: any) => {
+                this.translate(["USER_TODOS.ERROR_ACCESS_DATA_COMPONENT", "USER_TODOS.CLOSE"])
+                    .then((translations: any) => {
+                        this.uiUtilitiesService.modalAlert(translations["USER_TODOS.ERROR_ACCESS_DATA"], reason.toString(), translations["USER_TODOS.CLOSE"]);
+                    });
+                Logger.log(reason);
+            })
+            .finally(() => {
+                this.busy = false;
             });
-            Logger.log(reason);
-        }).finally(() => {
-            this.busy = false;
-        });
     }
 
     public changeTodo(todo: Todo): void {
-        todo.completed = !todo.completed;
+        const userId = "userId";
+        this.todosService.changeTodo(this.stateParams[userId], todo.id, !todo.completed)
+            .then((response: ResponseWs<Todo[]>) => {
+                todo.completed = !todo.completed;
+            })
+            .catch((reason: any) => {
+                // this.translate(["USER_TODOS.ERROR_ACCESS_DATA_COMPONENT", "USER_TODOS.CLOSE"]).then((translations: any) => {
+                //     this.uiUtilitiesService.modalAlert(translations["USER_TODOS.ERROR_ACCESS_DATA"], reason.toString(), translations["USER_TODOS.CLOSE"]);
+                // });
+                Logger.log(reason);
+            });
     }
 }
 

@@ -15,6 +15,7 @@ import { environment } from "../../environments/environment";
 
 export interface IAlbumsService {
     getAlbums(textFilter: string | undefined, page: number): ng.IPromise<ResponseWs<Album[] | undefined>>;
+
     cancelOngoingRequests(): void;
 }
 
@@ -67,25 +68,26 @@ export class AlbumsService implements IAlbumsService {
         // fetch data
         this.getAlbumsRequest.promise = this.http.get<Album[]>(url, config);
 
-        return this.getAlbumsRequest.promise.then((response: ng.IHttpResponse<Album[]>) => {
-            let info = this.utilitiesService.parseLinkHeaders(response.headers);
+        return this.getAlbumsRequest.promise
+            .then((response: ng.IHttpResponse<Album[]>) => {
+                let info = this.utilitiesService.parseLinkHeaders(response.headers);
 
-            if (!info.last) {
-                // default value: when there are no
-                // pages, info is empty
-                info = {
-                    first: environment.apiUrl + "albums?_page=1",
-                    last: environment.apiUrl + "albums?_page=1",
-                    next: environment.apiUrl + "albums?_page=1",
-                };
-            }
+                if (!info.last) {
+                    // default value: when there are no
+                    // pages, info is empty
+                    info = {
+                        first: environment.apiUrl + "albums?_page=1",
+                        last: environment.apiUrl + "albums?_page=1",
+                        next: environment.apiUrl + "albums?_page=1",
+                    };
+                }
 
-            const lastPage = parseInt(this.utilitiesService.parseQueryString(info.last)._page, 10);
-            return new ResponseWs(response.status === 200, response.statusText, response.data, page === lastPage, response.status === -1);
+                const lastPage = parseInt(this.utilitiesService.parseQueryString(info.last)._page, 10);
+                return new ResponseWs(response.status === 200, response.statusText, response.data, page === lastPage, response.status === -1);
 
-        }, (response: ng.IHttpResponse<Album[]>) => {
-            return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
-        });
+            }, (response: ng.IHttpResponse<Album[]>) => {
+                return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
+            });
     }
 
     public cancelOngoingRequests(): void {

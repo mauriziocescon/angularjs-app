@@ -76,12 +76,13 @@ export class UserPostsController {
     }
 
     public $onInit(): void {
-        this.translate(["USER_POSTS.POSTS"]).then((translations: any) => {
-            this.navigationBarService.setTitle(translations["USER_POSTS.POSTS"]);
-            this.loadPostsKey = new Enum("POSTS");
-            this.busy = false;
-            this.loadDataSource();
-        });
+        this.translate(["USER_POSTS.POSTS"])
+            .then((translations: any) => {
+                this.navigationBarService.setTitle(translations["USER_POSTS.POSTS"]);
+                this.loadPostsKey = new Enum("POSTS");
+                this.busy = false;
+                this.loadDataSource();
+            });
     }
 
     public $onDestroy(): void {
@@ -124,25 +125,30 @@ export class UserPostsController {
         this.posts = undefined;
 
         const userId = "userId";
-        this.userPostsService.getPosts(this.stateParams[userId], this.textFilter).then((response: ResponseWs<Post[]>) => {
+        this.userPostsService.getPosts(this.stateParams[userId], this.textFilter)
+            .then((response: ResponseWs<Post[]>) => {
 
-            if (response.isSuccess()) {
-                this.posts = response.getData();
-            }
-            else if (response.hasBeenCanceled() === false) {
-                // we do not notify the user in case of cancel request
-                this.translate(["USER_POSTS.ERROR_ACCESS_DATA", "USER_POSTS.CLOSE"]).then((translations: any) => {
-                    this.uiUtilitiesService.modalAlert(translations["USER_POSTS.ERROR_ACCESS_DATA"], response.getMessage(), translations["USER_POSTS.CLOSE"]);
-                });
-            }
-        }).catch((reason: any) => {
-            this.translate(["USER_POSTS.ERROR_ACCESS_DATA_COMPONENT", "USER_POSTS.CLOSE"]).then((translations: any) => {
-                this.uiUtilitiesService.modalAlert(translations["USER_POSTS.ERROR_ACCESS_DATA"], reason.toString(), translations["USER_POSTS.CLOSE"]);
+                if (response.isSuccess()) {
+                    this.posts = response.getData();
+                }
+                else if (response.hasBeenCanceled() === false) {
+                    // we do not notify the user in case of cancel request
+                    this.translate(["USER_POSTS.ERROR_ACCESS_DATA", "USER_POSTS.CLOSE"])
+                        .then((translations: any) => {
+                            this.uiUtilitiesService.modalAlert(translations["USER_POSTS.ERROR_ACCESS_DATA"], response.getMessage(), translations["USER_POSTS.CLOSE"]);
+                        });
+                }
+            })
+            .catch((reason: any) => {
+                this.translate(["USER_POSTS.ERROR_ACCESS_DATA_COMPONENT", "USER_POSTS.CLOSE"])
+                    .then((translations: any) => {
+                        this.uiUtilitiesService.modalAlert(translations["USER_POSTS.ERROR_ACCESS_DATA"], reason.toString(), translations["USER_POSTS.CLOSE"]);
+                    });
+                Logger.log(reason);
+            })
+            .finally(() => {
+                this.busy = false;
             });
-            Logger.log(reason);
-        }).finally(() => {
-            this.busy = false;
-        });
     }
 }
 

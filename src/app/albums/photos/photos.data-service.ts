@@ -15,8 +15,11 @@ import { environment } from "../../../environments/environment";
 
 export interface IPhotosService {
     getPhoto(id: number): ng.IPromise<ResponseWs<Photo[] | undefined>>;
+
     getPhotos(ids: number[]): ng.IPromise<ResponseWs<Photo[] | undefined>>;
+
     getPhotosForAlbum(albumId: number, page: number): ng.IPromise<ResponseWs<Photo[] | undefined>>;
+
     cancelOngoingRequests(): void;
 }
 
@@ -57,12 +60,14 @@ export class PhotosService implements IPhotosService {
         // fetch data using the generic currentGetPhotoRequest
         this.setupGetPhotoRequest(id, this.getPhotoRequest);
 
-        return this.getPhotoRequest.promise.then((response: ng.IHttpResponse<Photo[]>) => {
-            return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
+        return this.getPhotoRequest.promise
+            .then((response: ng.IHttpResponse<Photo[]>) => {
+                return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
 
-        }).catch((response: ng.IHttpResponse<Photo>) => {
-            return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
-        });
+            })
+            .catch((response: ng.IHttpResponse<Photo>) => {
+                return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
+            });
     }
 
     public getPhotos(ids: number[]): ng.IPromise<ResponseWs<Photo[] | undefined>> {
@@ -82,20 +87,21 @@ export class PhotosService implements IPhotosService {
             return request.promise;
         });
 
-        return this.q.all(promises).then((responses: Array<ng.IHttpResponse<Photo[]>>) => {
+        return this.q.all(promises)
+            .then((responses: Array<ng.IHttpResponse<Photo[]>>) => {
 
-            let photos: Photo[] = [];
-            responses.forEach((response: ng.IHttpResponse<Photo[]>) => {
-                photos = photos.concat(response.data);
-            });
+                let photos: Photo[] = [];
+                responses.forEach((response: ng.IHttpResponse<Photo[]>) => {
+                    photos = photos.concat(response.data);
+                });
 
-            return new ResponseWs(true, "OK", photos, true, responses.findIndex((response) => {
+                return new ResponseWs(true, "OK", photos, true, responses.findIndex((response) => {
                     return response.status === -1;
                 }) !== -1);
 
-        }, (response: ng.IHttpResponse<Photo>) => {
-            return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
-        });
+            }, (response: ng.IHttpResponse<Photo>) => {
+                return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
+            });
     }
 
     public getPhotosForAlbum(albumId: number, page: number): ng.IPromise<ResponseWs<Photo[] | undefined>> {
@@ -119,25 +125,26 @@ export class PhotosService implements IPhotosService {
         // fetch data
         this.getPhotosForAlbumRequests.promise = this.http.get<Photo[]>(url, config);
 
-        return this.getPhotosForAlbumRequests.promise.then((response: ng.IHttpResponse<Photo[]>) => {
-            let info = this.utilitiesService.parseLinkHeaders(response.headers);
+        return this.getPhotosForAlbumRequests.promise
+            .then((response: ng.IHttpResponse<Photo[]>) => {
+                let info = this.utilitiesService.parseLinkHeaders(response.headers);
 
-            if (!info.last) {
-                // default value: when there are no
-                // pages, info is empty
-                info = {
-                    first: environment.apiUrl + "albums?_page=1",
-                    last: environment.apiUrl + "albums?_page=1",
-                    next: environment.apiUrl + "albums?_page=1",
-                };
-            }
+                if (!info.last) {
+                    // default value: when there are no
+                    // pages, info is empty
+                    info = {
+                        first: environment.apiUrl + "albums?_page=1",
+                        last: environment.apiUrl + "albums?_page=1",
+                        next: environment.apiUrl + "albums?_page=1",
+                    };
+                }
 
-            const lastPage = parseInt(this.utilitiesService.parseQueryString(info.last)._page, 10);
-            return new ResponseWs(response.status === 200, response.statusText, response.data, page === lastPage, response.status === -1);
+                const lastPage = parseInt(this.utilitiesService.parseQueryString(info.last)._page, 10);
+                return new ResponseWs(response.status === 200, response.statusText, response.data, page === lastPage, response.status === -1);
 
-        }, (response: ng.IHttpResponse<Photo[]>) => {
-            return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
-        });
+            }, (response: ng.IHttpResponse<Photo[]>) => {
+                return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
+            });
     }
 
     public cancelOngoingRequests(): void {

@@ -53,7 +53,9 @@ export class Logger {
                 }
             };
 
-            StackTrace.fromError(exc).then(callback).catch(errback);
+            StackTrace.fromError(exc)
+                .then(callback)
+                .catch(errback);
 
         } catch (e) {
             Logger.log("Logger.exception: " + e.message);

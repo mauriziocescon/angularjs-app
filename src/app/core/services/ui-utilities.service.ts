@@ -28,6 +28,7 @@ export interface IUIUtilitiesService {
      * @param buttonLabel label of the button
      */
     modalAlert(title: string, message: string, buttonLabel: string): void;
+
     /**
      * Display a confirm alert
      *
@@ -123,11 +124,12 @@ export class UIUtilitiesService implements IUIUtilitiesService {
             };
 
             const modalInstance: ng.ui.bootstrap.IModalInstanceService = this.uibModal.open(modalSettings);
-            modalInstance.result.then(() => {
-                callback(true);
-            }, () => {
-                callback(false);
-            });
+            modalInstance.result
+                .then(() => {
+                    callback(true);
+                }, () => {
+                    callback(false);
+                });
         } catch (e) {
             Logger.exception(this, e);
         }

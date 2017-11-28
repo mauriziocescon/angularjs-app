@@ -5,6 +5,7 @@ import { Comment } from "./post-comments.model";
 
 export interface IPostCommentsService {
     getPostComments(postId: string): ng.IPromise<ResponseWs<Comment[] | undefined>>;
+
     cancelOngoingRequests(): void;
 }
 
@@ -57,12 +58,13 @@ export class PostCommentsService implements IPostCommentsService {
         // fetch data
         this.getPostCommentsRequest.promise = this.http.get<Comment[]>(url, config);
 
-        return this.getPostCommentsRequest.promise.then((response: ng.IHttpResponse<Comment[]>) => {
-            return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
+        return this.getPostCommentsRequest.promise
+            .then((response: ng.IHttpResponse<Comment[]>) => {
+                return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
 
-        }, (response: ng.IHttpResponse<Comment[]>) => {
-            return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
-        });
+            }, (response: ng.IHttpResponse<Comment[]>) => {
+                return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
+            });
     }
 
     public cancelOngoingRequests(): void {
