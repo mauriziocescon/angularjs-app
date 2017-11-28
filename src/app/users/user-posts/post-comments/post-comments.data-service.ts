@@ -30,11 +30,6 @@ export class PostCommentsService implements IPostCommentsService {
         this.utilitiesService = UtilitiesService;
 
         this.getPostCommentsRequest = new RequestWs();
-        this.http.defaults = this.httpDefaults;
-    }
-
-    protected get httpDefaults(): ng.IHttpProviderDefaults {
-        return {};
     }
 
     public getPostComments(postId: string): ng.IPromise<ResponseWs<Comment[] | undefined>> {

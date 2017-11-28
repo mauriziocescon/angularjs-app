@@ -40,11 +40,6 @@ export class AlbumsService implements IAlbumsService {
         this.utilitiesService = UtilitiesService;
 
         this.getAlbumsRequest = new RequestWs();
-        this.http.defaults = this.httpDefaults;
-    }
-
-    protected get httpDefaults(): ng.IHttpProviderDefaults {
-        return {};
     }
 
     public getAlbums(textFilter: string | undefined, page: number): ng.IPromise<ResponseWs<Album[] | undefined>> {

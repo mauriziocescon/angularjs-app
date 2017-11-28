@@ -14,7 +14,7 @@ import { Todo } from "./user-todos.model";
 export interface IUserTodosService {
     getTodos(userId: string, textFilter: string | undefined): ng.IPromise<ResponseWs<Todo[] | undefined>>;
 
-    changeTodo(userId: string, id: number, value: boolean): ng.IPromise<ResponseWs<Todo[] | undefined>>;
+    changeTodo(todo: Todo): ng.IPromise<ResponseWs<Todo[] | undefined>>;
 
     cancelOngoingRequests(): void;
 }
@@ -42,11 +42,6 @@ export class UserTodosService implements IUserTodosService {
 
         this.getUserTodosRequest = new RequestWs();
         this.changeUserTodoRequest = new RequestWs();
-        this.http.defaults = this.httpDefaults;
-    }
-
-    protected get httpDefaults(): ng.IHttpProviderDefaults {
-        return {};
     }
 
     public getTodos(userId: string, textFilter: string | undefined): ng.IPromise<ResponseWs<Todo[] | undefined>> {
@@ -79,7 +74,7 @@ export class UserTodosService implements IUserTodosService {
             });
     }
 
-    public changeTodo(userId: string, id: number, value: boolean): ng.IPromise<ResponseWs<Todo[] | undefined>> {
+    public changeTodo(todo: Todo): ng.IPromise<ResponseWs<Todo[] | undefined>> {
 
         // reset request
         this.changeUserTodoRequest.reset(this.utilitiesService);
@@ -91,15 +86,14 @@ export class UserTodosService implements IUserTodosService {
             timeout: this.changeUserTodoRequest.canceler.promise,
         };
         const data = {
-            completed: value,
-            id,
-            userId: parseInt(userId, 10),
+            ...todo,
+            completed: !todo.completed,
         };
 
         // setup a timeout for the request
         this.changeUserTodoRequest.setupTimeout(this, this.utilitiesService);
 
-        const url = this.appConstantsService.Api.todos;
+        const url = this.appConstantsService.Api.todos + "/" + todo.id;
 
         // fetch data
         this.changeUserTodoRequest.promise = this.http.put<Todo[]>(url, data, config);

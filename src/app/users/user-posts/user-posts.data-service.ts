@@ -38,11 +38,6 @@ export class UserPostsService implements IUserPostsService {
         this.utilitiesService = UtilitiesService;
 
         this.getUserPostsRequest = new RequestWs();
-        this.http.defaults = this.httpDefaults;
-    }
-
-    protected get httpDefaults(): ng.IHttpProviderDefaults {
-        return {};
     }
 
     public getPosts(userId: string, textFilter: string | undefined): ng.IPromise<ResponseWs<Post[] | undefined>> {

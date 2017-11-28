@@ -1,6 +1,12 @@
-export const appConfigFunc = ($translateProvider: ng.translate.ITranslateProvider,
+export const appConfigFunc = ($httpProvider: ng.IHttpProvider,
+                              $translateProvider: ng.translate.ITranslateProvider,
                               tmhDynamicLocaleProvider: ng.dynamicLocale.tmhDynamicLocaleProvider,
                               cfpLoadingBarProvider: ng.loadingBar.ILoadingBarProvider) => {
+    $httpProvider.defaults.headers = {
+        common: {
+            "Content-Type": "application/json",
+        },
+    };
     $translateProvider.useMissingTranslationHandlerLog();
     $translateProvider.useStaticFilesLoader({
         prefix: "assets/i18n/",
@@ -11,4 +17,4 @@ export const appConfigFunc = ($translateProvider: ng.translate.ITranslateProvide
     cfpLoadingBarProvider.includeSpinner = false;
 };
 
-appConfigFunc.$inject = ["$translateProvider", "tmhDynamicLocaleProvider", "cfpLoadingBarProvider"];
+appConfigFunc.$inject = ["$httpProvider", "$translateProvider", "tmhDynamicLocaleProvider", "cfpLoadingBarProvider"];

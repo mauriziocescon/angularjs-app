@@ -48,11 +48,6 @@ export class PhotosService implements IPhotosService {
         this.getPhotoRequest = new RequestWs();
         this.getPhotosRequests = [];
         this.getPhotosForAlbumRequests = new RequestWs();
-        this.http.defaults = this.httpDefaults;
-    }
-
-    protected get httpDefaults(): ng.IHttpProviderDefaults {
-        return {};
     }
 
     public getPhoto(id: number): ng.IPromise<ResponseWs<Photo[] | undefined>> {

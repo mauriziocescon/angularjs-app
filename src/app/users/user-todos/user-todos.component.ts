@@ -147,7 +147,7 @@ export class UserTodosController {
 
     public changeTodo(todo: Todo): void {
         const userId = "userId";
-        this.todosService.changeTodo(this.stateParams[userId], todo.id, !todo.completed)
+        this.todosService.changeTodo(todo)
             .then((response: ResponseWs<Todo[]>) => {
                 todo.completed = !todo.completed;
             })

@@ -38,11 +38,6 @@ export class UsersService implements IUsersService {
         this.utilitiesService = UtilitiesService;
 
         this.getUsersRequest = new RequestWs();
-        this.http.defaults = this.httpDefaults;
-    }
-
-    protected get httpDefaults(): ng.IHttpProviderDefaults {
-        return {};
     }
 
     public getUsers(textFilter: string | undefined): ng.IPromise<ResponseWs<User[] | undefined>> {
