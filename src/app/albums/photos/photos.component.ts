@@ -74,6 +74,10 @@ export class PhotosController {
         return this.photos;
     }
 
+    public get imgFallbackUrl(): string {
+        return "../../../assets/imgs/missing-image.svg";
+    }
+
     public $onInit(): void {
         this.translate(["PHOTOS.PHOTOS"]).then((translations: any) => {
             this.navigationBarService.setTitle(translations["PHOTOS.PHOTOS"]);
