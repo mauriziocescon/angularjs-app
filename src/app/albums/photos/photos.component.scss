@@ -19,7 +19,7 @@
       display: inline-block;
       width: calc(100% - 35%);
 
-      @media (min-width: $screen-lg-min) {
+      @media (min-width: $screen-md-min) {
         width: calc(100% - 270px);
       }
     }
