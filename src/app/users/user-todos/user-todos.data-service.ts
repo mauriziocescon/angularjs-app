@@ -14,7 +14,7 @@ import { Todo } from "./user-todos.model";
 export interface IUserTodosService {
     getTodos(userId: string, textFilter: string | undefined): ng.IPromise<ResponseWs<Todo[] | undefined>>;
 
-    changeTodo(todo: Todo): ng.IPromise<ResponseWs<Todo[] | undefined>>;
+    changeTodo(todo: Todo): ng.IPromise<ResponseWs<any>>;
 
     cancelOngoingRequests(): void;
 }
@@ -74,7 +74,7 @@ export class UserTodosService implements IUserTodosService {
             });
     }
 
-    public changeTodo(todo: Todo): ng.IPromise<ResponseWs<Todo[] | undefined>> {
+    public changeTodo(todo: Todo): ng.IPromise<ResponseWs<any>> {
 
         // reset request
         this.changeUserTodoRequest.reset(this.utilitiesService);
@@ -85,24 +85,24 @@ export class UserTodosService implements IUserTodosService {
             // set a promise that let you cancel the current request
             timeout: this.changeUserTodoRequest.canceler.promise,
         };
-        const data = {
-            ...todo,
-            completed: !todo.completed,
-        };
 
         // setup a timeout for the request
         this.changeUserTodoRequest.setupTimeout(this, this.utilitiesService);
 
         const url = this.appConstantsService.Api.todos + "/" + todo.id;
 
+        const data = {
+            ...todo,
+            completed: !todo.completed,
+        };
         // fetch data
-        this.changeUserTodoRequest.promise = this.http.put<Todo[]>(url, data, config);
+        this.changeUserTodoRequest.promise = this.http.put<any>(url, data, config);
 
         return this.changeUserTodoRequest.promise
-            .then((response: ng.IHttpResponse<Todo[]>) => {
+            .then((response: ng.IHttpResponse<any>) => {
                 return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
 
-            }, (response: ng.IHttpResponse<Todo[]>) => {
+            }, (response: ng.IHttpResponse<any>) => {
                 return new ResponseWs(false, response.statusText, undefined, true, response.status === -1);
             });
     }

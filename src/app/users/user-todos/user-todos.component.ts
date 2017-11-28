@@ -148,13 +148,15 @@ export class UserTodosController {
     public changeTodo(todo: Todo): void {
         const userId = "userId";
         this.todosService.changeTodo(todo)
-            .then((response: ResponseWs<Todo[]>) => {
-                todo.completed = !todo.completed;
+            .then((response: ResponseWs<any>) => {
+                if (response.isSuccess()) {
+                    todo.completed = !todo.completed;
+                }
             })
             .catch((reason: any) => {
-                // this.translate(["USER_TODOS.ERROR_ACCESS_DATA_COMPONENT", "USER_TODOS.CLOSE"]).then((translations: any) => {
-                //     this.uiUtilitiesService.modalAlert(translations["USER_TODOS.ERROR_ACCESS_DATA"], reason.toString(), translations["USER_TODOS.CLOSE"]);
-                // });
+                this.translate(["USER_TODOS.ERROR_CHANGE_TODO_STATUS", "USER_TODOS.CLOSE"]).then((translations: any) => {
+                    this.uiUtilitiesService.modalAlert(translations["USER_TODOS.ERROR_ACCESS_DATA"], reason.toString(), translations["USER_TODOS.CLOSE"]);
+                });
                 Logger.log(reason);
             });
     }
