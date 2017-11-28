@@ -29,7 +29,7 @@ describe("UsersController", () => {
         appConstantsService = AppConstantsService;
         utilitiesService = UtilitiesService;
 
-        // returns a list i18n strings
+        // returns a list of i18n strings
         httpBackend.whenGET((url: string) => {
             return url.startsWith("assets/i18n/");
         }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
