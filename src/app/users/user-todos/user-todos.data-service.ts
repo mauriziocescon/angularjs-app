@@ -29,7 +29,6 @@ export class UserTodosService implements IUserTodosService {
 
     // requests
     protected getUserTodosRequest: RequestWs<Todo[]>;
-    protected changeUserTodoRequest: RequestWs<any>;
 
     constructor($http: ng.IHttpService,
                 $q: ng.IQService,
@@ -41,7 +40,6 @@ export class UserTodosService implements IUserTodosService {
         this.utilitiesService = UtilitiesService;
 
         this.getUserTodosRequest = new RequestWs();
-        this.changeUserTodoRequest = new RequestWs();
     }
 
     public getTodos(userId: string, textFilter: string | undefined): ng.IPromise<ResponseWs<Todo[] | undefined>> {
@@ -76,18 +74,19 @@ export class UserTodosService implements IUserTodosService {
 
     public changeTodo(todo: Todo): ng.IPromise<ResponseWs<any>> {
 
-        // reset request
-        this.changeUserTodoRequest.reset(this.utilitiesService);
+        // reset request not ncessary: we fire
+        // several request at the same time
+        const changeUserTodoRequest = new RequestWs();
 
         // configure new request
-        this.changeUserTodoRequest.canceler = this.q.defer();
+        changeUserTodoRequest.canceler = this.q.defer();
         const config: ng.IRequestShortcutConfig = {
             // set a promise that let you cancel the current request
-            timeout: this.changeUserTodoRequest.canceler.promise,
+            timeout: changeUserTodoRequest.canceler.promise,
         };
 
         // setup a timeout for the request
-        this.changeUserTodoRequest.setupTimeout(this, this.utilitiesService);
+        changeUserTodoRequest.setupTimeout(this, this.utilitiesService);
 
         const url = this.appConstantsService.Api.todos + "/" + todo.id;
 
@@ -96,9 +95,9 @@ export class UserTodosService implements IUserTodosService {
             completed: !todo.completed,
         };
         // fetch data
-        this.changeUserTodoRequest.promise = this.http.put<any>(url, data, config);
+        changeUserTodoRequest.promise = this.http.put<any>(url, data, config);
 
-        return this.changeUserTodoRequest.promise
+        return changeUserTodoRequest.promise
             .then((response: ng.IHttpResponse<any>) => {
                 return new ResponseWs(response.status === 200, response.statusText, response.data, true, response.status === -1);
 
@@ -111,6 +110,5 @@ export class UserTodosService implements IUserTodosService {
 
         // reset requests
         this.getUserTodosRequest.reset(this.utilitiesService);
-        this.changeUserTodoRequest.reset(this.utilitiesService);
     }
 }

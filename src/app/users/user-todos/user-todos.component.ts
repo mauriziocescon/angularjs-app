@@ -146,7 +146,6 @@ export class UserTodosController {
     }
 
     public changeTodo(todo: Todo): void {
-        const userId = "userId";
         this.todosService.changeTodo(todo)
             .then((response: ResponseWs<any>) => {
                 if (response.isSuccess()) {

@@ -14,7 +14,7 @@
     "start": "npm run json-server",
     "json-server": "node ./mock-server/server.js",
     "json-server-watch": "nodemon ./mock-server/server.js",
-    "serve": "webpack-dev-server --d --progress --profile --colors --env.name=dev | npm run json-server-watch",
+    "serve": "webpack-dev-server --d --progress --profile --colors --env.name=dev | npm run json-server",
     "build": "webpack --progress --profile --colors --env.name=prod",
     "pretest": "webpack --progress --profile --colors --env.name=test",
     "test": "karma start karma.conf.js",
