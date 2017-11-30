@@ -1,5 +1,7 @@
 import * as angular from "angular";
 
+import * as i18nEn from "../../../assets/i18n/en.json";
+
 import { photos } from "./photos.module";
 
 import { IAppConstantsService, IUtilitiesService } from "../../app.module";
@@ -42,7 +44,7 @@ describe("PhotosController", () => {
         httpBackend.whenGET((url: string) => {
             return url.startsWith("assets/i18n/");
         }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
-            const response = {};
+            const response = i18nEn;
             return [200, response, headers, "ok"];
         });
 
