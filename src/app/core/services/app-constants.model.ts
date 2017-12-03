@@ -20,6 +20,7 @@ export class Application {
 export class Languages {
     public SUPPORTED_LANG = ["en", "it", "de"];
     public SUPPORTED_LANG_DESC = ["English", "Italiano", "Deutsch"];
+    public DEFAULT_LANGUAGE = "en";
 }
 
 export class LocalStorageKey {

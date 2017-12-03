@@ -89,7 +89,7 @@ export class AppLanguageService implements IAppLanguageService {
     }
 
     public getDefaultLanguageId(): string {
-        return this.appConstantsService.Languages.SUPPORTED_LANG[0];
+        return this.appConstantsService.Languages.DEFAULT_LANGUAGE;
     }
 
     protected getBrowserLang(): string {
