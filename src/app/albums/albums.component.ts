@@ -154,7 +154,7 @@ export class AlbumsController {
                 }
             })
             .catch((reason: any) => {
-                this.translate(["ALBUMS.ERROR_ACCESS_DATA_COMPONENT", "ALBUMS.CLOSE"])
+                this.translate(["ALBUMS.ERROR_ACCESS_DATA", "ALBUMS.CLOSE"])
                     .then((translations: any) => {
                         this.uiUtilitiesService.modalAlert(translations["ALBUMS.ERROR_ACCESS_DATA"], reason.toString(), translations["ALBUMS.CLOSE"]);
                     });

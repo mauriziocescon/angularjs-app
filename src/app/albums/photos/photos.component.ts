@@ -136,7 +136,7 @@ export class PhotosController {
                 }
             })
             .catch((reason: any) => {
-                this.translate(["PHOTOS.ERROR_ACCESS_DATA_COMPONENT", "PHOTOS.CLOSE"])
+                this.translate(["PHOTOS.ERROR_ACCESS_DATA", "PHOTOS.CLOSE"])
                     .then((translations: any) => {
                         this.uiUtilitiesService.modalAlert(translations["PHOTOS.ERROR_ACCESS_DATA"], reason.toString(), translations["PHOTOS.CLOSE"]);
                     });

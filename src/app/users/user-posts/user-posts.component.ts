@@ -140,7 +140,7 @@ export class UserPostsController {
                 }
             })
             .catch((reason: any) => {
-                this.translate(["USER_POSTS.ERROR_ACCESS_DATA_COMPONENT", "USER_POSTS.CLOSE"])
+                this.translate(["USER_POSTS.ERROR_ACCESS_DATA", "USER_POSTS.CLOSE"])
                     .then((translations: any) => {
                         this.uiUtilitiesService.modalAlert(translations["USER_POSTS.ERROR_ACCESS_DATA"], reason.toString(), translations["USER_POSTS.CLOSE"]);
                     });

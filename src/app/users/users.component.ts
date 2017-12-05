@@ -134,7 +134,7 @@ export class UsersController {
                 }
             })
             .catch((reason: any) => {
-                this.translate(["USERS.ERROR_ACCESS_DATA_COMPONENT", "USERS.CLOSE"])
+                this.translate(["USERS.ERROR_ACCESS_DATA", "USERS.CLOSE"])
                     .then((translations: any) => {
                         this.uiUtilitiesService.modalAlert(translations["USERS.ERROR_ACCESS_DATA"], reason.toString(), translations["USERS.CLOSE"]);
                     });

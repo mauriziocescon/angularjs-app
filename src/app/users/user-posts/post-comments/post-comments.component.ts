@@ -97,7 +97,7 @@ export class PostCommentsController {
                 }
             })
             .catch((reason: any) => {
-                this.translate(["POST_COMMENTS.ERROR_ACCESS_DATA_COMPONENT", "POST_COMMENTS.CLOSE"])
+                this.translate(["POST_COMMENTS.ERROR_ACCESS_DATA", "POST_COMMENTS.CLOSE"])
                     .then((translations: any) => {
                         this.uiUtilitiesService.modalAlert(translations["POST_COMMENTS.ERROR_ACCESS_DATA"], reason.toString(), translations["POST_COMMENTS.CLOSE"]);
                     });
