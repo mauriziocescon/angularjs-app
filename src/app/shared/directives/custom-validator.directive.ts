@@ -20,8 +20,9 @@ export const mcCustomValidatorDirective = () => {
     directive.priority = 0;
     directive.restrict = "A";
     directive.require = "^ngModel";
-    directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, ngModel: ng.INgModelController) => {
+    directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, controller?: ng.IController) => {
         try {
+            const ngModel = controller as ng.INgModelController;
             const clearWatcher = scope.$watch(() => {
                 setValidity(scope, attrs, ngModel);
             });
