@@ -116,7 +116,7 @@ export class PhotosController {
     public loadDataSource(): void {
         const albumId = "albumId";
         this.photosService.getPhotosForAlbum(this.stateParams[albumId], this.pageNumber)
-            .then((response: ResponseWs<Photo[]>) => {
+            .then((response: ResponseWs<Photo[] | undefined>) => {
 
                 if (response.isSuccess()) {
                     const data = response.getData();

@@ -126,7 +126,7 @@ export class UserPostsController {
 
         const userId = "userId";
         this.userPostsService.getPosts(this.stateParams[userId], this.textFilter)
-            .then((response: ResponseWs<Post[]>) => {
+            .then((response: ResponseWs<Post[] | undefined>) => {
 
                 if (response.isSuccess()) {
                     this.posts = response.getData();

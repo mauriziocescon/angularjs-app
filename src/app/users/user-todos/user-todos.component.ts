@@ -120,7 +120,7 @@ export class UserTodosController {
 
         const userId = "userId";
         this.todosService.getTodos(this.stateParams[userId], this.textFilter)
-            .then((response: ResponseWs<Todo[]>) => {
+            .then((response: ResponseWs<Todo[] | undefined>) => {
 
                 if (response.isSuccess()) {
                     this.todos = response.getData();

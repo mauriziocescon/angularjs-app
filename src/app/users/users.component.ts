@@ -120,7 +120,7 @@ export class UsersController {
         this.users = undefined;
 
         this.usersService.getUsers(this.textFilter)
-            .then((response: ResponseWs<User[]>) => {
+            .then((response: ResponseWs<User[] | undefined>) => {
 
                 if (response.isSuccess()) {
                     this.users = response.getData();

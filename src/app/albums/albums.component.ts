@@ -134,7 +134,7 @@ export class AlbumsController {
 
     public loadDataSource(): void {
         this.albumsService.getAlbums(this.textFilter, this.pageNumber)
-            .then((response: ResponseWs<Album[]>) => {
+            .then((response: ResponseWs<Album[] | undefined>) => {
 
                 if (response.isSuccess()) {
                     const data = response.getData();

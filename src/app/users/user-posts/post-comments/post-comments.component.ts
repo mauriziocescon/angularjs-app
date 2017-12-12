@@ -83,7 +83,7 @@ export class PostCommentsController {
         this.comments = undefined;
 
         this.postCommentsService.getPostComments(this.postId.toString())
-            .then((response: ResponseWs<Comment[]>) => {
+            .then((response: ResponseWs<Comment[] | undefined>) => {
 
                 if (response.isSuccess()) {
                     this.comments = response.getData();
