@@ -6,14 +6,14 @@ const Joi = frisby.Joi;
 
 it("Get albums: status", (done) => {
     frisby
-        .get("http://localhost:5000/albums?_page=1")
+        .get("http://localhost:5000/api/albums?_page=1")
         .expect("status", 200)
         .done(done);
 });
 
 it("Get albums: jsonTypes", (done) => {
     frisby
-        .get("http://localhost:5000/albums?_page=1")
+        .get("http://localhost:5000/api/albums?_page=1")
         .expect("jsonTypes", "*", {
             userId: Joi.number(),
             id: Joi.number(),
@@ -24,7 +24,7 @@ it("Get albums: jsonTypes", (done) => {
 
 it("Get albums: json", (done) => {
     frisby
-        .get("http://localhost:5000/albums?_page=1")
+        .get("http://localhost:5000/api/albums?_page=1")
         .then((response) => {
             expect(response.json.length).toBe(10); // 10 albums for each page
 
