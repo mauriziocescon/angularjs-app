@@ -21,15 +21,10 @@ export interface IConnectionService {
 export class ConnectionService implements IConnectionService {
     public static $inject = ["$rootScope", "$window"];
 
-    protected rootScope: ng.IRootScopeService;
-    protected window: ng.IWindowService;
-
     protected onLine: boolean;
 
-    constructor($rootScope: ng.IRootScopeService,
-                $window: ng.IWindowService) {
-        this.rootScope = $rootScope;
-        this.window = $window;
+    constructor(protected rootScope: ng.IRootScopeService,
+                protected window: ng.IWindowService) {
     }
 
     public start(): void {

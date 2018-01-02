@@ -133,25 +133,12 @@ export class UtilitiesService implements IUtilitiesService {
 
     protected static WARNING_TIME_SCOPE = 1000;
 
-    protected rootScope: ng.IRootScopeService;
-    protected document: ng.IDocumentService;
-    protected window: ng.IWindowService;
-    protected timeout: ng.ITimeoutService;
-    protected angularStats: IAngularStats;
-    protected appConstantsService: IAppConstantsService;
-
-    constructor($rootScope: ng.IRootScopeService,
-                $document: ng.IDocumentService,
-                $window: ng.IWindowService,
-                $timeout: ng.ITimeoutService,
-                AngularStatsService: IAngularStats,
-                AppConstantsService: IAppConstantsService) {
-        this.rootScope = $rootScope;
-        this.document = $document;
-        this.window = $window;
-        this.timeout = $timeout;
-        this.angularStats = AngularStatsService;
-        this.appConstantsService = AppConstantsService;
+    constructor(protected rootScope: ng.IRootScopeService,
+                protected document: ng.IDocumentService,
+                protected window: ng.IWindowService,
+                protected timeout: ng.ITimeoutService,
+                protected angularStats: IAngularStats,
+                protected appConstantsService: IAppConstantsService) {
     }
 
     // tslint:disable-next-line:ban-types

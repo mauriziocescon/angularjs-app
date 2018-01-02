@@ -26,25 +26,15 @@ export interface IPhotosService {
 export class PhotosService implements IPhotosService {
     public static $inject = ["$http", "$q", "AppConstantsService", "UtilitiesService"];
 
-    protected http: ng.IHttpService;
-    protected q: ng.IQService;
-    protected appConstantsService: IAppConstantsService;
-    protected utilitiesService: IUtilitiesService;
-
     // requests
     protected getPhotoRequest: RequestWs<Photo[]>;
     protected getPhotosRequests: Array<RequestWs<Photo>>;
     protected getPhotosForAlbumRequests: RequestWs<Photo[]>;
 
-    constructor($http: ng.IHttpService,
-                $q: ng.IQService,
-                AppConstantsService: IAppConstantsService,
-                UtilitiesService: IUtilitiesService) {
-        this.http = $http;
-        this.q = $q;
-        this.appConstantsService = AppConstantsService;
-        this.utilitiesService = UtilitiesService;
-
+    constructor(protected http: ng.IHttpService,
+                protected q: ng.IQService,
+                protected appConstantsService: IAppConstantsService,
+                protected utilitiesService: IUtilitiesService) {
         this.getPhotoRequest = new RequestWs();
         this.getPhotosRequests = [];
         this.getPhotosForAlbumRequests = new RequestWs();

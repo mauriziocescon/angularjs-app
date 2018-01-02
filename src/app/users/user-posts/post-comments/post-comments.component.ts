@@ -18,30 +18,16 @@ export class PostCommentsController {
     public static $inject = ["$filter", "$translate", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "PostCommentsService"];
     public name: string;
 
-    protected filter: ISharedFilterService;
-    protected translate: ng.translate.ITranslateService;
-    protected navigationBarService: INavigationBarService;
-    protected uiUtilitiesService: IUIUtilitiesService;
-    protected utilitiesService: IUtilitiesService;
-    protected postCommentsService: IPostCommentsService;
-
     protected postId: number;
     protected comments: Comment[] | undefined;
     protected busy: boolean;
 
-    constructor($filter: ISharedFilterService,
-                $translate: ng.translate.ITranslateService,
-                NavigationBarService: INavigationBarService,
-                UIUtilitiesService: IUIUtilitiesService,
-                UtilitiesService: IUtilitiesService,
-                PostCommentsService: IPostCommentsService) {
-        this.filter = $filter;
-        this.translate = $translate;
-        this.navigationBarService = NavigationBarService;
-        this.uiUtilitiesService = UIUtilitiesService;
-        this.utilitiesService = UtilitiesService;
-        this.postCommentsService = PostCommentsService;
-
+    constructor(protected filter: ISharedFilterService,
+                protected translate: ng.translate.ITranslateService,
+                protected navigationBarService: INavigationBarService,
+                protected uiUtilitiesService: IUIUtilitiesService,
+                protected utilitiesService: IUtilitiesService,
+                protected postCommentsService: IPostCommentsService) {
         this.name = "PostCommentsComponent";
     }
 

@@ -44,19 +44,10 @@ export interface IUIUtilitiesService {
 export class UIUtilitiesService implements IUIUtilitiesService {
     public static $inject = ["$uibModal", "AppConstantsService", "UtilitiesService", "UIUtilitiesConstants"];
 
-    protected uibModal: ng.ui.bootstrap.IModalService;
-    protected appConstantsService: IAppConstantsService;
-    protected utilitiesService: IUtilitiesService;
-    protected uiUtilitiesConstants: IUIUtilitiesConstants;
-
-    constructor($uibModal: ng.ui.bootstrap.IModalService,
-                AppConstantsService: IAppConstantsService,
-                UtilitiesService: IUtilitiesService,
-                UIUtilitiesConstants: IUIUtilitiesConstants) {
-        this.uibModal = $uibModal;
-        this.appConstantsService = AppConstantsService;
-        this.utilitiesService = UtilitiesService;
-        this.uiUtilitiesConstants = UIUtilitiesConstants;
+    constructor(protected uibModal: ng.ui.bootstrap.IModalService,
+                protected appConstantsService: IAppConstantsService,
+                protected utilitiesService: IUtilitiesService,
+                protected uiUtilitiesConstants: IUIUtilitiesConstants) {
     }
 
     public getCurrencySymbol(currency: string): string {

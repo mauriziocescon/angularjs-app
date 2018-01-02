@@ -14,28 +14,14 @@ export class NavigationBarController {
     public name: string;
     public selectedLanguageId: string;
 
-    protected location: ng.ILocationService;
-    protected translate: ng.translate.ITranslateService;
-    protected appConstantsService: IAppConstantsService;
-    protected appLanguageService: IAppLanguageService;
-    protected navigationBarService: INavigationBarService;
-    protected utilitiesService: IUtilitiesService;
-
     protected languages: string[];
 
-    constructor($location: ng.ILocationService,
-                $translate: ng.translate.ITranslateService,
-                AppConstantsService: IAppConstantsService,
-                AppLanguageService: IAppLanguageService,
-                NavigationBarService: INavigationBarService,
-                UtilitiesService: IUtilitiesService) {
-        this.location = $location;
-        this.translate = $translate;
-        this.appConstantsService = AppConstantsService;
-        this.appLanguageService = AppLanguageService;
-        this.navigationBarService = NavigationBarService;
-        this.utilitiesService = UtilitiesService;
-
+    constructor(protected location: ng.ILocationService,
+                protected translate: ng.translate.ITranslateService,
+                protected appConstantsService: IAppConstantsService,
+                protected appLanguageService: IAppLanguageService,
+                protected navigationBarService: INavigationBarService,
+                protected utilitiesService: IUtilitiesService) {
         this.name = "NavigationBarComponent";
     }
 

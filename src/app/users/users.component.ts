@@ -21,36 +21,18 @@ export class UsersController {
     public name: string;
     public textFilter: string | undefined;
 
-    protected filter: ISharedFilterService;
-    protected location: ng.ILocationService;
-    protected translate: ng.translate.ITranslateService;
-    protected delayExecutionService: IDelayExecutionService;
-    protected navigationBarService: INavigationBarService;
-    protected uiUtilitiesService: IUIUtilitiesService;
-    protected utilitiesService: IUtilitiesService;
-    protected usersService: IUsersService;
-
     protected users: User[] | undefined;
     protected busy: boolean;
     protected loadUsersKey: Enum;
 
-    constructor($filter: ISharedFilterService,
-                $location: ng.ILocationService,
-                $translate: ng.translate.ITranslateService,
-                DelayExecutionService: IDelayExecutionService,
-                NavigationBarService: INavigationBarService,
-                UIUtilitiesService: IUIUtilitiesService,
-                UtilitiesService: IUtilitiesService,
-                UsersService: IUsersService) {
-        this.filter = $filter;
-        this.location = $location;
-        this.translate = $translate;
-        this.delayExecutionService = DelayExecutionService;
-        this.navigationBarService = NavigationBarService;
-        this.uiUtilitiesService = UIUtilitiesService;
-        this.utilitiesService = UtilitiesService;
-        this.usersService = UsersService;
-
+    constructor(protected filter: ISharedFilterService,
+                protected location: ng.ILocationService,
+                protected translate: ng.translate.ITranslateService,
+                protected delayExecutionService: IDelayExecutionService,
+                protected navigationBarService: INavigationBarService,
+                protected uiUtilitiesService: IUIUtilitiesService,
+                protected utilitiesService: IUtilitiesService,
+                protected usersService: IUsersService) {
         this.name = "UsersComponent";
     }
 

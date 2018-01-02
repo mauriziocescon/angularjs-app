@@ -34,10 +34,8 @@ export interface ICacheHelper {
 }
 
 export class CacheHelper implements ICacheHelper {
-    protected currentCache: ng.ICacheObject;
 
-    constructor(currentCache: ng.ICacheObject) {
-        this.currentCache = currentCache;
+    constructor(protected currentCache: ng.ICacheObject) {
     }
 
     public getValueForKey(key: string, defaultValue?: any): any {
@@ -106,19 +104,13 @@ export interface ICacheHelperService {
 export class CacheHelperService implements ICacheHelperService {
     public static $inject = ["$rootScope", "$cacheFactory", "UtilitiesService"];
 
-    protected rootScope: ng.IRootScopeService;
-    protected cacheFactory: ng.ICacheFactoryService;
-    protected utilitiesService: IUtilitiesService;
-
     protected cacheNames: string[];
     protected urlStack: string[];
     protected clearDefer: ng.IPromise<any>;
 
-    constructor($rootScope: ng.IRootScopeService, $cacheFactory: ng.ICacheFactoryService, UtilitiesService: IUtilitiesService) {
-        this.rootScope = $rootScope;
-        this.cacheFactory = $cacheFactory;
-        this.utilitiesService = UtilitiesService;
-
+    constructor(protected rootScope: ng.IRootScopeService,
+                protected cacheFactory: ng.ICacheFactoryService,
+                protected utilitiesService: IUtilitiesService) {
         this.cacheNames = [];
         this.urlStack = [];
     }

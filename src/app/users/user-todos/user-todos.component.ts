@@ -21,39 +21,19 @@ export class UserTodosController {
     public name: string;
     public textFilter: string | undefined;
 
-    protected filter: ISharedFilterService;
-    protected location: ng.ILocationService;
-    protected stateParams: ng.ui.IStateParamsService;
-    protected translate: ng.translate.ITranslateService;
-    protected delayExecutionService: IDelayExecutionService;
-    protected navigationBarService: INavigationBarService;
-    protected uiUtilitiesService: IUIUtilitiesService;
-    protected utilitiesService: IUtilitiesService;
-    protected todosService: IUserTodosService;
-
     protected todos: Todo[] | undefined;
     protected busy: boolean;
     protected loadTodosKey: Enum;
 
-    constructor($filter: ISharedFilterService,
-                $location: ng.ILocationService,
-                $stateParams: ng.ui.IStateParamsService,
-                $translate: ng.translate.ITranslateService,
-                DelayExecutionService: IDelayExecutionService,
-                NavigationBarService: INavigationBarService,
-                UIUtilitiesService: IUIUtilitiesService,
-                UtilitiesService: IUtilitiesService,
-                UserTodosService: IUserTodosService) {
-        this.filter = $filter;
-        this.location = $location;
-        this.stateParams = $stateParams;
-        this.translate = $translate;
-        this.delayExecutionService = DelayExecutionService;
-        this.navigationBarService = NavigationBarService;
-        this.uiUtilitiesService = UIUtilitiesService;
-        this.utilitiesService = UtilitiesService;
-        this.todosService = UserTodosService;
-
+    constructor(protected filter: ISharedFilterService,
+                protected location: ng.ILocationService,
+                protected stateParams: ng.ui.IStateParamsService,
+                protected translate: ng.translate.ITranslateService,
+                protected delayExecutionService: IDelayExecutionService,
+                protected navigationBarService: INavigationBarService,
+                protected uiUtilitiesService: IUIUtilitiesService,
+                protected utilitiesService: IUtilitiesService,
+                protected todosService: IUserTodosService) {
         this.name = "UserTodosComponent";
     }
 

@@ -19,34 +19,18 @@ export class PhotosController {
     public static $inject = ["$filter", "$stateParams", "$translate", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "PhotosService"];
     public name: string;
 
-    protected filter: ISharedFilterService;
-    protected stateParams: ng.ui.IStateParamsService;
-    protected translate: ng.translate.ITranslateService;
-    protected navigationBarService: INavigationBarService;
-    protected uiUtilitiesService: IUIUtilitiesService;
-    protected utilitiesService: IUtilitiesService;
-    protected photosService: IPhotosService;
-
     protected photos: Photo[] | undefined;
     protected pageNumber: number;
     protected loadCompleted: boolean;
     protected busy: boolean;
 
-    constructor($filter: ISharedFilterService,
-                $stateParams: ng.ui.IStateParamsService,
-                $translate: ng.translate.ITranslateService,
-                NavigationBarService: INavigationBarService,
-                UIUtilitiesService: IUIUtilitiesService,
-                UtilitiesService: IUtilitiesService,
-                PhotosService: IPhotosService) {
-        this.filter = $filter;
-        this.stateParams = $stateParams;
-        this.translate = $translate;
-        this.navigationBarService = NavigationBarService;
-        this.uiUtilitiesService = UIUtilitiesService;
-        this.utilitiesService = UtilitiesService;
-        this.photosService = PhotosService;
-
+    constructor(protected filter: ISharedFilterService,
+                protected stateParams: ng.ui.IStateParamsService,
+                protected translate: ng.translate.ITranslateService,
+                protected navigationBarService: INavigationBarService,
+                protected uiUtilitiesService: IUIUtilitiesService,
+                protected utilitiesService: IUtilitiesService,
+                protected photosService: IPhotosService) {
         this.name = "PhotosComponent";
     }
 

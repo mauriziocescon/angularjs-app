@@ -26,19 +26,12 @@ export interface ILocationChangeService {
 export class LocationChangeService implements ILocationChangeService {
     public static $inject = ["$rootScope", "$location", "UtilitiesService"];
 
-    protected rootScope: ng.IRootScopeService;
-    protected location: ng.ILocationService;
-    protected utilitiesService: IUtilitiesService;
-
     protected semaphoreQueue: string[];
     protected lastUrlBlock: string | undefined;
 
-    constructor($rootScope: ng.IRootScopeService,
-                $location: ng.ILocationService,
-                UtilitiesService: IUtilitiesService) {
-        this.rootScope = $rootScope;
-        this.location = $location;
-        this.utilitiesService = UtilitiesService;
+    constructor(protected rootScope: ng.IRootScopeService,
+                protected location: ng.ILocationService,
+                protected utilitiesService: IUtilitiesService) {
         this.semaphoreQueue = [];
     }
 

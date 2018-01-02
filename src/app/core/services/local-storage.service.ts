@@ -14,6 +14,7 @@ export interface ILocalStorageService {
      * @param key
      */
     getData<T>(key: Enum): T | undefined;
+
     /**
      * Set fata for key
      *
@@ -21,12 +22,14 @@ export interface ILocalStorageService {
      * @param data
      */
     setData(key: Enum, data: any): void;
+
     /**
      * Remove data for key
      *
      * @param key
      */
     removeData(key: Enum): void;
+
     /**
      * Remove all data related to
      * the application in local storage
@@ -37,13 +40,9 @@ export interface ILocalStorageService {
 export class LocalStorageService implements ILocalStorageService {
     public static $inject = ["AppConstantsService"];
 
-    protected appConstantsService: IAppConstantsService;
-
     protected prefix: string;
 
-    constructor(AppConstantsService: IAppConstantsService) {
-        this.appConstantsService = AppConstantsService;
-
+    constructor(protected appConstantsService: IAppConstantsService) {
         this.prefix = this.appConstantsService.Application.APP_NAME;
     }
 

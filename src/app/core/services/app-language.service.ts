@@ -37,23 +37,13 @@ export interface IAppLanguageService {
 export class AppLanguageService implements IAppLanguageService {
     public static $inject = ["$locale", "tmhDynamicLocale", "$translate", "AppConstantsService", "LocalStorageService"];
 
-    protected locale: ng.ILocaleService;
-    protected tmhDynamicLocale: ng.dynamicLocale.tmhDynamicLocaleService;
-    protected translate: ng.translate.ITranslateService;
-    protected appConstantsService: IAppConstantsService;
-    protected localStorageService: ILocalStorageService;
     protected selectedLanguageId: string;
 
-    constructor($locale: ng.ILocaleService,
-                tmhDynamicLocale: ng.dynamicLocale.tmhDynamicLocaleService,
-                translate: ng.translate.ITranslateService,
-                AppConstantsService: IAppConstantsService,
-                LocalStorageService: ILocalStorageService) {
-        this.locale = $locale;
-        this.tmhDynamicLocale = tmhDynamicLocale;
-        this.translate = translate;
-        this.appConstantsService = AppConstantsService;
-        this.localStorageService = LocalStorageService;
+    constructor(protected locale: ng.ILocaleService,
+                protected tmhDynamicLocale: ng.dynamicLocale.tmhDynamicLocaleService,
+                protected translate: ng.translate.ITranslateService,
+                protected appConstantsService: IAppConstantsService,
+                protected localStorageService: ILocalStorageService) {
     }
 
     public start(): void {

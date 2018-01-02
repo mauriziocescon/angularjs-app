@@ -21,15 +21,6 @@ export class AlbumsController {
     public name: string;
     public textFilter: string | undefined;
 
-    protected filter: ISharedFilterService;
-    protected state: ng.ui.IStateService;
-    protected translate: ng.translate.ITranslateService;
-    protected delayExecutionService: IDelayExecutionService;
-    protected navigationBarService: INavigationBarService;
-    protected uiUtilitiesService: IUIUtilitiesService;
-    protected utilitiesService: IUtilitiesService;
-    protected albumsService: IAlbumsService;
-
     protected albums: Album[] | undefined;
     protected pageNumber: number;
     protected loadCompleted: boolean;
@@ -37,23 +28,14 @@ export class AlbumsController {
 
     protected loadAlbumsKey: Enum;
 
-    constructor($filter: ISharedFilterService,
-                $state: ng.ui.IStateService,
-                $translate: ng.translate.ITranslateService,
-                DelayExecutionService: IDelayExecutionService,
-                NavigationBarService: INavigationBarService,
-                UIUtilitiesService: IUIUtilitiesService,
-                UtilitiesService: IUtilitiesService,
-                AlbumsService: IAlbumsService) {
-        this.filter = $filter;
-        this.state = $state;
-        this.translate = $translate;
-        this.delayExecutionService = DelayExecutionService;
-        this.navigationBarService = NavigationBarService;
-        this.uiUtilitiesService = UIUtilitiesService;
-        this.utilitiesService = UtilitiesService;
-        this.albumsService = AlbumsService;
-
+    constructor(protected filter: ISharedFilterService,
+                protected state: ng.ui.IStateService,
+                protected translate: ng.translate.ITranslateService,
+                protected delayExecutionService: IDelayExecutionService,
+                protected navigationBarService: INavigationBarService,
+                protected uiUtilitiesService: IUIUtilitiesService,
+                protected utilitiesService: IUtilitiesService,
+                protected albumsService: IAlbumsService) {
         this.name = "AlbumsComponent";
     }
 
