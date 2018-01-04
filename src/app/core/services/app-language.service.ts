@@ -69,7 +69,7 @@ export class AppLanguageService implements IAppLanguageService {
         if (languageId !== undefined && languageId !== this.selectedLanguageId && this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(languageId) !== -1) {
             this.selectedLanguageId = languageId;
             this.localStorageService.setData(this.appConstantsService.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
-            this.translate.use(languageId);
+            this.translate.use(this.selectedLanguageId);
             location.reload(true);
         }
     }
