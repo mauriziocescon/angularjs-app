@@ -15,6 +15,7 @@ const data = {
     posts: [],
     todos: [],
     users: [],
+    logs: [],
 };
 
 // do items
