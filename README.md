@@ -1,6 +1,10 @@
 Demo built on angular 1.x, Typescript, ES2017, ui-router
 =========
 
+## Demo 
+
+1. [Demo](https://mc-angularjs-app.herokuapp.com) powered by Heroku 
+
 ## How to build the app
 
 1. Download and install [NodeJS](https://nodejs.org/en/)
