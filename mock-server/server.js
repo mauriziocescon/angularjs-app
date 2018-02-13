@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 // Simulate server side errors
 app.use((req, res, next) => {
     const randomOutcome = Math.random();
-    if (randomOutcome < 0.01 && req.path.startsWith("/api/")) {
+    if (randomOutcome < 0.05 && req.path.startsWith("/api/")) {
         const choice = Math.random();
 
         if (choice < 0.11) {
