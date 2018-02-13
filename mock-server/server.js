@@ -30,55 +30,47 @@ app.use((req, res, next) => {
         const choice = Math.random();
 
         if (choice < 0.11) {
-            res.status(400).jsonp({
+            return res.status(400).jsonp({
                 error: "Bad Request",
             });
-            return;
         }
         else if (choice < 0.22) {
-            res.status(401).jsonp({
+            return res.status(401).jsonp({
                 error: "Unauthorized",
             });
-            return;
         }
         else if (choice < 0.33) {
-            res.status(403).jsonp({
+            return  res.status(403).jsonp({
                 error: "Forbidden",
             });
-            return;
         }
         else if (choice < 0.44) {
-            res.status(404).jsonp({
+            return res.status(404).jsonp({
                 error: "Not Found",
             });
-            return;
         }
         else if (choice < 0.55) {
-            res.status(410).jsonp({
+            return res.status(410).jsonp({
                 error: "Gone",
             });
-            return;
         }
         else if (choice < 0.66) {
-            res.status(500).jsonp({
+            return res.status(500).jsonp({
                 error: "Internal Server Error",
             });
-            return;
         }
         else if (choice < 0.77) {
-            res.status(501).jsonp({
+            return res.status(501).jsonp({
                 error: "Not Implemented",
             });
-            return;
         }
         else if (choice < 0.88) {
-            res.status(503).jsonp({
+            return res.status(503).jsonp({
                 error: "Service Unavailable",
             });
-            return;
         }
         else {
-            res.status(550).jsonp({
+            return res.status(550).jsonp({
                 error: "Permission denied",
             });
         }
