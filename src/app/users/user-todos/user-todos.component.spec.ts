@@ -47,12 +47,7 @@ describe("UserTodosController", () => {
             const response = [];
 
             for (let i = 0; i < 10; i++) {
-                const todo = new Todo();
-
-                todo.userId = parseInt(params.userId, 10);
-                todo.id = i;
-                todo.title = "title " + i.toString();
-                todo.completed = Math.random() > 0.5;
+                const todo = new Todo(parseInt(params.userId, 10), i, "title " + i.toString(), Math.random() > 0.5);
 
                 response.push(todo);
             }

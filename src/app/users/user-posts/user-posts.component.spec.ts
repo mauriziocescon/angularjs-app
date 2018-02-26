@@ -47,12 +47,7 @@ describe("UserPostsController", () => {
             const response = [];
 
             for (let i = 0; i < 20; i++) {
-                const post = new Post();
-
-                post.userId = parseInt(params.userId, 10);
-                post.id = i;
-                post.title = "title";
-                post.body = "body of the post";
+                const post = new Post(parseInt(params.userId, 10), i, "title", "body of the post");
 
                 response.push(post);
             }

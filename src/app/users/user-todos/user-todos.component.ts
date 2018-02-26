@@ -22,8 +22,8 @@ export class UserTodosController {
     public textFilter: string | undefined;
 
     protected todos: Todo[] | undefined;
-    protected busy: boolean;
-    protected loadTodosKey: Enum;
+    protected busy!: boolean;
+    protected loadTodosKey!: Enum;
 
     constructor(protected filter: ISharedFilterService,
                 protected location: ng.ILocationService,

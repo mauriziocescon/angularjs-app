@@ -21,7 +21,7 @@ export interface IConnectionService {
 export class ConnectionService implements IConnectionService {
     public static $inject = ["$rootScope", "$window"];
 
-    protected onLine: boolean;
+    protected onLine!: boolean;
 
     constructor(protected rootScope: ng.IRootScopeService,
                 protected window: ng.IWindowService) {

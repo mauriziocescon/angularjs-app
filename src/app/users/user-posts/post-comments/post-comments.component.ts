@@ -18,9 +18,9 @@ export class PostCommentsController {
     public static $inject = ["$filter", "$translate", "NavigationBarService", "UIUtilitiesService", "UtilitiesService", "PostCommentsService"];
     public name: string;
 
-    protected postId: number;
+    protected postId!: number;
     protected comments: Comment[] | undefined;
-    protected busy: boolean;
+    protected busy!: boolean;
 
     constructor(protected filter: ISharedFilterService,
                 protected translate: ng.translate.ITranslateService,

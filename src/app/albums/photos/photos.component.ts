@@ -20,9 +20,9 @@ export class PhotosController {
     public name: string;
 
     protected photos: Photo[] | undefined;
-    protected pageNumber: number;
-    protected loadCompleted: boolean;
-    protected busy: boolean;
+    protected pageNumber!: number;
+    protected loadCompleted!: boolean;
+    protected busy!: boolean;
 
     constructor(protected filter: ISharedFilterService,
                 protected stateParams: ng.ui.IStateParamsService,

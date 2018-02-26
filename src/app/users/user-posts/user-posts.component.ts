@@ -31,9 +31,9 @@ export class UserPostsController {
     protected userPostsService: IUserPostsService;
 
     protected posts: Post[] | undefined;
-    protected busy: boolean;
+    protected busy!: boolean;
     protected openedPost: Post | undefined;
-    protected loadPostsKey: Enum;
+    protected loadPostsKey!: Enum;
 
     constructor($filter: ISharedFilterService,
                 $stateParams: ng.ui.IStateParamsService,

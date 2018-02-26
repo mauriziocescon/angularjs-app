@@ -106,7 +106,7 @@ export class CacheHelperService implements ICacheHelperService {
 
     protected cacheNames: string[];
     protected urlStack: string[];
-    protected clearDefer: ng.IPromise<any>;
+    protected clearDefer!: ng.IPromise<any>;
 
     constructor(protected rootScope: ng.IRootScopeService,
                 protected cacheFactory: ng.ICacheFactoryService,

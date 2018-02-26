@@ -65,13 +65,7 @@ describe("PhotosController", () => {
                 "et, cu viderer minimum voluptua duo, ex eligendi abhorreant vis. Sea posse legimus " +
                 "vituperata no, per at etiam deserunt inimicus.";
 
-            const photo = new Photo();
-
-            photo.albumId = 124;
-            photo.id = params.id;
-            photo.title = fakeText.substring(0, (Math.random() * 10000) % 20);
-            photo.url = "chevron-circle-up.svg";
-            photo.thumbnailUrl = "chevron-circle-up.svg";
+            const photo = new Photo(124, params.id, fakeText.substring(0, (Math.random() * 10000) % 20), "chevron-circle-up.svg", "chevron-circle-up.svg");
 
             response.push(photo);
 
@@ -96,13 +90,12 @@ describe("PhotosController", () => {
             const page = parseInt(params._page, 10);
 
             for (let i = (page * 10) - 10; i < page * 10; i++) {
-                const photo = new Photo();
-
-                photo.albumId = parseInt(params.albumId, 10);
-                photo.id = i;
-                photo.title = fakeText.substring(0, (Math.random() * 10000) % 20);
-                photo.url = ["chevron-circle-up.svg", "chevron-down.svg", "chevron-up.svg", "chevron-left.svg", "chevron-right.svg"][Math.round(Math.random() * 1000) % 5];
-                photo.thumbnailUrl = ["chevron-circle-up.svg", "chevron-down.svg", "chevron-up.svg", "chevron-left.svg", "chevron-right.svg"][Math.round(Math.random() * 1000) % 5];
+                const photo = new Photo(
+                    parseInt(params.albumId, 10),
+                    i,
+                    fakeText.substring(0, (Math.random() * 10000) % 20),
+                    ["chevron-circle-up.svg", "chevron-down.svg", "chevron-up.svg", "chevron-left.svg", "chevron-right.svg"][Math.round(Math.random() * 1000) % 5],
+                    ["chevron-circle-up.svg", "chevron-down.svg", "chevron-up.svg", "chevron-left.svg", "chevron-right.svg"][Math.round(Math.random() * 1000) % 5]);
 
                 response.push(photo);
             }

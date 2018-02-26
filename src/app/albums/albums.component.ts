@@ -22,11 +22,11 @@ export class AlbumsController {
     public textFilter: string | undefined;
 
     protected albums: Album[] | undefined;
-    protected pageNumber: number;
-    protected loadCompleted: boolean;
-    protected busy: boolean;
+    protected pageNumber!: number;
+    protected loadCompleted!: boolean;
+    protected busy!: boolean;
 
-    protected loadAlbumsKey: Enum;
+    protected loadAlbumsKey!: Enum;
 
     constructor(protected filter: ISharedFilterService,
                 protected state: ng.ui.IStateService,

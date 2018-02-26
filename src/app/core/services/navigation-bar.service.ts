@@ -9,7 +9,7 @@ export class NavigationBarService implements INavigationBarService {
     protected title: string;
 
     constructor() {
-        // do nothing
+        this.title = "";
     }
 
     public setTitle(title: string): void {

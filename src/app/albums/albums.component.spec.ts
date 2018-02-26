@@ -59,11 +59,7 @@ describe("AlbumsController", () => {
             const page = parseInt(params._page, 10);
 
             for (let i = (page * 10) - 10; i < page * 10; i++) {
-                const album = new Album();
-
-                album.userId = page * 10;
-                album.id = i;
-                album.title = fakeText.substring(0, (Math.random() * 10000) % 20);
+                const album = new Album(page * 10, i, fakeText.substring(0, (Math.random() * 10000) % 20));
 
                 response.push(album);
             }

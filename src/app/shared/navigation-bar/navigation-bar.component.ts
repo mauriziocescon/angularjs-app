@@ -12,9 +12,9 @@ import {
 export class NavigationBarController {
     public static $inject = ["$location", "$translate", "AppConstantsService", "AppLanguageService", "NavigationBarService", "UtilitiesService"];
     public name: string;
-    public selectedLanguageId: string;
+    public selectedLanguageId!: string;
 
-    protected languages: string[];
+    protected languages!: string[];
 
     constructor(protected location: ng.ILocationService,
                 protected translate: ng.translate.ITranslateService,
