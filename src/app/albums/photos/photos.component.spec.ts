@@ -90,10 +90,7 @@ describe("PhotosController", () => {
             const page = parseInt(params._page, 10);
 
             for (let i = (page * 10) - 10; i < page * 10; i++) {
-                const photo = new Photo(
-                    parseInt(params.albumId, 10),
-                    i,
-                    fakeText.substring(0, (Math.random() * 10000) % 20),
+                const photo = new Photo(parseInt(params.albumId, 10), i, fakeText.substring(0, (Math.random() * 10000) % 20),
                     ["chevron-circle-up.svg", "chevron-down.svg", "chevron-up.svg", "chevron-left.svg", "chevron-right.svg"][Math.round(Math.random() * 1000) % 5],
                     ["chevron-circle-up.svg", "chevron-down.svg", "chevron-up.svg", "chevron-left.svg", "chevron-right.svg"][Math.round(Math.random() * 1000) % 5]);
 

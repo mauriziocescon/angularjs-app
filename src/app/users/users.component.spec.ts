@@ -47,26 +47,11 @@ describe("UsersController", () => {
             const response = [];
 
             for (let i = 0; i < 4; i++) {
-                const user = new User();
 
-                user.id = i;
-                user.name = "name " + i.toString();
-                user.username = "username " + i.toString();
-                user.email = user.name + "@email.com";
-                user.address = new Address();
-                user.address.street = "street";
-                user.address.suite = "suite";
-                user.address.city = "city";
-                user.address.zipcode = "32332";
-                user.address.geo = new Coordinates();
-                user.address.geo.lat = "0";
-                user.address.geo.lng = "0";
-                user.phone = "+39 20151025";
-                user.website = "www." + user.name + ".com";
-                user.company = new Company();
-                user.company.name = "name";
-                user.company.catchPhrase = "catchPhrase";
-                user.company.bs = "bs";
+                const coordinates = new Coordinates("0", "0");
+                const address = new Address("street", "suite", "city", "32332", coordinates);
+                const company = new Company("name", "catchPhrase", "bs");
+                const user = new User(i, "name " + i.toString(), "username " + i.toString(), "name " + i.toString() + "@email.com", address, "+39 20151025", "www." + "name " + i.toString() + ".com", company);
 
                 response.push(user);
             }

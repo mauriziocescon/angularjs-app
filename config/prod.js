@@ -16,7 +16,7 @@ module.exports = (env) => {
 
             new webpack.DefinePlugin({
                 "process.env": {
-                    "ENV": JSON.stringify("production"),
+                    "NODE_ENV": JSON.stringify("production"),
                 },
             }),
 
@@ -57,13 +57,6 @@ module.exports = (env) => {
                 navigateFallbackWhitelist: [/^(?!\/__).*/],
                 // Don't precache sourcemaps (they're large) and build asset manifest:
                 staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
-            }),
-
-            new webpack.optimize.UglifyJsPlugin({
-                mangle: {
-                    keep_fnames: true,
-                },
-                sourceMap: true,
             }),
         ],
 

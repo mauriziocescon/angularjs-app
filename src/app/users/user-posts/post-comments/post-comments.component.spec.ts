@@ -56,9 +56,7 @@ describe("PostCommentsController", () => {
                 "vituperata no, per at etiam deserunt inimicus.";
 
             for (let i = 0; i < Math.round(Math.random() * 150); i++) {
-                const comment = new Comment(
-                    parseInt(params.postId, 10),
-                    i,
+                const comment = new Comment(parseInt(params.postId, 10), i,
                     fakeText.substring(0, (Math.random() * 10000) % 20),
                     fakeText.substring(0, (Math.random() * 10000) % 20),
                     fakeText.substring(0, (Math.random() * 10000) % fakeText.length));

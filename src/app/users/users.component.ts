@@ -22,8 +22,8 @@ export class UsersController {
     public textFilter: string | undefined;
 
     protected users: User[] | undefined;
-    protected busy: boolean;
-    protected loadUsersKey: Enum;
+    protected busy!: boolean;
+    protected loadUsersKey!: Enum;
 
     constructor(protected filter: ISharedFilterService,
                 protected location: ng.ILocationService,
