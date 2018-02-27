@@ -5,6 +5,7 @@
     "diagnostics": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "jsx": "preserve",
     "module": "CommonJS",
     "moduleResolution": "Node",
     "pretty": true,
