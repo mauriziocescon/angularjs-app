@@ -12,7 +12,7 @@ module.exports = (env) => {
     return {
 
         entry: {
-            vendor: "./src/vendor.ts",
+            vendors: "./src/vendors.ts",
             app: "./src/main.ts",
         },
 

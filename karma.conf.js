@@ -11,10 +11,10 @@ module.exports = (config) => {
 
         // list of files / patterns to load in the browser
         files: [
-            "dist/vendor.js",
+            "dist/common~**.js",
+            "dist/vendors.js",
             "dist/app.js",
-            "dist/test.js",
-            "dist/lazy.js",
+            "dist/tests.js",
         ],
 
         // list of files to exclude

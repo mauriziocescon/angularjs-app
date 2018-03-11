@@ -8,9 +8,9 @@ module.exports = (env) => {
     return webpackMerge(commonConfig(env), {
 
         entry: {
+            vendors: "./src/vendors.ts",
             app: "./src/main.ts",
-            vendor: "./src/vendor.ts",
-            test: "./src/test.spec.ts",
+            tests: "./src/tests.ts",
         },
 
         devtool: "cheap-module-eval-source-map",
