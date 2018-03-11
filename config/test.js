@@ -13,7 +13,7 @@ module.exports = (env) => {
             tests: "./src/tests.ts",
         },
 
-        devtool: "cheap-module-eval-source-map",
+        mode: "development",
 
         plugins: [
 

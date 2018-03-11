@@ -21,6 +21,18 @@ module.exports = (env) => {
             extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js", ".scss", ".html", ".json"],
         },
 
+        optimization: {
+
+            splitChunks: {
+                cacheGroups: {
+                    common: {
+                        test: /node_modules/,
+                        chunks: "initial",
+                    },
+                },
+            },
+        },
+
         plugins: [
 
             // environment variables
@@ -65,7 +77,7 @@ module.exports = (env) => {
                 inject: "head",
             }),
 
-            new StyleLintPlugin(),
+            // new StyleLintPlugin(),
         ],
 
         module: {
