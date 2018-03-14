@@ -77,7 +77,7 @@ module.exports = (env) => {
                 inject: "head",
             }),
 
-            new StyleLintPlugin(),
+            // new StyleLintPlugin(),
         ],
 
         module: {
