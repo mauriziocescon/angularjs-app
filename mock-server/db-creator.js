@@ -1,5 +1,4 @@
-const faker = require("faker");
-
+const dataCreator = require("./data-creator");
 const utils = require("./utils");
 
 const dbUrl = "./mock-server/db.json";
@@ -31,80 +30,32 @@ function main() {
 
         // albums
         for (let i = 0; i < numberOfAlbums; i++) {
-            data.albums.push({
-                userId: parseInt(i / 10) + 1,
-                id: i + 1,
-                title: faker.lorem.text(),
-            });
+            data.albums.push(dataCreator.getAlbum(i));
         }
 
         // comments
         for (let i = 0; i < numberOfComments; i++) {
-            data.comments.push({
-                postId: parseInt(i / 5) + 1,
-                id: i + 1,
-                name: faker.lorem.text(),
-                email: faker.internet.email(),
-                body: faker.lorem.text(),
-            });
+            data.comments.push(dataCreator.getComment(i));
         }
 
         // photos
         for (let i = 0; i < numberOfPhotos; i++) {
-            data.photos.push({
-                albumId: parseInt(i / 50) + 1,
-                id: i + 1,
-                title: faker.lorem.text(),
-                url: faker.image.imageUrl(),
-                thumbnailUrl: faker.image.imageUrl(250, 250),
-            });
+            data.photos.push(dataCreator.getPhoto(i));
         }
 
         // posts
         for (let i = 0; i < numberOfPosts; i++) {
-            data.posts.push({
-                userId: parseInt(i / 10) + 1,
-                id: i + 1,
-                title: faker.lorem.text(),
-                body: faker.lorem.text(),
-            });
+            data.posts.push(dataCreator.getPost(i));
         }
 
         // todos
         for (let i = 0; i < numberOfTodos; i++) {
-            data.todos.push({
-                userId: parseInt(i / 20) + 1,
-                id: i + 1,
-                title: faker.lorem.text(),
-                completed: faker.random.boolean(),
-            });
+            data.todos.push(dataCreator.getTodo(i));
         }
 
         // users
         for (let i = 0; i < numberOfUsers; i++) {
-            data.users.push({
-                id: i + 1,
-                name: faker.name.findName(),
-                username: faker.internet.userName(),
-                email: faker.internet.email(),
-                address: {
-                    street: faker.address.streetName(),
-                    suite: faker.address.streetSuffix(),
-                    city: faker.address.city(),
-                    zipcode: faker.address.zipCode(),
-                    geo: {
-                        lat: faker.address.latitude(),
-                        lng: faker.address.longitude(),
-                    },
-                },
-                phone: faker.phone.phoneNumber(),
-                website: faker.internet.url(),
-                company: {
-                    name: faker.company.companyName(),
-                    catchPhrase: faker.company.catchPhraseDescriptor(),
-                    bs: faker.company.bsNoun(),
-                },
-            });
+            data.users.push(dataCreator.getUser(i));
         }
 
         utils.saveDb(dbUrl, data, (err) => {
