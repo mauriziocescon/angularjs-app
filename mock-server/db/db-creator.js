@@ -1,7 +1,6 @@
 const dataCreator = require("./data-creator");
-const utils = require("./utils");
-
-const dbUrl = "./mock-server/db.json";
+const utils = require("./db-utils");
+const dbUrl = require("./constants").dbUrl;
 
 function main() {
     utils.deleteDb(dbUrl, (err) => {
