@@ -1,62 +1,62 @@
 <div class="container-fluid users">
 
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="input-group">
-                <input type="search" class="form-control" ng-change="$ctrl.textFilterDidChange()" ng-model="$ctrl.textFilter" placeholder="{{ 'USERS.INPUT_TEXT_PLACEHOLDER' | translate }}">
-                <span class="input-group-addon addon"  ng-click="$ctrl.resetTextFilter()">
-                    <span class="fa fa-search" ng-show="!$ctrl.textFilter"></span>
-                    <span class="fa fa-remove" ng-show="$ctrl.textFilter"></span>
-                </span>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <input type="search" class="form-control" ng-change="$ctrl.textFilterDidChange()" ng-model="$ctrl.textFilter" placeholder="{{ 'USERS.INPUT_TEXT_PLACEHOLDER' | translate }}">
+        <span class="input-group-addon addon" ng-click="$ctrl.resetTextFilter()">
+          <span class="fa fa-search" ng-show="!$ctrl.textFilter"></span>
+          <span class="fa fa-remove" ng-show="$ctrl.textFilter"></span>
+        </span>
+      </div>
     </div>
+  </div>
 
-    <div class="row" ng-show="$ctrl.showData">
-        <div class="col-xs-12" ng-repeat="user in $ctrl.dataSource track by user.id">
-            <div class="row user">
-                <div class="col-xs-10">
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <div class="user-label">{{ "USERS.NAME" | translate }}</div>
-                            <div class="user-value">{{ ::$ctrl.getUserNameDesc(user) }}</div>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <div class="user-label">{{ "USERS.ADDRESS" | translate }}</div>
-                            <div class="user-value">{{ ::$ctrl.getUserAddressDesc(user) }}</div>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <div class="user-label">{{ "USERS.EMAIL" | translate }}</div>
-                            <div class="user-value">{{ ::user.email }}</div>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <div class="user-label">{{ "USERS.PHONE" | translate }}</div>
-                            <div class="user-value">{{ ::user.phone }}</div>
-                        </div>
-
-                        <div class="col-xs-12 col-md-6">
-                            <div class="user-label">{{ "USERS.WEBSITE" | translate }}</div>
-                            <div class="user-value">{{ ::user.website }}</div>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <div class="user-label">{{ "USERS.COMPANY" | translate }}</div>
-                            <div class="user-value">{{ ::$ctrl.getUserCompanyDesc(user) }}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-2">
-                    <button type="button" class="btn btn-default pull-right" ng-click="$ctrl.goToUserTodos(user, $event)">{{ "USERS.TODOS" | translate }}</button>
-                    <button type="button" class="btn btn-default pull-right" ng-click="$ctrl.goToUserPosts(user, $event)">{{ "USERS.POSTS" | translate }}</button>
-                </div>
+  <div class="row" ng-show="$ctrl.showData">
+    <div class="col-xs-12" ng-repeat="user in $ctrl.dataSource track by user.id">
+      <div class="row user">
+        <div class="col-xs-10">
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <div class="user-label">{{ "USERS.NAME" | translate }}</div>
+              <div class="user-value">{{ ::$ctrl.getUserNameDesc(user) }}</div>
             </div>
-        </div>
-        <div class="col-xs-12">
-            <div class="full-width-message">{{ "USERS.LOAD_COMPLETED" | translate }}</div>
-        </div>
-    </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="user-label">{{ "USERS.ADDRESS" | translate }}</div>
+              <div class="user-value">{{ ::$ctrl.getUserAddressDesc(user) }}</div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="user-label">{{ "USERS.EMAIL" | translate }}</div>
+              <div class="user-value">{{ ::user.email }}</div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="user-label">{{ "USERS.PHONE" | translate }}</div>
+              <div class="user-value">{{ ::user.phone }}</div>
+            </div>
 
-    <div class="full-width-message" ng-show="$ctrl.isLoadingData">{{ "USERS.LOADING" | translate }}</div>
-    <div class="full-width-message" ng-show="$ctrl.hasNoData">{{ "USERS.NO_RESULT" | translate }}</div>
-    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSource()">{{ "USERS.RETRY" | translate }}</div>
-    <div class="go-up" mc-scroll-to-top></div>
+            <div class="col-xs-12 col-md-6">
+              <div class="user-label">{{ "USERS.WEBSITE" | translate }}</div>
+              <div class="user-value">{{ ::user.website }}</div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="user-label">{{ "USERS.COMPANY" | translate }}</div>
+              <div class="user-value">{{ ::$ctrl.getUserCompanyDesc(user) }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <button type="button" class="btn btn-default pull-right" ng-click="$ctrl.goToUserTodos(user, $event)">{{ "USERS.TODOS" | translate }}</button>
+          <button type="button" class="btn btn-default pull-right" ng-click="$ctrl.goToUserPosts(user, $event)">{{ "USERS.POSTS" | translate }}</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="full-width-message">{{ "USERS.LOAD_COMPLETED" | translate }}</div>
+    </div>
+  </div>
+
+  <div class="full-width-message" ng-show="$ctrl.isLoadingData">{{ "USERS.LOADING" | translate }}</div>
+  <div class="full-width-message" ng-show="$ctrl.hasNoData">{{ "USERS.NO_RESULT" | translate }}</div>
+  <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSource()">{{ "USERS.RETRY" | translate }}</div>
+  <div class="go-up" mc-scroll-to-top></div>
 </div>

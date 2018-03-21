@@ -1,7 +1,7 @@
-import * as $ from "jquery";
+import * as $ from 'jquery';
 
-import { IScrollToService } from "../../app.module";
-import { Logger } from "../shared.module";
+import { IScrollToService } from '../../app.module';
+import { Logger } from '../shared.module';
 
 /**
  * When the user starts scrolling and window.pageYOffset
@@ -13,46 +13,46 @@ import { Logger } from "../shared.module";
  */
 export const mcScrollToTopDirective = ($window: ng.IWindowService, ScrollToService: IScrollToService) => {
 
-    const onScroll = (element: JQuery, attrs: ng.IAttributes) => {
+  const onScroll = (element: JQuery, attrs: ng.IAttributes) => {
 
-        const elementVisibility = attrs["element-visibility"];
-        const shouldBeVisible = ScrollToService.getScrollPosition() > 100;
+    const elementVisibility = attrs['element-visibility'];
+    const shouldBeVisible = ScrollToService.getScrollPosition() > 100;
 
-        if (shouldBeVisible === true && elementVisibility !== true) {
-            $(element).show();
-            attrs["element-visibility"] = true;
-        } else if (shouldBeVisible === false && elementVisibility !== false) {
-            $(element).hide();
-            attrs["element-visibility"] = false;
-        }
-    };
+    if (shouldBeVisible === true && elementVisibility !== true) {
+      $(element).show();
+      attrs['element-visibility'] = true;
+    } else if (shouldBeVisible === false && elementVisibility !== false) {
+      $(element).hide();
+      attrs['element-visibility'] = false;
+    }
+  };
 
-    const directive: ng.IDirective = {};
+  const directive: ng.IDirective = {};
 
-    directive.priority = 0;
-    directive.restrict = "A";
-    directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
-        try {
-            $(element).on("click", () => {
-                ScrollToService.scrollTo(0);
-            });
+  directive.priority = 0;
+  directive.restrict = 'A';
+  directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
+    try {
+      $(element).on('click', () => {
+        ScrollToService.scrollTo(0);
+      });
 
-            const scrollFunc = (ev: UIEvent) => {
-                onScroll(element, attrs);
-            };
+      const scrollFunc = (ev: UIEvent) => {
+        onScroll(element, attrs);
+      };
 
-            $window.addEventListener("scroll", scrollFunc, false);
-            onScroll(element, attrs);
+      $window.addEventListener('scroll', scrollFunc, false);
+      onScroll(element, attrs);
 
-            scope.$on("$destroy", (event: ng.IAngularEvent) => {
-                $(element).off("click");
-                $window.removeEventListener("scroll", scrollFunc, false);
-            });
-        } catch (e) {
-            Logger.exception(scope, e);
-        }
-    };
-    return directive;
+      scope.$on('$destroy', (event: ng.IAngularEvent) => {
+        $(element).off('click');
+        $window.removeEventListener('scroll', scrollFunc, false);
+      });
+    } catch (e) {
+      Logger.exception(scope, e);
+    }
+  };
+  return directive;
 };
 
-mcScrollToTopDirective.$inject = ["$window", "ScrollToService"];
+mcScrollToTopDirective.$inject = ['$window', 'ScrollToService'];

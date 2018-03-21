@@ -3,7 +3,7 @@
 // `--env.name=prod` then `environment.prod.ts` will be used instead.
 
 export const environment = {
-    // json-server mock server
-    apiUrl: "http://localhost:5000/api/",
-    production: false,
+  // json-server mock server
+  apiUrl: 'http://localhost:5000/api/',
+  production: false,
 };

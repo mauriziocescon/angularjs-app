@@ -1,11 +1,11 @@
 export class Album {
-    public userId: number;
-    public id: number;
-    public title: string;
+  public userId: number;
+  public id: number;
+  public title: string;
 
-    constructor(userId: number, id: number, title: string) {
-        this.userId = userId;
-        this.id = id;
-        this.title = title;
-    }
+  constructor(userId: number, id: number, title: string) {
+    this.userId = userId;
+    this.id = id;
+    this.title = title;
+  }
 }

@@ -1,14 +1,14 @@
-import * as angular from "angular";
+import * as angular from 'angular';
 
-import { mcServices } from "./services/services.module";
+import { mcServices } from './services/services.module';
 
-import { servicesSetupFunc } from "./core-run.module";
+import { servicesSetupFunc } from './core-run.module';
 
-export * from "./services/services.module";
+export * from './services/services.module';
 
-const coreModule = angular.module("app.core", [
-    "tmh.dynamicLocale",
-    mcServices,
+const coreModule = angular.module('app.core', [
+  'tmh.dynamicLocale',
+  mcServices,
 ]);
 
 // run function
