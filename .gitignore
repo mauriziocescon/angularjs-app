@@ -1,7 +1,7 @@
 # Node.js with Express and Stlyus
-public/css/*.css
-public/css/main/*.css
-public/css/admin/*.css
+/public/css/*.css
+/public/css/main/*.css
+/public/css/admin/*.css
 /.monitor
 
 # Eclipse
@@ -14,7 +14,7 @@ public/css/admin/*.css
 *.sublime-workspace
 
 # Windows
-Thumbs.db
+/Thumbs.db
 
 # Ignore this in Clock Harness projects because it is created by the build system.
 /Config/vhost.conf
@@ -28,12 +28,12 @@ tags
 .DS_Store
 Icon?
 ._*
-.Spotlight-V100
-.Trashes
+/.Spotlight-V100
+/.Trashes
 
 # nodejs npm modules
-node_modules
-npm-debug.log
+/node_modules
+/npm-debug.log
 
 # bower
 /bower_components
@@ -46,16 +46,16 @@ npm-debug.log
 /.cake_task_cache
 
 # SVN
-.svn
+/.svn
 
 # IDEA
-.idea
+/.idea
 
 # Webpack caches
-.awcache
-.cache-loader
+/.awcache
+/.cache-loader
 
-# DIST
-dist
-e2e-tests/tmp
-mock-server/db/db.json
+# compiled output
+/dist
+/e2e-tests/tmp
+/mock-server/db/db.json
