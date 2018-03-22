@@ -10,7 +10,9 @@
     "pretty": true,
     "removeComments": true,
     "target": "es2015",
-    "types": ["jasmine"],
+    "types": [
+      "jasmine"
+    ],
     "outDir": "tmp"
   },
   "exclude": [

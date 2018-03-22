@@ -1,11 +1,11 @@
-const faker = require("faker");
+const faker = require('faker');
 
 exports.getComment = (id) => {
-    return {
-        postId: parseInt(id / 5) + 1,
-        id: id + 1,
-        name: faker.lorem.text(),
-        email: faker.internet.email(),
-        body: faker.lorem.text(),
-    };
+  return {
+    postId: parseInt(id / 5) + 1,
+    id: id + 1,
+    name: faker.lorem.text(),
+    email: faker.internet.email(),
+    body: faker.lorem.text(),
+  };
 };

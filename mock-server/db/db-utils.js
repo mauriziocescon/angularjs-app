@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require('fs');
 
 // delete db
 exports.deleteDb = (path, callback) => {
