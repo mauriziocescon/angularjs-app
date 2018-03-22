@@ -1,16 +1,16 @@
 export class Enum {
 
-    public static toEnum(val: string): Enum {
-        return new Enum(val);
-    }
+  public static toEnum(val: string): Enum {
+    return new Enum(val);
+  }
 
-    protected value: string;
+  protected value: string;
 
-    constructor(value: string) {
-        this.value = value;
-    }
+  constructor(value: string) {
+    this.value = value;
+  }
 
-    public toString(): string {
-        return this.value;
-    }
+  public toString(): string {
+    return this.value;
+  }
 }

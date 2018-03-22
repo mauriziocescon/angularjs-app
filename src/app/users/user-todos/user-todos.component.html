@@ -1,37 +1,40 @@
 <div class="container-fluid todos">
 
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="input-group">
-                <input type="search" class="form-control" ng-change="$ctrl.textFilterDidChange()" ng-model="$ctrl.textFilter" placeholder="{{ 'USER_TODOS.INPUT_TEXT_PLACEHOLDER' | translate }}">
-                <span class="input-group-addon addon"  ng-click="$ctrl.resetTextFilter()">
-                    <span class="fa fa-search" ng-show="!$ctrl.textFilter"></span>
-                    <span class="fa fa-remove" ng-show="$ctrl.textFilter"></span>
-                </span>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <input type="search" class="form-control" ng-change="$ctrl.textFilterDidChange()" ng-model="$ctrl.textFilter"
+               placeholder="{{ 'USER_TODOS.INPUT_TEXT_PLACEHOLDER' | translate }}">
+        <span class="input-group-addon addon" ng-click="$ctrl.resetTextFilter()">
+          <span class="fa fa-search" ng-show="!$ctrl.textFilter"></span>
+          <span class="fa fa-remove" ng-show="$ctrl.textFilter"></span>
+        </span>
+      </div>
     </div>
+  </div>
 
-    <div class="row" ng-show="$ctrl.showData">
-        <div class="col-xs-12" ng-repeat="todo in $ctrl.dataSource track by todo.id">
-            <div class="row todo">
-                <div class="col-xs-8 col-md-10">
-                    <div class="todo-body">{{ ::$ctrl.getTodoDesc(todo) }}</div>
-                </div>
-                <div class="col-xs-4 col-md-2 cursor-pointer">
-                    <div class="todo-check">
-                        <span class="fa fa-2x" ng-class="{ 'done' : $ctrl.isCompleted(todo), 'pending' : !$ctrl.isCompleted(todo) }" ng-click="$ctrl.changeTodo(todo)"></span>
-                    </div>
-                </div>
-            </div>
+  <div class="row" ng-show="$ctrl.showData">
+    <div class="col-xs-12" ng-repeat="todo in $ctrl.dataSource track by todo.id">
+      <div class="row todo">
+        <div class="col-xs-8 col-md-10">
+          <div class="todo-body">{{ ::$ctrl.getTodoDesc(todo) }}</div>
         </div>
-        <div class="col-xs-12">
-            <div class="full-width-message">{{ "USER_TODOS.LOAD_COMPLETED" | translate }}</div>
+        <div class="col-xs-4 col-md-2 cursor-pointer">
+          <div class="todo-check">
+            <span class="fa fa-2x"
+                  ng-class="{ 'done' : $ctrl.isCompleted(todo), 'pending' : !$ctrl.isCompleted(todo) }"
+                  ng-click="$ctrl.changeTodo(todo)"></span>
+          </div>
         </div>
+      </div>
     </div>
+    <div class="col-xs-12">
+      <div class="full-width-message">{{ "USER_TODOS.LOAD_COMPLETED" | translate }}</div>
+    </div>
+  </div>
 
-    <div class="full-width-message" ng-show="$ctrl.isLoadingData">{{ "USER_TODOS.LOADING" | translate }}</div>
-    <div class="full-width-message" ng-show="$ctrl.hasNoData">{{ "USER_TODOS.NO_RESULT" | translate }}</div>
-    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSource()">{{ "USER_TODOS.RETRY" | translate }}</div>
-    <div class="go-up" mc-scroll-to-top></div>
+  <div class="full-width-message" ng-show="$ctrl.isLoadingData">{{ "USER_TODOS.LOADING" | translate }}</div>
+  <div class="full-width-message" ng-show="$ctrl.hasNoData">{{ "USER_TODOS.NO_RESULT" | translate }}</div>
+  <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSource()">{{ "USER_TODOS.RETRY" | translate }}</div>
+  <div class="go-up" mc-scroll-to-top></div>
 </div>

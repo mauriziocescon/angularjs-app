@@ -1,5 +1,5 @@
 // tslint:disable:max-classes-per-file
-import { IUtilitiesService } from "./utilities.service";
+import { IUtilitiesService } from './utilities.service';
 
 /**
  * Helper around ng.ICacheObject
@@ -7,58 +7,61 @@ import { IUtilitiesService } from "./utilities.service";
  * putting and removing values
  */
 export interface ICacheHelper {
-    /**
-     * Get value for key
-     *
-     * @param key
-     * @param defaultValue returned value if there is no cache with key
-     */
-    getValueForKey(key: string, defaultValue?: any): any;
-    /**
-     * Put valueToCache in cache with key
-     *
-     * @param key
-     * @param valueToCache
-     */
-    setValueForKey(key: string, valueToCache: any): void;
-    /**
-     * Remove value from cache with key
-     *
-     * @param key
-     */
-    removeValueForKey(key: string): void;
-    /**
-     * Remove all values from cache
-     */
-    removeAllValues(): void;
+  /**
+   * Get value for key
+   *
+   * @param key
+   * @param defaultValue returned value if there is no cache with key
+   */
+  getValueForKey(key: string, defaultValue?: any): any;
+
+  /**
+   * Put valueToCache in cache with key
+   *
+   * @param key
+   * @param valueToCache
+   */
+  setValueForKey(key: string, valueToCache: any): void;
+
+  /**
+   * Remove value from cache with key
+   *
+   * @param key
+   */
+  removeValueForKey(key: string): void;
+
+  /**
+   * Remove all values from cache
+   */
+  removeAllValues(): void;
 }
 
 export class CacheHelper implements ICacheHelper {
 
-    constructor(protected currentCache: ng.ICacheObject) {
+  constructor(protected currentCache: ng.ICacheObject) {
+  }
+
+  public getValueForKey(key: string, defaultValue?: any): any {
+    const returnValue = this.currentCache.get(key);
+
+    if (returnValue !== undefined) {
+      return returnValue;
     }
 
-    public getValueForKey(key: string, defaultValue?: any): any {
-        const returnValue = this.currentCache.get(key);
+    return defaultValue;
+  }
 
-        if (returnValue !== undefined) {
-            return returnValue;
-        }
+  public setValueForKey(key: string, valueToCache: any): void {
+    this.currentCache.put(key, valueToCache);
+  }
 
-        return defaultValue;
-    }
+  public removeValueForKey(key: string): void {
+    this.currentCache.remove(key);
+  }
 
-    public setValueForKey(key: string, valueToCache: any): void {
-        this.currentCache.put(key, valueToCache);
-    }
-
-    public removeValueForKey(key: string): void {
-        this.currentCache.remove(key);
-    }
-
-    public removeAllValues(): void {
-        this.currentCache.removeAll();
-    }
+  public removeAllValues(): void {
+    this.currentCache.removeAll();
+  }
 }
 
 /**
@@ -76,123 +79,126 @@ export class CacheHelper implements ICacheHelper {
  * the related cache gets destroyed
  */
 export interface ICacheHelperService {
-    /**
-     * Setup the service: this method has
-     * to be called as soon as the service
-     * gets created
-     */
-    start(): void;
-    /**
-     * Get the cache related to
-     * the current url
-     */
-    getCache(): ICacheHelper;
-    /**
-     * Destroy the cache related
-     * to a particular url
-     *
-     * @param url
-     */
-    resetCacheStack(url?: string): void;
-    /**
-     * Destroy all caches defined
-     * through out this service
-     */
-    destroyAllCache(): void;
+  /**
+   * Setup the service: this method has
+   * to be called as soon as the service
+   * gets created
+   */
+  start(): void;
+
+  /**
+   * Get the cache related to
+   * the current url
+   */
+  getCache(): ICacheHelper;
+
+  /**
+   * Destroy the cache related
+   * to a particular url
+   *
+   * @param url
+   */
+  resetCacheStack(url?: string): void;
+
+  /**
+   * Destroy all caches defined
+   * through out this service
+   */
+  destroyAllCache(): void;
 }
 
 export class CacheHelperService implements ICacheHelperService {
-    public static $inject = ["$rootScope", "$cacheFactory", "UtilitiesService"];
+  public static $inject = ['$rootScope', '$cacheFactory', 'UtilitiesService'];
 
-    protected cacheNames: string[];
-    protected urlStack: string[];
-    protected clearDefer!: ng.IPromise<any>;
+  protected cacheNames: string[];
+  protected urlStack: string[];
+  protected clearDefer!: ng.IPromise<any>;
 
-    constructor(protected rootScope: ng.IRootScopeService,
-                protected cacheFactory: ng.ICacheFactoryService,
-                protected utilitiesService: IUtilitiesService) {
-        this.cacheNames = [];
-        this.urlStack = [];
+  constructor(protected rootScope: ng.IRootScopeService,
+              protected cacheFactory: ng.ICacheFactoryService,
+              protected utilitiesService: IUtilitiesService) {
+    this.cacheNames = [];
+    this.urlStack = [];
+  }
+
+  public start(): void {
+    this.rootScope.$on('$locationChangeStart', (event: ng.IAngularEvent, nextLocation: string, currentLocation: string) => {
+      this.locationChangeStart(event, nextLocation, currentLocation);
+    });
+  }
+
+  public getCache(): ICacheHelper {
+    const currentPath = this.utilitiesService.getCurrentPath();
+
+    let cache = this.cacheFactory.get(currentPath);
+    if (cache === undefined) {
+      cache = this.cacheFactory(currentPath);
     }
 
-    public start(): void {
-        this.rootScope.$on("$locationChangeStart", (event: ng.IAngularEvent, nextLocation: string, currentLocation: string) => {
-            this.locationChangeStart(event, nextLocation, currentLocation);
-        });
+    if (this.cacheNames.indexOf(currentPath) === -1) {
+      this.cacheNames.push(currentPath);
     }
 
-    public getCache(): ICacheHelper {
-        const currentPath = this.utilitiesService.getCurrentPath();
+    return (new CacheHelper(cache));
+  }
 
-        let cache = this.cacheFactory.get(currentPath);
-        if (cache === undefined) {
-            cache = this.cacheFactory(currentPath);
-        }
+  public resetCacheStack(url?: string): void {
+    if (url && this.urlStack.length > 0 && this.urlStack[0] === this.utilitiesService.getPath(url)) {
+      this.urlStack = [this.urlStack[0]];
+    } else {
+      this.urlStack = [];
+    }
+  }
 
-        if (this.cacheNames.indexOf(currentPath) === -1) {
-            this.cacheNames.push(currentPath);
-        }
-
-        return (new CacheHelper(cache));
+  public destroyAllCache(): void {
+    for (const cacheName of this.cacheNames) {
+      const cache = this.cacheFactory.get(cacheName);
+      if (cache !== undefined) {
+        cache.destroy();
+      }
     }
 
-    public resetCacheStack(url?: string): void {
-        if (url && this.urlStack.length > 0 && this.urlStack[0] === this.utilitiesService.getPath(url)) {
-            this.urlStack = [this.urlStack[0]];
-        } else {
-            this.urlStack = [];
+    this.cacheNames = [];
+    this.urlStack = [];
+  }
+
+  protected deleteNotReferredCache(): void {
+    const newCacheNameList = [];
+
+    for (const cacheName of this.cacheNames) {
+      if (this.urlStack.indexOf(cacheName) === -1) {
+        const cache = this.cacheFactory.get(cacheName);
+        if (cache !== undefined) {
+          cache.destroy();
         }
+      } else {
+        newCacheNameList.push(cacheName);
+      }
     }
 
-    public destroyAllCache(): void {
-        for (const cacheName of this.cacheNames) {
-            const cache = this.cacheFactory.get(cacheName);
-            if (cache !== undefined) {
-                cache.destroy();
-            }
-        }
+    this.cacheNames = newCacheNameList;
+  }
 
-        this.cacheNames = [];
-        this.urlStack = [];
+  protected locationChangeStart(event: ng.IAngularEvent, nextLocation: string, currentLocation: string, newState?: string, oldState?: string): void {
+    if (event.defaultPrevented === true) {
+      return;
     }
 
-    protected deleteNotReferredCache(): void {
-        const newCacheNameList = [];
+    const path = this.utilitiesService.getPath(nextLocation);
+    const index = this.urlStack.indexOf(path);
 
-        for (const cacheName of this.cacheNames) {
-            if (this.urlStack.indexOf(cacheName) === -1) {
-                const cache = this.cacheFactory.get(cacheName);
-                if (cache !== undefined) {
-                    cache.destroy();
-                }
-            } else {
-                newCacheNameList.push(cacheName);
-            }
-        }
-
-        this.cacheNames = newCacheNameList;
+    if (this.urlStack.length > 0 && this.urlStack[this.urlStack.length - 1] === path) {
+      return;
     }
 
-    protected locationChangeStart(event: ng.IAngularEvent, nextLocation: string, currentLocation: string, newState?: string, oldState?: string): void {
-        if (event.defaultPrevented === true) {
-            return;
-        }
-
-        const path = this.utilitiesService.getPath(nextLocation);
-        const index = this.urlStack.indexOf(path);
-
-        if (this.urlStack.length > 0 && this.urlStack[this.urlStack.length - 1] === path) {
-            return;
-        }
-
-        // remove urlStack references from index to urlStack.length
-        if (index !== -1) {
-            this.urlStack = this.urlStack.splice(0, index);
-        }
-
-        this.urlStack.push(path);
-        this.clearDefer = this.utilitiesService.defer(() => {
-            this.deleteNotReferredCache();
-        }, 100, this);
+    // remove urlStack references from index to urlStack.length
+    if (index !== -1) {
+      this.urlStack = this.urlStack.splice(0, index);
     }
+
+    this.urlStack.push(path);
+    this.clearDefer = this.utilitiesService.defer(() => {
+      this.deleteNotReferredCache();
+    }, 100, this);
+  }
 }

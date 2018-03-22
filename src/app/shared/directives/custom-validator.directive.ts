@@ -1,4 +1,4 @@
-import { Logger } from "../shared.module";
+import { Logger } from '../shared.module';
 
 /**
  * Call $setValidity on the ngModel based on
@@ -10,32 +10,32 @@ import { Logger } from "../shared.module";
  */
 export const mcCustomValidatorDirective = () => {
 
-    const setValidity = (scope: ng.IScope, attrs: ng.IAttributes, ngModel: ng.INgModelController) => {
-        const mcCustomValidator = "mcCustomValidator";
-        ngModel.$setValidity("mcCustomValidatorError", scope.$eval(attrs[mcCustomValidator]) === true);
-    };
+  const setValidity = (scope: ng.IScope, attrs: ng.IAttributes, ngModel: ng.INgModelController) => {
+    const mcCustomValidator = 'mcCustomValidator';
+    ngModel.$setValidity('mcCustomValidatorError', scope.$eval(attrs[mcCustomValidator]) === true);
+  };
 
-    const directive: ng.IDirective = {};
+  const directive: ng.IDirective = {};
 
-    directive.priority = 0;
-    directive.restrict = "A";
-    directive.require = "^ngModel";
-    directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, controller?: ng.IController) => {
-        try {
-            const ngModel = controller as ng.INgModelController;
-            const clearWatcher = scope.$watch(() => {
-                setValidity(scope, attrs, ngModel);
-            });
-            setValidity(scope, attrs, ngModel);
+  directive.priority = 0;
+  directive.restrict = 'A';
+  directive.require = '^ngModel';
+  directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, controller?: ng.IController) => {
+    try {
+      const ngModel = controller as ng.INgModelController;
+      const clearWatcher = scope.$watch(() => {
+        setValidity(scope, attrs, ngModel);
+      });
+      setValidity(scope, attrs, ngModel);
 
-            scope.$on("$destroy", (event: ng.IAngularEvent) => {
-                if (clearWatcher) {
-                    clearWatcher();
-                }
-            });
-        } catch (e) {
-            Logger.exception(scope, e);
+      scope.$on('$destroy', (event: ng.IAngularEvent) => {
+        if (clearWatcher) {
+          clearWatcher();
         }
-    };
-    return directive;
+      });
+    } catch (e) {
+      Logger.exception(scope, e);
+    }
+  };
+  return directive;
 };

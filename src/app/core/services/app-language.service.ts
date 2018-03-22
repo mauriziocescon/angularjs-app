@@ -1,5 +1,5 @@
-import { IAppConstantsService } from "./app-constants.service";
-import { ILocalStorageService } from "./local-storage.service";
+import { IAppConstantsService } from './app-constants.service';
+import { ILocalStorageService } from './local-storage.service';
 
 /**
  * Manage the language set by the
@@ -7,92 +7,96 @@ import { ILocalStorageService } from "./local-storage.service";
  * the app gets reloaded
  */
 export interface IAppLanguageService {
-    /**
-     * Setup the service: this method has
-     * to be called as soon as the service
-     * gets created
-     */
-    start(): void;
-    /**
-     * returns the language id selected by the user
-     * or downloaded from the server
-     */
-    getLanguageId(): string;
-    /**
-     * Set the language id selected by the user
-     *
-     * @param languageId
-     */
-    setLanguageId(languageId: string): void;
-    /**
-     * return the entire list of supported languages
-     */
-    getSupportedLanguagesList(): string[];
-    /**
-     * return the default language Id
-     */
-    getDefaultLanguageId(): string;
+  /**
+   * Setup the service: this method has
+   * to be called as soon as the service
+   * gets created
+   */
+  start(): void;
+
+  /**
+   * returns the language id selected by the user
+   * or downloaded from the server
+   */
+  getLanguageId(): string;
+
+  /**
+   * Set the language id selected by the user
+   *
+   * @param languageId
+   */
+  setLanguageId(languageId: string): void;
+
+  /**
+   * return the entire list of supported languages
+   */
+  getSupportedLanguagesList(): string[];
+
+  /**
+   * return the default language Id
+   */
+  getDefaultLanguageId(): string;
 }
 
 export class AppLanguageService implements IAppLanguageService {
-    public static $inject = ["$locale", "tmhDynamicLocale", "$translate", "AppConstantsService", "LocalStorageService"];
+  public static $inject = ['$locale', 'tmhDynamicLocale', '$translate', 'AppConstantsService', 'LocalStorageService'];
 
-    protected selectedLanguageId!: string;
+  protected selectedLanguageId!: string;
 
-    constructor(protected locale: ng.ILocaleService,
-                protected tmhDynamicLocale: ng.dynamicLocale.tmhDynamicLocaleService,
-                protected translate: ng.translate.ITranslateService,
-                protected appConstantsService: IAppConstantsService,
-                protected localStorageService: ILocalStorageService) {
+  constructor(protected locale: ng.ILocaleService,
+              protected tmhDynamicLocale: ng.dynamicLocale.tmhDynamicLocaleService,
+              protected translate: ng.translate.ITranslateService,
+              protected appConstantsService: IAppConstantsService,
+              protected localStorageService: ILocalStorageService) {
+  }
+
+  public start(): void {
+    const localStorageLang = this.localStorageService.getData<string>(this.appConstantsService.LocalStorageKey.LANGUAGE_ID);
+    const browserLang = this.getBrowserLang();
+    const defaultLang = this.getDefaultLanguageId();
+
+    if (localStorageLang && this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(localStorageLang) !== -1) {
+      this.selectedLanguageId = localStorageLang;
+      this.tmhDynamicLocale.set(this.selectedLanguageId);
+    } else {
+      this.selectedLanguageId = this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(browserLang) === -1 ? defaultLang : browserLang;
+      this.tmhDynamicLocale.set(this.selectedLanguageId);
+      this.localStorageService.setData(this.appConstantsService.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
+    }
+  }
+
+  public getLanguageId(): string {
+    return this.selectedLanguageId;
+  }
+
+  public setLanguageId(languageId: string): void {
+    if (languageId !== undefined && languageId !== this.selectedLanguageId && this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(languageId) !== -1) {
+      this.selectedLanguageId = languageId;
+      this.localStorageService.setData(this.appConstantsService.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
+      this.translate.use(this.selectedLanguageId);
+      location.reload(true);
+    }
+  }
+
+  public getSupportedLanguagesList(): string[] {
+    return this.appConstantsService.Languages.SUPPORTED_LANG;
+  }
+
+  public getDefaultLanguageId(): string {
+    return this.appConstantsService.Languages.DEFAULT_LANGUAGE;
+  }
+
+  protected getBrowserLang(): string {
+    let lang: string = navigator.language;
+
+    if (lang.length > 0) {
+      lang = lang.toLowerCase();
     }
 
-    public start(): void {
-        const localStorageLang = this.localStorageService.getData<string>(this.appConstantsService.LocalStorageKey.LANGUAGE_ID);
-        const browserLang = this.getBrowserLang();
-        const defaultLang = this.getDefaultLanguageId();
-
-        if (localStorageLang && this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(localStorageLang) !== -1) {
-            this.selectedLanguageId = localStorageLang;
-            this.tmhDynamicLocale.set(this.selectedLanguageId);
-        } else {
-            this.selectedLanguageId = this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(browserLang) === -1 ? defaultLang : browserLang;
-            this.tmhDynamicLocale.set(this.selectedLanguageId);
-            this.localStorageService.setData(this.appConstantsService.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
-        }
+    if (lang.length > 2) {
+      lang = lang.substring(0, 2);
     }
 
-    public getLanguageId(): string {
-        return this.selectedLanguageId;
-    }
-
-    public setLanguageId(languageId: string): void {
-        if (languageId !== undefined && languageId !== this.selectedLanguageId && this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(languageId) !== -1) {
-            this.selectedLanguageId = languageId;
-            this.localStorageService.setData(this.appConstantsService.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
-            this.translate.use(this.selectedLanguageId);
-            location.reload(true);
-        }
-    }
-
-    public getSupportedLanguagesList(): string[] {
-        return this.appConstantsService.Languages.SUPPORTED_LANG;
-    }
-
-    public getDefaultLanguageId(): string {
-        return this.appConstantsService.Languages.DEFAULT_LANGUAGE;
-    }
-
-    protected getBrowserLang(): string {
-        let lang: string = navigator.language;
-
-        if (lang.length > 0) {
-            lang = lang.toLowerCase();
-        }
-
-        if (lang.length > 2) {
-            lang = lang.substring(0, 2);
-        }
-
-        return lang;
-    }
+    return lang;
+  }
 }

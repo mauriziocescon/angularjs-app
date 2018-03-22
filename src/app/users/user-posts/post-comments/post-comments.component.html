@@ -1,22 +1,22 @@
 <div class="container-fluid comments">
 
-    <div class="row" ng-show="$ctrl.showData">
-        <div class="col-xs-12 comment" ng-repeat="comment in ::$ctrl.dataSource track by comment.id">
-            <div class="row">
-                <div class="col-xs-12">
-                    <span class="comment-title">{{ ::$ctrl.getCommentTitle(comment) }}</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <span class="comment-body">{{ ::comment.body }}</span>
-                </div>
-            </div>
+  <div class="row" ng-show="$ctrl.showData">
+    <div class="col-xs-12 comment" ng-repeat="comment in ::$ctrl.dataSource track by comment.id">
+      <div class="row">
+        <div class="col-xs-12">
+          <span class="comment-title">{{ ::$ctrl.getCommentTitle(comment) }}</span>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <span class="comment-body">{{ ::comment.body }}</span>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="full-width-message" ng-show="$ctrl.isLoadingData">{{ "POST_COMMENTS.LOADING" | translate }}</div>
-    <div class="full-width-message" ng-show="$ctrl.hasNoData">{{ "POST_COMMENTS.NO_RESULT" | translate }}</div>
-    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSource()">{{ "POST_COMMENTS.RETRY" | translate }}</div>
-    <div class="go-up" mc-scroll-to-top></div>
+  <div class="full-width-message" ng-show="$ctrl.isLoadingData">{{ "POST_COMMENTS.LOADING" | translate }}</div>
+  <div class="full-width-message" ng-show="$ctrl.hasNoData">{{ "POST_COMMENTS.NO_RESULT" | translate }}</div>
+  <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSource()">{{ "POST_COMMENTS.RETRY" | translate }}</div>
+  <div class="go-up" mc-scroll-to-top></div>
 </div>

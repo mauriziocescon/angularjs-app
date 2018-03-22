@@ -1,3 +1,3 @@
 // declaration.d.ts
 
-declare module "*";
+declare module '*';

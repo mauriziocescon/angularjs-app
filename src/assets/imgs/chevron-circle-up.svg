@@ -1,14 +1,15 @@
-
-<svg width="129px" height="129px" viewBox="-58 -159 129 129" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="ico_up" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-54.000000, -155.000000)">
-        <g id="Livello_3">
-            <circle id="XMLID_2_" fill="#987c3b" cx="60.097561" cy="60.097561" r="59.7560976"></circle>
-            <g id="Livello_4" transform="translate(24.878049, 35.121951)" fill="#FFFFFF">
-                <polygon id="XMLID_6_" points="0 39.5121951 69.2682927 39.5121951 35.1219512 0.243902439"></polygon>
-            </g>
-        </g>
+<svg width="129px" height="129px" viewBox="-58 -159 129 129" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+  <desc>Created with Sketch.</desc>
+  <defs></defs>
+  <g id="ico_up" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
+     transform="translate(-54.000000, -155.000000)">
+    <g id="Livello_3">
+      <circle id="XMLID_2_" fill="#987c3b" cx="60.097561" cy="60.097561" r="59.7560976"></circle>
+      <g id="Livello_4" transform="translate(24.878049, 35.121951)" fill="#FFFFFF">
+        <polygon id="XMLID_6_" points="0 39.5121951 69.2682927 39.5121951 35.1219512 0.243902439"></polygon>
+      </g>
     </g>
+  </g>
 </svg>

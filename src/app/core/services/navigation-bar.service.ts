@@ -1,22 +1,23 @@
 export interface INavigationBarService {
-    setTitle(title: string): void;
-    getTitle(): string;
+  setTitle(title: string): void;
+
+  getTitle(): string;
 }
 
 export class NavigationBarService implements INavigationBarService {
-    public static $inject = [];
+  public static $inject = [];
 
-    protected title: string;
+  protected title: string;
 
-    constructor() {
-        this.title = "";
-    }
+  constructor() {
+    this.title = '';
+  }
 
-    public setTitle(title: string): void {
-        this.title = title;
-    }
+  public setTitle(title: string): void {
+    this.title = title;
+  }
 
-    public getTitle(): string {
-        return this.title;
-    }
+  public getTitle(): string {
+    return this.title;
+  }
 }

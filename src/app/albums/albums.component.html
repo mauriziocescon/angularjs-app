@@ -1,33 +1,33 @@
 <div class="container-fluid albums">
 
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="input-group">
-                <input type="search" class="form-control" ng-change="$ctrl.textFilterDidChange()" ng-model="$ctrl.textFilter" placeholder="{{ 'ALBUMS.INPUT_TEXT_PLACEHOLDER' | translate }}">
-                <span class="input-group-addon addon"  ng-click="$ctrl.resetTextFilter()">
-                    <span class="fa fa-search" ng-show="!$ctrl.textFilter"></span>
-                    <span class="fa fa-remove" ng-show="$ctrl.textFilter"></span>
-                </span>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <input type="search" class="form-control" ng-change="$ctrl.textFilterDidChange()" ng-model="$ctrl.textFilter" placeholder="{{ 'ALBUMS.INPUT_TEXT_PLACEHOLDER' | translate }}">
+        <span class="input-group-addon addon" ng-click="$ctrl.resetTextFilter()">
+          <span class="fa fa-search" ng-show="!$ctrl.textFilter"></span>
+          <span class="fa fa-remove" ng-show="$ctrl.textFilter"></span>
+        </span>
+      </div>
     </div>
+  </div>
 
-    <div class="clearfix" infinite-scroll="$ctrl.loadDataSourceNextPage()" infinite-scroll-disabled="$ctrl.isInfiniteScrollDisabled" infinite-scroll-distance="1">
-        <div class="row album" ng-click="$ctrl.goToPhotos(album)" ng-repeat="album in $ctrl.dataSource track by album.id">
-            <div class="col-xs-11">
-                <div class="album-title"> {{ ::$ctrl.getAlbumDesc(album) }}</div>
-            </div>
-            <div class="col-xs-1">
-                <span class="fa fa-3x fa-angle-right arrow"></span>
-            </div>
-        </div>
+  <div class="clearfix" infinite-scroll="$ctrl.loadDataSourceNextPage()" infinite-scroll-disabled="$ctrl.isInfiniteScrollDisabled" infinite-scroll-distance="1">
+    <div class="row album" ng-click="$ctrl.goToPhotos(album)" ng-repeat="album in $ctrl.dataSource track by album.id">
+      <div class="col-xs-11">
+        <div class="album-title"> {{ ::$ctrl.getAlbumDesc(album) }}</div>
+      </div>
+      <div class="col-xs-1">
+        <span class="fa fa-3x fa-angle-right arrow"></span>
+      </div>
     </div>
+  </div>
 
-    <div class="clearfix"></div>
+  <div class="clearfix"></div>
 
-    <div class="full-width-message" ng-show="$ctrl.isLoadingData">{{ "ALBUMS.LOADING" | translate }}</div>
-    <div class="full-width-message" ng-show="$ctrl.hasNoData">{{ "ALBUMS.NO_RESULT" | translate }}</div>
-    <div class="full-width-message" ng-show="$ctrl.isLoadCompleted">{{ "ALBUMS.LOAD_COMPLETED" | translate }}</div>
-    <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSourceFirstPage()">{{ "ALBUMS.RETRY" | translate }}</div>
-    <div class="go-up" mc-scroll-to-top></div>
+  <div class="full-width-message" ng-show="$ctrl.isLoadingData">{{ "ALBUMS.LOADING" | translate }}</div>
+  <div class="full-width-message" ng-show="$ctrl.hasNoData">{{ "ALBUMS.NO_RESULT" | translate }}</div>
+  <div class="full-width-message" ng-show="$ctrl.isLoadCompleted">{{ "ALBUMS.LOAD_COMPLETED" | translate }}</div>
+  <div class="full-width-message" ng-show="$ctrl.shouldRetry" ng-click="$ctrl.loadDataSourceFirstPage()">{{ "ALBUMS.RETRY" | translate }}</div>
+  <div class="go-up" mc-scroll-to-top></div>
 </div>
