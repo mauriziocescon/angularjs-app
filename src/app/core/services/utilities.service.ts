@@ -1,6 +1,7 @@
 import * as angular from 'angular';
 
 import { IAngularStats } from 'angular-stats';
+import * as parseLinkHeader from 'parse-link-header';
 
 import { TypeDetect } from '../../shared/shared.module';
 
@@ -307,26 +308,9 @@ export class UtilitiesService implements IUtilitiesService {
 
   public parseLinkHeaders(headers: ng.IHttpHeadersGetter): any {
     if (headers && headers('link') && headers('link').length === 0) {
-      throw new Error('input must not be of zero length');
+      throw new Error('parseLinkHeaders: link must be defined');
     }
 
-    // Split parts by comma
-    const parts = headers('link').split(',');
-    const links: { [key: string]: string } = {};
-
-    if (parts.length > 1) {
-      // Parse each part into a named link
-      for (const part of parts) {
-        const section = part.split(';');
-        if (section.length !== 2) {
-          throw new Error('section could not be split on \';\'');
-        }
-        const url = section[0].replace(/<(.*)>/, '$1').trim();
-        const name = section[1].replace(/rel="(.*)"/, '$1').trim();
-        links[name] = url;
-      }
-    }
-
-    return links;
+    return parseLinkHeader(headers('link'));
   }
 }

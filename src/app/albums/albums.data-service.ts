@@ -55,19 +55,9 @@ export class AlbumsService implements IAlbumsService {
 
     return this.getAlbumsRequest.promise
       .then((response: ng.IHttpResponse<Album[]>) => {
-        let info = this.utilitiesService.parseLinkHeaders(response.headers);
+        const info = this.utilitiesService.parseLinkHeaders(response.headers);
 
-        if (!info.last) {
-          // default value: when there are no
-          // pages, info is empty
-          info = {
-            first: environment.apiUrl + 'albums?_page=1',
-            last: environment.apiUrl + 'albums?_page=1',
-            next: environment.apiUrl + 'albums?_page=1',
-          };
-        }
-
-        const lastPage = parseInt(this.utilitiesService.parseQueryString(info.last)._page, 10);
+        const lastPage = parseInt(info ? info.last._page : '1', 10);
         return new ResponseWs(response.status === 200, response.statusText, response.data, page === lastPage, response.status === -1);
 
       }, (response: ng.IHttpResponse<Album[]>) => {

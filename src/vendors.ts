@@ -19,6 +19,7 @@ import 'angular-ui-router';
 import 'angular-ui-scroll';
 import 'babel-polyfill';
 import 'ng-infinite-scroll';
+import 'parse-link-header';
 import 'stacktrace-js';
 
 // Take a look at http://thesassway.com/beginner/how-to-structure-a-sass-project
