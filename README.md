@@ -70,3 +70,7 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 ## Working with editors/IDEs supporting “safe write”
 
 1. Take a look at the following [page](https://webpack.github.io/docs/webpack-dev-server.html#working-with-editors-ides-supporting-safe-write) if you use IntelliJ or VIM 
+ 
+first line
+second line
+third line
