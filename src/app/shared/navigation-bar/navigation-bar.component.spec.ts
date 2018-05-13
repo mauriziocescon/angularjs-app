@@ -8,7 +8,6 @@ import {
 } from '../../core/services/services.module';
 import { NavigationBarController } from './navigation-bar.component';
 
-// Addition of angular-mocks and jasmine references is done on the gulpfile
 describe('NavigationBarController', () => {
   let httpBackend: ng.IHttpBackendService;
   let componentController: ng.IComponentControllerService;

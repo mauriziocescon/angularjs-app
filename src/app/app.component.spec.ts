@@ -6,7 +6,6 @@ import { IAppConstantsService, IUtilitiesService } from './app.module';
 
 import { AppController } from './app.component';
 
-// Addition of angular-mocks and jasmine references is done on the gulpfile
 describe('AppController', () => {
   let httpBackend: ng.IHttpBackendService;
   let componentController: ng.IComponentControllerService;

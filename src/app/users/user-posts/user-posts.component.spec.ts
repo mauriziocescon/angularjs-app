@@ -7,7 +7,6 @@ import { IAppConstantsService, IUtilitiesService } from '../../app.module';
 import { UserPostsController } from './user-posts.component';
 import { Post } from './user-posts.model';
 
-// Addition of angular-mocks and jasmine references is done on the gulpfile
 describe('UserPostsController', () => {
   let httpBackend: ng.IHttpBackendService;
   let componentController: ng.IComponentControllerService;

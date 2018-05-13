@@ -11,7 +11,6 @@ import { Photo } from './photos.model';
 
 import { environment } from '../../../environments/environment';
 
-// Addition of angular-mocks and jasmine references is done on the gulpfile
 describe('PhotosController', () => {
   let httpBackend: ng.IHttpBackendService;
   let componentController: ng.IComponentControllerService;
