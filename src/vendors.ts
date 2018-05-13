@@ -1,12 +1,8 @@
-import 'jquery';
-
 import 'angular';
 import 'angular-animate';
 import 'angular-mocks';
 import 'angular-sanitize';
 import 'angular-touch';
-
-import 'bootstrap-sass';
 
 import 'angular-dynamic-locale';
 import 'angular-loading-bar';

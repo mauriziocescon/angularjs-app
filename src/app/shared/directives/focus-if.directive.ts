@@ -1,4 +1,3 @@
-import * as $ from 'jquery';
 import { Logger } from '../shared.module';
 
 /**
@@ -12,7 +11,7 @@ export const mcFocusIfDirective = ($timeout: ng.ITimeoutService) => {
 
   directive.priority = 0;
   directive.restrict = 'A';
-  directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
+  directive.link = (scope: ng.IScope, element: JQLite, attrs: ng.IAttributes) => {
     try {
       const mcFocusIf = 'mcFocusIf';
 
@@ -21,14 +20,14 @@ export const mcFocusIfDirective = ($timeout: ng.ITimeoutService) => {
       }, (newValue, oldValue) => {
         if (newValue !== oldValue && newValue === true) {
           $timeout(() => {
-            $(element).focus();
+            element[0].focus();
           }, 200);
         }
       });
 
       if (scope.$eval(attrs[mcFocusIf]) === true) {
         $timeout(() => {
-          $(element).focus();
+          element[0].focus();
         }, 200);
       }
 

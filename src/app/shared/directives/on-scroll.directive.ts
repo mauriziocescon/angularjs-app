@@ -12,7 +12,7 @@ export const mcOnScrollDirective = (UtilitiesService: IUtilitiesService) => {
 
   directive.priority = 0;
   directive.restrict = 'A';
-  directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
+  directive.link = (scope: ng.IScope, element: JQLite, attrs: ng.IAttributes) => {
     try {
       const raw = element[0];
 

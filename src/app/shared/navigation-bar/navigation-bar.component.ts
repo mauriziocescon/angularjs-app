@@ -13,6 +13,8 @@ export class NavigationBarController {
   public static $inject = ['$location', '$translate', 'AppConstantsService', 'AppLanguageService', 'NavigationBarService', 'UtilitiesService'];
   public name: string;
   public selectedLanguageId!: string;
+  public isNavCollapsed!: boolean;
+  public languageDropdown!: boolean;
 
   protected languages!: string[];
 
@@ -44,6 +46,8 @@ export class NavigationBarController {
   public $onInit(): void {
     this.selectedLanguageId = this.appLanguageService.getLanguageId();
     this.languages = this.appLanguageService.getSupportedLanguagesList();
+    this.isNavCollapsed = true;
+    this.languageDropdown = false;
   }
 
   public $onDestroy(): void {

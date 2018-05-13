@@ -1,4 +1,3 @@
-import * as $ from 'jquery';
 import { Logger } from '../shared.module';
 
 /**
@@ -12,15 +11,15 @@ export const mcOnMouseWheelDirective = () => {
 
   directive.priority = 0;
   directive.restrict = 'A';
-  directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
+  directive.link = (scope: ng.IScope, element: JQLite, attrs: ng.IAttributes) => {
     try {
       const mcOnMouseWheel = 'mcOnMouseWheel';
       const mousewheelHandler = scope.$eval(attrs[mcOnMouseWheel]);
 
-      $(element).on('mousewheel DOMMouseScroll', mousewheelHandler());
+      element.on('mousewheel DOMMouseScroll', mousewheelHandler());
 
       scope.$on('$destroy', (event: ng.IAngularEvent) => {
-        $(element).off('mousewheel DOMMouseScroll');
+        element.off('mousewheel DOMMouseScroll');
       });
     } catch (e) {
       Logger.exception(scope, e);

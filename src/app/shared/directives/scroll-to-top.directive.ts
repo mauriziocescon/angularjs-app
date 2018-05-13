@@ -1,5 +1,3 @@
-import * as $ from 'jquery';
-
 import { IScrollToService } from '../../app.module';
 import { Logger } from '../shared.module';
 
@@ -13,16 +11,16 @@ import { Logger } from '../shared.module';
  */
 export const mcScrollToTopDirective = ($window: ng.IWindowService, ScrollToService: IScrollToService) => {
 
-  const onScroll = (element: JQuery, attrs: ng.IAttributes) => {
+  const onScroll = (element: JQLite, attrs: ng.IAttributes) => {
 
     const elementVisibility = attrs['element-visibility'];
     const shouldBeVisible = ScrollToService.getScrollPosition() > 100;
 
     if (shouldBeVisible === true && elementVisibility !== true) {
-      $(element).show();
+      element.css('visibility', 'visible');
       attrs['element-visibility'] = true;
     } else if (shouldBeVisible === false && elementVisibility !== false) {
-      $(element).hide();
+      element.css('visibility', 'hidden');
       attrs['element-visibility'] = false;
     }
   };
@@ -31,9 +29,9 @@ export const mcScrollToTopDirective = ($window: ng.IWindowService, ScrollToServi
 
   directive.priority = 0;
   directive.restrict = 'A';
-  directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
+  directive.link = (scope: ng.IScope, element: JQLite, attrs: ng.IAttributes) => {
     try {
-      $(element).on('click', () => {
+      element.on('click', () => {
         ScrollToService.scrollTo(0);
       });
 
@@ -45,7 +43,7 @@ export const mcScrollToTopDirective = ($window: ng.IWindowService, ScrollToServi
       onScroll(element, attrs);
 
       scope.$on('$destroy', (event: ng.IAngularEvent) => {
-        $(element).off('click');
+        element.off('click');
         $window.removeEventListener('scroll', scrollFunc, false);
       });
     } catch (e) {

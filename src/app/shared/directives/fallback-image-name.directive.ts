@@ -1,4 +1,3 @@
-import * as $ from 'jquery';
 import { Logger } from '../shared.module';
 
 /**
@@ -12,17 +11,17 @@ export const mcFallbackImageUrlDirective = () => {
 
   directive.priority = 0;
   directive.restrict = 'A';
-  directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
+  directive.link = (scope: ng.IScope, element: JQLite, attrs: ng.IAttributes) => {
     try {
       const mcFallbackImageUrl = 'mcFallbackImageUrl';
       const fallbackImageUrl = scope.$eval(attrs[mcFallbackImageUrl]);
 
-      $(element).on('error', () => {
-        $(element).attr('src', fallbackImageUrl);
+      element.on('error', () => {
+        element.attr('src', fallbackImageUrl);
       });
 
       scope.$on('$destroy', (event: ng.IAngularEvent) => {
-        $(element).off('error');
+        element.off('error');
       });
     } catch (e) {
       Logger.exception(scope, e);

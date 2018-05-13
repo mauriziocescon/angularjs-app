@@ -120,15 +120,6 @@ module.exports = (env) => {
             {loader: 'source-map-loader'},
           ],
         },
-
-        // add jQuery to the global object
-        {
-          test: require.resolve('jquery'),
-          use: [
-            {loader: 'expose-loader', options: 'jQuery'},
-            {loader: 'expose-loader', options: '$'},
-          ],
-        },
       ],
     },
   };

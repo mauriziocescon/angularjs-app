@@ -1,4 +1,5 @@
-import * as $ from 'jquery';
+import * as angular from 'angular';
+
 import { Logger } from '../shared.module';
 
 /**
@@ -12,46 +13,45 @@ import { Logger } from '../shared.module';
  * If the toggle is fired by the user click, the event
  * is passed to on / off functions.
  *
- * example: <div mc-toggle="function()==true" on="fuction($event)" off="function($event)" toggle-on-selector="check" keep-watching="true"></div>
+ * example: <div mc-toggle="function()===true" on="fuction($event)" off="function($event)" toggle-on-selector=".check" keep-watching="true"></div>
  */
-export const mcToggleDirective = () => {
+export const mcToggleDirective = ($document: ng.IDocumentService) => {
 
   const getState = (scope: ng.IScope, attrs: ng.IAttributes) => {
     const mcToggle = 'mcToggle';
     return scope.$eval(attrs[mcToggle]) === true;
   };
 
-  const execute = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, state: boolean, eventObject?: JQueryEventObject) => {
+  const execute = (scope: ng.IScope, element: JQLite, attrs: ng.IAttributes, state: boolean, eventObject?: JQueryEventObject) => {
     setClass(scope, element, attrs, state);
     callStateFunction(scope, element, attrs, state, eventObject);
   };
 
-  const setClass = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, state: boolean) => {
+  const setClass = (scope: ng.IScope, element: JQLite, attrs: ng.IAttributes, state: boolean) => {
     const toggleOnSelector = 'toggleOnSelector';
 
     if (state === true) {
-      $(element).removeClass('off');
-      $(element).addClass('on');
+      element.removeClass('off');
+      element.addClass('on');
 
       if (attrs[toggleOnSelector]) {
-        const subElement = element.find(attrs[toggleOnSelector]);
-        const selector = [attrs[toggleOnSelector], '.on'].join(',');
-
         // remove on and add off everywhere
-        const elements = $(selector).not(subElement);
-        elements.removeClass('on');
-        elements.addClass('off');
+        const selector = [attrs[toggleOnSelector], '.on'].join('');
+        const subElements = angular.element($document[0].querySelectorAll(selector));
+        subElements.removeClass('on');
+        subElements.addClass('off');
 
         // add on for childrens of element
+        const subElement = angular.element(element[0].querySelectorAll(attrs[toggleOnSelector]));
         subElement.removeClass('off');
         subElement.addClass('on');
       }
     } else {
-      $(element).removeClass('on');
-      $(element).addClass('off');
+      element.removeClass('on');
+      element.addClass('off');
 
       if (attrs[toggleOnSelector]) {
-        const subElement = element.find(attrs[toggleOnSelector]);
+        const subElement = angular.element(element[0].querySelector(attrs[toggleOnSelector]));
 
         // remove on and add off
         subElement.removeClass('on');
@@ -60,7 +60,7 @@ export const mcToggleDirective = () => {
     }
   };
 
-  const callStateFunction = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes, state: boolean, eventObject?: JQueryEventObject) => {
+  const callStateFunction = (scope: ng.IScope, element: JQLite, attrs: ng.IAttributes, state: boolean, eventObject?: JQueryEventObject) => {
     const on = 'on';
     const off = 'off';
 
@@ -83,7 +83,7 @@ export const mcToggleDirective = () => {
 
   directive.priority = 0;
   directive.restrict = 'A';
-  directive.link = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) => {
+  directive.link = (scope: ng.IScope, element: JQLite, attrs: ng.IAttributes) => {
     try {
       const keepWatching = 'keepWatching';
       const keepWatchingAttrs = scope.$eval(attrs[keepWatching]) === true;
@@ -100,7 +100,7 @@ export const mcToggleDirective = () => {
         });
       }
 
-      $(element).on('click', (eventObject: JQueryEventObject) => {
+      element.on('click', (eventObject: JQueryEventObject) => {
         execute(scope, element, attrs, getState(scope, attrs) !== true, eventObject);
       });
 
@@ -109,7 +109,7 @@ export const mcToggleDirective = () => {
           clearWatcher();
         }
 
-        $(element).off('click');
+        element.off('click');
       });
     } catch (e) {
       Logger.exception(scope, e);
@@ -117,3 +117,5 @@ export const mcToggleDirective = () => {
   };
   return directive;
 };
+
+mcToggleDirective.$inject = ['$document'];

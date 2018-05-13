@@ -15,8 +15,7 @@
 
   <div class="row" ng-show="$ctrl.showData">
     <div class="col-xs-12 post" ng-repeat="post in $ctrl.dataSource track by post.id">
-      <div class="row" mc-toggle="$ctrl.isOpen(post)" on="$ctrl.open(post)" off="$ctrl.close(post)"
-           toggle-on-selector=".arrow">
+      <div class="row" mc-toggle="$ctrl.isOpen(post)" on="$ctrl.open(post)" off="$ctrl.close(post)" toggle-on-selector=".arrow">
         <div class="col-xs-11">
           <div class="row">
             <div class="col-xs-12">
