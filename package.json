@@ -29,19 +29,18 @@
   "keywords": [
     "angularjs",
     "bootstrap",
-    "browser-sync",
-    "browserify",
     "cescon",
     "es2017",
     "frisby",
-    "gulp",
+    "json-server",
     "karma",
     "maurizio",
     "protractor",
     "sass",
+    "travis",
     "typescript",
     "vendor",
-    "watchify"
+    "webpack"
   ],
   "licenses": [
     {
