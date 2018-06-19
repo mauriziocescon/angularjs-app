@@ -19,6 +19,9 @@ app.use(middlewares);
 app.use(delayMiddleware.delay);
 app.use(errosMiddleware.error);
 
+// To handle POST, PUT and PATCH you need to use a body-parser
+app.use(jsonServer.bodyParser);
+
 // Mount the router based on db.json
 app.use('/api', router);
 
