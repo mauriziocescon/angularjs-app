@@ -11,7 +11,7 @@ const delayMiddleware = require('./middlewares/delay');
 const errosMiddleware = require('./middlewares/errors');
 
 // set the port of our application
-// process.env.PORT lets the port be set by Heroku
+// process.env.PORT lets the port to be set by Heroku
 const port = process.env.PORT || 5000;
 
 // Middlewares
@@ -24,7 +24,7 @@ app.use('/api', router);
 
 // Fallback on frontend routes
 app.get('*', (req, res) => {
-  // load the single view file (frontend will handle the page changes on the front-end)
+  // load index.html (frontend will handle page changes)
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
