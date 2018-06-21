@@ -4,16 +4,18 @@
 const frisby = require('frisby');
 const Joi = frisby.Joi;
 
+const basicUrl = require('./constants').basicUrl;
+
 it('Get users: status', (done) => {
   frisby
-    .get('http://localhost:5000/api/users?id=10')
+    .get(`${basicUrl}users?id=10`)
     .expect('status', 200)
     .done(done);
 });
 
 it('Get users: jsonTypes', (done) => {
   frisby
-    .get('http://localhost:5000/api/users?id=10')
+    .get(`${basicUrl}users?id=10`)
     .expect('jsonTypes', '*', {
       id: Joi.number(),
       name: Joi.string(),
@@ -42,7 +44,7 @@ it('Get users: jsonTypes', (done) => {
 
 it('Get users: json', (done) => {
   frisby
-    .get('http://localhost:5000/api/users?id=10')
+    .get(`${basicUrl}users?id=10`)
     .then((response) => {
       response.json.forEach((user) => {
         expect(Object.keys(user).length).toBe(8); // 8 fields for each user

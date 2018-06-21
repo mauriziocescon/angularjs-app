@@ -15,6 +15,8 @@ export class Api {
 export class Application {
   public APP_NAME = 'demo';
   public SHOW_ANALYSIS = true;
+  public SHOW_JSON_SERVER_API = !environment.production;
+  public JSON_SERVER_API_URL = environment.apiUrl;
 }
 
 export class Languages {

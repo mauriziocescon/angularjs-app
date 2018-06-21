@@ -4,16 +4,18 @@
 const frisby = require('frisby');
 const Joi = frisby.Joi;
 
+const basicUrl = require('./constants').basicUrl;
+
 it('Get post-comments: status', (done) => {
   frisby
-    .get('http://localhost:5000/api/comments?postId=1')
+    .get(`${basicUrl}comments?postId=1`)
     .expect('status', 200)
     .done(done);
 });
 
 it('Get post-comments: jsonTypes', (done) => {
   frisby
-    .get('http://localhost:5000/api/comments?postId=1')
+    .get(`${basicUrl}comments?postId=1`)
     .expect('jsonTypes', '*', {
       postId: Joi.number(),
       id: Joi.number(),
@@ -26,7 +28,7 @@ it('Get post-comments: jsonTypes', (done) => {
 
 it('Get post-comments: json', (done) => {
   frisby
-    .get('http://localhost:5000/api/comments?postId=1')
+    .get(`${basicUrl}comments?postId=1`)
     .then((response) => {
       response.json.forEach((comment) => {
         expect(Object.keys(comment).length).toBe(5); // 5 fields for each comment

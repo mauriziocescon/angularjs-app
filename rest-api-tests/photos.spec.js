@@ -4,16 +4,18 @@
 const frisby = require('frisby');
 const Joi = frisby.Joi;
 
+const basicUrl = require('./constants').basicUrl;
+
 it('Get  photos: status', (done) => {
   frisby
-    .get('http://localhost:5000/api/photos?id=10')
+    .get(`${basicUrl}photos?id=10`)
     .expect('status', 200)
     .done(done);
 });
 
 it('Get photos: jsonTypes', (done) => {
   frisby
-    .get('http://localhost:5000/api/photos?id=10')
+    .get(`${basicUrl}photos?id=10`)
     .expect('jsonTypes', '*', {
       albumId: Joi.number(),
       id: Joi.number(),
@@ -26,7 +28,7 @@ it('Get photos: jsonTypes', (done) => {
 
 it('Get photos: json', (done) => {
   frisby
-    .get('http://localhost:5000/api/photos?id=10')
+    .get(`${basicUrl}photos?id=10`)
     .then((response) => {
       response.json.forEach((photo) => {
         expect(Object.keys(photo).length).toBe(5); // 5 fields for each photo

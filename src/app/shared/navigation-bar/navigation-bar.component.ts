@@ -10,7 +10,7 @@ import {
 } from '../../core/services/services.module';
 
 export class NavigationBarController {
-  public static $inject = ['$location', '$translate', 'AppConstantsService', 'AppLanguageService', 'NavigationBarService', 'UtilitiesService'];
+  public static $inject = ['$location', '$translate', '$window', 'AppConstantsService', 'AppLanguageService', 'NavigationBarService', 'UtilitiesService'];
   public name: string;
   public selectedLanguageId!: string;
   public isNavCollapsed!: boolean;
@@ -20,6 +20,7 @@ export class NavigationBarController {
 
   constructor(protected location: ng.ILocationService,
               protected translate: ng.translate.ITranslateService,
+              protected window: ng.IWindowService,
               protected appConstantsService: IAppConstantsService,
               protected appLanguageService: IAppLanguageService,
               protected navigationBarService: INavigationBarService,
@@ -31,8 +32,8 @@ export class NavigationBarController {
     return this.appConstantsService.Application.SHOW_ANALYSIS === true;
   }
 
-  get canChangeLanguage(): boolean {
-    return true;
+  get canOpenJsonServer(): boolean {
+    return this.appConstantsService.Application.SHOW_JSON_SERVER_API === true;
   }
 
   get analysis(): string {
@@ -67,6 +68,10 @@ export class NavigationBarController {
       this.selectedLanguageId = language;
       this.appLanguageService.setLanguageId(this.selectedLanguageId);
     }
+  }
+
+  public openJsonServer(): void {
+    this.window.open(this.appConstantsService.Application.JSON_SERVER_API_URL);
   }
 }
 
