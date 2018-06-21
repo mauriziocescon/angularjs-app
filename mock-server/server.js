@@ -26,6 +26,7 @@ app.use(jsonServer.rewriter({}));
 // Mount the router based on lowdb.js
 app.use(isProduction ? '/api' : '/', router);
 
+
 // Fallback on frontend routes
 app.get('*', (req, res) => {
   // load index.html (frontend will handle page changes)
