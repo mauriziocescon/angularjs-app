@@ -14,7 +14,7 @@
           <button type="button" class="btn btn-default fa fa-line-chart" ng-if="$ctrl.canShowAnalysis"
                   uib-popover-html="$ctrl.analysis" popover-class="popover-analysis" popover-append-to-body
                   popover-placement="bottom" popover-trigger="click" popover-is-open="$ctrl.isPopoverOpened"
-
+                  ng-click="$ctrl.isPopoverOpened = !$ctrl.isPopoverOpened"></button>
         </form>
         <form class="navbar-form navbar-left hidden-xs">
           <button type="button" class="btn btn-default fa fa-server" ng-if="$ctrl.canOpenJsonServer"
