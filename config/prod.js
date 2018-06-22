@@ -2,6 +2,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const webpackMerge = require('webpack-merge');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
@@ -57,6 +58,13 @@ module.exports = (env) => {
         navigateFallbackWhitelist: [/^(?!\/__).*/],
         // Don't precache sourcemaps (they're large) and build asset manifest:
         staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+      }),
+
+      // bundle analyzer
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'disabled',
+        generateStatsFile: true,
+        logLevel: 'silent',
       }),
     ],
 
