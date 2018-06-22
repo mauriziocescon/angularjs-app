@@ -27,9 +27,9 @@ app.use(jsonServer.rewriter({}));
 app.use(isProduction ? '/api' : '/', router);
 
 // Fallback on frontend routes
-app.get('*', (req, res) => {
+app.get('*', (req, res, next) => {
   // load index.html (frontend will handle page changes)
-  res.sendFile(path.join(__dirname, '../dist/index.html'));
+  isProduction ? res.sendFile(path.join(__dirname, '../dist/index.html')) : next();
 });
 
 // Start listening
