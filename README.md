@@ -49,6 +49,8 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 12. [JSON Server](https://github.com/typicode/json-server) 
 
+13. [Webpack Bundle Analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer) 
+
 ## Unit-tests (karma + jasmine)
 
 1. The unit-tests are written in typescript using Jasmine. You find all the files searching for *__.spec.ts*

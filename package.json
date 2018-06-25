@@ -10,8 +10,8 @@
     "npm": "=5.6.0"
   },
   "scripts": {
-    "postinstall": "node ./mock-server/db/db-creator.js | npm run build",
-    "start": "npm run json-server",
+    "postinstall": "npm run build",
+    "start": "cross-env NODE_ENV=production npm run json-server",
     "json-server": "node ./mock-server/server.js",
     "json-server-watch": "nodemon --ext js --watch ./mock-server ./mock-server/server.js",
     "serve": "webpack-dev-server --d --progress --profile --colors --env.name=dev | npm run json-server-watch",
@@ -95,6 +95,7 @@
     "babel-preset-env": "1.7.0",
     "clean-webpack-plugin": "0.1.19",
     "copy-webpack-plugin": "4.5.1",
+    "cross-env": "5.2.0",
     "css-loader": "0.28.11",
     "expose-loader": "0.7.5",
     "extract-text-webpack-plugin": "4.0.0-beta.0",
