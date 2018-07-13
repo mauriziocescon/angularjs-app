@@ -7,6 +7,7 @@ const middlewares = jsonServer.defaults(isProduction ? {static: 'dist'} : {});
 
 const delayMiddleware = require('./middlewares/delay');
 const errosMiddleware = require('./middlewares/errors');
+const sseMiddleware = require('./middlewares/sse');
 
 // set the port of our application
 // process.env.PORT lets the port to be set by Heroku
@@ -16,6 +17,7 @@ const port = process.env.PORT || 3000;
 app.use(middlewares);
 app.use(delayMiddleware.delay);
 app.use(errosMiddleware.error);
+app.use(sseMiddleware.sse);
 
 // To handle POST, PUT and PATCH you need to use a body-parser
 app.use(jsonServer.bodyParser);
