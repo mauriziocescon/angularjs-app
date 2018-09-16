@@ -30,7 +30,7 @@ module.exports = (env) => {
           use: [
             {loader: 'style-loader'},
             {loader: 'css-loader', options: {minimize: true, modules: false, sourceMap: true}},
-            {loader: 'resolve-url-loader'},
+            {loader: 'resolve-url-loader', options: {absolute: true}},
             {loader: 'sass-loader', options: {sourceMap: true}},
           ],
         },

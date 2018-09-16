@@ -80,7 +80,7 @@ module.exports = (env) => {
             fallback: 'style-loader',
             use: [
               {loader: 'css-loader', options: {minimize: true, modules: false, sourceMap: true}},
-              {loader: 'resolve-url-loader'},
+              {loader: 'resolve-url-loader', options: {absolute: true}},
               {loader: 'sass-loader', options: {sourceMap: true}},
             ],
           }),
