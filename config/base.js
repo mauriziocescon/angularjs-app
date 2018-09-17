@@ -17,7 +17,7 @@ module.exports = (env) => {
     },
 
     resolve: {
-      // Add .ts and .tsx as a resolvable extension.
+      // Add '.ts' and '.tsx' as a resolvable extension.
       extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.scss', '.html', '.json'],
     },
 
