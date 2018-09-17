@@ -17,7 +17,7 @@ module.exports = (env) => {
     },
 
     resolve: {
-      // Add ".ts" and ".tsx" as a resolvable extension.
+      // Add .ts and .tsx as a resolvable extension.
       extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.scss', '.html', '.json'],
     },
 
@@ -93,7 +93,7 @@ module.exports = (env) => {
           ],
         },
 
-        // all files with ".js .ts .tsx" extensions will be handled by ts-loader
+        // all files with '.js' '.ts' '.tsx' extensions will be handled by ts-loader
         {
           test: /\.(js|ts|tsx)?$/,
           exclude: [/node_modules/],
@@ -112,7 +112,7 @@ module.exports = (env) => {
           ],
         },
 
-        // All output ".js" files will have any sourcemaps re-processed by "source-map-loader".
+        // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
         {
           test: /\.js$/,
           enforce: 'pre',
