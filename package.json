@@ -90,6 +90,7 @@
     "@types/parse-link-header": "1.0.0",
     "@types/selenium-webdriver": "3.0.15",
     "@types/stacktrace-js": "0.0.32",
+    "@types/webpack": "4.4.26",
     "awesome-typescript-loader": "5.2.1",
     "babel-core": "6.26.3",
     "babel-preset-env": "1.7.0",
