@@ -2,7 +2,7 @@
 const webpack = require('webpack');
 const fs = require('fs');
 const path = require('path');
-const CleanPlugin = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
@@ -22,7 +22,8 @@ module.exports = (env) => {
     },
 
     optimization: {
-
+      concatenateModules: true,
+      usedExports: true,
       splitChunks: {
         cacheGroups: {
           common: {
@@ -46,11 +47,8 @@ module.exports = (env) => {
       // hot module replacement
       new webpack.HotModuleReplacementPlugin({}),
 
-      // scope hoisting
-      new webpack.optimize.ModuleConcatenationPlugin(),
-
       // clean dist folder
-      new CleanPlugin(),
+      new CleanWebpackPlugin(),
 
       new CopyPlugin([{
         from: 'src/index.html',
