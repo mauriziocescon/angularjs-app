@@ -35,7 +35,7 @@ module.exports = (env) => {
           test: /\.scss$/,
           use: [
             {loader: 'style-loader'},
-            {loader: 'css-loader', options: {minimize: true, modules: false}},
+            {loader: 'css-loader', options: {modules: false}},
             {loader: 'resolve-url-loader', options: {absolute: true}},
             {loader: 'sass-loader', options: {sourceMap: true}},
           ],

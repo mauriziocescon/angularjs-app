@@ -35,7 +35,7 @@ export const mcScrollToTopDirective = ($window: ng.IWindowService, ScrollToServi
         ScrollToService.scrollTo(0);
       });
 
-      const scrollFunc = (ev: UIEvent) => {
+      const scrollFunc = (ev: Event) => {
         onScroll(element, attrs);
       };
 
