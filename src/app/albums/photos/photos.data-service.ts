@@ -28,7 +28,7 @@ export class PhotosService implements IPhotosService {
 
   // requests
   protected getPhotoRequest: RequestWs<Photo[]>;
-  protected getPhotosRequests: Array<RequestWs<Photo>>;
+  protected getPhotosRequests: RequestWs<Photo>[];
   protected getPhotosForAlbumRequests: RequestWs<Photo[]>;
 
   constructor(protected http: ng.IHttpService,
@@ -73,7 +73,7 @@ export class PhotosService implements IPhotosService {
     });
 
     return this.q.all(promises)
-      .then((responses: Array<ng.IHttpResponse<Photo[]>>) => {
+      .then((responses: ng.IHttpResponse<Photo[]>[]) => {
 
         let photos: Photo[] = [];
         responses.forEach((response: ng.IHttpResponse<Photo[]>) => {
