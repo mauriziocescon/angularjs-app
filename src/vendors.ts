@@ -13,7 +13,7 @@ import 'angular-translate-storage-local';
 import 'angular-ui-bootstrap';
 import 'angular-ui-router';
 import 'angular-ui-scroll';
-import 'babel-polyfill';
+import '@babel/polyfill';
 import 'ng-infinite-scroll';
 import 'parse-link-header';
 import 'stacktrace-js';

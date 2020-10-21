@@ -6,7 +6,6 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const {CheckerPlugin} = require('awesome-typescript-loader');
 
 module.exports = (env) => {
   return {
@@ -59,8 +58,6 @@ module.exports = (env) => {
         ],
       }),
 
-      new CheckerPlugin(),
-
       // insert file dynamically
       new HtmlWebpackPlugin({
         template: 'src/index.html',
@@ -90,7 +87,8 @@ module.exports = (env) => {
           test: /\.(js|ts|tsx)?$/,
           exclude: [/node_modules/],
           use: [
-            {loader: 'awesome-typescript-loader', options: {useBabel: true, useCache: true}},
+            {loader: 'babel-loader', options: {cacheDirectory: true, presets: ['@babel/env']}},
+            {loader: 'ts-loader'},
           ],
         },
 
