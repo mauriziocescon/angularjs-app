@@ -37,7 +37,8 @@ export const mcToggleDirective = ($document: ng.IDocumentService) => {
       if (attrs[toggleOnSelector]) {
         // remove on and add off everywhere
         const selector = [attrs[toggleOnSelector], '.on'].join('');
-        const subElements = angular.element($document[0].querySelectorAll(selector));
+        const document = $document[0] as Document;
+        const subElements = angular.element(document.querySelectorAll(selector));
         subElements.removeClass('on');
         subElements.addClass('off');
 

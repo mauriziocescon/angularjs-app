@@ -6,7 +6,6 @@ import {
   IUtilitiesService,
 } from '../../app.module';
 import {
-
   ISharedFilterService,
   Logger,
   ResponseWs,

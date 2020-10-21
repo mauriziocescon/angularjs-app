@@ -209,19 +209,20 @@ export class UtilitiesService implements IUtilitiesService {
   }
 
   public addScript(src: string): void {
-    if (this.document[0].readyState === 'complete' || this.document[0].readyState === 'interactive') {
-      const script: HTMLScriptElement = this.document[0].createElement('script');
+    const document = this.document[0] as Document;
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      const script: HTMLScriptElement = document.createElement('script');
       script.setAttribute('src', src);
       script.setAttribute('type', 'text/javascript');
       script.setAttribute('charset', 'utf-8');
-      const head = this.document[0].getElementById('head');
+      const head = document.getElementById('head');
       if (head) {
         head.appendChild(script);
       }
     }
     else {
       const line = '<script type=\'text/javascript\' charset=\'utf-8\' src=\'' + src + '\'></script>';
-      this.document[0].writeln(line);
+      document.writeln(line);
     }
   }
 

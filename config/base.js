@@ -50,17 +50,14 @@ module.exports = (env) => {
       // clean dist folder
       new CleanWebpackPlugin(),
 
-      new CopyPlugin([{
-        from: 'src/index.html',
-      }, {
-        from: 'src/manifest.json',
-      }, {
-        from: 'src/assets/i18n', to: 'assets/i18n',
-      }, {
-        from: 'src/assets/imgs', to: 'assets/imgs',
-      }, {
-        from: {glob: 'node_modules/angular-i18n/**_+(de|en|it).js'}, to: 'locales', flatten: true,
-      }]),
+      new CopyPlugin({
+        patterns: [
+          {from: 'src/index.html'},
+          {from: 'src/assets/i18n', to: 'assets/i18n'},
+          {from: 'src/assets/imgs', to: 'assets/imgs'},
+          {from: 'node_modules/angular-i18n/**_+(de|en|it).js', to: 'locales', flatten: true},
+        ],
+      }),
 
       new CheckerPlugin(),
 
@@ -70,7 +67,9 @@ module.exports = (env) => {
         inject: 'head',
       }),
 
-      new StyleLintPlugin(),
+      new StyleLintPlugin({
+        files: 'src/**/*.s?(a|c)ss',
+      }),
     ],
 
     module: {
@@ -82,7 +81,7 @@ module.exports = (env) => {
           test: /\.html?$/,
           exclude: /index.html$/,
           use: [
-            {loader: 'html-loader', options: {exportAsEs6Default: true, minimize: true}},
+            {loader: 'html-loader', options: {esModule: true, minimize: true}},
           ],
         },
 
