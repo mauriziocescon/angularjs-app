@@ -14,7 +14,7 @@
     "start": "cross-env NODE_ENV=production npm run json-server",
     "json-server": "node ./mock-server/server.js",
     "json-server-watch": "nodemon --ext js --watch ./mock-server ./mock-server/server.js",
-    "serve": "webpack-dev-server --d --progress --profile --color --env name=dev | npm run json-server-watch",
+    "serve": "webpack serve --progress --color --env name=dev --config webpack.config.js | npm run json-server-watch",
     "build": "webpack --progress --profile --color --env name=prod",
     "pretest": "webpack --progress --profile --color --env name=test",
     "test": "karma start karma.conf.js",
