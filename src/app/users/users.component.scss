@@ -1,3 +1,6 @@
+@import "user-posts/user-posts.component";
+@import "user-todos/user-todos.component";
+
 .users {
   .addon {
     color: $accent-color;
@@ -21,6 +24,3 @@
     }
   }
 }
-
-@import "user-posts/user-posts.component";
-@import "user-todos/user-todos.component";

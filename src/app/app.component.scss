@@ -1,8 +1,8 @@
-.app-content {
-  padding-top: $navbar-height + 10px;
-}
-
 // components
 @import "shared/navigation-bar/navigation-bar.component";
 @import "albums/albums.component";
 @import "users/users.component";
+
+.app-content {
+  padding-top: $navbar-height + 10px;
+}

@@ -1,3 +1,5 @@
+@import "post-comments/post-comments.component";
+
 .posts {
   .addon {
     color: $accent-color;
@@ -34,5 +36,3 @@
     transition: background-color 0.7s;
   }
 }
-
-@import "post-comments/post-comments.component";
