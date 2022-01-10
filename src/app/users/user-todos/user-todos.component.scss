@@ -18,7 +18,7 @@
       }
 
       & > .pending {
-        @extend .fa-close; // stylelint-disable-line at-rule-no-unknown
+        @extend .fa-window-close; // stylelint-disable-line at-rule-no-unknown
 
         opacity: 0.6;
         transition: opacity 0.5s ease-in-out;

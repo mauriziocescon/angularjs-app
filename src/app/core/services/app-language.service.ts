@@ -74,7 +74,7 @@ export class AppLanguageService implements IAppLanguageService {
       this.selectedLanguageId = languageId;
       this.localStorageService.setData(this.appConstantsService.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
       this.translate.use(this.selectedLanguageId);
-      location.reload(true);
+      location.reload();
     }
   }
 

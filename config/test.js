@@ -40,14 +40,6 @@ module.exports = (env) => {
             {loader: 'sass-loader', options: {sourceMap: true}},
           ],
         },
-
-        // images loader
-        {
-          test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-          use: [
-            {loader: 'file-loader', options: {name: '[name].[ext]'}},
-          ],
-        },
       ],
     },
 

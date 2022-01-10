@@ -1,5 +1,9 @@
 {
-  "extends": "stylelint-config-standard",
+  "extends": "stylelint-config-standard-scss",
   "rules": {
+    "max-line-length": null,
+    "property-no-vendor-prefix": null,
+    "scss/at-extend-no-missing-placeholder": null,
+    "scss/at-import-partial-extension": null
   }
 }

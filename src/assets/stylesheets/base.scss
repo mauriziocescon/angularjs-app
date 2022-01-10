@@ -13,29 +13,27 @@ $gray-color: #9e9e9e;
 // -------------------------------------------------------
 // Bootstrap variables
 
-//== Colors
+// == Colors
 $brand-primary: $primary-color;
 $brand-success: $success-color;
 $brand-info: $info-color;
 $brand-warning: $warning-color;
 $brand-danger: $danger-color;
 
-//== Typography
+// == Typography
 $font-size-base: 16px;
 $font-family-base: -apple-system, blinkmacsystemfont, "Segoe UI", roboto, oxygen-sans, ubuntu, cantarell, "Helvetica Neue", sans-serif;
 
-//== Grid system
+// == Grid system
 $grid-gutter-width: 8px;
 
-//== Navbar
+// == Navbar
 $navbar-height: 50px;
 $navbar-margin-bottom: 0;
 $navbar-border-radius: 0;
-
 $navbar-default-color: $accent-color;
 $navbar-default-bg: $secondary-color;
 $navbar-default-border: $accent-color;
-
 $navbar-default-link-color: $accent-color;
 $navbar-default-link-hover-color: $accent-color;
 $navbar-default-link-hover-bg: $app-transparent;
@@ -44,10 +42,9 @@ $navbar-default-link-active-bg: $accent-color;
 $navbar-default-link-disabled-color: $accent-color;
 $navbar-default-link-disabled-bg: $secondary-color;
 
-//== Buttons
+// == Buttons
 $btn-default-color: $accent-color;
 $btn-default-bg: $primary-color;
-
 $input-group-addon-bg: $primary-color;
 
 // -------------------------------------------------------

@@ -6,9 +6,11 @@ import { environment } from '../../../environments/environment';
 
 export class Logger {
 
-  public static exception(scope: any, exc: Error): void {
+  public static exception(scope: any, exc: unknown): void {
     try {
-      const errback = (err: Error) => {
+      const exception = exc as Error;
+
+      const errback = (err: any) => {
         // tslint:disable:no-console
         console.log(err.message);
         // tslint:enable:no-console
@@ -20,7 +22,8 @@ export class Logger {
         try {
           location += ' in ' + Logger.getPath(window.location.href.toString());
         } catch (e) {
-          Logger.log('Logger.exception get location: ' + e.message);
+          const error = e as Error;
+          Logger.log('Logger.exception get location: ' + error.message);
         }
 
         // get className
@@ -35,15 +38,16 @@ export class Logger {
             }
           }
         } catch (e) {
-          Logger.log('Logger.exception get className: ' + e.message);
+          const error = e as Error;
+          Logger.log('Logger.exception get className: ' + error.message);
         }
 
         const stringifiedStack = stackframes.map((sf: StackTrace.StackFrame) => {
           return sf.toString();
         }).join('\n');
 
-        const exceptionMessage = exc.message && exc.message.length > 0 ? exc.message : 'NO_MESSAGE';
-        const exceptionName = exc.name && exc.name.length > 0 ? exc.name : 'NO_NAME';
+        const exceptionMessage = exception.message && exception.message.length > 0 ? exception.message : 'NO_MESSAGE';
+        const exceptionName = exception.name && exception.name.length > 0 ? exception.name : 'NO_NAME';
 
         const msg = '\n' + location + '\n' + className + ' : ' + exceptionName + ' : ' + decodeURI(exceptionMessage) + ' at\n' + decodeURI(stringifiedStack) + '\n\n';
         Logger.log(msg);
@@ -53,16 +57,17 @@ export class Logger {
         }
       };
 
-      StackTrace.fromError(exc)
+      StackTrace.fromError(exception)
         .then(callback)
         .catch(errback);
 
     } catch (e) {
-      Logger.log('Logger.exception: ' + e.message);
+      const error = e as Error;
+      Logger.log('Logger.exception: ' + error.message);
     }
   }
 
-  public static log(mex: string, ...args: any[]): void {
+  public static log(mex: unknown, ...args: any[]): void {
     // tslint:disable:no-console
     if (console !== undefined) {
       console.log(mex);
@@ -70,7 +75,7 @@ export class Logger {
     // tslint:enable:no-console
   }
 
-  public static warn(mex: string, ...args: any[]) {
+  public static warn(mex: unknown, ...args: any[]) {
     // tslint:disable:no-console
     if (console !== undefined) {
       console.warn(mex);

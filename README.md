@@ -59,10 +59,6 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 3. Tests are also executed automatically by [Travis CI](https://travis-ci.com/)
 
-## e2e-tests (protractor + jasmine)
-
-1. Run ``npm start`` and when the server is up and running, open another console and run ``npm run protractor``
-
 ## Lightweight rest-api tests
 
 1. Run ``npm start`` in order to launch the server (``http://localhost:5000``) with the distribution version of the app 

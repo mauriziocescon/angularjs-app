@@ -11,22 +11,22 @@
     <div class="collapse navbar-collapse text-center" uib-collapse="$ctrl.isNavCollapsed">
       <ul class="nav navbar-nav navbar-right">
         <form class="navbar-form navbar-left hidden-xs">
-          <button type="button" class="btn btn-default fa fa-line-chart" ng-if="$ctrl.canShowAnalysis"
+          <button type="button" class="btn btn-default fas fa-chart-bar" ng-if="$ctrl.canShowAnalysis"
                   uib-popover-html="$ctrl.analysis" popover-class="popover-analysis" popover-append-to-body
                   popover-placement="bottom" popover-trigger="click" popover-is-open="$ctrl.isPopoverOpened"
                   ng-click="$ctrl.isPopoverOpened = !$ctrl.isPopoverOpened"></button>
         </form>
         <form class="navbar-form navbar-left hidden-xs">
-          <button type="button" class="btn btn-default fa fa-server" ng-if="$ctrl.canOpenJsonServer"
+          <button type="button" class="btn btn-default fas fa-server" ng-if="$ctrl.canOpenJsonServer"
                   ng-click="$ctrl.openJsonServer()"></button>
         </form>
         <li>
           <a href="" ng-click="$ctrl.goToUsers()">
-            <span class="fa fa-users menu-icon"></span>{{ "NAVIGATION_BAR.USERS" | translate }}</a>
+            <span class="fas fa-users menu-icon"></span>{{ "NAVIGATION_BAR.USERS" | translate }}</a>
         </li>
         <li>
           <a href="" ng-click="$ctrl.goToAlbums()">
-            <span class="fa fa-book menu-icon"></span>{{ "NAVIGATION_BAR.ALBUMS" | translate }}</a>
+            <span class="fas fa-book menu-icon"></span>{{ "NAVIGATION_BAR.ALBUMS" | translate }}</a>
         </li>
         <li class="dropdown" uib-dropdown on-toggle="toggled($ctrl.languageDropdown)">
           <a class="dropdown-toggle" uib-dropdown-toggle>

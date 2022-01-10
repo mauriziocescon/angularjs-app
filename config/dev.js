@@ -34,14 +34,6 @@ module.exports = (env) => {
             {loader: 'sass-loader', options: {sourceMap: true}},
           ],
         },
-
-        // images loader
-        {
-          test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-          use: [
-            {loader: 'file-loader', options: {name: '[name].[ext]'}},
-          ],
-        },
       ],
     },
 
@@ -52,16 +44,20 @@ module.exports = (env) => {
 
     devServer: {
       port: 4200,
-      clientLogLevel: 'info',
-      compress: true,
-      contentBase: path.resolve(__dirname, 'dist'),
-      historyApiFallback: true,
-      hot: true,
-      open: true,
-      overlay: {
-        warnings: true,
-        errors: true,
+      static: {
+        directory: path.resolve(__dirname, 'dist'),
       },
+      client: {
+        logging: "info",
+        overlay: {
+          errors: true,
+          warnings: true,
+        },
+        progress: true,
+      },
+      historyApiFallback: true,
+      hot: "only",
+      open: true,
     },
   });
 };

@@ -2,16 +2,18 @@
 @import "colors";
 @import "functions";
 @import "mixins";
+
 // Core css
 @import "base";
 @import "selects";
 
 // Vendors
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-$fa-font-path: "~font-awesome/fonts";
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 $roboto-font-path: "~roboto-fontface/fonts";
 
 @import "~angular-loading-bar/build/loading-bar";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
-@import "~font-awesome/scss/font-awesome";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~roboto-fontface/css/roboto/sass/roboto-fontface";

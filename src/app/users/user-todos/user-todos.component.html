@@ -6,8 +6,8 @@
         <input type="search" class="form-control" ng-change="$ctrl.textFilterDidChange()" ng-model="$ctrl.textFilter"
                placeholder="{{ 'USER_TODOS.INPUT_TEXT_PLACEHOLDER' | translate }}">
         <span class="input-group-addon addon" ng-click="$ctrl.resetTextFilter()">
-          <span class="fa fa-search" ng-show="!$ctrl.textFilter"></span>
-          <span class="fa fa-remove" ng-show="$ctrl.textFilter"></span>
+          <span class="fas fa-search" ng-show="!$ctrl.textFilter"></span>
+          <span class="fas fa-times" ng-show="$ctrl.textFilter"></span>
         </span>
       </div>
     </div>
@@ -21,7 +21,7 @@
         </div>
         <div class="col-xs-4 col-md-2 cursor-pointer">
           <div class="todo-check">
-            <span class="fa fa-2x"
+            <span class="fas fa-2x"
                   ng-class="{ 'done' : $ctrl.isCompleted(todo), 'pending' : !$ctrl.isCompleted(todo) }"
                   ng-click="$ctrl.changeTodo(todo)"></span>
           </div>
