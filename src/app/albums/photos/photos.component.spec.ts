@@ -42,7 +42,7 @@ describe('PhotosController', () => {
     // returns a list of i18n strings
     httpBackend.whenGET((url: string) => {
       return url.startsWith('assets/i18n/');
-    }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
+    }).respond((method: string, url: string, data: string, headers: unknown, params?: any) => {
       const response = i18nEn;
       return [200, response, headers, 'ok'];
     });
@@ -51,7 +51,7 @@ describe('PhotosController', () => {
     httpBackend.whenGET((url: string) => {
       return url.startsWith(appConstantsService.Api.photos) &&
         (/(&|\?)id\=/g).test(url) === true;
-    }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
+    }).respond((method: string, url: string, data: string, headers: unknown, params?: any) => {
 
       const response = [];
       const fakeText = 'Lorem ipsum dolor sit amet, vidit clita vitae no vix. ' +
@@ -74,7 +74,7 @@ describe('PhotosController', () => {
     // returns photos for album
     httpBackend.whenGET((url: string) => {
       return url.startsWith(AppConstantsService.Api.photos) && (/(&|\?)albumId\=/g).test(url) === true;
-    }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
+    }).respond((method: string, url: string, data: string, headers: unknown, params?: any) => {
 
       const response = [];
       const fakeText = 'Lorem ipsum dolor sit amet, vidit clita vitae no vix. ' +

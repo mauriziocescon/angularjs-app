@@ -34,7 +34,7 @@ describe('NavigationBarController', () => {
     // returns a list of i18n strings
     httpBackend.whenGET((url: string) => {
       return url.startsWith('assets/i18n/');
-    }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
+    }).respond((method: string, url: string, data: string, headers: unknown, params?: any) => {
       const response = i18nEn;
       return [200, response, headers, 'ok'];
     });

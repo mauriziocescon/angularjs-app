@@ -33,7 +33,7 @@ describe('UsersController', () => {
     // returns a list of i18n strings
     httpBackend.whenGET((url: string) => {
       return url.startsWith('assets/i18n/');
-    }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
+    }).respond((method: string, url: string, data: string, headers: unknown, params?: any) => {
       const response = i18nEn;
       return [200, response, headers, 'ok'];
     });
@@ -41,7 +41,7 @@ describe('UsersController', () => {
     // returns the current list of users
     httpBackend.whenGET((url: string) => {
       return url.startsWith(appConstantsService.Api.users);
-    }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
+    }).respond((method: string, url: string, data: string, headers: unknown, params?: any) => {
 
       const response = [];
 
