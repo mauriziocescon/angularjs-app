@@ -43,7 +43,7 @@ Demo built on angular 1.x, Typescript, ES2017, ui-router
 
 8. [Babel](https://babeljs.io/)
 
-10. [TSLint](https://palantir.github.io/tslint/) 
+10. [EsLint](https://eslint.org)
 
 11. [Stylelint](https://stylelint.io/) 
 

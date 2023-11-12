@@ -1,4 +1,3 @@
-// tslint:disable:max-classes-per-file
 import { Logger } from '../../shared/shared.module';
 
 import modalAlertTemplate from '../../shared/modals/modal-alert/modal-alert.template.html';

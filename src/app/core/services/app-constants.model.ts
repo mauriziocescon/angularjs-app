@@ -1,4 +1,3 @@
-// tslint:disable:max-classes-per-file
 import { Enum } from '../../shared/shared.module';
 
 import { environment } from '../../../environments/environment';

@@ -33,7 +33,7 @@ describe('UserTodosController', () => {
     // returns a list of i18n strings
     httpBackend.whenGET((url: string) => {
       return url.startsWith('assets/i18n/');
-    }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
+    }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
       const response = i18nEn;
       return [200, response, headers, 'ok'];
     });
@@ -41,7 +41,7 @@ describe('UserTodosController', () => {
     // returns the current list of todos per userId
     httpBackend.whenGET((url: string) => {
       return url.startsWith(appConstantsService.Api.todos);
-    }).respond((method: string, url: string, data: string, headers: Object, params?: any) => { // tslint:disable-line:ban-types
+    }).respond((method: string, url: string, data: string, headers: Object, params?: any) => {
 
       const response = [];
 

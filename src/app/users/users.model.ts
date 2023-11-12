@@ -1,4 +1,3 @@
-// tslint:disable:max-classes-per-file
 export class User {
   public id: number;
   public name: string;

@@ -19,7 +19,7 @@ export interface IUtilitiesService {
    * @param scope
    * @param args
    */
-  defer(func: Function, n: number, scope: any, ...args: any[]): ng.IPromise<any>; // tslint:disable-line:ban-types
+  defer(func: Function, n: number, scope: any, ...args: any[]): ng.IPromise<any>; // eslint-disable-line  @typescript-eslint/ban-types
   /**
    * Cancel the defer func
    *
@@ -34,7 +34,7 @@ export interface IUtilitiesService {
    * @param scope
    * @param args
    */
-  call(func: Function, scope: any, ...args: any[]): void; // tslint:disable-line:ban-types
+  call(func: Function, scope: any, ...args: any[]): void; // eslint-disable-line  @typescript-eslint/ban-types
   /**
    * Deeply copy the object
    *
@@ -142,8 +142,7 @@ export class UtilitiesService implements IUtilitiesService {
               protected appConstantsService: IAppConstantsService) {
   }
 
-  // tslint:disable-next-line:ban-types
-  public defer(func: Function, n: number, scope: any, ...args: any[]): ng.IPromise<any> {
+  public defer(func: Function, n: number, scope: any, ...args: any[]): ng.IPromise<any> { // eslint-disable-line  @typescript-eslint/ban-types
     return this.timeout(() => {
       func.apply(scope, args);
     }, n);
@@ -155,8 +154,7 @@ export class UtilitiesService implements IUtilitiesService {
     }
   }
 
-  // tslint:disable-next-line:ban-types
-  public call(func: Function, scope: any, ...args: any[]): void {
+  public call(func: Function, scope: any, ...args: any[]): void { // eslint-disable-line  @typescript-eslint/ban-types
     func.apply(scope, args);
   }
 
@@ -173,7 +171,6 @@ export class UtilitiesService implements IUtilitiesService {
   }
 
   public createUUID(): string {
-    // tslint:disable:no-bitwise
     let d = new Date().getTime();
     if (this.window.performance && typeof this.window.performance.now === 'function') {
       d += performance.now(); // use high-precision timer if available
@@ -183,7 +180,6 @@ export class UtilitiesService implements IUtilitiesService {
       d = Math.floor(d / 16);
       return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
-    // tslint:enable:no-bitwise
     return uuid;
   }
 

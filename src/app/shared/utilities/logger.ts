@@ -11,9 +11,7 @@ export class Logger {
       const exception = exc as Error;
 
       const errback = (err: any) => {
-        // tslint:disable:no-console
         console.log(err.message);
-        // tslint:enable:no-console
       };
 
       const callback = (stackframes: StackTrace.StackFrame[]) => {
@@ -68,19 +66,15 @@ export class Logger {
   }
 
   public static log(mex: unknown, ...args: any[]): void {
-    // tslint:disable:no-console
     if (console !== undefined) {
       console.log(mex);
     }
-    // tslint:enable:no-console
   }
 
   public static warn(mex: unknown, ...args: any[]) {
-    // tslint:disable:no-console
     if (console !== undefined) {
       console.warn(mex);
     }
-    // tslint:enable:no-console
   }
 
   protected static getPath(url: string): string {
