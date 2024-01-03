@@ -2,8 +2,8 @@
   "name": "angular-1-x-app",
   "version": "1.0.0",
   "description": "A demo application built on angular 1.x components, Typescript, ES2017, ui-router",
-  "author": "Maurizio Cescon <maurizio.cescon@gmail.com> (http://www.mauriziocescon.com)",
-  "homepage": "http://www.mauriziocescon.com",
+  "author": "Maurizio Cescon <maurizio.cescon@gmail.com>",
+  "homepage": "https://be.linkedin.com/in/mauriziocescon",
   "private": false,
   "engines": {
     "node": ">=20.9.0",
