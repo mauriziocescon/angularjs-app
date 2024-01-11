@@ -2,7 +2,6 @@ import 'angular';
 import 'angular-animate';
 import 'angular-mocks';
 import 'angular-sanitize';
-import 'angular-touch';
 
 import 'angular-dynamic-locale';
 import 'angular-loading-bar';
@@ -12,8 +11,6 @@ import 'angular-translate-loader-static-files';
 import 'angular-translate-storage-local';
 import 'angular-ui-bootstrap';
 import 'angular-ui-router';
-import 'angular-ui-scroll';
-import '@babel/polyfill';
 import 'ng-infinite-scroll';
 import 'parse-link-header';
 import 'stacktrace-js';
