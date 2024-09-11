@@ -19,7 +19,7 @@ export interface IUtilitiesService {
    * @param scope
    * @param args
    */
-  defer(func: Function, n: number, scope: any, ...args: any[]): ng.IPromise<any>; // eslint-disable-line  @typescript-eslint/ban-types
+  defer(func: Function, n: number, scope: any, ...args: any[]): ng.IPromise<any>; // eslint-disable-line @typescript-eslint/no-unsafe-function-type
   /**
    * Cancel the defer func
    *
@@ -34,7 +34,7 @@ export interface IUtilitiesService {
    * @param scope
    * @param args
    */
-  call(func: Function, scope: any, ...args: any[]): void; // eslint-disable-line  @typescript-eslint/ban-types
+  call(func: Function, scope: any, ...args: any[]): void; // eslint-disable-line @typescript-eslint/no-unsafe-function-type
   /**
    * Deeply copy the object
    *
@@ -142,7 +142,7 @@ export class UtilitiesService implements IUtilitiesService {
               protected appConstantsService: IAppConstantsService) {
   }
 
-  public defer(func: Function, n: number, scope: any, ...args: any[]): ng.IPromise<any> { // eslint-disable-line  @typescript-eslint/ban-types
+  public defer(func: Function, n: number, scope: any, ...args: any[]): ng.IPromise<any> { // eslint-disable-line @typescript-eslint/no-unsafe-function-type
     return this.timeout(() => {
       func.apply(scope, args);
     }, n);
@@ -154,7 +154,7 @@ export class UtilitiesService implements IUtilitiesService {
     }
   }
 
-  public call(func: Function, scope: any, ...args: any[]): void { // eslint-disable-line  @typescript-eslint/ban-types
+  public call(func: Function, scope: any, ...args: any[]): void { // eslint-disable-line @typescript-eslint/no-unsafe-function-type
     func.apply(scope, args);
   }
 

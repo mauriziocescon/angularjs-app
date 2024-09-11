@@ -27,6 +27,7 @@ export class Logger {
         // get className
         let className = 'ANONYMOUS_CALLER';
         try {
+          // @ts-expect-error old code
           if (['constructor']) {
             const funcNameRegex = /function (.{1,})\(/;
             const constructor = 'constructor';
