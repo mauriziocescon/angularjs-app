@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import jsonServer from 'json-server';
 import {getRouter} from './lowdb.js';
 
