@@ -1,6 +1,6 @@
-const faker = require('faker');
+import faker from 'faker';
 
-exports.getTodo = (id) => ({
+export const getTodo = (id) => ({
   userId: parseInt(id / 20) + 1,
   id: id + 1,
   title: faker.lorem.text(),

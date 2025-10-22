@@ -1,6 +1,6 @@
-const faker = require('faker');
+import faker from 'faker';
 
-exports.getPhoto = (id) => ({
+export const getPhoto = (id) => ({
   albumId: parseInt(id / 50) + 1,
   id: id + 1,
   title: faker.lorem.text(),

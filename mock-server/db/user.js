@@ -1,6 +1,6 @@
-const faker = require('faker');
+import faker from 'faker';
 
-exports.getUser = (id) => ({
+export const getUser = (id) => ({
   id: id + 1,
   name: faker.name.findName(),
   username: faker.internet.userName(),
