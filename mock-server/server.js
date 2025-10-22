@@ -23,8 +23,8 @@ app.use(jsonServer.bodyParser);
 // Rewrite some routes
 app.use(jsonServer.rewriter({}));
 
-// Mount the router based on lowdb.js
-app.use(isProduction ? '/api' : '/', router);
+// Mount routes
+app.use(`${isProduction ? '/api' : '/'}`, router);
 
 // Fallback on frontend routes
 app.get('*', (req, res, next) => {
